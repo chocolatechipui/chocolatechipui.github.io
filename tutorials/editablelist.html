@@ -1,0 +1,43 @@
+<h1>Editable List</h1>
+
+<p>Sometimes you need to give users a way to edit a list, such as changing the order of items or deleting items. ChocolateChip-UI provides the editable list method, <code>$(selector).UIEditList(options)</code>, for these purposes. It turns an ordinary list into an editable one. It can accept the following arguments:</p>
+
+<ul>
+  <li>editLabel: the text shown by the Edit Button, default is "Edit"</li>
+  <li>doneLabel: the text shown by the Done button, default is "Done"</li>
+  <li>deleteLabel: the text shown by the Delete button, default is "Delete"</li>
+  <li>movable: true or false, default is true</li>
+  <li>deletable: true or false, default is true</li>
+  <li>callback, gets executed when the user taps the Done button</li>
+</ul>
+
+<p>If you need to localize the names of the button, you would provide those values as show above. Similarly, if you only want to enable reording list items, you would pass the movable argument as false. Or if you only wanted to enable deletion, then you would pass the movable argument as false. Otherwise both will be enabled.</p>
+<p>When the user enables editing of the list by tapping the "Edit" button, depending on where moving or editing has been enbabled, he can modify the list by the possible indicators revealed. When the user taps the "Done" button, the indicators are hidden and any callback gets executed. This callback gets a reference to the editable list. From this reference you can query the list's two properties: <code>data-list-items-deleted</code> and <code>data-list-items-position</code>. If nothing was deleted, the first will be empty. If nothing was moved, the second will return the current, unchanged order of list items.</p>
+
+<pre class="prettyprint"><code>// Initialize a list for editing:
+$('#myList').UIEditList({
+  moveable: true,
+  deletable: true,
+  callback: function(list) {
+    console.log('Items deleted: ' + $(list).attr('data-list-items-deleted'));
+    console.log('New order of items: ' + $(list).attr('data-list-items-position'));
+  }
+});
+</code></pre>
+
+
+
+<script>
+  (function() {
+    prettyPrint();
+  })();
+</script>
+
+<script>
+   $(function() {
+      $('body').scrollTop(0);
+      prettyPrint();
+      $('#documentation').trigger('click');
+      $('#platformspecifics').addClass('selected');
+   });
+</script>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChocolateChip-UI: Features</title>
+  <meta name="fragment" content="#" />
+  <meta name="description" content="ChocolateChip-UI provides a wide number of layouts, widgets and programming patterns to enble you to quickly build great mobile Web apps.">
+  <link rel="canonical" href="http://chocolatechip-ui.com/tutorials.html">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="stylesheet" href="css/style.css">
+  <script type='text/javascript' src='scripts/jquery-2.1.3.js'></script>
+  <style>
+    h2, h3 {
+      text-align: left;
+    }
+    .list {
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+    }
+    .list > li {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-flex-orient: row;
+      -moz-box-orient: horizontal;
+      flex-orient: row;
+      margin-bottom: 20px;
+      border-bottom: dashed 2px #eee;
+      padding-bottom: 20px;
+    }
+    .list > li > div:first-child {
+      -webkit-flex: 1;
+      -moz-flex: 1;
+      flex: 1;
+      -webkit-box-pack: start;
+      -wekbit-justify: start;
+      -moz-box-pack: start;
+      justify-content: flex-start;
+      padding: 5px;
+    }
+    .list > li > div:first-child {
+      padding-left: 0;
+      padding-right: 20px;
+    }
+    .list > li > div:first-child + div:not(.double-image) {
+      padding-right: 10px;
+    }
+    .list > li > div.double-image,
+    .list > li > div + div.double-image {
+    padding-left: 10px;
+      -webkit-flex: 1;
+      flex: 1;
+    }
+    .list > li > div + div.double-image:first-of-type > img {
+      margin-right: 10px !important;
+    }
+    .list > li > div + div.double-image > img {
+      margin-bottom: 10px;
+    }
+    .list > li > div.double-image:first-of-type {
+      padding-right: 20px !important;
+    }
+    img {
+      border: solid 1px #ddd;
+    }
+    .list > li > div + div > img {
+      float: right;
+    }
+    .list > li > div > h4 {
+      margin: 0 0 6px !important;
+      text-align: left;
+    }
+    @media only screen and (max-width: 768px) {
+      #split-layout-image {
+        width: 100% !important;
+        height: auto !important;
+      }
+      .list > li {
+        display: block;
+      }
+      .list > li > div {
+        float: none;
+        display: block;
+        padding: 0;
+      }
+      .list > li > div > img {
+        float: none !important;
+      }
+      .list > li::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+    }
+  </style>
+  <script>
+    $(function() {
+      $('#Logo').on('click', function() {
+        window.location = './index.html'
+      });
+    });
+  </script>
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li><a href="./tutorials.html#/layouts"><span>Tutorials</span><span>Tuts</span></a></li>
+      <li><a href="./documentation.html#/building"><span>Documentation</span><span>Docs</span></a>
+      <li><a href="./community.html#/news">Community</a></li>
+      <li id='downloadTab'><a target='_blank' href="https://github.com/chocolatechipui/chocolatechip-ui">Download</a></li>
+    </ul>
+    <h1 id='Logo'>ChocolateChip-UI</h1>
+  </nav>
+  <article>
+    <section id='features'>
+      <h2>Available Features</h2>
+      <p>ChocolateChip-UI has a wide range of layouts, widgets and programming patterns to help you create mobile Web apps quickly and easily. In some cases you may not need anything else to build your app. Our philosophy is: Do more with less. Whenever we consider a new feature, we ask ourselves these questions: "Will it get used by most developers or just take up space? Will it add unnecessary complexity to the code base? Will it require code running in the background?" If you find something lacking, you can always integrate other popular libraries and frameworks with your ChocolateChip-UI app. And, ChocolateChip-UI is open source on Github. It's just HTML, CSS and JavaScript. Everything is broken down into logical pieces. If things don't work to your satisfaction, feel free to fork the sourcecode and make it do what you want.</p>
+
+      <p>Below are all the things that ChocolateChip-UI provides.</p>
+      <h3>Simple Layouts</h3>
+      <p>These layouts use an unordered list. Each list item is a cell of the list. They automatically stack up whatever you put inside them. This is the simplest and easiest list layout that you can create with ChocolateChip-UI. If your content is basic, this may be sufficient for your needs. If you have more complex layout requirements, please look at the Composite Layouts described below.</p>
+      <ol class='list'>
+        <li>
+          <div>
+            <h4>List with Titles</h4>
+            <p>This is the simplest list. It is a list with and H3 for titles. This is not an interactive list. It just displays a series of items. For interactive lists, look at lists with navigation or detail indicators.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/plain-list.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Navigation List with Titles</h4>
+            <p>By adding a class of <code>nav</code> to the list item, it will render a navigation indicator. This enables you to easily designate a list as navigable for your users.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/navigation-list.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Navigation List with Titles &amp; Subtitles</h4>
+            <p>Here we see a list with a title and subtitle. Just as titles are designated with an H3, subtitles are designated with an H4.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/navigation-subtitles-list.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Title, Subtitle and Detail</h4>
+            <p>You can add a detailed description of a list item using a paragraph tag. This is usually used in conjuction with a title (H3) and subtitle (H4).</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/title-subtitle-detail.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Icon with Title</h4>
+            <p>You can use a span with a class of <code>icon</code> and then some CSS to render a background image to display icons in list items. In this example we have an icon followed by a title.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/icon-with-title.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Image with Title &amp; Detail Indicator</h4>
+            <p>This list has a combination of an image followed by a title.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/image-title.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Image with Title, Subtitle &amp; Detail</h4>
+            <p>Here we have a list of items with an image, a title, a subltitle and a detail</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/image-title-subtitle-detail.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Header</h4>
+            <p>If you want your list to have a header, just put an <code>H2</code> directly before it. A header might provide a basic introductory discription of what the list is about.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/list-with-header.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Footer</h4>
+            <p>If you want, you can put a paragraph tag immediately after a list to provide it with a descriptive footer. You would do this when you want to give the user important information that should see after reaching the bottom of the list.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/list-with-footer.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Titled List</h4>
+            <p>You can create what's called a titled list by simply providing a serious of individual but related lists with titles (H2s). You might use this approach if you have a long list of items that you need separated out in related groups, such as fruits, vegetables, meats, etc. to indicate food groceries. Each section we be a separate list with its H2 header.</p>
+          </div>
+          <div><img src="./images/features/simple-layouts/titled-list-1.png" alt=""></div>
+          <div><img src="./images/features/simple-layouts/titled-list-2.png" alt=""></div>
+        </li>
+      </ol>
+      <h3>Composite Layouts</h3>
+      <p>Although the simple list layouts provide basic structure for display data, you may have more sophisticated needs. ChocolateChip-UI provides a number of complex layout patterns that you can use for this purpose. These allow you to create columns within the list item for organizing your data in more meaningful and visually pleasant ways. In most cases you create these layouts by first putting the class <code>comp</code> on the list item.</p>
+      <ol class='list'>
+        <li>
+          <div>
+            <h4>Navigation List with Title &amp; Subtitle</h4>
+            <p>Setting up a navigation list using a comp layout results in the navigation indicator always being vertically centered to the content on the left.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/nav-title-subtitle.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Navigation List with Title, Subtitle &amp; Detail</h4>
+            <p>Another example of a comp layout where the navigation indicator is perfectly centered vertical to the content in the list item.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/nav-title-subtitle-detail.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Switched Layout</h4>
+            <p>The switched layout allows you to change the visible order and appearance of a list, giving more prominence to the subtitle than the title. This is accomplished by using the class <code>switched</code> on the list items.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/switched-layout.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Parallel Title &amp; Subtitle</h4>
+            <p>Normally a list item's subtitle is dislayed under the title. however, using the structure of a comp layout, you can have the subtitle parallelt to the title.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/parallel-title-subtitle.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Detail Indicators</h4>
+            <p>Sometimes, instead of using the common navigation indicators, you want your users to know that tapping will show them a detail page for that list item. In that case you would use a detail indicator.</p>
+            <p>In a comp layout, the detail indicator gets centered vertically to the list item content, like a navigation indicator.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/detail-indicator.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Image with Title &amp; Subtitle</h4>
+            <p>Comp layouts allow you to create more visually pleasing arrangements, such as aligning the title and subtitle next to their image.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/images-with-title-subtitle.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Counters</h4>
+            <p>Comp layouts provide a way for you to show counters on a list item. </p>
+          </div>
+          <div><img src="./images/features/complex-layouts/list-with-counters.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Date/Time</h4>
+            <p>Comp layouts provide a way to display date/time values in a list item.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/list-with-date-time.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Icons</h4>
+            <p>Just as with the comp layout with images described above, you can use ChocolateChip-UI's icon tag to display icons and title/subtitles in a list item. You will need to provide you own icon images and style each icon with CSS to display as intended.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/list-with-icons.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Grids</h4>
+            <p>ChocolateChip-UI provides a system of grids which you can use for your app. These are done using CSS3 flex boxes.</p>
+          </div>
+          <div><img src="./images/features/complex-layouts/grids.png" alt=""></div>
+        </li>
+      </ol>
+      <h3>Navigation Types</h3>
+      <p>ChocolateChip-UI provides a number of layouts and widgets that enable a user to navigate through a group of content. These always involve some type of visual change, sliding or toggling.</p>
+      <ol class='list'>
+        <li>
+          <div>
+            <h4>Navigation List</h4>
+            <p>A navigation list provides a means by which a user can see a large number of choices and drill down to see more information on the choice. Please be aware that creating situations where the user has to tap may times to arrive at the deserved content can result in frustration. It's always best to keep your navigation as shallow as possible.</p>
+          </div>
+          <div><img src="./images/features/navigation/navigation-list-start.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Navigation List with Bottom Toolbar</h4>
+            <p>A navigation list can also have an accompanying toolbar where you can add addition buttons for some particular purpose.</p>
+          </div>
+          <div><img src="./images/features/navigation/nav-with-toolbar.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Back Navigation</h4>
+            <p>When the user taps a navigation list item, the app automatically brings the user to the destination screen. By placing a back button in the navigation bar, you allow the user to return to the previous screen. This does not require any coding for this to work. Back navigation automatic in ChocolateChip-UI.</p>
+          </div>
+          <div><img src="./images/features/navigation/back-navigation.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>List with Detail Indicators</h4>
+            <p>A detail list is the same as a navigation list. The difference is that instead of using navigation indicators, you use detail indictors. These mean that when the user taps the list item, they will be show the detail view for that list item. With navigation lists there is no indication what will come next, the user might have to navigate to other screens.</p>
+          </div>
+          <div><img src="./images/features/navigation/show-detail.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Tab Bar</h4>
+            <p>The tab bar layout provides a convenient way to enable the user to quickly toggle between several important views. This is great for an app that only has three to five screens.</p>
+          </div>
+          <div><img src="./images/features/navigation/tabbar.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Tab Bar with Navigation List</h4>
+            <p>If you want to use a tab bar but also have more screens than can fit, you can you can make the last tab bar item a navigation list. This will give your user access to more content than the default tab bar allows. Bare in mind that the other tabs should be the screens that the user will most like want to access. The navigation list should be for content that is less likely to be accessed.</p>
+          </div>
+          <div><img src="./images/features/navigation/tabbar-with-nav-list.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Horizontal Scroll Panel</h4>
+            <p>You may want to provide your user with a series of content, perhaps media, that they can access quickly and easily. A horizontal scroll panels is perfect for this.</p>
+          </div>
+          <div><img src="./images/features/navigation/scroll-panel.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Carousel</h4>
+            <p>Using a scroll panel with large amounts of media can sometimes have a performance impact on your app due to memory usage. In that case you should consider using the carousl. It only ever display three items at any time, resulting in less memory usage. It lazy-loads the content as the user scrolls.</p>
+          </div>
+          <div><img src="./images/features/navigation/carousel.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Pagination Control</h4>
+            <p>When you have a lot of content of a similar nature that you want your user to be able to peruse, you can use the pagination control. You can have pagination horizontally or veritcally.</p>
+          </div>
+          <div><img src="./images/features/navigation/pagination.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Slideout Control</h4>
+            <p>Another method of enabling navigation of app content is the slide out control. This was popularized by many social apps with their "hamburger" buttons. Tapping the hamburger button opens a slide out menu allowing you to change the content in the screen below.</p>
+          </div>
+          <div><img src="./images/features/navigation/slide-out-1.png" alt=""></div>
+          <div><img src="./images/features/navigation/slide-out-2.png" alt=""></div>
+        </li>
+      </ol>
+      <h3>Widgets</h3>
+      <p>ChocolateChip-UI provides a number of common controls to allow your users to make choices, change values and set states in an app.</p>
+      <ol class='list'>
+        <li>
+          <div>
+            <h4>Busy Indicator</h4>
+            <p>You would use this when some actions, such as an Ajax request for data, might take an indeterminate amount of time.</p>
+          </div>
+          <div><img src="./images/features/widgets/busy-indicator.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Progress Bar</h4>
+            <p>Like the busy indicator above, you can use the default HTML5 progress bar to give the user feedback about the progress of an activity.</p>
+          </div>
+          <div><img src="./images/features/widgets/progressbar.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Popover</h4>
+            <p>When you want to provide some user choices in a menu, you can use a popover.</p>
+          </div>
+          <div><img src="./images/features/widgets/popover.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Popup</h4>
+            <p>Alerts and notifications are provided with the Popup widget.</p>
+          </div>
+          <div><img src="./images/features/widgets/popup.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Search</h4>
+            <p>This widget is just a shell for you to implement search. You will need to write or use the code to make the search happen.</p>
+          </div>
+          <div><img src="./images/features/widgets/search.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Range Control</h4>
+            <p>This input, using the native HTML5 range, allows your users to choose various values. Using stops, you can make it snap to the units you indicate.</p>
+          </div>
+          <div><img src="./images/features/widgets/range-control.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Stepper</h4>
+            <p>This simple widget allows users to indicate value between a small set. If you have great values, consider using a range widget.</p>
+          </div>
+          <div><img src="./images/features/widgets/stepper.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Select List</h4>
+            <p>This type of widget allows the user to make one out of a number of possible choices. Think of it as just a fancy-looking radio button group. Under the hood, that's what it actually is.</p>
+          </div>
+          <div><img src="./images/features/widgets/select-list.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Switches</h4>
+            <p>These allow your uses to turn something on or off. In effect they are just fancy checkboxes, literally.</p>
+          </div>
+          <div><img src="./images/features/widgets/switches.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Segmented Buttons</h4>
+            <p>Sometimes you  need to give your user several related choices. You can use segmented buttons to group them together conveniently.</p>
+          </div>
+          <div><img src="./images/features/widgets/segmented-buttons.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Segmented Toggle Buttons</h4>
+            <p>Sometimes you may need to provide several panels of content to your user, but want to minimize the space these take up. You can use the segmented toggle widge to do this. Tapping a button toggles its corresponding panel.</p>
+          </div>
+          <div><img src="./images/features/widgets/segmented-toggle.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Sheet</h4>
+            <p>Another useful widget is the sheet. This allows you to present the user with a screen of things. These might be action buttons, other widgets, notifications, etc. That's up to you.</p>
+          </div>
+          <div><img src="./images/features/widgets/sheet.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Editable List</h4>
+            <p>Sometimes you need to let the user do something with your list, such as change the order of items or delete items. ChocolateChip-UI provides the Editable List widget for this purpose. When you create an editable list, ChocolateChip-UI puts and "Edit" button in the top left of the navigation bar. Tapping this displays deleting indicators or move indicators, or both. You get to decide what happens. After the user moves or deletes items they can finally their choice by tapping the "Done" button. This can execute a callback with which you can persist the user's choice.</p>
+          </div>
+          <div class='double-image'><img src="./images/features/widgets/editable-list-1.png" alt=""><img src="./images/features/widgets/editable-list-3.png" alt=""></div>
+          <div class='double-image'><img src="./images/features/widgets/editable-list-2.png" alt=""><img src="./images/features/widgets/editable-list-4.png" alt=""></div>
+        </li>
+        <li>
+          <div>
+            <h4>Split Layouts</h4>
+            <p>Split layouts are specifically for tablets. It is basically a flattened out navigation list. Instead of having to drill down to the final detail screen, but the navigable list and the detail screen are show simultaneously. When the user interacts with the items in the master list, the content in the details screen gets updated.</p>
+            <img id='split-layout-image' src="./images/features/complex-layouts/split-layout.png" alt="">
+          </div>
+          <div></div>
+        </li>
+      </ol>
+      <h3>Right-to-Left Support</h3>
+      <ol class='list'>
+        <li>
+          <div>
+            <p>ChocolateChip-UI provides full support for right-to-left languages, such as Arabic, Farsi, Urdu, Kurdish, Hebrew, etc. Layouts and controls are automatically switched to function properly for a right-to-left language. This includes all interactive animations as well.</p>
+            <p>Supporting a right-to-left language is ridiculously easy. Just put the attribute <code>dir="rtl"</code> on your apps HTML tag. That's it. At load time the correct language directional features will be applied.</p>
+          </div>
+          <div>
+            <img src="./images/rtl-1.png" alt="">
+          </div>
+          <div>
+            <img src="./images/rtl-2.png" alt="">
+          </div>
+        </li>
+      </ol>
+      <h3>Technologies</h3>
+      <ol class='list'>
+        <li>
+          <div>
+            <h4>jQuery</h4>
+            <p>ChocolateChip-UI is built on top of jQuery. This means anything you can do with jQuery, you can do with ChocolateChip-UI, such as Ajax, Deferred Objects, etc.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>HTML5</h4>
+            <p>ChocolateChip-UI uses the simplest possible valid HTML5 markup to create its structures. It then beautifies these and brings them to life with sophisticated use of CSS3. This makes your app light, which means it loads quickly and uses less memory.</p>
+            <p>ChocolateChip-UI is for use on modern mobile devices. As such it may not work well on older devices and mobile operating systems. ChocolateChip-UI supports the following Operating Systems:</p>
+            <ol>
+              <li>Android: starting from Ice Cream Sandwich (4.0) up to the current version.</li>
+              <li>iOS: starting from verion 7 up to the current version.</li>
+              <li>Windows Phone: start with version 8.0 up to the current version.</li>
+            </ol>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Animations</h4>
+            <p>All layouts and widgets that the user can interact with have built-in animations. These are not done with JavaScript but with hardware-accelerated CSS. This gives your app a smooth, natural feel as the user interacts with it.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Gestures</h4>
+            <p>ChocolateChip-UI provides its own module for handling gestures and events. It also has an abstraction layer for mouse, touch and pointer events. This simplifies prototyping on the desktop and moving to mobile devices for further testing. The following gestures work just like any other gestures in jQuery. They work with mouse, stylus or finger:</p>
+            <ol>
+              <li>tap</li>
+              <li>singletap</li>
+              <li>doubletap</li>
+              <li>longtap</li>
+              <li>swipe</li>
+              <li>swipeleft</li>
+              <li>swiperight</li>
+              <li>swipeup</li>
+              <li>swipedown</li>
+            </ol>
+            <p>Please see "Events" in the Tutorials section for more details.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Themes</h4>
+            <p>ChocolateChip-UI was created with the concept of themes. These create the look and feel for each mobile operating system, using the same markup and JavaScript for all. The themes are organized to make it easy for you to open up the source code and quickly change the colors used in a theme. We use the popular LESS as our CSS preprocessor. Learn more about <a href='http://lesscss.org' target='_blank'>LESS</a> before you attempt to modify a theme.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Theme Roller</h4>
+            <p>To make it easy for you to spice up your app with color without out having to mess with LESS, we provide a theme roller on this site. You can find it in the Community section. You can colorize your app in several ways. First, the theme roller allows you to pick which theme you want to colorize: Android, iOS or Windows Phone. Next you can choose to color text and secondary control structures in your app. Or you can be more radical and also color the navigation bars and toolbars, giving your app a strong feel. You can also choose a secondary color. This affects a small subset of controls and indicators in your app.</p>
+            <p>When you have the colors the way you want them, just copy the stylesheet from the theme roller and paste it into the corresponding stylesheet of your app.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Pub/Sub</h4>
+            <p>ChocolateChip-UI provides a number of function to implement pub-sub. This is used for obsering and notifying when the user interacts with the app, or when other changes occur in the app's life cycle.</p>
+            <p>You can setup a method to publish a broadcast when a certain condition occurs. You can also pass on relevant data in this publication. Your app can have many means of publishing the same broadcast, providing appropriate data.</p>
+            <p>You can also create subscribers. These listen for their publication to occur. This does not involve polling, so it will not impact the performance of your app. You can write a subscription to check the data that came with a publication and make decisions based on the type of data received.</p>
+            <p>You can also unsubscribe from a publication at any time.</p>
+            <p>These pub-sub patterns enable you to easily decouple the code that is used to update the UI based on changing conditions.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Data Binding</h4>
+            <p>There are ocassion where you content that will be dynamic, depending on changing conditions. Normal you might deal with this by directly making updates in your code. This results in tightly bound code and what is commonly know as "spaghetti code". ChocolateChip-UI provides some simple data binding to enable you to avoid needing to write complex code to keep your form input up to date with your UI. It does this using two attributes: <code>data-controller</code> and <code>data-model</code>. When a form controll and a UI element have the same data-controller/data-model value, ChocolateChip-UI sets up code to update the UI automatically when the value of the form control changes. This is called one-way data binding. In most cases you only need one-way binding. If you need two-way data binding, you can accomplish that by implemenint a mediator to do so. Mediators are described below.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Mediators</h4>
+            <p>Mediators are a development pattern that enables you to decouple the code needed to keep several things in sync. Using ChocolateChip-UI's pub-sub, you can define a mediator that will listen for a publication broadcast when the user interacts with the UI. Upon receiving this publication, the mediator can update the data model, post data to a remote source, etc. This allows you to decouple these types of data maintenance from the code that handle's the UI interactions. The code for the UI only broadcasts a publication, perhaps with relevant data. The mediator captures this and handles it as necessary. This means that the model on the other end can easily be switched out. This is esspecially useful for unit testing or early prototyping of your app.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Navigation System</h4>
+            <p>ChocolateChip-UI provides the easiest possible way to build complex navigation. Just but a navigation indicator on your list items and the value <code>data-goto="somePlace"</code>. The data-goto value is the id of the screen you want to navigate to. On that page just put a button with a class of back in the top navigation bar. That's it. When the user taps the navigation list item, they will be brought ot the destination. While there, if they tap the Back button they will return to whence they came. No JavaScript required.</p>
+            <p>When the navigation occurs, ChocolateChip-UI fires an event: navigationend. It also publishes two broadcasts to which you can subscribe: 'chui/navigateBack/leave' and 'chui/navigateBack/enter'. These contain the id of the article which the user is leaving and the article to which the user is going. These are published while the user is navigation forwards, as well as backwards.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Templating</h4>
+            <p>ChocolateChip-UI has its own templating engine. If your needs are basic, this will be sufficent. It provides you with the ability to create templates with JavaScript logic for complex conditional processing. It is as efficient as Moustache or Handlebars in performance tests. However, you can use whatever Template engine you want.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Modern JavaScript Library: ChocolateChipJS</h4>
+            <p>By default, ChocolateChip-UI runs on jQuery. This is the most widely used JavaScript library today. However, choice is good. We also provide an alternative to jQuery called ChocolateChipJS. Why? It's much smaller than jQuery, so it loads faster. Even more important, in performance tests where typical DOM manipulations are performed, ChocolateChipJS is on average 30% faster than jQuery. This makes apps created with ChocolateChipJS feel snappier than their jQuery equivalents. It is also much faster than the jQuery clone, Zepto.</p>
+            <p>ChocolateChipJS avoids some of the API inconsistencies that have been with jQuery since its creation. ChocolateChipJS also offers support for ECMAScript 6 Promises, allowing you to use these with its Ajax methods. You can get the <a target='_blank' href="https://github.com/chocolatechipui/ChocolateChipJS">sourcecode for ChocolateChipJS</a>. When you build ChocolateChipJS with support for the modern Promises API, you also get a version of Ajax methods that use these automatically. This also includes a polyfill for browsers that don't yet support promises. This allows you to use sophisticated and efficient patterns for avoiding nested callbacks in your Ajax requests.</p>
+            <p>ChocolateChipJS is not a drop-in replacement for jQuery. Their APIs are quite different. ChocolateChipJS shares many function names with jQuery that work similarly, but you need to know the differences. ChocolateChipJS also offers features that jQuery lacks. These can sometimes be convenient timesavers that jQuery would require multiple lines of code. Please consult the documentation for ChocolateChipJS on this site to learn more.</p>
+            <p>If you are going to use plugins or libraries that depend on jQuery, you will need to stick with jQuery.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Plays Well with Others</h4>
+            <p>ChocolateChip-UI was built to be versatile. We did not want to provide every imaginable feature like some other frameworks, forcing you to work our way. Instead we give you the freedom to choose what you want to use to compliment your app for the features you require.</p>
+            <p>Depending on your needs, you can use libraries for MVC structure, data binding, routing, etc. Some options are: Backbone, Ember, Rails, Angular, SomaJS, VueJS, Director, SammyJS, Knockout, etc. Be aware they you may need to make minor adjustments to how you use ChocolateChip-UI to use it with these. We have tried to be as agnostic as possible.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </article>
+</body>
+</html>

@@ -1,0 +1,280 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, SegoeUI, 'Segoe UI', Arial, Sans-serif;
+}
+body {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-font-smoothing: subpixel-antialiased;
+/*  -webkit-align-items: stretch;
+  align-items: stretch;*/
+  
+}
+menu, menu > div, menu > div > ul, menu > div > ul > li {
+  height: 30px !important;
+}
+menu > div > ul > li > a {
+  display: inline-block;
+  padding: 2px 10px;
+  line-height: 20px;
+}
+article {
+  width: 50%;
+}
+#theme, #roller {
+  position: relative;
+  z-index: 1;
+}
+#roller {
+  padding: 1px 20px 20px;
+  border-left: solid 2px #ccc;
+  box-sizing: border-box;
+  height: 1000px !important;
+}
+#roller * {
+  color: #333;
+}
+#roller ul {
+  margin: 0;
+  padding: 0;
+}
+#roller ul > li {
+  display: inline-block;
+  padding: 0;
+  margin-right: 30px;
+}
+ul#colors, ul#colors-secondary {
+  padding: 10px 0 0;
+  margin: 10px auto;
+  max-width: 380px;
+  border-top: solid 1px #ccc;
+}
+ul#colors > li, ul#colors-secondary > li {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin: 0 10px 10px !important;
+  padding: 0;
+  border: solid 2px #ccc !important;
+  border-radius: 0px !important;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  cursor: pointer;
+}
+ul#colors > li:hover,
+ul#colors-secondary > li:hover,
+ul#colors > li.selected,
+ul#colors-secondary > li.selected {
+  box-shadow: 0 0 6px 2px rgba(0,0,0,0.75);
+  border: solid 2px #fff !important;
+}
+
+.maroonColor {
+  background-color: #9d403a !important;
+}
+.redColor {
+  background-color: #ff0000 !important;
+}
+.orangeColor {
+  background-color: #ffa500 !important;
+}
+.goldColor {
+  background-color: #ffd700 !important;
+}
+.violetColor {
+  background-color: #ee82ee !important;
+}
+.pinkColor {
+  background-color: #ff69b4 !important;
+}
+.purpleColor {
+  background-color: #800080 !important;
+}
+.darkBlueColor {
+  background-color: #011a99 !important;
+}
+.blueColor {
+  background-color: #0000ff !important;
+}
+.dodgerBlueColor {
+  background-color: #1e90ff !important;
+}
+.skyBlueColor {
+  background-color: #87ceeb !important;
+}
+.tealColor {
+  background-color: #008080 !important;
+}
+.greenColor {
+  background-color: #006400 !important;
+}
+.lightGreenColor {
+  background-color: #30c930 !important;
+}
+.oliveDrabColor {
+  background-color: #6b8e23 !important;
+}
+.oliveColor {
+  background-color: #808000 !important;
+}
+.slateGrayColor {
+  background-color: #708090 !important;
+}
+.steelBlueColor {
+  background-color: #b0c4de !important;
+}
+.grayColor {
+  background-color: #808080 !important;
+}
+.darkGrayColor {
+  background-color: #a9a9a9 !important;
+}
+.lightGrayColor {
+  background-color: #d3d3d3 !important;
+}
+.tanColor {
+  background-color: #c8ac85 !important;
+}
+.blackColor {
+  background-color: #000000 !important
+}
+.chestnutColor {
+  background-color: #daa520 !important;
+}
+.salmonColor {
+  background-color: #fa8072 !important;
+}
+.peachColor {
+  background-color: #ffdab9 !important;
+}
+.aquaColor {
+  background-color: #00ffff !important;
+}
+.plumColor {
+  background-color: #dda0dd !important;
+}
+.thistleColor {
+  background-color: #d8bfd8 !important;
+}
+.turquoiseColor {
+  background-color: #40e0d0 !important;
+}
+.steelBlueColor {
+  background-color: #b0c4de !important;
+}
+.mediumPurpleColor {
+  background-color: #9370d8 !important;
+}
+
+#roller textarea {
+  font-size: 12pt;
+  color: #333;
+  width: 100%;
+}
+#roller button.action {
+  color: #585d63;
+  border: solid 1px #585d63;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  min-width: 200px;
+  box-shadow: none;
+  background: none;
+}
+#roller  p {
+  width: 100% !important;
+}
+#roller button.action {
+  color: #777 !important;
+  border: solid 1px #777 !important;
+  margin: 0 auto !important;
+}
+#roller button:hover {
+  cursor: pointer;
+  opacity: .5 !important;
+}
+
+#roller .segmented {
+  display: -webkit-flex;
+  display: flex;
+  width: 400px;
+  margin: 20px auto;
+  height: 22px !important;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+#roller .segmented > button {
+  text-transform: none !important;
+  color: #777 !important;
+}
+#roller .segmented > button {
+  display: block !important;
+  border: solid 1px #777 !important;
+  padding: 0px 10px !important;
+  line-height: 18px !important;
+  margin: 0;
+  border-left: none;
+  background-color: rgba(255, 255, 255, 0.65);
+  width: auto;
+  overflow-x: hidden;
+  -webkit-transition: none;
+  transition: none;
+  font-size: 10pt;
+  display: flex;
+  display: -webkit-flex;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-box-flex: 1 !important;
+  -webkit-flex: 1 !important;
+  flex: 1 !important;
+  text-align: center;
+  color: #007aff;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 22px !important;
+  margin-top: 8px !important;
+}
+#roller .segmented > button:first-of-type {
+  border: solid 1px #777 !important;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#roller .segmented > button:last-of-type {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: solid 1px #777 !important;
+}
+#roller  .segmented > button:hover,
+#roller .segmented > button.selected {
+  color: #ffffff !important;
+  border: solid 1px #777 !important;
+  background-color: #777 !important;
+  opacity: 1 !important;
+} 
+#chooseMode input[type=radio] {
+  font-size: 16px !important;
+}
+/* Firefox only */
+@-moz-document url-prefix() { 
+  #theme {
+    -moz-box-pack: start;
+    justify-content: flex-start;
+  }
+}

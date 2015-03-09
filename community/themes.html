@@ -1,0 +1,162 @@
+
+  <link id='os-theme' rel="stylesheet" href="./css/theme-ios.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <style id='customStylesheet'></style>
+  <script src='./scripts/jquery-2.1.3.js'></script>
+  <script src='./scripts/chui-3.8.2.js'></script>
+  <script src='./scripts/colorContrast.js'></script>
+  <script src='./scripts/theme.js'></script>
+  <script id='stylesheetTemplate' type='text/javascript'></script>
+  <div id="accessMessage">
+    <h2>The ChocolateChip-UI Theme Roller is for desktop use. Please access this on a desktop, or if you are on a desktop, please expand the width of your browser so the Theme Roller can fit.</h2>
+  </div>
+  <article id='theme'>
+    <nav>
+      <button class="back">Back</button>
+      <h1>The Title</h1>
+      <button>Edit</button>
+    </nav>
+   <!--  <h2>List of Stuff</h2> -->
+    <ul class="list">
+      <li class='comp' data-goto>
+        <div>
+          <h3>People</h3>
+        </div>
+        <aside>
+          <h4>Your Friends</h4>
+          <span class='counter'>22</span>
+          <span class='nav'></span>
+        </aside>
+      </li>
+      <li class='comp' data-goto>
+        <aside>
+          <img title='Imagine Dragons' src="./images/Imagine Dragons.jpg" height="80px">
+        </aside>
+        <div>
+          <h3>Imagine Dragons</h3>
+          <h4>Radioactive</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <aside>
+          <span class='show-detail'></span>
+        </aside>
+      </li>
+    </ul>
+    <p><button class="action">Action Button</button></p>
+    <ul class="list">
+      <li>
+        <div class='horizontal centered'>
+          <div id='testSegmentedControl' class='segmented'>
+            <button>Radioactive</button>
+            <button>Hurt</button>
+            <button>Permanent</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+ <!--    <h2>Select List</h2>   -->
+    <ul class='list select' id='selectList'>
+      <li data-select-value='eat' class='selected'>
+        <h3>Go eat something</h3>
+      </li>
+      <li data-select-value='eat'>
+        <h3>Take a nap</h3>
+      </li>
+    </ul>
+    <ul class='list'>
+      <li class='comp'>
+        <div>
+          <h3>Sleep</h3>
+        </div>
+        <aside>
+          <span class="switch on" id="sleepSwitch">
+             <input data-controller='switch-value' type="checkbox" value="Sleep" name="sleepSwitch">
+          </span>
+        </aside>
+      </li>
+    </ul>
+    <h2>Toolbar</h2>
+    <div class="toolbar current">
+      <button>Button 1</button>
+      <button>Button 2</button>
+    </div>
+  </article>
+  <article id='roller'>
+      <h2>Give Your App Some Color</h2>
+      <div class='segmented menu' id='osMenu'>
+        <button id='iosTheme' data-os='ios' class='selected'>iOS</button>
+        <button id='androidTheme' data-os='android'>Android</button>
+        <button id='windowsTheme' data-os='windows'>Windows Phone</button>
+      </div>
+      <p>Choose a Primary Color</p>
+      <ul id='chooseMode'>
+        <li><label><input name='primaryColor' value='text_only' checked type="radio"> Text Only</label></li>
+        <li><label><input name='primaryColor' value='navbar_toolbar' type="radio"> Navbar/Toolbar</label></li>
+      </ul>
+      <ul id='colors'>
+        <li title='Brown' class='maroonColor' data-color='#9d403a'></li>
+        <li title='Tan' class="tanColor" data-color="#c8ac85"></li>
+        <li title='Chestnut' class='chestnutColor' data-color='#daa520'></li>
+        <li title='Gold' class='goldColor' data-color='#fad622'></li>
+        <li title='Orange' class='orangeColor' data-color='#ffa500'></li>
+        <li title='Salmon' class='salmonColor' data-color='#fa8072'></li>
+        <li title='Red' class='redColor' data-color='#ff0000'></li>
+        <li title='Pink' class='pinkColor' data-color='#ff69b4'></li>
+        <li title='Violet' class='violetColor' data-color='#ee82ee'></li>
+        <li title="Plum" class="plumColor" data-color="#dda0dd"></li>
+        <li title='Purple' class='purpleColor' data-color='#800080'></li>
+        <li title="Medium Purple" class="mediumPurpleColor" data-color="#9370d8"></li>
+        <li title='Navy Blue' class='darkBlueColor' data-color='#011a99'></li>
+        <li title='Blue' class="blueColor" data-color="#0000ff"></li>
+        <li title='Light Blue' class="dodgerBlueColor" data-color="#1e90ff"></li>
+        <li title='Sky Blue' class="skyBlueColor" data-color="#87ceeb"></li>
+        <li title="Steel Blue" class="steelBlueColor" data-color="#b0c4de"></li>
+        <li title="Turquoise" class="turquoiseColor" data-color="#40e0d0"></li>
+        <li title='Teal' class="tealColor" data-color="#008080"></li>
+        <li title='Lime' class="lightGreenColor" data-color="#30c930"></li>
+        <li title='Green' class="greenColor" data-color="#008000"></li>
+        <li title='Moss' class="oliveDrabColor" data-color="#6b8e23"></li>
+        <li title='Olive' class="oliveColor" data-color="#808000"></li>
+        <li title='Black' class="blackColor" data-color="#000000"></li>
+        <li title='Slate' class="slateGrayColor" data-color="#708090"></li>
+        <li title='Dark Gray' class="grayColor" data-color="#808080"></li>
+        <li title='Gray' class="darkGrayColor" data-color="#a9a9a9"></li>
+        <li title='Light Gray' class="lightGrayColor" data-color="#d3d3d3"></li>
+      </ul>
+
+      <p>Choose an Optional, Secondary Color</p>
+
+      <ul id='colors-secondary'>
+        <li title='Brown' class='maroonColor' data-color='#9d403a'></li>
+        <li title='Tan' class="tanColor" data-color="#c8ac85"></li>
+        <li title='Chestnut' class='chestnutColor' data-color='#daa520'></li>
+        <li title='Gold' class='goldColor' data-color='#fad622'></li>
+        <li title='Orange' class='orangeColor' data-color='#ffa500'></li>
+        <li title='Salmon' class='salmonColor' data-color='#fa8072'></li>
+        <li title='Red' class='redColor' data-color='#ff0000'></li>
+        <li title='Pink' class='pinkColor' data-color='#ff69b4'></li>
+        <li title='Violet' class='violetColor' data-color='#ee82ee'></li>
+        <li title="Plum" class="plumColor" data-color="#dda0dd"></li>
+        <li title='Purple' class='purpleColor' data-color='#800080'></li>
+        <li title="Medium Purple" class="mediumPurpleColor" data-color="#9370d8"></li>
+        <li title='Navy Blue' class='darkBlueColor' data-color='#011a99'></li>
+        <li title='Blue' class="blueColor" data-color="#0000ff"></li>
+        <li title='Light Blue' class="dodgerBlueColor" data-color="#1e90ff"></li>
+        <li title='Sky Blue' class="skyBlueColor" data-color="#87ceeb"></li>
+        <li title="Steel Blue" class="steelBlueColor" data-color="#b0c4de"></li>
+        <li title="Turquoise" class="turquoiseColor" data-color="#40e0d0"></li>
+        <li title='Teal' class="tealColor" data-color="#008080"></li>
+        <li title='Lime' class="lightGreenColor" data-color="#30c930"></li>
+        <li title='Green' class="greenColor" data-color="#008000"></li>
+        <li title='Moss' class="oliveDrabColor" data-color="#6b8e23"></li>
+        <li title='Olive' class="oliveColor" data-color="#808000"></li>
+        <li title='Black' class="blackColor" data-color="#000000"></li>
+        <li title='Slate' class="slateGrayColor" data-color="#708090"></li>
+        <li title='Dark Gray' class="grayColor" data-color="#808080"></li>
+        <li title='Gray' class="darkGrayColor" data-color="#a9a9a9"></li>
+        <li title='Light Gray' class="lightGrayColor" data-color="#d3d3d3"></li>
+      </ul>
+      <p><button id='resetBtn' class="action">Reset</button></p>
+      <h3>Copy the stylesheet below to your app</h3>
+      <p><textarea name="" id="" rows="10"></textarea></p>
+   </article>

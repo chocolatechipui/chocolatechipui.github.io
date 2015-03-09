@@ -1,0 +1,101 @@
+<h1>Carousels</h1>
+
+<p>ChocolateChip-UI provides two types of carousels, one requiring JavaScript initialization and a simpler one that does not. We'll examine the simpler one first.</p>
+
+<h2>Horizontal Scroll Panel</h2>
+
+<p>We can create a horizontal scroll panel very easily with some markup and a class. This scroll panel uses CSS to implement a normal, HTML5 scrolling region. This region is by default resposive, meaning that it will automatically resize to fill the available space of its container. This depends on the size of the device and where it is in portrait or landscape mode. Of course, through CSS you can set a min or max width if your wish.</p>
+
+<p><img src="./images/carousel/horizontal-scroll-panel.jpg" alt=""></p>
+
+<p>The horizontal scroll panel uses the following markup:</p>
+
+
+<pre class="prettyprint"><code>&lt;div class='horizontal-scroll-panel'&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;img src='../pics/pic-01.jpg'&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src='../pics/pic-02.jpg'&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src='../pics/pic-03.jpg'&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src='../pics/pic-04.jpg'&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src='../pics/pic-05.jpg'&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src='../pics/pic-06.jpg'&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt; 
+</code></pre>
+
+<p>In the above example, our content is the images. Each image has been placed inside a list item. The important thing to notice is the class <code>horizontal-scroll-panel</code> on the main container. This should be a div. The next element is an unordered list. No class needed, just a plain list with enough list items. You can put whatever content you want in these list items. Essentially, each list item is a panel in the scrolling mechanism.</p>
+
+<p>Functionally, when you scroll to the end, it stops. This is not an infinite scroll panel. It scrolls to one end or the other.</p>
+
+<p>To learn more about customizing the horizontal scroll panel, please read the <a target="_blank" href="./documentation.html#/markup">documentation</a> for it in markup.</p>
+
+<h2>Swipable Carousel</h2>
+
+<p>The swipable carousel is quite different from the horizontal scroll panel. It only has three panels and loads its content dynamically as the user swipes. There are never more than three panels. As the user swipes, the carousel snaps to the next panel. The current panel fills the viewable area of the carousel.</p>
+
+<p><img src="./images/features/navigation/carousel.png" alt=""></p>
+
+<p>To work, this requires an initialization. It takes several arguments:</p>
+
+<pre class="prettyprint"><code>$.UISetupCarousel({ 
+   target: '#carousel', 
+   panels: panels /* A variable holding the data that the carousel will display */, 
+   loop: true, 
+   pagination: true 
+});
+</code></pre>
+
+<p>Looking at the arguments, the first, target, is the container that will hold the carousel. This would normally be a div. Second, the panels key hold the value for the data that the carousel will display. In the example above that would be "panels". This data might be like this:</p>
+
+<pre class="prettyprint"><code>var panels = [
+  "&lt;h2&gt;Panel 1&lt;/h2&gt;&lt;img src='./images/myPictures/american-football-63109_640.jpg'&gt;",
+  "&lt;h2&gt;Panel 2&lt;/h2&gt;&lt;img src='./images/myPictures/couple-168191_640.jpg'&gt;",
+  "&lt;h2&gt;Panel 3&lt;/h2&gt;&lt;img src='./images/myPictures/daisy-75190_640.jpg'&gt;",
+  "&lt;h2&gt;Panel 4&lt;/h2&gt;&lt;img src='./images/myPictures/dependent-100343_640.jpg'&gt;",
+  "&lt;h2&gt;Panel 5&lt;/h2&gt;&lt;img src='./images/myPictures/dreamy-20100_640.jpg'&gt;",
+  "&lt;h2&gt;Panel 6&lt;/h2&gt;&lt;img src='./images/myPictures/girl-102831_640.jpg'&gt;",
+  "&lt;h2&gt;Panel 7&lt;/h2&gt;&lt;ol&gt;&lt;li&gt;Milk&lt;/li&gt;&lt;li&gt;Fruit&lt;/li&gt;&lt;li&gt;Vegetables&lt;/li&gt;&lt;li&gt;Cheese&lt;/li&gt;&lt;li&gt;Bread&lt;/li&gt;&lt;/ol&gt;",
+  "&lt;h2&gt;Panel 8&lt;/h2&gt;&lt;p&gt;The quality of mercy is not strained; It droppeth as the gentle rain from heaven upon the place beneath. It is twice blest; It blesseth him that gives and him that takes.&lt;/p&gt;"
+];
+</code></pre>
+
+<p>In the above code you can see that we are loading images as content, as well as blocks of markup to create lists. The only limit to what you can put in the carousel frames is screen size and memory.</p>
+
+<p>The next argument, "loop", determines whether the carousel does infinite looping or not. The default is inifinite looping. If you don't want the carousel to scroll infinitely, set this value to false.</p>
+
+<p>The last argument is for pagination. By default the carousel will render without pagination. If you want paginators to appear below the carousel which allow the user to tap and go to whatever carousel frame they want, set this value to true. Be aware that if you have a lot of content for your carousel, paginators may be very cramped or not fit at all on the smaller devices.</p>
+
+<p>When you initialize a carousel, you simultaneous create a unique instance of the carousel object. You can get a reference to that instance from the carousel container that your provided when you initialized it. For example, if the ID we used as the target was <code>#carousel</code>, we could get a reference to the carousel instance like this:</p>
+
+<pre class="prettyprint"><code>
+var myCarousel = $('#carousel').data('carousel');
+</code></pre>
+
+<p>With this instance we could then control which panel the carousel shows:</p>
+
+<pre class="prettyprint"><code>
+var myCarousel = $('#carousel').data('carousel');
+$('button').on('singletap', function() {
+  // Go to panel number 6:
+  myCarousel.goToPanel(5);
+});
+</code></pre>
+
+<p>Clicking on the button element would cause the carousel to scroll to the item. If the carousel had pagination displayed, it would deselect the current and select the correct one for the panel being displayed.</p>
+
+<p>When you build ChocolateChip-UI with its examples, you can find two working copies of carousels for Android, iOS and Windows Phone.</p>
+
+<script>
+  (function() {
+    prettyPrint();
+  })();
+</script>
+
+<script>
+   $(function() {
+      $('body').scrollTop(0);
+      prettyPrint();
+      $('#documentation').trigger('click');
+      $('#platformspecifics').addClass('selected');
+   });
+</script>

@@ -1,0 +1,99 @@
+<h1>Toggle Panel</h1>
+
+<p>Sometimes you have a small set of data comprising two to four categories that you would like to enable the user to access in a single view. You can accomplish this with the segmented control. If you have more than four items you should look at using a navigation list, a slide out menu, or a tab bar with a navigation list as its last item.</p>
+
+<p>
+  <figcaption>iOS Toggle Panel</figcaption>
+  <img src="./images/features/widgets/segmented-toggle.png" alt="">
+</p>
+<p>Here's is the hypothetical markup for the dynamic toggle panel:</p>
+
+<pre class="prettyprint"><code>&lt;nav class="current"&gt;
+  &lt;h1&gt;Toggle Panels&lt;/h1&gt;
+&lt;/nav&gt;
+&lt;article id="main" class="current"&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Dynamic Content&lt;/h2&gt;
+    &lt;div id='segmentedPanel' class='horizontal centered'&gt;&lt;/div&gt;
+    &lt;div id="dynamicContent"&gt;&lt;/div&gt;
+  &lt;/section&gt;
+&lt;/article&gt;
+</code></pre>
+
+<p>We have a container called "segmentedPanel", which will oddly hold our segmented control, and a container called "dynamicContent", which will display content depending on which segmented button the user taps.</p>
+
+<p>The first thing we need to do to get this working is to create a segmented control. We can do that with the following code in which we provide and ID for the contrl and names for the segment labels:</p>
+
+<pre class="prettyprint"><code>// Define options for segmented control:
+//======================================
+var segmentedOptions = {
+  id: 'mySegmented',
+  labels : ['Apples','Oranges','Bananas']
+};
+
+// Create the segmented control:
+//==============================
+var fruitSegmentedCtrl = $.UICreateSegmented(segmentedOptions);
+
+// Append the segmented control to a panel in your document:
+//==========================================================
+$('#segmentedPanel').append(fruitSegmentedCtrl);
+</code></pre>
+
+<p>This will give you a fully functional segmented control placed in the "segmentedPanel" container in our markup. At the moment it does nothing other than show selected states on its buttons when the user taps. Segmented buttons work like radio button groups, tapping on segment deselects any currently selected segment.</p>
+
+<p>Normally after inserting a segmented button control you would execute an initializer to set the state and pass it a callback which we can use to load the content. Using the ID we used to create the segmented control, we can execute the <code>UISegmented</code> method to set its default selected state and give it a callback to handle user interaction. This callback will get the event that fired, which will also expose the event target or segment the user tapped:</p>
+
+<pre class="prettyprint"><code>// Init Segmented Control:
+//========================
+$('#mySegmented').UISegmented({
+  selected: 0, 
+  callback: getSelection
+});
+
+// Get which segment the user tapped:
+//===================================
+var getSelection = function(event) {
+  var selection = $(event.target).index();
+  // Define this method somewhere to render
+  // content based on the item selected:
+  RenderFruitSelection(selection);
+};
+</code></pre>
+
+<p>We could possible define the <code>getSelection</code> method like this:</p>
+
+<pre class="prettyprint"><code>// Define callback for segmented control:
+//=======================================
+function RenderFruitSelection (index) {
+  $('#fruit h3').text(fruits[index].name);
+  $('#fruit img').attr('src', fruits[index].image)
+  target.find('#uses').empty();
+  fruits[index].uses.forEach(function(ctx) {
+    target.find('#uses').append('&lt;li&gt;&lt;h3&gt;' + ctx +'&lt;/h3&gt;&lt;/li&gt;')
+  });
+  target.find('#benefits').empty();
+  fruits[index].benefits.forEach(function(ctx) {
+    target.find('#benefits').append('&lt;li&gt;&lt;h3&gt;' + ctx +'&lt;/h3&gt;&lt;/li&gt;')
+  });
+}
+</code></pre>
+
+<p>For a more detail tutorial on creating dynamic toggle panel, please read <a href='http://bit.ly/1qi8VK0' target='_blank'>this tutorial</a>.</p>
+
+
+
+<script>
+  (function() {
+    prettyPrint();
+  })();
+</script>
+
+<script>
+   $(function() {
+      $('body').scrollTop(0);
+      prettyPrint();
+      $('#documentation').trigger('click');
+      $('#platformspecifics').addClass('selected');
+   });
+</script>

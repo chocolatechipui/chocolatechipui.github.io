@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChocolateChip-UI</title>
+  <meta name="fragment" content="#" />
+  <meta name="description" content="ChocolateChip-UI, an open source framework, helps you make great mobile Web apps with the native look of iOS, Android, & Windows Phone using HTML5, CSS and JavaScript.">
+  <link rel="canonical" href="http://chocolatechip-ui.com/">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="stylesheet" href="css/style.css">
+  <script type='text/javascript' src='scripts/jquery-2.1.3.js'></script>
+  <script>
+    $(function() {
+
+      // Setup to cache images:
+      var emptyArray = [];
+      var carouselImages = ["./images/carousel/ios/navigation.png","./images/carousel/ios/navigation-back.png","./images/carousel/ios/segment.png","./images/carousel/ios/composite-counters.png","./images/carousel/ios/switched.png","./images/carousel/ios/composite-time.png","./images/carousel/ios/select.png","./images/carousel/ios/switch.png","./images/carousel/ios/range.png","./images/carousel/ios/composite-icons.png","./images/carousel/ios/popup.png","./images/carousel/ios/popover.png","./images/carousel/ios/tabbar.png","./images/carousel/ios/editable.png","./images/carousel/ios/carousel.png","./images/carousel/ios/sheet.png","./images/carousel/android/navigation-back.png","./images/carousel/android/segment.png","./images/carousel/android/composite-counters.png","./images/carousel/android/switched.png","./images/carousel/android/composite-time.png","./images/carousel/android/select.png","./images/carousel/android/switch.png","./images/carousel/android/range.png","./images/carousel/android/composite-icons.png","./images/carousel/android/popup.png","./images/carousel/android/popover.png","./images/carousel/android/tabbar.png","./images/carousel/android/editable.png","./images/carousel/android/carousel.png","./images/carousel/android/sheet.png","./images/carousel/windows/navigation.png","./images/carousel/windows/navigation-back.png","./images/carousel/windows/segment.png","./images/carousel/windows/composite-counters.png","./images/carousel/windows/switched.png","./images/carousel/windows/composite-time.png","./images/carousel/windows/select.png","./images/carousel/windows/switch.png","./images/carousel/windows/range.png","./images/carousel/windows/composite-icons.png","./images/carousel/windows/popup.png","./images/carousel/windows/popover.png","./images/carousel/windows/tabbar.png","./images/carousel/windows/editable.png","./images/carousel/windows/carousel.png","./images/carousel/windows/sheet.png"];
+
+      // Load the images:
+      carouselImages.forEach(function(ctx, idx) {
+        emptyArray[idx] = new Image();
+        emptyArray[idx].src = ctx;
+      });
+
+      // Templates for image carousel:
+      var iosUI = '<li><img src="images/carousel/ios/navigation.png" alt=""></li>\
+<li><img src="images/carousel/ios/navigation-back.png" alt=""></li>\
+<li><img src="images/carousel/ios/segment.png" alt=""></li>\
+<li><img src="images/carousel/ios/composite-counters.png" alt=""></li>\
+<li><img src="images/carousel/ios/switched.png" alt=""></li>\
+<li><img src="images/carousel/ios/composite-time.png" alt=""></li>\
+<li><img src="images/carousel/ios/select.png" alt=""></li>\
+<li><img src="images/carousel/ios/switch.png" alt=""></li>\
+<li><img src="images/carousel/ios/range.png" alt=""></li>\
+<li><img src="images/carousel/ios/composite-icons.png" alt=""></li>\
+<li><img src="images/carousel/ios/popup.png" alt=""></li>\
+<li><img src="images/carousel/ios/popover.png" alt=""></li>\
+<li><img src="images/carousel/ios/tabbar.png" alt=""></li>\
+<li><img src="images/carousel/ios/editable.png" alt=""></li>\
+<li><img src="images/carousel/ios/carousel.png" alt=""></li>\
+<li><img src="images/carousel/ios/sheet.png" alt=""></li>';
+      var androidUI = '<li><img src="images/carousel/android/navigation.png" alt=""></li>\
+<li><img src="images/carousel/android/navigation-back.png" alt=""></li>\
+<li><img src="images/carousel/android/segment.png" alt=""></li>\
+<li><img src="images/carousel/android/composite-counters.png" alt=""></li>\
+<li><img src="images/carousel/android/switched.png" alt=""></li>\
+<li><img src="images/carousel/android/composite-time.png" alt=""></li>\
+<li><img src="images/carousel/android/select.png" alt=""></li>\
+<li><img src="images/carousel/android/switch.png" alt=""></li>\
+<li><img src="images/carousel/android/range.png" alt=""></li>\
+<li><img src="images/carousel/android/composite-icons.png" alt=""></li>\
+<li><img src="images/carousel/android/popup.png" alt=""></li>\
+<li><img src="images/carousel/android/popover.png" alt=""></li>\
+<li><img src="images/carousel/android/tabbar.png" alt=""></li>\
+<li><img src="images/carousel/android/editable.png" alt=""></li>\
+<li><img src="images/carousel/android/carousel.png" alt=""></li>\
+<li><img src="images/carousel/android/sheet.png" alt=""></li>';
+      var windowsUI = 
+      '<li><img src="images/carousel/windows/navigation.png" alt=""></li>\
+<li><img src="images/carousel/windows/navigation-back.png" alt=""></li>\
+<li><img src="images/carousel/windows/segment.png" alt=""></li>\
+<li><img src="images/carousel/windows/composite-counters.png" alt=""></li>\
+<li><img src="images/carousel/windows/switched.png" alt=""></li>\
+<li><img src="images/carousel/windows/composite-time.png" alt=""></li>\
+<li><img src="images/carousel/windows/select.png" alt=""></li>\
+<li><img src="images/carousel/windows/switch.png" alt=""></li>\
+<li><img src="images/carousel/windows/range.png" alt=""></li>\
+<li><img src="images/carousel/windows/composite-icons.png" alt=""></li>\
+<li><img src="images/carousel/windows/popup.png" alt=""></li>\
+<li><img src="images/carousel/windows/popover.png" alt=""></li>\
+<li><img src="images/carousel/windows/tabbar.png" alt=""></li>\
+<li><img src="images/carousel/windows/editable.png" alt=""></li>\
+<li><img src="images/carousel/windows/carousel.png" alt=""></li>\
+<li><img src="images/carousel/windows/sheet.png" alt=""></li>';
+
+      // Handle switch carousel images based on OS:
+      $('#osMenu').on('click', 'li', function() {
+          var $this = $(this);
+          if (/iOS/i.test(this.className)) {
+            $('#carousel ul').html(iosUI);
+            $this.siblings().removeClass('selected');
+            $this.addClass('selected');
+          } else if (/Android/i.test(this.className)) {
+            $('#carousel ul').html(androidUI)
+            $this.siblings().removeClass('selected');
+            $this.addClass('selected');
+          } else if (/Windows/i.test(this.className)) {
+            $('#carousel ul').html(windowsUI)
+            $this.siblings().removeClass('selected');
+            $this.addClass('selected');
+          }
+      });
+    });
+  </script>
+</head>
+<body id='landingPage'>
+  <nav>
+    <ul class="menu">
+      <li>
+        <a href="./tutorials.html#/layouts"><span>Tutorials</span><span>Tuts</span></a>
+      </li>
+      <li>
+        <a href="./documentation.html#/building"><span>Documentation</span><span>Docs</span></a>
+      <li>
+        <a href="./community.html#/news">Community</a>
+      </li>
+      <li id='downloadTab'>
+        <a target='_blank' href="https://github.com/chocolatechipui/chocolatechip-ui">Download</a>
+      </li>
+    </ul>
+    <h1 id='Logo'>ChocolateChip-UI</h1>
+  </nav>
+  <article>
+    <section class='header'>
+      <h2>Create Mobile Apps
+with Native Look & Feel
+For Web or Hybrid</h2>
+      <h3>Light, Fast, Customizable, Standards-based</h3>
+    </section>
+    <section class='platforms'>
+      <h2>Write Once, Support 3 Platforms:
+iOS, Android and Windows Phone</h2>
+      <h3><img src="images/iphones.png" alt="">ChocolateChip-UI is just HTML, CSS & JavaScript.
+CSS themes implement each platform.
+Easy to customize LESS styles.
+Use alone or with Phonegap.
+Theme Roller for Custom Colors.</h3>
+    </section>
+    <section class='features'>
+      <h2>Everything You Need to Make Great Apps</h2>
+      <ul id='osMenu'>
+        <li class='iOS selected'>iOS</li>
+        <li class='Android'>Android</li>
+        <li class='Windows'>Windows</li>
+      </ul>
+      <div id="carousel">
+        <div>
+          <ul>
+            <li><img src="images/carousel/ios/navigation.png" alt=""></li>
+            <li><img src="images/carousel/ios/navigation-back.png" alt=""></li>
+            <li><img src="images/carousel/ios/segment.png" alt=""></li>
+            <li><img src="images/carousel/ios/composite-counters.png" alt=""></li>
+            <li><img src="images/carousel/ios/switched.png" alt=""></li>
+            <li><img src="images/carousel/ios/composite-time.png" alt=""></li>
+            <li><img src="images/carousel/ios/select.png" alt=""></li>
+            <li><img src="images/carousel/ios/switch.png" alt=""></li>
+            <li><img src="images/carousel/ios/range.png" alt=""></li>
+            <li><img src="images/carousel/ios/composite-icons.png" alt=""></li>
+            <li><img src="images/carousel/ios/popup.png" alt=""></li>
+            <li><img src="images/carousel/ios/popover.png" alt=""></li>
+            <li><img src="images/carousel/ios/tabbar.png" alt=""></li>
+            <li><img src="images/carousel/ios/editable.png" alt=""></li>
+            <li><img src="images/carousel/ios/carousel.png" alt=""></li>
+            <li><img src="images/carousel/ios/sheet.png" alt=""></li>
+          </ul>
+        </div>
+      </div>
+      <p id='seeAll'><a href="features.html">See more</a></p>
+    </section>
+    <section class='audience'>
+      <h2>Attention: Web Developers!</h2>
+      <h3>ChocolateChip-UI uses standard Web technologies.
+It’s built on top of the popular & familiar jQuery library.
+You can continue using the coding tools you already
+know and enjoy. ChocolateChip-UI provides you with a
+powerful and easy to customize view for your backend.
+ChocolateChip-UI makes no assumptions about what
+your backend is. Use whatever library or framework
+you want. Just output the results in the format
+ChocolateChip-UI expects and everything 
+will render beautifully. </h3>
+      <span class="logo"></span>
+    </section>
+    <section class="opensource">
+      <h2>Open Source
+MIT License 
+Available on Github<img src="images/open-source.png" alt=""></h2>
+      <h3>You can use ChocolateChip-UI to build an app and give it away for free, because you’re cool with that. Or make a commercial offering and charge for it. The MIT license gives you the flexibility to create and distribute your app the way you want. So, what do you have to do to comply? The license is already in the source files. Just include them as is in your app. How much does this cost? Nothing. Open source means it’s free to use. Same as jQuery. Understand?</h3>
+    </section>
+    <footer>
+      <h2>Get ChocolateChip-UI and Start
+Making Your App Now</h2>
+    <a id='download' href='https://github.com/chocolatechipui/chocolatechip-ui'>Download</a>
+    <ul id='socialMedia'>
+      <li id='facebook'></li>
+      <li id='twitter'></li>
+      <li id='google'></li>
+    </ul>
+    </footer>
+  </article>
+</body>
+</html>

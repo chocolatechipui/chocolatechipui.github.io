@@ -1,0 +1,52 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChocolateChip-UI</title>
+  <meta name="description" content="ChocolateChip-UI, an open source framework, helps you make great mobile Web apps with the native look of iOS, Android, & Windows Phone using HTML5, CSS and JavaScript.">
+  <link rel="canonical" href="http://chocolatechip-ui.com/">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="stylesheet" href="css/style.css">
+  <script type='text/javascript' src='scripts/jquery-2.1.3.js'></script>
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      background: #E2865C url(./images/deathvalley.jpg) no-repeat center 130px;
+      background-size: auto 80%;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li><a href="./tutorials.html"><span>Tutorials</span><span>Tuts</span></a></li>
+      <li><a href="./documentation.html"><span>Documentation</span><span>Docs</span></a></li>
+      <li><a href="./community.html#/news">Community</a></li>
+      <li id='downloadTab'><a target='_blank' href="https://github.com/chocolatechipui/chocolatechip-ui">Download</a></li>
+    </ul>
+    <h1 id='Logo'>ChocolateChip-UI</h1>
+  </nav>
+  <article>
+    <section class='header'>
+      <h1>404 Page not found
+      You probably don't want to be here.
+      Use one of the links above to get out now.</h1>
+    </section>
+  </article>
+  <script>
+    $(function() {
+      $('#Logo').on('click', function() {
+        window.location = './index.html'
+      });
+    });
+  </script>
+</body>
+</html>
