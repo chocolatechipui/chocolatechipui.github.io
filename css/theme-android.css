@@ -720,6 +720,7 @@ p {
   margin: 0px !important;
   padding: 6px 10px 0px !important;
   border-radius: 0;
+  line-height: 1.5;
 }
 .segmented:not(.paging) > button:first-of-type {
   border-left: solid 1px #979797;
@@ -871,19 +872,6 @@ button {
 #selectList li > h3 {
   width: auto;
 }
-/* Chrome only */
-@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
-  nav.navbar h1 {
-    top: 0px;
-  }
-  li.selected > .deletion-indicator::before {
-    top: 1px !important;
-  }
-  #weather-icon-aside {
-    display: inline-block !important;
-    width: 40px !important;
-  }  
-}
 .toolbar {
   position: relative;
   border-bottom: solid 1px #a7a7aa;
@@ -1004,6 +992,23 @@ button.back {
   #theme nav > button.back {
     top: -5px !important;
   }
+}
+
+/* Chrome only */
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+  #theme nav > button.back {
+    top: 0px !important;
+  }
+  nav.navbar h1 {
+    top: 0px;
+  }
+  li.selected > .deletion-indicator::before {
+    top: 1px !important;
+  }
+  #weather-icon-aside {
+    display: inline-block !important;
+    width: 40px !important;
+  }  
 }
 /* Firefox only */
 @-moz-document url-prefix() { 
