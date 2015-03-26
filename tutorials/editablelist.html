@@ -25,6 +25,7 @@ $('#myList').UIEditList({
 });
 </code></pre>
 
+<p>In the above code, notice the <code>list</code> parameter in the callback. This parameter gives us access to the current editable list. Using this we can find out the current value of the two attributes: <code>data-list-items-deleted</code> and <code>data-list-items-position</code>. With this information, our callback can do whatever is need to persist this information either locally or on a remote server.</p>
 
 
 <script>
