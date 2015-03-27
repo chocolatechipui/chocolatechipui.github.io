@@ -205,13 +205,11 @@ animation-name: none;\
       $.get('./data/ios.js', function(data) {
         $('#stylesheetTemplate').html(data);
       });
-      // $('textarea').val($.stylesheet);
       
       break;
 
       case 'android':
       if (!$._navbarBkgdColor) $._bkgdColor = '#eaeaea';
-      // $('#stylesheetTemplate').src = './data/android.js';
       $._newStyle = 
 '#theme h1 {\
   font-family: HelveticaNeue, "Helvetica Neue", Helvetica, SegoeUI, Arial, Sans-serif;\
@@ -465,7 +463,7 @@ color: ' + $._contrast + ';\
     ["#cc0000", "#e69138", "#f1c232", "#6aa84f", "#45818e", "#3d85c6", "#674ea7", "#a64d79"],
     ["#990000", "#b45f06", "#bf9000", "#38761d", "#134f5c", "#0b5394", "#351c75", "#741b47"]];
 
-  var calculatePrimaryColor = function(color) {
+  var calculateColors = function(color) {
     if (typeof color === 'string') {
       $._color = color;
     } else { 
@@ -482,19 +480,25 @@ color: ' + $._contrast + ';\
   var secondaryColorInput = $('#colorPicker2');
   primaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: '#007aff', 
     move : function(color) {
-      calculatePrimaryColor(color);
+      calculateColors(color);
     }
   });
 
+  // Handle hiding and showing color picker for secondary color:
   $('#chooseSecondaryColorCheckbox').change(function() {
-    $._secondaryColorActive = $._secondaryColorActive ? false : true;
-    if ($._secondaryColorActive) {
-      $._secondaryColorActive = false;
-      $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
-    } else {
+    var color = $('#primaryColorChooser .sp-container input').val();
+    if ($(this).prop('checked')) {
+      $._secondaryColorActive = true;
+      $._color = $._secondaryColor = $('#primaryColorChooser .sp-container input').val();
       $.publish('chosen-color', {color: $._color, secondaryColor: $._color});
+      $("#secondaryColorChooser").show();
+    } else {
+      $._secondaryColorActive = false;
+      $.publish('chosen-color', {color: color, secondaryColor: color});
+      $("#secondaryColorChooser").hide();
     }
-    $("#secondaryColorChooser").toggle();
+
+    // Initialize color picker when showing:
     secondaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: '#007aff',
       move: function(color) {
         $._secondaryColorActive = true;
@@ -506,7 +510,10 @@ color: ' + $._contrast + ';\
 
   // Calculate Color from manual entry:
   $('#primaryColorChooser .sp-container input').change(function() {
-    calculatePrimaryColor($(this).val());
+    calculateColors($(this).val());
+  });
+  $('#secondaryColorChooser .sp-container-input input').change(function() {
+    calculateColors($(this).val());
   });
 
 });
