@@ -73,6 +73,7 @@ button.action {
   padding: 0 15px;
   vertical-align: middle;
   background-color: #f7f7f7;
+  border-top: solid 1px #a7a7aa;
   border-bottom: solid 1px #a7a7aa;
   margin-bottom: 6px;
   position: relative;

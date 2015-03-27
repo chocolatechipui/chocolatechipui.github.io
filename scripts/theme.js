@@ -1,5 +1,6 @@
 $(function() {
   $._navbarBkgdColor = false;
+  $._secondaryColorActive = false;
   $._contrast = '#333';
   $._bkgdContrastColor = '#fff';
   $._newStyle = '';
@@ -8,6 +9,7 @@ $(function() {
   $._secondaryColor = '';
   $._bkgdColor = '#f7f7f7';
   $._navbarColor = $._color;
+  $._titleColor = '#333';
   // Windows colors:
   $._windowsBorderColor = '#fff';
   $._windowsButtonContrast = '#fff';
@@ -54,43 +56,17 @@ $(function() {
       $._navbarBkgdColor = false;
       $._bkgdColor = '#f7f7f7'
       $._navbarColor = $._color;
-      if ($._color) $.publish('chosen-color', {color: $._color, secondaryColor: $._color});
+      if ($._color) $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
     } else if ($(this).val() === 'navbar_toolbar') {
       $._navbarBkgdColor = true;
       if ($._color) {
         $._bkgdColor = $._color;
         $._navbarColor = $._contrast;
-        $.publish('chosen-color', {color: $._color});
-        calculateSegmentedColor($._color);
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
+        calculateSegmentedColor($._secondaryColor);
       }
     }
     $('#colors-secondary li').removeClass('selected');
-  });
-
-  //======================
-  // Choose primary color:
-  //======================
-  $('#colors').on('click', 'li', function() {
-    $(this).siblings().removeClass('selected');
-    $(this).addClass('selected');
-    $._color = $(this).attr('data-color');
-    $._secondaryColor = $._color;
-    if ($._navbarBkgdColor) $._navbarColor = $._contrast;
-    else $._navbarColor = $._color;
-    $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
-    calculateSegmentedColor($._color);
-    $('#colors-secondary li').removeClass('selected');
-  });
-
-  //========================
-  // Choose secondary color:
-  //========================
-  $('#colors-secondary').on('click', 'li', function() {
-    if (!$._color) return;
-    $(this).siblings().removeClass('selected');
-    $(this).addClass('selected');
-    $._secondaryColor = $(this).attr('data-color');
-    $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
   });
 
   //============================================
@@ -98,7 +74,7 @@ $(function() {
   //============================================
   var calculateSegmentedColor = function(color) {
     if ($._navbarBkgdColor === false) {
-      var brightness = calculateContrast(color);
+      var brightness = $.calculateContrast(color);
       $._bkgdContrastColor = (brightness < 150) ? "#fff" : "#333";
     }
   }
@@ -106,7 +82,8 @@ $(function() {
   //===========================================
   // Define method to calculate color contrast:
   //===========================================
-  var calculateContrast = function(color) {
+  $.calculateContrast = function(color) {
+    if (typeof color === 'object') color = color.toHexString();
     var colour = new $.RGBColor(color);
     return $.calcBrightness(colour);
   };
@@ -116,7 +93,7 @@ $(function() {
   // and updating the stylessheets and UI:
   //======================================================
   var colorMediator = $.subscribe('chosen-color', function(event, obj) {
-    var brightness = calculateContrast(obj.color);
+    var brightness = $.calculateContrast(obj.color);
     color = obj.color;
     if (obj.secondaryColor && obj.color !== obj.secondaryColor) $._secondaryColor = obj.secondaryColor;
     else $._secondaryColor = obj.color;
@@ -132,7 +109,7 @@ $(function() {
       $._windowsBorderColor = '#fff';
     }
     if ($._secondaryColor !== $._color) {
-      var secondaryColorBrightness = calculateContrast(obj.secondaryColor);
+      var secondaryColorBrightness = $.calculateContrast(obj.secondaryColor);
       $._windowsButtonColor = (secondaryColorBrightness < 150) ? "#fff" : "#000";
       $._windowsListColor = (secondaryColorBrightness < 150) ? '#fff' : "#000";
     } else {
@@ -141,9 +118,13 @@ $(function() {
     
     switch ($._currentOS) {
       case 'ios':
-      if (!$._navbarBkgdColor) $._bkgdColor = '#f7f7f7';
-      else $._contrast = $._color;
-
+      if (!$._navbarBkgdColor) {
+        $._bkgdColor = '#f7f7f7';
+        $._titleColor = $._color;
+      } else {
+        $._contrast = $._color;
+        $._titleColor = $._bkgdContrastColor;
+    }
       $._newStyle = 
 '#theme h1 {\
   font-family: HelveticaNeue, "Helvetica Neue", Helvetica, SegoeUI, Arial, Sans-serif;\
@@ -152,7 +133,7 @@ $(function() {
 background-color: '+ $._bkgdColor +';\
 }\
 #theme nav > h1 {\
-color: ' + $._bkgdContrastColor + ' !important;\
+color: ' + $._titleColor + ' !important;\
 }\
 #theme nav > button {\
  color: ' + $._navbarColor + ' !important;\
@@ -467,7 +448,65 @@ color: ' + $._contrast + ';\
   //========================
   $('#testSegmentedControl').UISegmented({selected: 0});
   $('#selectList').UISelectList({
-      selected: 0,
-      callback: $.noop
+    selected: 0,
+    callback: $.noop
+  });
+
+
+    // Define color palette for color picker:
+    var chuiPaletteOld = [["#9d403a", "#c8ac85", "#daa520", "#fad622", "#ffa500", "#fa8072", "#ff0000"], ["#ff69b4", "#ee82ee", "#dda0dd", "#800080", "#9370d8", "#011a99", "#0000ff"], ["#1e90ff", "#87ceeb", "#b0c4de", "#40e0d0", "#008080", "#30c930", "#008000"], ["#6b8e23", "#808000", "#000000", "#708090", "#808080", "#a9a9a9", "#d3d3d3"]];
+
+    var chuiPalette  = [
+    ["#434343", "#666666", "#999999", "#b7b7b7", "#cccccc", "#efefef", "#f3f3f3", "#ffffff"],
+    ["#ff0000", "#ff9900", "#ffff00", "#00ff00", "#00ffff", "#0000ff", "#9900ff", "#ff00ff"],
+    ["#f4cccc", "#fce5cd", "#fff2cc", "#d9ead3", "#d9ead3", "#cfe2f3", "#d9d2e9", "#ead1dc"],
+    ["#ea9999", "#f9cb9c", "#ffe599", "#b6d7a8", "#a2c4c9", "#9fc5e8", "#b4a7d6", "#d5a6bd"],
+    ["#e06666", "#f6b26b", "#ffd966", "#93c47d", "#76a5af", "#6fa8dc", "#8e7cc3", "#c27ba0"],
+    ["#cc0000", "#e69138", "#f1c232", "#6aa84f", "#45818e", "#3d85c6", "#674ea7", "#a64d79"],
+    ["#990000", "#b45f06", "#bf9000", "#38761d", "#134f5c", "#0b5394", "#351c75", "#741b47"]];
+
+  var calculatePrimaryColor = function(color) {
+    if (typeof color === 'string') {
+      $._color = color;
+    } else { 
+      $._color = color.toHexString();
+    }
+    $._secondaryColor = $._secondaryColorActive ? $._secondaryColor : $._color;
+    if ($._navbarBkgdColor) $._navbarColor = $._contrast;
+    else $._navbarColor = $._color;
+    $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
+    calculateSegmentedColor($._color);
+  };  
+  // Initialize primary color picker:
+  var primaryColorInput = $('#colorPicker1');
+  var secondaryColorInput = $('#colorPicker2');
+  primaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: '#007aff', 
+    move : function(color) {
+      calculatePrimaryColor(color);
+    }
+  });
+
+  $('#chooseSecondaryColorCheckbox').change(function() {
+    $._secondaryColorActive = $._secondaryColorActive ? false : true;
+    if ($._secondaryColorActive) {
+      $._secondaryColorActive = false;
+      $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
+    } else {
+      $.publish('chosen-color', {color: $._color, secondaryColor: $._color});
+    }
+    $("#secondaryColorChooser").toggle();
+    secondaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: '#007aff',
+      move: function(color) {
+        $._secondaryColorActive = true;
+        $._secondaryColor = color.toHexString();
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
+      }
     });
+  }); 
+
+  // Calculate Color from manual entry:
+  $('#primaryColorChooser .sp-container input').change(function() {
+    calculatePrimaryColor($(this).val());
+  });
+
 });

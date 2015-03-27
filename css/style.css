@@ -194,9 +194,8 @@ menu.submenu li.selected a {
   padding: 40px 40px 60px;
 }
 #osMenu {
-  width: 230px;
-  margin: 0 auto 20px auto;
-  padding: 0;
+  width: 400px !important;
+  margin: 0 auto 20px;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
