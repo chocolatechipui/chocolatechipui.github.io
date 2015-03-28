@@ -22,12 +22,12 @@ $(function() {
   // Toggle the UI based on OS:
   //===========================
   $('.menu').on('click', 'button', function() {
-    resetUI();
     switch (this.id) {
       case 'iosTheme':
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         $('#os-theme').attr('href', './css/theme-ios.css');
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'ios';
         $('textarea').val('');
       break;
@@ -35,6 +35,7 @@ $(function() {
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         $('#os-theme').attr('href', './css/theme-android.css');
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'android';
         $('textarea').val('');
       break;
@@ -42,6 +43,7 @@ $(function() {
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         $('#os-theme').attr('href', './css/theme-win.css');
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'windows'
         $('textarea').val('');
       break;
@@ -472,9 +474,15 @@ color: ' + $._contrast + ';\
     $._secondaryColor = $._secondaryColorActive ? $._secondaryColor : $._color;
     if ($._navbarBkgdColor) $._navbarColor = $._contrast;
     else $._navbarColor = $._color;
-    $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
     calculateSegmentedColor($._color);
+    $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
   };  
+  var calculateColorsSecondary = function(color) {
+    $._color = $('#primaryColorChooser .sp-container input').val()
+    $._secondaryColor = $('#secondaryColorChooser .sp-input-container input').val();
+    calculateSegmentedColor($._color);
+    $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
+  }; 
   // Initialize primary color picker:
   var primaryColorInput = $('#colorPicker1');
   var secondaryColorInput = $('#colorPicker2');
@@ -506,13 +514,16 @@ color: ' + $._contrast + ';\
         $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
       }
     });
+
+    $('#secondaryColorChooser .sp-input-container input').change(function() {
+      $._secondaryColor = $(this).val();
+      $._secondaryColorActive = true;
+      calculateColorsSecondary($(this).val());
+    });
   }); 
 
   // Calculate Color from manual entry:
   $('#primaryColorChooser .sp-container input').change(function() {
-    calculateColors($(this).val());
-  });
-  $('#secondaryColorChooser .sp-container-input input').change(function() {
     calculateColors($(this).val());
   });
 
