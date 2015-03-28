@@ -194,10 +194,11 @@ menu.submenu li.selected a {
   padding: 40px 40px 60px;
 }
 #osMenu {
-  width: 400px !important;
+  width: 210px !important;
   margin: 0 auto 20px;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
+  padding: 0;
 }
 #osMenu li {
   display: inline-block;
@@ -210,6 +211,12 @@ menu.submenu li.selected a {
   padding: 0;
   margin: 0 10px;
   cursor: pointer;
+}
+#osMenu li:first-child {
+  margin-left: 0;
+}
+#osMenu li:last-child {
+  margin-right: 0;
 }
 #osMenu li:hover,
 #osMenu li.selected {
@@ -515,6 +522,9 @@ body > article > section {
   }
   #documentation h2, #tutorials h2, #community h2 {
     font-size: 1.2em !important;
+  }
+  .opensource h3 {
+    text-align: left;
   }
 }
 
