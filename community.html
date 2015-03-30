@@ -70,23 +70,23 @@
         $('#community').removeClass('themeSection');
         $('.submenu ul li').eq(0).addClass('selected');
       };
+      var themes = function() {
+         getFile('./community/themes.html', 'themes');
+        $('.submenu ul li').removeClass('selected');
+         $('#community').addClass('themeSection');
+        $('.submenu ul li').eq(1).addClass('selected');
+      };
       var resources = function() {
         getFile('./community/resources.html', 'resources');
         $('.submenu ul li').removeClass('selected');
         $('#community').removeClass('themeSection');
-        $('.submenu ul li').eq(1).addClass('selected');
+        $('.submenu ul li').eq(2).addClass('selected');
       };
       var builtwith = function() {
         getFile('./community/builtwith.html', 'builtwith');
         $('.submenu ul li').removeClass('selected');
         $('.submenu ul li').eq(3).addClass('selected');
         $('#community').removeClass('themeSection');
-      };
-      var themes = function() {
-         getFile('./community/themes.html', 'themes');
-        $('.submenu ul li').removeClass('selected');
-         $('#community').addClass('themeSection');
-        $('.submenu ul li').eq(2).addClass('selected');
       };
       var routes = {
         '#/news': news,
@@ -114,8 +114,8 @@
     <div>
       <ul>
         <li><a href="#/news">News</a></li>
-        <li><a href="#/resources">Resources</a></li>
         <li id='themesTab'><a href="#/themes">Themes</a></li>
+        <li><a href="#/resources">Resources</a></li>
         <li><a href="#/builtwith">Built with ChUI</a></li>
       </ul>
     </div>

@@ -1,4 +1,5 @@
 $(function() {
+  $._editingIsActive = false;
   $._navbarBkgdColor = false;
   $._secondaryColorActive = false;
   $._contrast = '#333';
@@ -30,6 +31,7 @@ $(function() {
         $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'ios';
         $('textarea').val('');
+        if (!$._editingIsActive) $.publish('chosen-color', {color: '#007aff', secondaryColor: '#007aff'});
       break;
       case 'androidTheme':
         $(this).siblings().removeClass('selected');
@@ -489,6 +491,7 @@ color: ' + $._contrast + ';\
   primaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: '#007aff', 
     move : function(color) {
       calculateColors(color);
+      $._editingIsActive = true;
     }
   });
 
