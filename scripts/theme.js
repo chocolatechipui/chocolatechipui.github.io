@@ -15,10 +15,18 @@ $(function() {
   $._windowsBorderColor = '#fff';
   $._windowsButtonContrast = '#fff';
   $._windowsNavBtnBkgd = 'transparent';
-  $._windowsButtonColor = '#fff'
+  $._windowsButtonColor = '#fff';
+  // Android colors:
+  $._androidTapColor = '0, 0, 0';
 
   var stylesheet;
 
+  // Function to light a hex color:
+  //===============================
+  function lightenColor(color, percent) {  
+    var num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, G = (num >> 8 & 0x00FF) + amt, B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
+  }
   //===========================
   // Toggle the UI based on OS:
   //===========================
@@ -28,26 +36,28 @@ $(function() {
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         $('#os-theme').attr('href', './css/theme-ios.css');
-        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'ios';
         $('textarea').val('');
-        if (!$._editingIsActive) $.publish('chosen-color', {color: '#007aff', secondaryColor: '#007aff'});
+        if (!$._editingIsActive) return;
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
       break;
       case 'androidTheme':
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         $('#os-theme').attr('href', './css/theme-android.css');
-        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'android';
         $('textarea').val('');
+        if (!$._editingIsActive) return;
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
       break;
       case 'windowsTheme':
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         $('#os-theme').attr('href', './css/theme-win.css');
-        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
         $._currentOS = 'windows'
         $('textarea').val('');
+        if (!$._editingIsActive) return;
+        $.publish('chosen-color', {color: $._color, secondaryColor: $._secondaryColor});
       break;
     }
   });
@@ -214,8 +224,43 @@ animation-name: none;\
 
       case 'android':
       if (!$._navbarBkgdColor) $._bkgdColor = '#eaeaea';
+      var brightness = $.calculateContrast($._secondaryColor);
+      if (brightness > 150) {
+        var androidSwitchTrackColor = $._secondaryColor;
+      } else {
+        var androidSwitchTrackColor = lightenColor($._secondaryColor, 30);
+      }
+      var buttonBrightness = $.calculateContrast($._navbarColor);
+      var androidBackTap = '';
+      var androidBackTapPercentage = 0;
+      var androidBackTapPercentage2 = 0;
+      if (buttonBrightness < 150) {
+        $._androidTapColor = 'rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025)';
+        androidBackTap = '0, 0, 0';
+        androidBackTapPercentage = 0.15;
+        androidBackTapPercentage2 = 0.15;
+      } else {
+        $._androidTapColor = 'rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.35)';
+        androidBackTap = '255, 255, 255';
+        androidBackTapPercentage = 0.75;
+        androidBackTapPercentage2 = 0.5;
+      }
       $._newStyle = 
-'#theme h1 {\
+'@-webkit-keyframes backButtonRipple {\
+  0% {\
+    box-shadow: inset 0 0 0 rgba(' + androidBackTap + ', 0);\
+  }\
+  50% {\
+    box-shadow: inset 0 0 40px rgba(' + androidBackTap + ', ' + androidBackTapPercentage + '), 0 0 10px rgba(' + androidBackTap + ', ' + androidBackTapPercentage + ');\
+  }\
+  90% {\
+    box-shadow: inset 0 0 40px rgba(' + androidBackTap + ', androidBackTapPercentage2' + androidBackTapPercentage2 + '), 0 0 3px rgba(' + androidBackTap + ', ' + androidBackTapPercentage + ');\
+  }\
+  100% {\
+    box-shadow: inset 0 0 0 rbga(' + androidBackTap + ', 0), 0 0 0 rgba(' + androidBackTap + ', 0);\
+  }\
+}\
+#theme h1 {\
   font-family: HelveticaNeue, "Helvetica Neue", Helvetica, SegoeUI, Arial, Sans-serif;\
 }\
 #theme nav {\
@@ -226,11 +271,13 @@ animation-name: none;\
 }\
 #theme nav > button {\
  color: ' + $._contrast + ' !important;\
+ background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%);\
 }\
 #theme button.action {\
   color: ' + $._bkgdContrastColor + ';\
   border-color: ' + $._secondaryColor + ' !important;\
   background-color: ' + $._secondaryColor + ' !important;\
+  background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%);\
 }\
 #theme button.action:hover {\
   box-shadow: 0 3px 7px #666666;\
@@ -239,81 +286,60 @@ animation-name: none;\
 #theme .nav::after {\
   border-color:' + $._secondaryColor + ' !important;\
 }\
-#theme .list>li[data-goto]:hover {\
-  background-color: ' + $._color + ';\
-}\
 #theme .list>li:hover::after {\
   border-color: ' + $._contrast + '!important;\
-}\
-#theme .list > li[data-goto]:hover > h3,\
-#theme .list > li[data-goto]:hover > div > h3,\
-#theme .list > li[data-goto]:hover > div > h4,\
-#theme .list > li[data-goto]:hover > div > p,\
-#theme .list > li[data-goto]:hover > aside > h4,\
-#theme .list > li[data-goto]:hover > aside > .counter {\
-  color: ' + $._bkgdContrastColor + ';\
 }\
 #theme .show-detail::after {\
   color:' + $._secondaryColor +' !important;\
   border-color:' + $._secondaryColor +' !important;\
 }\
-#theme .list > li[data-goto]:hover > aside > .nav::after {\
-  border-color:' + $._bkgdContrastColor +' !important;\
-}\
-#theme .list > li[data-goto]:hover > aside > .show-detail::after {\
-  color:' + $._bkgdContrastColor +' !important;\
-  border-color:' + $._bkgdContrastColor +' !important;\
-}\
-#theme .segmented > button {\
-  color:' + $._color + ' !important;\
-  border-color:' + $._color + ' !important;\
-}\
 #theme .segmented > button:hover,\
 #theme .segmented > button.selected {\
-  border-color:' + $._color + ' !important;\
-  background-color:' + $._color + ' !important;\
-  color:' + $._bkgdContrastColor + ' !important;\
+  -webkit-animation-name: tapRipple;\
+  animation-name: tapRipple;\
+  border-bottom: solid 3px ' + $._color + ';\
 }\
 #theme .toolbar {\
   background-color: ' + $._bkgdColor + ' !important;\
 }\
 #theme .toolbar button {\
   color: ' + $._contrast + ';\
+  background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%);\
 }\
-#theme .list.select li:hover {\
-  background-color: ' + $._secondaryColor + ';\
-}\
-#theme .list.select li:hover > h3 {\
-  color: ' + $._bkgdContrastColor + ';\
+#theme .toolbar button:hover {\
+  animation-name: tapRipple;\
+  box-shadow: 0 5px 8px 2px rgba(0,0,0,0.25);\
 }\
 #theme .list.select li.selected::after {\
   background-color: ' + $._secondaryColor + ';\
-  box-shadow: 0 0 0 3px ' + $._secondaryColor + ', inset 0 0px 0px 3px #ffffff;\
+  box-shadow: inset 0 0px 0px 3px #fff;\
+  border: solid 2px ' + $._secondaryColor + ';\
 }\
 #theme .list.select li:hover::after {\
   background-color: ' + $._secondaryColor + ';\
-  box-shadow: 0 0 0 3px ' + $._secondaryColor + ', inset 0 0px 0px 3px #ffffff;\
-}\
-#theme .list.select li:hover {\
-  background-color: ' + $._secondaryColor + ' !important;\
+  box-shadow: inset 0 0px 0px 3px #fff;\
+  border: solid 2px ' + $._secondaryColor + ' !important;\
 }\
 #theme .switch {\
-  background-image: -webkit-linear-gradient(left, ' + $._secondaryColor + ', ' + $._secondaryColor + '), -webkit-linear-gradient(left, #888888, #888888);\
-  background-image: linear-gradient(to left, ' + $._secondaryColor + ', ' + $._secondaryColor + '), linear-gradient(to left, #888888, #888888);\
+  background-image: -webkit-linear-gradient(left, ' + androidSwitchTrackColor + ',' + androidSwitchTrackColor + '), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\
+  background-image: linear-gradient(to left, ' + androidSwitchTrackColor + ', ' + androidSwitchTrackColor + '), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\
 }\
 #theme .switch.on {\
--webkit-animation-name: none;\
-animation-name: none;\
+  -webkit-animation-name: none;\
+  animation-name: none;\
 }\
 #theme .switch.on > em {\
   background-color: ' + $._secondaryColor + ';\
-  border: solid 2px ' + $._secondaryColor + ';\
+}\
+#theme nav > button.back {\
+  background-image: -webkit-linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ');\
+  background-image: linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ');\
 }\
 #theme nav > button.back::before {\
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%22120px%22%20height%3D%22120px%22%20viewBox%3D%220%200%20120%20120%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22BackButton%22%20stroke-linecap%3D%22square%22%20stroke%3D%22%23' + $._contrast.split('#')[1] + '%22%20stroke-width%3D%228%22%3E%3Cg%20id%3D%22Line-2-+-Line-+-Line%22%20transform%3D%22translate%2815.000000,%2022.000000%29%22%3E%3Cpath%20d%3D%22M0.62909796,38.5%20L37.1384668,76.3699524%22%20id%3D%22Line-2%22%3E%3C/path%3E%3Cpath%20d%3D%22M89.3478261,39%20L3.2313744,39%22%20id%3D%22Line%22%3E%3C/path%3E%3Cpath%20d%3D%22M0.62909796,38.5%20L37.1384668,0.63004759%22%20id%3D%22Line%22%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;\
+  background-color: ' + $._contrast + ' !important;\
 }\
-#theme nav > button.back:hover::before {\
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%22120px%22%20height%3D%22120px%22%20viewBox%3D%220%200%20120%20120%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22BackButton%22%20stroke-linecap%3D%22square%22%20stroke%3D%22%23' + $._bkgdContrastColor.split('#')[1] + '%22%20stroke-width%3D%228%22%3E%3Cg%20id%3D%22Line-2-+-Line-+-Line%22%20transform%3D%22translate%2815.000000,%2022.000000%29%22%3E%3Cpath%20d%3D%22M0.62909796,38.5%20L37.1384668,76.3699524%22%20id%3D%22Line-2%22%3E%3C/path%3E%3Cpath%20d%3D%22M89.3478261,39%20L3.2313744,39%22%20id%3D%22Line%22%3E%3C/path%3E%3Cpath%20d%3D%22M0.62909796,38.5%20L37.1384668,0.63004759%22%20id%3D%22Line%22%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;\
+#theme nav > button.back::after {\
+  background-color: ' + $._contrast + ' !important;\
 }';
       $('#customStylesheet').html($._newStyle);
 

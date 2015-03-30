@@ -11,9 +11,6 @@ body {
   -webkit-flex-direction: row;
   flex-direction: row;
   -webkit-font-smoothing: subpixel-antialiased;
-/*  -webkit-align-items: stretch;
-  align-items: stretch;*/
-  
 }
 menu, menu > div, menu > div > ul, menu > div > ul > li {
   height: 30px !important;

@@ -3,7 +3,7 @@ ChocolateChip-UI
 ChUI-Win.css
 Copyright 2015 Sourcebits www.sourcebits.com
 License: MIT
-Version: 3.8.2
+Version: 3.8.3
 */
 /* ==============================
    Body
@@ -65,22 +65,28 @@ body * {
   Horizontal Panels
   ============================== */
 .horizontal {
+  display: -webkit-box;
+  display: -webkit-flexbox;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-orient: horizontal;
+  -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-flex-pack: flex-start;
   -ms-flex-pack: flex-start;
   justify-content: flex-start;
+  -webkit-flex-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
 }
 .horizontal.centered {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
 }
@@ -755,6 +761,10 @@ div.toolbar > button {
 menu > div > ul > li > a {
   -webkit-font-smoothing: subpixel-antialiased;
   font-family: "HelveticaNeue", Helvetica, Calibri, sans-serif !important;
+}
+#osMenu {
+  width: auto !important;
+  margin: 0 auto 20px !important;
 }
 /* Sarari Only */
 @media screen and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0) {
