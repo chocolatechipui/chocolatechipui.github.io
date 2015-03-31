@@ -2,9 +2,9 @@
 
 <p>When using Web technologies, especially those who heavily rely on jQuery for everything, it's common to create situations with the UI and the code that runs an application are tightly bound up in what's often referred to as spaghetti code. This results in code that is hard to debug, hard to maintain and hard to extend. Decoupling is not an approach to coding to avoid tight coupling of functionalities.</p>
 
-<p>The most common way of decoupling is through the use of observer patters. Knockout, Angular and many other frameworks use some type of observers to decouple the code. ChocolateChip-UI does not have a dedicated observer factory built-in. But it does have something close: pub/sub. Using the pub/sub methods, we can set up an evented bus that works the same as a dedicated observer system. Before we get to envoled, let's first take a look at how ChocolateChip-UI's pub/sub works.</p>
+<p>The most common way of decoupling is through the use of observer patters. Knockout, Angular and many other frameworks use some type of observers to decouple the code. ChocolateChip-UI does not have a dedicated observer pattern built-in. But it does have something close: pub/sub. Using the pub/sub methods, we can set up an evented bus that works the same as a dedicated observer system. Before we get too envoled, let's first take a look at how ChocolateChip-UI's pub/sub works.</p>
 
-<p>There are just three methods to implement pub/sub:</p>
+<p>Pub/sub in ChocolateChip-UI has three methods:</p>
 
 <ol>
   <li>$.subscribe(broadcast)</li>
@@ -12,7 +12,7 @@
   <li>$.unsubscribe(broadcast)</li>
 </ol>
 
-<p>These three methods are of course very similar to event binding. In fact, this is a custom event bus for handling the workings of an app. We first need to define a broadcast. We do this by giving it a unique name, as we may need to may a number of different broadcasts depending on what our app is doing. Let's imagine we have a list that the user taps. We want to set up a broadcast that will publish what the user chose. We can then set up any number of subscribers to react when the publication occurs. We'll name our broadcast "user-choice". Feel free to be as descriptive as you like. You can also create namespaces so that you can define channel-based broadcasts. For example:</p>
+<p>In order to use these, we first need to define a broadcast. We do this by providing a unique name, as we may need to have a number of different broadcasts for our app. Let's imagine we have a list that the user taps. We want to set up a broadcast that will publish what the user chose. We can then set up any number of subscribers to react when the publication occurs. We'll name our broadcast "user-choice". Feel free to be as descriptive as you like. You can also create namespaces so that you can define channel-based broadcasts. For example:</p>
 
 <ul>
   <li>'item/choose'</li>
@@ -33,7 +33,8 @@
 });
 </code></pre>
 
-<p>Now that we can publish a broadcast, we need to define a subscriber. There are a lot of ways to use the subscriber. It really depends on your coding style. Personally, we prefer to define the subscribers as separate blocks. Thus they effectively become mediators. The mediator pattern is a way to write code in separated blocks. It stands between the interaction that published a broadcast, and the code that will be the ultimate target of that braodcast. For example, ordinarly when the user clicks on a list item, we might want to update a shopping cart object. It's not uncommon for developers to write all that responsiblity right into the event handler for the list. This results in spaghetti code. The UI then has to know about the shopping cart in order to update it. If you need to change how the UI works, you may also need to change how you update the shopping cart. Using a mediator, we avoid this entaglement. With a subscriber/mediator, the UI need not know anything about the shopping cart object. Similarly, the shopping cart need not no anything about the UI. And both need know anything about the mediator. Finally, the mediator does need to know about the UI. It merely listens for a broadcast. When a broadcast happens and it receives the data, it exectues the actions it was defined to do. This may involve updating the shopping cart. This gives us clearly separated concerns. This is easy to understand. It also allows us to make reasonable changes to the UI or the shopping cart and only have to worry about making sure only the mediator still works. Since the medator's task is about updating the shopping cart, this should be very straightforward. So, let's look at setting up our subscriber/mediator:</p>
+<p>Now that we can publish a broadcast, we need to define a subscriber. There are a lot of ways to use the subscriber. It really depends on your coding style. Personally, we prefer to define the subscribers as separate blocks. Thus they effectively become mediators. The mediator pattern is a way to write code in separated blocks. It stands between the interaction that published a broadcast, and the code that will be the ultimate target of that braodcast. For example, ordinarly when the user clicks on a list item, we might want to update a shopping cart object. It's not uncommon for developers to write all that responsiblity right into the event handler for the list. This results in spaghetti code. The UI then has to know about the shopping cart in order to update it. If you need to change how the UI works, you may also need to change how you update the shopping cart. Using a mediator, we avoid this entaglement.</p>
+<p>With a subscriber/mediator, the UI need not know anything about the shopping cart object. Similarly, the shopping cart need not no anything about the UI. And both need know anything about the mediator. Finally, the mediator does need to know about the UI. It merely listens for a broadcast. When a broadcast happens and it receives the data, it exectues the actions it was defined to do. This may involve updating the shopping cart. This gives us clearly separated concerns. This is easy to understand. It also allows us to make reasonable changes to the UI or the shopping cart and only have to worry about making sure only the mediator still works. Since the medator's task is about updating the shopping cart, this should be very straightforward. So, let's look at setting up our subscriber/mediator:</p>
 
 <pre class="prettyprint"><code>var choiceMediator = $.subscribe("user-choice", registerTheChoice);
 // The callback gets to arguments passed from the subscriber,
@@ -47,7 +48,7 @@ var registerTheChoice = function(topic, choice) {
 
 <p>What you can accomplish with pub/sub and mediators is only limited by your ingenuity. Your data model my have a publisher that annouces when something is deleted form it. You could then have a mediator for some part of the UI that would update it when this occurs.</p>
 
-<p>Lest we forget, there is also the <code>$.unsubscribe(broadcast)</code> method. This allows you to unsubscribe at any time from a broadcast. You might want to to this after a certain state has been reached. To unsubscribe a mediator from a broadcast, just pass the broadcast as an argument.</p>
+<p>Lest we forget, there is also the <code>$.unsubscribe(broadcast)</code> method. This allows you to unsubscribe at any time from a broadcast. You might want to do this after a certain state has been reached. To unsubscribe a mediator from a broadcast, just pass the broadcast as an argument.</p>
 
 <h3>Data Binding</h3>
 <p>Many frameworks provide data binding. They normally do this with observers. This can often be costly for your application because the more things you bind, the more memory gets eaten up by the observers. This can result in terrible performance issues. ChocolateChip-UI provides a way to implement one way data binding using two attributes: <code>data-controller</code> and <code>data-model</code>. By giving these two attributes the same value, we indicate that they have a bound relationship. At load time, ChocolateChip-UI sees this and automatically creates a mediator using its pub/sub system to establish the binding. This is much more efficient than Knockout or Angular. Here's an example of how easy this is:</p>
@@ -122,7 +123,7 @@ var registerTheChoice = function(topic, choice) {
 
 <p>To learn more about ChocolateChip-UI's implementation of pub/sub, please read the <a target='_blank' href="./documentation.html#/chuijs">documentation for ChUI.js</a>.</p>
 <p>You can read this article for more details about how ChocolateChip-UI uses pub/sub and mediators to implement <a target='_blank' href="http://bit.ly/Xz6qcN">data binding</a>.</p>
-<p>You can also see how <a href="http://bit.ly/1wrG0ny">these techniques were used</a> to create the Vino app for California's Wine Country.</p>
+<p>You can also see how <a target='_blank' href="http://bit.ly/1wrG0ny">these techniques were used</a> to create the Vino app for California's Wine Country.</p>
 
 
 
