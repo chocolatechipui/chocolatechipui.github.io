@@ -4,8 +4,8 @@
 <a name="theme_switching"></a>
 <h2>Theme Switching</h2>
 <p>ChocolateChip-UI was designed to allow you to write one app with data and user interactions which you can deploy to iOS, Android and Windows Phone 8. The only difference between each platform is the CSS file: chui.css. This means that when the user requests your app from the server, you can determine which browser and operating system they are on and provide them the appropriate theme. Because this is done on the server before the page is sent, the user sees only the appropriate theme load.</p>
-<p>There are too server stacks to show how to do this for all of them. But if you have any experience writing back end code for your server, you should be able to figure out how to switch themes based on the examples here. We present two ways to do user agent sniffing on the server: with PHP and NodeJS.</p>
-<p>Please note that these are very basic tests for the user agent. There are many solid solutions available for server-side user agent sniffing. You just need to find out what is available for your setup.</p>
+<p>We provide two examples here of how to provide the correct theme from a PHP server and a node server. If you have any experience writing back end code for your particular server choice, you should be able to figure out how to do this based on the examples here.</p>
+<p>Please note that these are very basic tests for the user agent. There are many solid solutions available for server-side user agent sniffing. You just need to find out what is available for your server.</p>
 
 <a name="php"></a>
 <h2>PHP</h2>
@@ -109,11 +109,6 @@ res.render('demo', { title: 'ChocolateChip-UI', userAgent: req.headers['user-age
 <p>Desktop browser may sometimes render things differently than how they will look when displayed on actual mobile devices, so, if you see some visual glitch, before trying to compensate for it, check it on the target device platform. For example, running Windows Phone theme on the mac in Safari or Chrome will not display properly as these do not support features specific to IE. And the Windows Back button icon will be missing. Similarly, on Windows, iOS Back button will not display correctly either. </p>
 
 
-<script>
-  (function() {
-    prettyPrint();
-  })();
-</script>
 <script>
    $(function() {
       $('body').scrollTop(0);

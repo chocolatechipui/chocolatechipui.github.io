@@ -1,0 +1,37 @@
+<h1>Troubleshooting</h1>
+
+<p>When a layout or widget is not working they way you expected, take a minute to check possible reasons. The first thing to check is if you have the proper markup for what you are trying to do.</p>
+
+<ol>
+   <li>
+     <p>A missing tag or an improperly closed tag can wreck havoc on a layout or widget. If things don't look right, check your markup first. ChocolateChip-UI expects a particular type of structure. Basically: </p>
+     <pre class="prettyprint">&lt;nav&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+&lt;/nav&gt;     
+&lt;article&gt;
+  &lt;section&gt;
+   stuff in here
+  &lt;/section&gt;
+&lt;/article&gt;</pre>
+   </li>
+   <li>
+     <p>Check any required attributes. For example, navigation lists require the <code>data-goto</code> attribute to look. Second, make sure attributes have the values they need. The <code>data-goto</code> attribute should have the id of the article it navigates to. If the value is wrong, no navigation. Simple. Check that you spelled the id of the article correctly. Same thing for slide out menus, tabbars, etc.</p>
+   </li>
+   <li>
+     <p>A simple console log for an element will let you know whether the element exists or not. If you get an undefined value, it means the element does not exist. Either you have a misspelled id, or the element has not been created yet or was deleted by some other action.</p>
+   </li>
+   <li>
+     <p>
+       Widget callbacks offer you access to themselves. Make sure you have the reference you expect and are looking at the appropriate attribute for a value. For example, although switches have an internal, hidden checkbox, you do not need to access it directly to know the checked state of a switch, you can directly check the switch's class name. When it is selected, it has a class of "on". When it is not selected, it does not have this class. Ready the documentation for widgets carefully, consult tutorials and examine the working examples that come with ChocolateChip-UI to see how to use widgets.
+     </p>
+   </li>
+   <li>
+     <p>Avoid complexity (KISS principle). ChocolateChip-UI is a very simple framework on purpose. The simpler you keep things, the less likely there will be bugs. As you're writing code to implement your app, try to avoid creating situations where diferent blocks of code are interlinked and dependent upon each other. When this happens, subtle bugs can creep into hte code that are hard to find and hard to resolve. Look at how to separate concerns and decouple code. Look at implementing an MVC pattern. ChocolateChip-UI provides a pub/sub module that you can use as an event bus to decouple your code with observer patterns. Please read the tutorial "Decoupling Code" for more information on how to do this. Otherwise, you can use some other framework for you MVC needs and integrate ChocolateChip-UI with it.</p>
+   </li>
+ </ol> 
+
+<script>
+  (function() {
+    prettyPrint();
+  })();
+</script>

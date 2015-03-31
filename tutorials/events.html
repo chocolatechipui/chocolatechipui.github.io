@@ -87,8 +87,11 @@ $('#myButton').on($.eventStart, function() {
 <p>Using a swipe gesture:</p>
 
 <pre class="prettyprint"><code>$('.list li').on('swiperight', function() {
-    // perform some action with the user
-    // swipe to the right on a list item.
+    // perform some action when the user
+    // swipes to the right on a list item:
+    alert('You just swiped to the right!');
+    // Output the text of the list item swiped on:
+    console.log($(this).text());
 });
 </code></pre>
 
@@ -99,11 +102,6 @@ $('#myButton').on($.eventStart, function() {
 <p>Look at the gestures demo in the examples to see how to use them. </p>
 
 
-<script>
-  (function() {
-    prettyPrint();
-  })();
-</script>
 
 <script>
    $(function() {

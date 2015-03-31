@@ -18,7 +18,9 @@ $(function() {
   $._windowsButtonColor = '#fff';
   // Android colors:
   $._androidTapColor = '0, 0, 0';
-
+  $._androidSwitchTrackColor = $._secondaryColor;
+  $._segmentedTextColor = '#333';
+  $._androidBackTap = '';
   var stylesheet;
 
   // Function to light a hex color:
@@ -226,38 +228,40 @@ animation-name: none;\
       if (!$._navbarBkgdColor) $._bkgdColor = '#eaeaea';
       var brightness = $.calculateContrast($._secondaryColor);
       if (brightness > 150) {
-        var androidSwitchTrackColor = $._secondaryColor;
+        $._androidSwitchTrackColor = $._secondaryColor;
+      $._segmentedTextColor = '#333';
       } else {
-        var androidSwitchTrackColor = lightenColor($._secondaryColor, 30);
+        $._androidSwitchTrackColor = lightenColor($._secondaryColor, 30);
+        $._segmentedTextColor = '#fafafa';
       }
       var buttonBrightness = $.calculateContrast($._navbarColor);
-      var androidBackTap = '';
+      
       var androidBackTapPercentage = 0;
       var androidBackTapPercentage2 = 0;
       if (buttonBrightness < 70) {
         $._androidTapColor = 'rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025)';
-        androidBackTap = '0, 0, 0';
+        $._androidBackTap = '0, 0, 0';
         androidBackTapPercentage = 0.15;
         androidBackTapPercentage2 = 0.15;
       } else {
         $._androidTapColor = 'rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.35)';
-        androidBackTap = '255, 255, 255';
+        $._androidBackTap = '255, 255, 255';
         androidBackTapPercentage = 0.75;
         androidBackTapPercentage2 = 0.5;
       }
       $._newStyle = 
 '@-webkit-keyframes backButtonRipple {\
   0% {\
-    box-shadow: inset 0 0 0 rgba(' + androidBackTap + ', 0);\
+    box-shadow: inset 0 0 0 rgba(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\
   }\
   50% {\
-    box-shadow: inset 0 0 40px rgba(' + androidBackTap + ', ' + androidBackTapPercentage + '), 0 0 10px rgba(' + androidBackTap + ', ' + androidBackTapPercentage + ');\
+    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage + '), 0 0 10px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage + ');\
   }\
   90% {\
-    box-shadow: inset 0 0 40px rgba(' + androidBackTap + ', androidBackTapPercentage2' + androidBackTapPercentage2 + '), 0 0 3px rgba(' + androidBackTap + ', ' + androidBackTapPercentage + ');\
+    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage2 + '), 0 0 3px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage + ');\
   }\
   100% {\
-    box-shadow: inset 0 0 0 rbga(' + androidBackTap + ', 0), 0 0 0 rgba(' + androidBackTap + ', 0);\
+    box-shadow: inset 0 0 0 rbga(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\
   }\
 }\
 #theme h1 {\
@@ -274,14 +278,13 @@ animation-name: none;\
  background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%);\
 }\
 #theme button.action {\
-  color: ' + $._bkgdContrastColor + ';\
+  color: ' + $._segmentedTextColor + ';\
   border-color: ' + $._secondaryColor + ' !important;\
   background-color: ' + $._secondaryColor + ' !important;\
   background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%);\
 }\
 #theme button.action:hover {\
   box-shadow: 0 3px 7px #666666;\
-  color: ' + $._bkgdContrastColor + ';\
 }\
 #theme .nav::after {\
   border-color:' + $._secondaryColor + ' !important;\
@@ -317,12 +320,13 @@ animation-name: none;\
 }\
 #theme .list.select li:hover::after {\
   background-color: ' + $._secondaryColor + ';\
+  opacity: 1;\
   box-shadow: inset 0 0px 0px 3px #fff;\
   border: solid 2px ' + $._secondaryColor + ' !important;\
 }\
 #theme .switch {\
-  background-image: -webkit-linear-gradient(left, ' + androidSwitchTrackColor + ',' + androidSwitchTrackColor + '), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\
-  background-image: linear-gradient(to left, ' + androidSwitchTrackColor + ', ' + androidSwitchTrackColor + '), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\
+  background-image: -webkit-linear-gradient(left, ' + $._androidSwitchTrackColor + ',' + $._androidSwitchTrackColor  + '), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\
+  background-image: linear-gradient(to left, ' + $._androidSwitchTrackColor  + ', ' + $._androidSwitchTrackColor  + '), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\
 }\
 #theme .switch.on {\
   -webkit-animation-name: none;\

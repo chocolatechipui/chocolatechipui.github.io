@@ -348,7 +348,8 @@ nav {
   background-color: #f0f0f0;
   overflow: hidden;
   border-top: solid 1px #ccc;
-  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.1);
+  border-bottom: solid 1px #ddd;
+  box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.1);
   padding: 0 5px;
   width: 100%;
   position: relative;
@@ -919,9 +920,15 @@ div.toolbar.current {
   background-repeat: no-repeat;
   background-position: center center;
 }
-.list.select li.selected {
+.list.select li:hover {
   -webkit-animation-name: listRipple;
   animation-name: listRipple;
+}
+.list.select li:hover::after {
+  background-color: #007aff;
+  opacity: 1;
+  box-shadow: inset 0 0px 0px 3px #fff;
+  border: solid 2px #007aff;
 }
 .list.select li.selected::after {
   background-color: #007aff;

@@ -43,7 +43,7 @@
 
 <p>Here is the format:</p>
 
-<pre class="prettyprint"><code>-webkit-mask-image: url('data:image/svg+xml;utf8,&lt;svg version="1.1" id="svg2" xmlns:svg="http://www.w3.org/2000/svg"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px"  viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"&gt; &lt;g id="g4"&gt; &lt;/g&gt; &lt;g id="layer2"&gt; &lt;path id="path7" d="M28.038, 8.381l2.674, 2.599L18.545, 23.146l12.086, 12.086l-2.593, 2.679L17.909, 27.782l-4.636-4.636l4.636-4.636  L28.038,8.381z"/&gt; &lt;/g&gt; &lt;/svg&gt; ');
+<pre class="prettyprint"><code>-webkit-mask-image: url('data:image/svg+xml;utf8,&lt;svg version="1.1" id="svg2" xmlns:svg="http://www.w3.org/2000/svg"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px"  viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"&gt; &lt;g id="g4"&gt; &lt;/g&gt; &lt;g id="layer2"&gt; &lt;path id="path7" d="M28.038, 8.381l2.674, 2.599L18.545, 23.146l12.086, 12.086l-2.593, 2.679L17.909, 27.782l-4.636-4.636l4.636-4.636  L28.038,8.381z"/&gt; &lt;/g&gt; &lt;/svg&gt;');
 </code></pre>
 
 <p>You can also provide styles for position, size, etc.:</p>
@@ -55,6 +55,18 @@ background-color: #007aff;
 </code></pre>
 
 <p>You can use a png or an SVG as a mask image. However, Windows Phone 8 has no support for any kind of image mask. Instead it uses symbol fonts.</p>
+
+<h2>Encode Your SVG</h2>
+
+<p>Some browsers (we're looking at you IE) don't allow spaces, etc. in a data uri. If you're using your SVG on IE, you'll need to encode the SVG string. Fortunately you can do this in the browser's console. Open the console and type the following command, then paste your quoted SVG string in it:</p>
+
+<pre class="prettyprint">encodeURI('&lt;svg version="1.1" id="svg2" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"&gt;&lt;g id="g4"&gt;&lt;/g&gt;&lt;g id="layer2"&gt;&lt;path id="path7" d="M28.038, 8.381l2.674, 2.599L18.545, 23.146l12.086, 12.086l-2.593, 2.679L17.909, 27.782l-4.636-4.636l4.636-4.636  L28.038,8.381z"/&gt;&lt;/g&gt;&lt;/svg&gt;')</pre>
+
+<p>After hitting return you'll be able to select and copy the resulting encode text to your CSS:</p>
+<pre class="prettyprint" style='white-space: pre-wrap !important;word-wrap: break-word'>"%3Csvg%20version=%221.1%22%20id=%22svg2%22%20xmlns:svg=%22http://www.w3.org/2000/svg%22%20xmlns=%22http://www.w3.org/2000/svg%22%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22%20x=%220px%22%20y=%220px%22%20width=%2248px%22%20height=%2248px%22%20viewBox=%220%200%2048%2048%22%20enable-background=%22new%200%200%2048%2048%22%20xml:space=%22preserve%22%3E%3Cg%20id=%22g4%22%3E%3C/g%3E%3Cg%20id=%22layer2%22%3E%3Cpath%20id=%22path7%22%20d=%22M28.038,%208.381l2.674,%202.599L18.545,%2023.146l12.086,%2012.086l-2.593,%202.679L17.909,%2027.782l-4.636-4.636l4.636-4.636%20%20L28.038,8.381z%22/%3E%3C/g%3E%3C/svg%3E"</pre>
+
+<p>Don't forget that you need to include the data-uri pre-fix to it: <code>data:image/svg+xml;utf8,</code>:</p>
+<pre class="prettyprint" style='white-space: pre-wrap !important;word-wrap: break-word'>background-image: url("data:image/svg+xml;utf8,%3Csvg%20version=%221.1%22%20id=%22svg2%22%20xmlns:svg=%22http://www.w3.org/2000/svg%22%20xmlns=%22http://www.w3.org/2000/svg%22%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22%20x=%220px%22%20y=%220px%22%20width=%2248px%22%20height=%2248px%22%20viewBox=%220%200%2048%2048%22%20enable-background=%22new%200%200%2048%2048%22%20xml:space=%22preserve%22%3E%3Cg%20id=%22g4%22%3E%3C/g%3E%3Cg%20id=%22layer2%22%3E%3Cpath%20id=%22path7%22%20d=%22M28.038,%208.381l2.674,%202.599L18.545,%2023.146l12.086,%2012.086l-2.593,%202.679L17.909,%2027.782l-4.636-4.636l4.636-4.636%20%20L28.038,8.381z%22/%3E%3C/g%3E%3C/svg%3E");</pre>
 
 <h2>Symbol Fonts</h2>
 
@@ -116,11 +128,7 @@ background-color: #007aff;
 }
 </code></pre>
 
-<script>
-  (function() {
-    prettyPrint();
-  })();
-</script>
+
 
 <script>
    $(function() {

@@ -400,6 +400,13 @@ $('ul').children().css('color', 'blue');
 $('ul').children('.selected').css('color', 'red');
 </code></pre>
 
+<p>You can also provide a selector as an argument. In that case, <code>[].children(selector)</code> will return all children that match the selector. If there are none, the result will be undefined.</p>
+
+
+<pre class="prettyprint"><code>// Find all children that are paragraphs and color their text red:
+$('#main).children('p').css('color','red')
+</code></pre>
+
 <h3>
 <a name="cc-parent" class="anchor" href="#parent" aria-hidden="true"><span class="octicon octicon-link"></span></a>parent</h3>
 

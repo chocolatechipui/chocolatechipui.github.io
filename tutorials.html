@@ -120,6 +120,11 @@
         $('.submenu ul li').removeClass('selected');
         $('.submenu ul li').eq(11).addClass('selected');
       };
+      var troubleshooting = function() {
+        getFile('./tutorials/troubleshooting.html', 'troubleshooting');
+        $('.submenu ul li').removeClass('selected');
+        $('.submenu ul li').eq(12).addClass('selected');
+      };
 
       var routes = {
         '#/layouts': layouts,
@@ -133,7 +138,8 @@
         '#/editablelist': editablelist,
         '#/templates': templates,
         '#/icons': icons,
-        '#/decoupling': decoupling
+        '#/decoupling': decoupling,
+        '#/troubleshooting': troubleshooting
       }
 
       var router = Router(routes);
@@ -167,6 +173,7 @@
         <li><a href='#/templates'>Templates</a></li>
         <li><a href='#/icons'>Icons</a></li>
         <li><a href='#/decoupling'>Decoupling Code</a></li>
+        <li><a href='#/troubleshooting'>Troubleshooting</a></li>
       </ul>
     </div>
   </menu>
