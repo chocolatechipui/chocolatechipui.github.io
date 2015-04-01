@@ -1092,6 +1092,9 @@ button.back {
   #theme nav > button.back {
     top: -5px !important;
   }
+  nav > button:not(.segment).back::after {
+    top: 21px !important;
+  }  
 }
 
 /* Chrome only */
