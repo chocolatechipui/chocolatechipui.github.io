@@ -379,9 +379,6 @@ li.comp.wrap > div > h4 {
   -webkit-box-align: center;
   -webkit-align-items: center;
   align-items: center;
-  -webkit-box-flex: 1 !important;
-  -webkit-flex: 1 !important;
-  flex: 1 !important;
   text-align: center;
   color: #007aff;
 }
@@ -613,6 +610,10 @@ div.horizontal.centered > .segmented {
 #theme li,
 .list > li > p {
   text-align: left !important;
+}
+/* IE only */
+@media screen and (-ms-high-contrast:none), (-ms-high-contrast:active) { 
+
 }
 /* Firefox only */
 /*@-moz-document url-prefix() { 
