@@ -3,13 +3,6 @@ html, body {
   margin: 0;
   height: 100%;
   font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, SegoeUI, 'Segoe UI', Arial, Sans-serif;
-}
-body {
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
   -webkit-font-smoothing: subpixel-antialiased;
 }
 body > section {
@@ -296,6 +289,26 @@ button:focus {
 }
 #osIntro {
   margin: 10px auto;
+}
+#helpPanel {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  box-sizing: border-box;
+  width: 800px;
+  height: 500px;
+  margin-left: -400px;
+  background-color: #fff;
+  border: solid 1px #ccc;
+  box-shadow: 0 10px 10px #aaa;
+  z-index: 111111111111111;
+  padding: 20px;
+  overflow-y: scroll;
+  border-radius: 4px;
+}
+.closeHelp {
+  text-align: center;
 }
 /* Firefox only */
 @-moz-document url-prefix() { 

@@ -429,7 +429,7 @@ body > article > section {
 /* Media Queries */
 
 @media only screen and (max-width: 899px) {
-  #themesTab, #theme, #roller {
+  #themesTab, #theme, #roller, #helpPanel {
     display: none;
   }
   body {
@@ -447,10 +447,6 @@ body > article > section {
   }
   #themesLink {
     display: none;
-  }
-  #community.themeSection {
-    border: none;
-    width: auto !important;
   }
   body > section {
     border: none !important;

@@ -335,7 +335,7 @@ li.comp > aside:last-child {
 li.comp > aside > span.counter,
 li.comp > aside > span.date-time {
   font-weight: normal;
-  color: #2d2d2d;
+  color: #7f7f7f;
   font-size: 1em;
 }
 li.comp:last-of-type > aside:last-child {

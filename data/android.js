@@ -2759,8 +2759,8 @@ html[dir=rtl] li.switched h4 {\n\
   -webkit-box-sizing: border-box;\n\
   -moz-box-sizing: border-box;\n\
   box-sizing: border-box;\n\
-  background-image: -webkit-linear-gradient(left, ' + $._secondaryColor + ', ' + $._secondaryColor + '), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\n\
-  background-image: linear-gradient(to left, ' + $._secondaryColor + ', ' + $._secondaryColor + '), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\n\
+  background-image: -webkit-linear-gradient(left, ' + $._androidSwitchTrackColor + ', ' + $._androidSwitchTrackColor + '), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\n\
+  background-image: linear-gradient(to left, ' + $._androidSwitchTrackColor + ', ' + $._androidSwitchTrackColor + '), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));\n\
   background-position: left 3px, left 3px;\n\
   background-size: 0% 14px, 100% 14px;\n\
   background-repeat: no-repeat, no-repeat;\n\
@@ -2814,7 +2814,6 @@ html[dir=rtl] li.switched h4 {\n\
   height: 18px;\n\
   border-radius: 50%;\n\
   background-color: #fff;\n\
-  border: solid 2px #888888;\n\
   pointer-events: none;\n\
   -webkit-transform: translate3d(-1px, 0, 0);\n\
   -moz-transform: translate3d(-1px, 0, 0);\n\
@@ -2831,9 +2830,9 @@ html[dir=rtl] li.switched h4 {\n\
   background-size: 100% 14px, 100% 14px;\n\
 }\n\
 .switch.on > em {\n\
-  -webkit-transform: translate3d(20px, 0, 0);\n\
-  -moz-transform: translate3d(20px, 0, 0);\n\
-  transform: translate3d(20px, 0, 0);\n\
+  -webkit-transform: translate3d(22px, 0, 0);\n\
+  -moz-transform: translate3d(22px, 0, 0);\n\
+  transform: translate3d(22px, 0, 0);\n\
   background-color: ' + $._secondaryColor + ';\n\
   animation-name: switchRipple;\n\
 }\n\

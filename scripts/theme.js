@@ -32,7 +32,7 @@ $(function() {
   //===========================
   // Toggle the UI based on OS:
   //===========================
-  $('.menu').on('click', 'button', function() {
+  $('#osMenu').on('click', 'button', function() {
     switch (this.id) {
       case 'iosTheme':
         $(this).siblings().removeClass('selected');
@@ -175,7 +175,7 @@ border-color: ' + $._contrast + '!important;\
 color: ' + $._bkgdContrastColor + ' !important;\
 }\
 .list > li[data-goto]:hover > aside > .counter {\
-color: ' + $._bkgdContrastColor + ';\
+color: #7f7f7f;\
 }\
 .show-detail::after {\
 color:' + $._secondaryColor +' !important;\
@@ -560,4 +560,13 @@ color: ' + $._contrast + ';\
     calculateColors($(this).val());
   });
 
+
+  // Show Help panel:
+  $('#help').on('click', function() {
+    $('#helpPanel').slideDown();
+  });
+  // Close Help panel:
+  $('#helpPanel').on('click', function() {
+    $(this).slideUp();
+  });
 });

@@ -151,7 +151,7 @@ button.align-flush {\n\
 button:hover,\n\
 button.selected {\n\
   color: #ffffff;\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   border-color: #ffffff !important;\n\
 }\n\
 button.back,\n\
@@ -190,7 +190,7 @@ button.backTo:hover {\n\
 }\n\
 button.back:hover::before,\n\
 button.backTo:hover::before {\n\
-  color: #007aff;\n\
+  color: ' + $._secondaryColor + ';\n\
 }\n\
 button.action {\n\
   width: auto;\n\
@@ -345,7 +345,7 @@ section h2,p,li,\n\
 .list > li[data-show-article]:hover {\n\
   cursor: pointer;\n\
   border: solid 1px #ffffff;\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   color: #ffffff !important;\n\
 }\n\
 .list > li[data-goto]:hover *,\n\
@@ -707,7 +707,7 @@ html[dir=rtl] .grid {\n\
 .segmented > button:hover,\n\
 .segmented > button.selected {\n\
   color: #ffffff !important;\n\
-  background-color: #007aff !important;\n\
+  background-color: ' + $._secondaryColor + ' !important;\n\
   opacity: 1 !important;\n\
   box-shadow: none;\n\
   border-color: #ffffff !important;\n\
@@ -753,7 +753,7 @@ html[dir=rtl] .segmented > button:first-of-type {\n\
 }\n\
 .segmented.paging > button:hover,\n\
 .segmented.paging > button.selected {\n\
-  color: #007aff;\n\
+  color: ' + $._secondaryColor + ';\n\
   box-shadow: none;\n\
   border-color: #ffffff;\n\
   background-color: #ffffff;\n\
@@ -763,7 +763,7 @@ html[dir=rtl] .segmented > button:first-of-type {\n\
 .segmented.paging > button:hover::before,\n\
 .segmented.paging > button.selected::before {\n\
   background-color: #ffffff;\n\
-  color: #007aff;\n\
+  color: ' + $._secondaryColor + ';\n\
 }\n\
 .segmented.paging > button::before {\n\
   content: "";\n\
@@ -1071,7 +1071,7 @@ nav > .busy {\n\
   margin: 0 !important;\n\
 }\n\
 .popover > section > ul.list > li:hover {\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   color: #ffffff;\n\
 }\n\
 button.show-popover:hover {\n\
@@ -1169,7 +1169,7 @@ button.show-popover:hover {\n\
   border-right: solid 2px #000000;\n\
 }\n\
 .popup footer > button:hover {\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   border-color: #000000 !important;\n\
   color: #ffffff;\n\
 }\n\
@@ -1426,7 +1426,7 @@ textarea {\n\
   color: #ffffff;\n\
 }\n\
 input:focus:not([type=range]) {\n\
-  border-color: #007aff;\n\
+  border-color: ' + $._secondaryColor + ';\n\
   color: #ffffff;\n\
 }\n\
 select {\n\
@@ -1437,14 +1437,14 @@ select {\n\
   padding-left: 5px;\n\
 }\n\
 select:focus {\n\
-  border-color: #007aff;\n\
+  border-color: ' + $._secondaryColor + ';\n\
 }\n\
 select:focus::-ms-value {\n\
   background-color: transparent;\n\
   color: #ffffff;\n\
 }\n\
 select:focus::-ms-expand {\n\
-  border: solid 2px #007aff;\n\
+  border: solid 2px ' + $._secondaryColor + ';\n\
   border-top: none;\n\
   border-right: none;\n\
   border-bottom: none;\n\
@@ -1461,7 +1461,7 @@ select::-ms-expand {\n\
 select option:hover,\n\
 select option:focus,\n\
 select option:checked {\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
 }\n\
 option {\n\
   color: #000000;\n\
@@ -1552,7 +1552,7 @@ input[type="range"] {\n\
 .list.select li:hover::before,\n\
 .list.select li.selected::before {\n\
   background-image: radial-gradient(circle, #ffffff 5px, transparent 5px);\n\
-  background-color: #3395ff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
 }\n\
 .list.select li > input {\n\
   display: none;\n\
@@ -1584,7 +1584,7 @@ input[type="range"] {\n\
 .sheet button:hover,\n\
 .sheet button.selected {\n\
   color: #ffffff;\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   border-color: #000000 !important;\n\
 }\n\
 .sheet > section {\n\
@@ -1858,7 +1858,7 @@ html[dir=rtl] li.switched h4 {\n\
   z-index: 3;\n\
   top: 0px;\n\
   border: solid 1px #ffffff;\n\
-  background-color: #1f8aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   height: 19px;\n\
   width: 0;\n\
   transition: all 0.15s ease-in-out;\n\
@@ -1924,7 +1924,7 @@ html[dir=rtl] .switch.on > em {\n\
 }\n\
 .tabbar > button:hover,\n\
 .tabbar > button.selected {\n\
-  color: #007aff !important;\n\
+  color: ' + $._secondaryColor + ' !important;\n\
   opacity: 1 !important;\n\
   background-color: transparent;\n\
 }\n\
@@ -2180,7 +2180,7 @@ body.hasTabBar > article {\n\
 }\n\
 .pagination > li:hover,\n\
 .pagination > li.selected {\n\
-  background-color: #007aff;\n\
+  background-color: ' + $._secondaryColor + ';\n\
   cursor: pointer;\n\
 }\n\
 .pagination > li:last-of-type {\n\
