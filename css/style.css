@@ -445,6 +445,9 @@ body > article > section {
     line-height: 1.75em;
     max-width: 400px;
   }
+  #themesLink {
+    display: none;
+  }
   #community.themeSection {
     border: none;
     width: auto !important;
@@ -473,9 +476,6 @@ body > article > section {
     display: none;
   }
   .menu > li > a > span:first-child {
-    display: none;
-  }
-  #themesLink {
     display: none;
   }
   .menu > li > a > span + span {
