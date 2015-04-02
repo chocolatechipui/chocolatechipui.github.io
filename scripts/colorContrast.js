@@ -10,11 +10,13 @@ $(function() {
     color = color.toLowerCase();
 
 
-    // Array of color format regex patterns:
+    // Array of color format regex patterns.
+    // These will identify the format of the color provided above.
+    // The process function converts HEX color values into decimal (rgb).
     var colorRegex = [
       {
-        re: /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/,
-        example: ['rgb(123, 234, 45)', 'rgb(255,234,245)'],
+        // example: ['rgb(123, 234, 45)', 'rgb(255, 234, 245)']
+        re: /^rgb\((\d{1, 3}),\s*(\d{1, 3}),\s*(\d{1, 3})\)$/,
         process: function (bits){
           return [
             parseInt(bits[1]),
@@ -24,8 +26,8 @@ $(function() {
         }
       },
       {
+        // example: ['#00ff00', '336699']
         re: /^(\w{2})(\w{2})(\w{2})$/,
-        example: ['#00ff00', '336699'],
         process: function (bits){
           return [
             parseInt(bits[1], 16),
@@ -35,8 +37,8 @@ $(function() {
         }
       },
       {
+        // example: ['#fb0', 'f0f']
         re: /^(\w{1})(\w{1})(\w{1})$/,
-        example: ['#fb0', 'f0f'],
         process: function (bits){
           return [
             parseInt(bits[1] + bits[1], 16),
@@ -47,7 +49,7 @@ $(function() {
       }
     ];
 
-    // Check for a match:
+    // Check for a match using each regex:
     for (var i = 0; i < 3; i++) {
       var re = colorRegex[i].re;
       var processor = colorRegex[i].process;
@@ -76,9 +78,13 @@ $(function() {
       return '#' + r + g + b;
     }
   };
+
+  // Make global method to get brightness of provided color.
+  // This is based on the values of YIQ color space, though 
+  // improved specifically for readability.
   $.calcBrightness = function(color) {
     return Math.sqrt(
-       color.r * color.r * .299 +
+       color.r * color.r * .200 +
        color.g * color.g * .587 +
        color.b * color.b * .114);           
   };
