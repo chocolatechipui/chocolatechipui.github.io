@@ -432,15 +432,25 @@ body > article > section {
   #themesTab, #theme, #roller {
     display: none;
   }
+  body {
+    -webkit-box-orient: vertical !important;
+    -webkit-flex-direction: column !important;
+    flex-direction: column !important;
+  }
   #accessMessage {
     display: block;
-    margin: 30px 20px 0;
+    margin: 60px auto 0;
+    padding: 0 20px;
     font-size: 12pt;
     line-height: 1.75em;
+    max-width: 400px;
   }
   #community.themeSection {
     border: none;
     width: auto !important;
+  }
+  body > section {
+    border: none !important;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -463,6 +473,9 @@ body > article > section {
     display: none;
   }
   .menu > li > a > span:first-child {
+    display: none;
+  }
+  #themesLink {
     display: none;
   }
   .menu > li > a > span + span {

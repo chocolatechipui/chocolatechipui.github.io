@@ -10,7 +10,7 @@ ChocolateChip-UI\n\
 ChUI-Android.css\n\
 Copyright 2015 Sourcebits www.sourcebits.com\n\
 License: MIT\n\
-Version: 3.8.3\n\
+Version: 3.8.4\n\
 */\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
@@ -67,9 +67,9 @@ article {\n\
   bottom: 0;\n\
   left: 0;\n\
   padding-top: 1px;\n\
-  -webkit-transition: all 0.15s ease-out;\n\
-  -moz-transition: all 0.15s ease-out;\n\
-  transition: all 0.15s ease-out;\n\
+  -webkit-transition: all .45s ease-out;\n\
+  -moz-transition: all .45s ease-out;\n\
+  transition: all .45s ease-out;\n\
   overflow-x: hidden;\n\
   overflow-y: auto;\n\
   -webkit-overflow-scrolling: touch;\n\
@@ -318,8 +318,8 @@ nav > button:not(.segment).backTo {\n\
   text-align: left;\n\
   background-color: transparent;\n\
   background-image: none;\n\
-  background-image: -webkit-linear-gradient(left, #000000, #000000);\n\
-  background-image: linear-gradient(left, #000000, #000000);\n\
+  background-image: -webkit-linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ');\n\
+  background-image: linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ');\n\
   background-size: 19px 2px;\n\
   background-repeat: no-repeat;\n\
   background-position: 10px center;\n\
@@ -355,7 +355,7 @@ nav > button:not(.segment).backTo::before {\n\
   display: block;\n\
   content: "";\n\
   -webkit-mask-image: none !important;\n\
-  background-color: black;\n\
+  background-color: ' + $._contrast + ';\n\
   height: 2px;\n\
   width: 14px;\n\
   position: absolute;\n\
@@ -368,8 +368,7 @@ nav > button:not(.segment).back::after,\n\
 nav > button:not(.segment).backTo::after {\n\
   display: block;\n\
   content: "";\n\
-  -webkit-mask-image: none !important;\n\
-  background-color: black;\n\
+  background-color: ' + $._contrast + ';\n\
   height: 2px;\n\
   width: 14px;\n\
   position: absolute;\n\
@@ -625,9 +624,6 @@ p {\n\
 .isDesktop li[data-show-article]:hover,\n\
 li[data-show-article].touched {\n\
   cursor: pointer;\n\
-}\n\
-.isDesktop .list > li[data-goto].nav:hover::after {\n\
-  background-color: ' + $._secondaryColor + ';\n\
 }\n\
 .list > li {\n\
   color: #666;\n\
@@ -1147,15 +1143,17 @@ html[dir=rtl] .segmented.align-flush {\n\
   top: 0px !important;\n\
 }\n\
 .segmented.paging > button {\n\
-  top: 4px;\n\
+  top: 10px;\n\
   background: none !important;\n\
+  border-radius: 50%;\n\
+  padding: 10px;\n\
 }\n\
 .segmented.paging.horizontal > button {\n\
   border: none !important;\n\
   background-color: none !important;\n\
   margin: 0 !important;\n\
   width: 30px !important;\n\
-  height: 40px !important;\n\
+  height: 30px !important;\n\
 }\n\
 .segmented.paging.horizontal > button:first-of-type::before,\n\
 html[dir=rtl] .segmented.paging.horizontal > button:last-of-type::before {\n\
@@ -1163,8 +1161,8 @@ html[dir=rtl] .segmented.paging.horizontal > button:last-of-type::before {\n\
   display: block;\n\
   width: 16px;\n\
   height: 16px;\n\
-  border-left: solid 3px ' + pagingColor + ';\n\
-  border-top: solid 3px ' + pagingColor + ';\n\
+  border-left: solid 3px ' + $._contrast + ';\n\
+  border-top: solid 3px ' + $._contrast + ';\n\
   -webkit-transform: rotate(-45deg);\n\
   -moz-transform: rotate(-45deg);\n\
   transform: rotate(-45deg);\n\
@@ -1179,8 +1177,8 @@ html[dir=rtl] .segmented.paging.horizontal > button:first-of-type::before {\n\
   width: 16px;\n\
   height: 16px;\n\
   margin: 0 !important;\n\
-  border-right: solid 3px ' + pagingColor + ';\n\
-  border-bottom: solid 3px ' + pagingColor + ';\n\
+  border-right: solid 3px ' + $._contrast + ';\n\
+  border-bottom: solid 3px ' + $._contrast + ';\n\
   -webkit-transform: rotate(-45deg);\n\
   -moz-transform: rotate(-45deg);\n\
   transform: rotate(-45deg);\n\
@@ -1219,8 +1217,8 @@ html[dir=rtl] .segmented.paging.horizontal > button:first-of-type::before {\n\
   display: block;\n\
   width: 16px;\n\
   height: 16px;\n\
-  border-right: solid 3px ' + pagingColor + ';\n\
-  border-bottom: solid 3px ' + pagingColor + ';\n\
+  border-right: solid 3px ' + $._contrast + ';\n\
+  border-bottom: solid 3px ' + $._contrast + ';\n\
   -webkit-transform: rotate(45deg);\n\
   -moz-transform: rotate(45deg);\n\
   transform: rotate(45deg);\n\
@@ -1233,8 +1231,8 @@ html[dir=rtl] .segmented.paging.horizontal > button:first-of-type::before {\n\
   display: block;\n\
   width: 16px;\n\
   height: 16px;\n\
-  border-right: solid 3px ' + pagingColor + ';\n\
-  border-top: solid 3px ' + pagingColor + ';\n\
+  border-right: solid 3px ' + $._contrast + ';\n\
+  border-top: solid 3px ' + $._contrast + ';\n\
   -webkit-transform: rotate(-45deg);\n\
   -moz-transform: rotate(-45deg);\n\
   transform: rotate(-45deg);\n\
@@ -1367,7 +1365,7 @@ html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:firs
   border-top: solid 1px #666666;\n\
 }\n\
 .toolbar > button {\n\
-  color: #666 !important;\n\
+  color: ' + $._contrast + ' !important;\n\
   background-color: #f5f5f5;\n\
   background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025) 10%);\n\
   background-size: 1000% 1000%;\n\
@@ -1681,7 +1679,7 @@ button.show-popover::after {\n\
   content: "";\n\
   display: block;\n\
   position: absolute;\n\
-  right: 6px;\n\
+  right: 0px;\n\
   bottom: 18px;\n\
   width: 0px;\n\
   height: 0px;\n\
@@ -1825,10 +1823,6 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {\n\
   margin: 0 !important;\n\
   border: none;\n\
   box-shadow: none !important;\n\
-}\n\
-.isDesktop .popup > footer > button:hover {\n\
-  box-shadow: none;\n\
-  background-color: ' + $._color + ';\n\
 }\n\
 .popup > footer > button.selected {\n\
   -webkit-animation-name: tapRipple;\n\
@@ -2220,9 +2214,9 @@ input[type="range"] {\n\
   width: auto;\n\
   height: 4px;\n\
   border-radius: 2px;\n\
-  background-color: #aaaaaa;\n\
+  background-color: transparent;\n\
   background-image: -webkit-linear-gradient(top, ' + $._color + ', ' + $._color + '), -webkit-linear-gradient(top, #cccccc, #cccccc);\n\
-  background-size: 0px 2px;\n\
+  background-size: 0px 3px, 0 2px;\n\
   background-position: left center;\n\
   background-repeat: no-repeat;\n\
   padding: 0;\n\
@@ -2230,10 +2224,10 @@ input[type="range"] {\n\
 input[type="range"]::-webkit-slider-thumb {\n\
   -webkit-appearance: none;\n\
   display: block;\n\
-  width: 16px;n\
-  height: 16px;n\
-  border-radius: 18px;n\
-  margin: 0;n\
+  width: 16px;\n\
+  height: 16px;\n\
+  border-radius: 18px;\n\
+  margin: 0;\n\
   background-color: ' + $._color + ';\n\
   border: solid 1px transparent;\n\
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);\n\
@@ -2243,7 +2237,7 @@ input[type="range"]::-webkit-slider-thumb {\n\
 }\n\
 input[type="range"]:focus::-webkit-slider-thumb,\n\
 .isDesktop input[type="range"]::-webkit-slider-thumb:hover {\n\
-  box-shadow: 0 0 0 2px #007aff, 0 0 0 11px rgba(0, 0, 0, 0.08);\n\
+  box-shadow: 0 0 0 2px ' + $._color + ', 0 0 0 11px rgba(0, 0, 0, 0.08);\n\
 }\n\
 .isDesktop input[type="range"]::-webkit-slider-thumb:hover::before {\n\
   content: "";\n\
@@ -2264,7 +2258,7 @@ input[type="range"]:focus::-webkit-slider-thumb,\n\
   height: 2px;\n\
   border-radius: 2px;\n\
   background-color: #cccccc;\n\
-  background-image: -webkit-linear-gradient(top, ' + $._color + ', ' + $._color + ';\n\
+  background-image: -webkit-linear-gradient(top, ' + $._color + ', ' + $._color + ');\n\
   background-size: 0px 2px;\n\
   background-position: left center;\n\
   background-repeat: no-repeat;\n\
@@ -2539,7 +2533,7 @@ nav > button.slide-out-button::before {\n\
   display: block;\n\
   height: 2px;\n\
   width: 20px;\n\
-  background-color: black;\n\
+  background-color: ' + $._contrast + ';\n\
   position: absolute;\n\
   top: 10px;\n\
   left: 8px;\n\
@@ -2552,7 +2546,7 @@ nav > button.slide-out-button::after {\n\
   content: "";\n\
   width: 20px;\n\
   height: 2px;\n\
-  background-color: black;\n\
+  background-color: ' + $._contrast + ';\n\
   position: absolute;\n\
   top: 24px;\n\
   left: 8px;\n\

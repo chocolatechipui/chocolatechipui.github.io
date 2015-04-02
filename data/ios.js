@@ -286,16 +286,13 @@ button.action {\n\
 nav > button {\n\
   max-width: 100px;\n\
 }\n\
-.align-flush {\n\
+button.align-flush,\n\
+.toolbar > button.align-flush {\n\
   position: absolute;\n\
-  right: 15px;
+  right: 15px;\n\
   margin-right: 0 !important;\n\
   z-index: 100;\n\
   top: 3px;\n\
-}\n\
-html[dir=rtl] .align-flush {\n\
-  right: auto;\n\
-  left: 15px;\n\
 }\n\
 .isDesktopSafari button.back {\n\
   margin-top: 2px !important;\n\
@@ -471,7 +468,7 @@ nav > button + h1 {\n\
   padding: 10px 8px;\n\
   position: absolute;\n\
   top: 10px;\n\
-  right: 10px;\n\
+  right: 15px;\n\
 }\n\
 .list + p,\n\
 .list + p + p {\n\

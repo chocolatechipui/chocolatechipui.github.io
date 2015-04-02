@@ -12,6 +12,20 @@ body {
   flex-direction: row;
   -webkit-font-smoothing: subpixel-antialiased;
 }
+body > section {
+  max-width: 860px !important;
+  width: 860px !important;
+  margin: 0 auto;
+  padding: 50px 0 0 !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  border-left: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+}
 menu, menu > div, menu > div > ul, menu > div > ul > li {
   height: 30px !important;
 }
