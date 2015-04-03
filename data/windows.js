@@ -1,5 +1,7 @@
 var pagingColor = $.navbarBkgdColor ? $._bkgdContrastColor : $._color;
 var toolbarButtonBkgd = $.navbarBkgdColor ? "rgba(0,0,0,.1)" : "#c0c0c0";
+var winNavBackgroundColor = 'transparent';
+if ($._navbarBkgdColor) winNavBackgroundColor = $._color;
 var stylesheet = '/*\n\
 ChocolateChip-UI\n\
 ChUI-Windows.css\n\
@@ -151,7 +153,7 @@ button.align-flush {\n\
 button:hover,\n\
 button.selected {\n\
   color: #ffffff;\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
   border-color: #ffffff !important;\n\
 }\n\
 button.back,\n\
@@ -178,7 +180,7 @@ button.back::before,\n\
 button.backTo::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\E0D5";\n\
+  content: "\\E0D5";\n\
   vertical-align: 50%;\n\
   font-size: 14pt;\n\
   display: block;\n\
@@ -190,7 +192,7 @@ button.backTo:hover {\n\
 }\n\
 button.back:hover::before,\n\
 button.backTo:hover::before {\n\
-  color: ' + $._secondaryColor + ';\n\
+  color: ' + $._color + ';\n\
 }\n\
 button.action {\n\
   width: auto;\n\
@@ -241,6 +243,7 @@ nav {\n\
   transition: opacity 0.5s ease-in, transform 0.35s ease-out;\n\
   padding: 5px 15px;\n\
   vertical-align: middle;\n\
+  background-color: ' + winNavBackgroundColor + ';\n\
 }\n\
 nav > h1 {\n\
   text-align: left;\n\
@@ -345,7 +348,7 @@ section h2,p,li,\n\
 .list > li[data-show-article]:hover {\n\
   cursor: pointer;\n\
   border: solid 1px #ffffff;\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
   color: #ffffff !important;\n\
 }\n\
 .list > li[data-goto]:hover *,\n\
@@ -707,7 +710,7 @@ html[dir=rtl] .grid {\n\
 .segmented > button:hover,\n\
 .segmented > button.selected {\n\
   color: #ffffff !important;\n\
-  background-color: ' + $._secondaryColor + ' !important;\n\
+  background-color: ' + $._color + ' !important;\n\
   opacity: 1 !important;\n\
   box-shadow: none;\n\
   border-color: #ffffff !important;\n\
@@ -753,7 +756,7 @@ html[dir=rtl] .segmented > button:first-of-type {\n\
 }\n\
 .segmented.paging > button:hover,\n\
 .segmented.paging > button.selected {\n\
-  color: ' + $._secondaryColor + ';\n\
+  color: ' + $._color + ';\n\
   box-shadow: none;\n\
   border-color: #ffffff;\n\
   background-color: #ffffff;\n\
@@ -763,7 +766,7 @@ html[dir=rtl] .segmented > button:first-of-type {\n\
 .segmented.paging > button:hover::before,\n\
 .segmented.paging > button.selected::before {\n\
   background-color: #ffffff;\n\
-  color: ' + $._secondaryColor + ';\n\
+  color: ' + $._color + ';\n\
 }\n\
 .segmented.paging > button::before {\n\
   content: "";\n\
@@ -783,17 +786,17 @@ nav .segmented.paging > button {\n\
   border-radius: 50%;\n\
 }\n\
 .segmented.paging.horizontal > button:first-of-type::before {\n\
-  content: "\E09E";\n\
+  content: "\\E09E";\n\
   margin-left: -2px;\n\
 }\n\
 .segmented.paging.horizontal > button:last-of-type::before {\n\
-  content: "\E09F";\n\
+  content: "\\E09F";\n\
 }\n\
 .segmented.paging.vertical > button:first-of-type::before {\n\
-  content: "\E0A0";\n\
+  content: "\\E0A0";\n\
 }\n\
 .segmented.paging.vertical > button:last-of-type::before {\n\
-  content: "\E0A1";\n\
+  content: "\\E0A1";\n\
 }\n\
 article.paging > section {\n\
   position: absolute;\n\
@@ -867,6 +870,7 @@ div.toolbar {\n\
   -webkit-transition: all 0.15s ease-out;\n\
   transition: all 0.15s ease-out;\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
+  background-color: ' + winNavBackgroundColor + ';\n\
 }\n\
 div.toolbar > button {\n\
   margin-right: 10px;\n\
@@ -1071,7 +1075,7 @@ nav > .busy {\n\
   margin: 0 !important;\n\
 }\n\
 .popover > section > ul.list > li:hover {\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
   color: #ffffff;\n\
 }\n\
 button.show-popover:hover {\n\
@@ -1169,7 +1173,7 @@ button.show-popover:hover {\n\
   border-right: solid 2px #000000;\n\
 }\n\
 .popup footer > button:hover {\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
   border-color: #000000 !important;\n\
   color: #ffffff;\n\
 }\n\
@@ -1204,7 +1208,7 @@ html[dir=rtl] .popup footer > button:first-of-type {\n\
 .list.editable > li > .move-down::after,\n\
 .list.deletable > li > .move-down::after {\n\
   display: block;\n\
-  content: "\E0A0";\n\
+  content: "\\E0A0";\n\
   width: 27px;\n\
   height: 27px;\n\
   position: absolute;\n\
@@ -1225,7 +1229,7 @@ html[dir=rtl] .popup footer > button:first-of-type {\n\
 .list.editable > li > .move-down,\n\
 .list.deletable > li > .move-down {\n\
   margin-right: 10px !important;\n\
-  content: "\E0A1";\n\
+  content: "\\E0A1";\n\
 }\n\
 .list.editable > li:first-of-type > .move-up,\n\
 .list.deletable > li:first-of-type > .move-up {\n\
@@ -1252,19 +1256,19 @@ html[dir=rtl] .popup footer > button:first-of-type {\n\
 }\n\
 .deletion-indicator:hover {\n\
   box-shadow: 0 0 6px 2px #ffffff !important;\n\
-  color: #66afff !important;\n\
+  color: ' + $._color + ' !important;\n\
 }\n\
 li.selected > .deletion-indicator {\n\
   box-shadow: 0 0 6px 2px #ffffff !important;\n\
-  color: #66afff !important;\n\
+  color: ' + $._color + ' !important;\n\
 }\n\
 li.selected > .deletion-indicator::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
   font-size: 13pt;\n\
   text-align: left;\n\
-  content: "\E008";\n\
-  color: #66afff;\n\
+  content: "\\E008";\n\
+  color: ' + $._color + ';\n\
   display: block;\n\
   margin: -2px 0 0 -4px;\n\
 }\n\
@@ -1347,7 +1351,7 @@ button.delete:hover::before {\n\
 button.delete::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\E107";\n\
+  content: "\\E107";\n\
   vertical-align: 50%;\n\
   font-size: 14pt;\n\
   display: block;\n\
@@ -1424,6 +1428,13 @@ textarea {\n\
   background: transparent !important;\n\
   padding: 5px;\n\
   color: #ffffff;\n\
+}\n\
+input[type="range"]::-ms-fill-lower {\n\
+    background-color: ' + $._color + ';\n\
+}\n\
+input[type="range"]:hover::-ms-thumb,\n\
+input[type="range"]:focus::-ms-thumb {\n\
+  background-color: black !important;\n\
 }\n\
 input:focus:not([type=range]) {\n\
   border-color: ' + $._secondaryColor + ';\n\
@@ -1552,7 +1563,7 @@ input[type="range"] {\n\
 .list.select li:hover::before,\n\
 .list.select li.selected::before {\n\
   background-image: radial-gradient(circle, #ffffff 5px, transparent 5px);\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
 }\n\
 .list.select li > input {\n\
   display: none;\n\
@@ -1584,7 +1595,7 @@ input[type="range"] {\n\
 .sheet button:hover,\n\
 .sheet button.selected {\n\
   color: #ffffff;\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
   border-color: #000000 !important;\n\
 }\n\
 .sheet > section {\n\
@@ -1626,7 +1637,7 @@ input[type="range"] {\n\
   height: 28pt;\n\
 }\n\
 .sheet > div.handle::before {\n\
-  content: "\E0A0";\n\
+  content: "\\E0A0";\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
   font-size: 24pt;\n\
@@ -1684,7 +1695,7 @@ button.slide-out-button {\n\
   margin-left: -5px !important;\n\
 }\n\
 button.slide-out-button::before {\n\
-  content: "\E179";\n\
+  content: "\\E179";\n\
   height: 35px;\n\
   width: 35px;\n\
   color: #ffffff;\n\
@@ -1778,7 +1789,7 @@ html[dir=rtl] button.slide-out-button::before {\n\
 .stepper > button:first-of-type::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\E108";\n\
+  content: "\\E108";\n\
 }\n\
 .stepper > button:last-of-type {\n\
   border-left: none;\n\
@@ -1786,7 +1797,7 @@ html[dir=rtl] button.slide-out-button::before {\n\
 .stepper > button:last-of-type::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\E109";\n\
+  content: "\\E109";\n\
 }\n\
 html[dir=rtl] .stepper > button:first-of-type {\n\
   border-right: solid 2px #ffffff;\n\
@@ -1924,7 +1935,7 @@ html[dir=rtl] .switch.on > em {\n\
 }\n\
 .tabbar > button:hover,\n\
 .tabbar > button.selected {\n\
-  color: ' + $._secondaryColor + ' !important;\n\
+  color: ' + $._color + ' !important;\n\
   opacity: 1 !important;\n\
   background-color: transparent;\n\
 }\n\
@@ -1935,7 +1946,7 @@ html[dir=rtl] .switch.on > em {\n\
 .tabbar > button.more::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\E10C";\n\
+  content: "\\E10C";\n\
   font-size: 20pt;\n\
   line-height: 0.85;\n\
 }\n\
@@ -2180,7 +2191,7 @@ body.hasTabBar > article {\n\
 }\n\
 .pagination > li:hover,\n\
 .pagination > li.selected {\n\
-  background-color: ' + $._secondaryColor + ';\n\
+  background-color: ' + $._color + ';\n\
   cursor: pointer;\n\
 }\n\
 .pagination > li:last-of-type {\n\

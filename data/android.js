@@ -17,16 +17,16 @@ Version: 3.8.4\n\
 }\n\
 @keyframes backButtonRipple {\n\
   0% {\n\
-    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);\n\
+    box-shadow: inset 0 0 0 rgba(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\n\
   }\n\
   50% {\n\
-    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25), 0 0 10px rgba(0, 0, 0, 0.25);\n\
+    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + '), 0 0 10px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + ');\n\
   }\n\
   90% {\n\
-    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.15), 0 0 3px rgba(0, 0, 0, 0.25);\n\
+    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage2 + '), 0 0 3px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + ');\n\
   }\n\
   100% {\n\
-    box-shadow: inset 0 0 0 rbga(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);\n\
+    box-shadow: inset 0 0 0 rbga(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\n\
   }\n\
 }\n\
 @keyframes tapRipple {\n\
@@ -318,8 +318,8 @@ nav > button:not(.segment).backTo {\n\
   text-align: left;\n\
   background-color: transparent;\n\
   background-image: none;\n\
-  background-image: -webkit-linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ');\n\
-  background-image: linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ');\n\
+  background-image: -webkit-linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ') !important;\n\
+  background-image: linear-gradient(left, ' + $._contrast + ', ' + $._contrast + ') !important;\n\
   background-size: 19px 2px;\n\
   background-repeat: no-repeat;\n\
   background-position: 10px center;\n\
@@ -404,6 +404,7 @@ nav > div > button,\n\
   box-shadow: none !important;\n\
   padding: 12px 20px 10px;\n\
   margin: 5px;\n\
+  background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%) !important;\n\
 }\n\
 nav > button:not(.back):hover,\n\
 nav > button:not(.backTo):hover,\n\
@@ -1367,7 +1368,7 @@ html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:firs
 .toolbar > button {\n\
   color: ' + $._contrast + ' !important;\n\
   background-color: #f5f5f5;\n\
-  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025) 10%);\n\
+  background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%) !important;\n\
   background-size: 1000% 1000%;\n\
   background-repeat: no-repeat;\n\
   background-position: center center;\n\
@@ -1459,7 +1460,7 @@ body.splitlayout {\n\
   align-items: stretch;\n\
 }\n\
 .splitlayout > nav {\n\
-  background-color: #eaeaea;\n\
+  background-color: ' + androidNavbarColor + ';\n\
   border-bottom: solid 1px #a7a7aa;\n\
 }\n\
 .splitlayout > nav:first-of-type {\n\
@@ -2274,10 +2275,23 @@ html[dir=rtl] input[type="range"] {\n\
 html[dir=rtl] body.isNativeAndroidBrowser input[type="range"] {\n\
   background-position: left center;\n\
 }\n\
+.list.select li {\n\
+  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.065) 20%);\n\
+  background-size: 1000% 1000%;\n\
+  background-repeat: no-repeat;\n\
+  background-position: center center;\n\
+  -webkit-animation-timing-function: ease-out;\n\
+  animation-timing-function: ease-out;\n\
+  -webkit-animation-duration: .2s;\n\
+  animation-duration: .2s;\n\
+  -webkit-animation-fill-mode: forwards;\n\
+  animation-fill-mode: forwards;\n\
+}\n\
 .list.select li.selected {\n\
   -webkit-animation-name: listRipple;\n\
   animation-name: listRipple;\n\
 }\n\
+.list.select li:hover::after,\n\
 .list.select li.selected::after {\n\
   background-color: ' + $._secondaryColor + ';\n\
   -webkit-transition: all 0.125s ease-in-out;\n\
@@ -2926,7 +2940,7 @@ body.hasTabBar article .next:not(.navigable) {\n\
   opacity: 1 !important;\n\
   box-shadow: none !important;\n\
   border-bottom: solid 3px ' + $._color + ';\n\
-  padding: 11px 10px 3px;\n\
+  padding: 6px 10px 3px;\n\
 }\n\
 .tabbar > button.more {\n\
   font-size: 0;\n\
@@ -2945,11 +2959,11 @@ body.hasTabBar article .next:not(.navigable) {\n\
   -moz-box-align: center;\n\
   -webkit-align-items: center;\n\
   align-items: center;\n\
-  padding: 13px 10px 3px;\n\
+  padding: 8px 10px 3px;\n\
 }\n\
 .tabbar > button.more.selected,\n\
 .tabbar > button.more:hover {\n\
-  padding: 13px 10px 3px;\n\
+  padding: 8px 10px 3px;\n\
 }\n\
 .tabbar > button.more > label {\n\
   display: none;\n\
@@ -2961,7 +2975,7 @@ body.hasTabBar article .next:not(.navigable) {\n\
   width: 40px;\n\
   background-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_2%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2248px%22%20height%3D%2248px%22%20viewBox%3D%220%200%2048%2048%22%20enable-background%3D%22new%200%200%2048%2048%22%20xml%3Aspace%3D%22preserve%22%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3C%2Fsvg%3E");\n\
   background-position: 50% 50%;\n\
-  background-size: 40% 40%;\n\
+  background-size: 100% 100%;\n\
   background-repeat: no-repeat;\n\
 }\n\
 .tabbar > button > span,\n\

@@ -171,7 +171,8 @@ border-color: ' + $._contrast + '!important;\
 #theme .list > li[data-goto]:hover > div > h3,\
 #theme .list > li[data-goto]:hover > div > h4,\
 #theme .list > li[data-goto]:hover > div > p,\
-#theme .list > li[data-goto]:hover > aside > h4 {\
+#theme .list > li[data-goto]:hover > aside > h4,\
+#theme .list > li[data-goto]:hover > aside > .counter {\
 color: ' + $._bkgdContrastColor + ' !important;\
 }\
 .list > li[data-goto]:hover > aside > .counter {\
@@ -236,29 +237,29 @@ animation-name: none;\
       }
       var buttonBrightness = $.calculateContrast($._navbarColor);
       
-      var androidBackTapPercentage = 0;
-      var androidBackTapPercentage2 = 0;
+      $._androidBackTapPercentage = 0;
+      $._androidBackTapPercentage2 = 0;
       if (buttonBrightness < 70) {
         $._androidTapColor = 'rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.05)';
         $._androidBackTap = '0, 0, 0';
-        androidBackTapPercentage = 0.15;
-        androidBackTapPercentage2 = 0.15;
+        $._androidBackTapPercentage = 0.15;
+        $._androidBackTapPercentage2 = 0.15;
       } else {
         $._androidTapColor = 'rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.35)';
         $._androidBackTap = '255, 255, 255';
-        androidBackTapPercentage = 0.75;
-        androidBackTapPercentage2 = 0.5;
+        $._androidBackTapPercentage = 0.75;
+        $._androidBackTapPercentage2 = 0.5;
       }
       $._newStyle = 
-'@-webkit-keyframes backButtonRipple {\
+'@keyframes backButtonRipple {\
   0% {\
     box-shadow: inset 0 0 0 rgba(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\
   }\
   50% {\
-    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage + '), 0 0 10px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage + ');\
+    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + '), 0 0 10px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + ');\
   }\
   90% {\
-    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage2 + '), 0 0 3px rgba(' + $._androidBackTap + ', ' + androidBackTapPercentage + ');\
+    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage2 + '), 0 0 3px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + ');\
   }\
   100% {\
     box-shadow: inset 0 0 0 rbga(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\
