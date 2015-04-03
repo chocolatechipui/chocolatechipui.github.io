@@ -1030,9 +1030,9 @@ button.back {
   animation-duration: .65s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
-  -webkit-transition: all 0.5s ease-out;
-  -moz-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 .switch > em {
   display: block;
@@ -1048,9 +1048,9 @@ button.back {
   -webkit-transform: translate3d(-1px, 0, 0);
   -moz-transform: translate3d(-1px, 0, 0);
   transform: translate3d(-1px, 0, 0);
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   animation-duration: .65s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;

@@ -301,11 +301,18 @@ button:focus {
   margin-left: -400px;
   background-color: #fff;
   border: solid 1px #ccc;
-  box-shadow: 0 10px 10px #aaa;
+  box-shadow: 0 10px 10px #666;
   z-index: 111111111111111;
-  padding: 20px;
+  padding: 0 20px 20px;
   overflow-y: scroll;
   border-radius: 4px;
+}
+#helpPanel > header {
+  padding: 1px;
+  background-color: #E2865C;
+  color: #fff !important;
+  margin-left: -20px;
+  margin-right: -20px;
 }
 .closeHelp {
   text-align: center;

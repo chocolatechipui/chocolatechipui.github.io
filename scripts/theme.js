@@ -251,21 +251,7 @@ animation-name: none;\
         $._androidBackTapPercentage2 = 0.5;
       }
       $._newStyle = 
-'@keyframes backButtonRipple {\
-  0% {\
-    box-shadow: inset 0 0 0 rgba(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\
-  }\
-  50% {\
-    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + '), 0 0 10px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + ');\
-  }\
-  90% {\
-    box-shadow: inset 0 0 40px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage2 + '), 0 0 3px rgba(' + $._androidBackTap + ', ' + $._androidBackTapPercentage + ');\
-  }\
-  100% {\
-    box-shadow: inset 0 0 0 rbga(' + $._androidBackTap + ', 0), 0 0 0 rgba(' + $._androidBackTap + ', 0);\
-  }\
-}\
-#theme h1 {\
+'#theme h1 {\
   font-family: HelveticaNeue, "Helvetica Neue", Helvetica, SegoeUI, Arial, Sans-serif;\
 }\
 #theme nav {\

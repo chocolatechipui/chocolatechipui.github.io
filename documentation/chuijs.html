@@ -1176,7 +1176,7 @@ $('button').on('singletap', function() {
 </code></pre>
 
 <a name="BindData" ></a>
-<h2>$.BindData()</h2>
+<h2>$.UIBindData()</h2>
 <p>As of version 3.7.0, ChocolateChip-UI offers a simple way to set up one-way data binding between from elements and static parts of the UI. This is done by the use of two attrbites: <code>data-controller</code> and <code>data-model</code>. You put <code>data-controller</code> on a form element, and <code>data-model</code> on the part of the UI where you want that value to be displayed. Both attributes need to have the same value so that ChocolateChip-UI can establish the relationship between them.</p>
 <pre class='prettyprint'><code>&lt;ul class="list"&gt;
   &lt;li&gt;&lt;lable&gt;Enter data:&lt;/lable&gt; 
@@ -1191,6 +1191,20 @@ $('button').on('singletap', function() {
 </code></pre>
 <p>This method will then scan the document for data-controlers and data-models. When it finds matches, it automatically creates delegated events that publish broadcasts with data when their values change. Similarly, it automatically creates mediators that listen for those broadcasts and update their data-model targets when they are received. To learn about more complex data binding setups, please read the chapter: "Mediators, Pub/Sub and Data Binding".</p>
 
+<a href="" name="UnBindData"></a>
+<h2>$.UIUnBindData()</h2>
+<p>You can unbind any controller/model pair at any time using the method <code>$.UIUnBind(controller-name)</code>. You need to pass the name of the controller you want to unbind:</p>
+<pre class='prettyprint'><code>// Markup:
+&lt;input type="text" data-controller='name' name='name'&gt;
+&lt;label data-model='name' for="name"&gt;&lt;/label&gt;
+&lt;button id='unbind' class="action"&gt;Unbind&lt;/button&gt;
+&lt;script&gt;
+  $.UIBindData('name');
+  $('unbind').on('singletap', function() {
+    $.UIUnBindData('name');
+  });
+&lt;/script&gt;
+</code></pre>
 
 <script>
 	$(function() {

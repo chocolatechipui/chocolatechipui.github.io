@@ -2791,9 +2791,9 @@ html[dir=rtl] li.switched h4 {\n\
   animation-duration: .65s;\n\
   animation-timing-function: ease-in-out;\n\
   animation-fill-mode: forwards;\n\
-  -webkit-transition: all 0.5s ease-out;\n\
-  -moz-transition: all 0.5s ease-out;\n\
-  transition: all 0.5s ease-out;\n\
+  -webkit-transition: all 0.1s ease-out;\n\
+  -moz-transition: all 0.1s ease-out;\n\
+  transition: all 0.1s ease-out;\n\
 }\n\
 .switch.traditional {\n\
   width: 70px;\n\
