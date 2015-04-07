@@ -134,6 +134,8 @@
             var current = p[i];
             if(current) {
                 var tiny = tinycolor(current);
+                // Calculate contrast for checkmarks 
+                // over background colors:
                 var brightness = $.calculateContrast(tiny);
                 var c = (brightness < 180) ? "sp-thumb-el sp-thumb-dark" : "sp-thumb-el sp-thumb-light";
                 c += (tinycolor.equals(color, current)) ? " sp-thumb-active" : "";
