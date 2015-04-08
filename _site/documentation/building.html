@@ -1,0 +1,140 @@
+<h1>Building ChocolateChip-UI</h1>
+
+<h2>No Building Needed</h2>
+
+<p>You do not need to build ChocolateChip-UI to begin using it. There are pre-compiled versions in the <code>dist</code> folder in the downloaded <a target='_blank' href='https://github.com/chocolatechipui/chocolatechip-ui'>source files</a>. However, if you want working examples or want to customize ChocolateChip-UI, you'll need to know how to build it.</p>
+
+<h3>Setup with Gulp</h3>
+
+<p>ChocolateChip-UI uses the Gulp Node module to enable building the framework. ChocolateChip-UI has no dependency on Nodejs or Gulpjs for running, so you do not need them in your project. As of version 3.6.0, Gulp is the default way of building ChocolateChip-UI.</p>
+
+<a name="installNodejs"></a>
+<h2>Install Nodejs &amp; Gulpjs</h2>
+
+<p>First go to the <a target='_blank' href='http://nodejs.org'>Node</a> site. You'll see an install button on the page. This will install the correct version of Node for you if you are on a Mac or Windows PC. Please note that if you are on a Windows 8 device, this will not work with WinRT. Furthermore, for Windows 8, you must use the browser on the desktop, not in the Modern UI Start Screen.</p>
+
+<p>After Node is finished installing, you need to install the Gulp command line interface, which is a node module for task management. On the Mac, open your terminal and run this command:</p>
+
+<pre class="prettyprint">sudo npm install -g gulp<code>
+</code></pre>
+
+<p>On Windows, open the command prompt and run this:</p>
+
+<pre class="prettyprint">npm install -g gulp<code>
+</code></pre>
+
+<p>When you hit Return (Mac), the terminal will ask you for your password. Enter it and hit return. On Windows, enter the command and hit Enter. In both cases you will see a list of messages output to the terminal. If there are no errors, you're ready to build. Using the terminal, change to the folder where ChocolateChip-UI is. You can do that by typing <code>cd </code> into the terminal, leaving a space after it, then dragging the folder to the terminal. When you see the path to the folder appear after the cd command, hit return. You will now be inside that folder. That is where you need to be to run build scripts. Before you can build, you need to install a number of Node modules that Gulp will use to do the work.</p>
+
+<a name="installBuildModules"></a>
+<h3>Install the Build Modules</h3>
+
+<p>First you need to install the modules that the Gulp script uses to build. You do this by runing the following command in your terminal:
+
+<pre class="prettyprint"><code>npm install</code></pre>
+
+You'll see a really long list of things being installed. And, if you have the folder open, you'll see a directory named "node_modules" appear. Once the install is finished you're ready to build.</p>
+
+<a name="building"></a>
+<h3>Building ChUI</h3>
+
+<p>Building is really simple. Just type "gulp" in the terminal and hit return. This will cause a complete version of ChocolateChip-UI to be built into the folder. This will include the ChocolateChipJS library, themes for iOS, Android and Windows, examples for iOS, Android and Windows, and unit tests for ChocolateChipJS.</p>
+
+<pre class="prettyprint"><code>// Build everything, including examples:
+gulp
+</code></pre>
+
+<p>You can also build only ChUI.js and the three themes:</p>
+
+<pre class="prettyprint"><code>// Build the ChUI without examples:
+gulp chui
+</code></pre>
+
+<p>You can also build just the CSS themes. This is useful if you are modifying the LESS files to create a custom theme for branding.</p>
+
+<pre class="prettyprint"><code>// Build the three themes:
+gulp less
+</code></pre>
+
+<p>If you intend to edit the ChUI LESS files to customize the look and feel for branding, you can tell gulp to watch those for any changes you make. When you save a LESS file after making changes, watch will automatically regenerate the CSS for you. Use the following command:</p>
+
+<pre class="prettyprint"><code>// Build ChUI.js:
+gulp watch
+</code></pre>
+
+<p>If you've made changes to the ChUI.js source files and want to regenerate it, or you just want to create the ChUI.js file, use this command:</p>
+
+<pre class="prettyprint"><code>// Build ChUI.js:
+gulp js
+</code></pre>
+
+<h3>Right-to-left Examples</h3>
+<p>If you are supporting a right-to-left alphabet, such as Arabic, Farsi, Urdu or Hebrew, you can build right-top-left examples to see how they work. Note these are mostly in Standard Arabic. To build them, use the following command:</p>
+
+<pre class="prettyprint"><code>// Build right-to-left examples:
+gulp --dir rtl
+</code></pre>
+
+<a name="customProject"></a>
+<h3>Custom Project</h3>
+
+<p>So far we've been building everything directly inside the folder of the repository. This is not very practical. You can build your project outside this folder by providing a path to where you want your project to be. This could be on your desktop, or any other place. To do this, open the package.json file and look for the property "projectPath". Currently the value is empty. By providing a path, your project will be built in the place indicated. This will give you a clean install of ChocolateChip-UI withough node modules, source files, etc. You can then add any other resources you need into this folder and begin development of your app.</p>
+
+<p>Here is an example of a possible path for a Mac and Windows project path using the username "joe". Please change "joe" to your own username on your Mac or Windows PC.</p>
+
+<pre class="prettyprint"><code>// For a custom Mac project:
+"projectPath": "/Users/<strong>joe</strong>/Desktop/MyProject/"
+</code></pre>
+
+<p>Please note, for Windows you need to escape the backslashes with another backslash.</p>
+
+<pre class="prettyprint"><code>// For a custom Windows project:
+"projectPath": "C:\\Users\\<strong>joe</strong>\\Desktop\\MyProject\\"
+</code></pre>
+
+
+<a name="buildwithchocolatechipjs"></a>
+<h3>ChocolateChipJS</h3>
+
+<p>ChocolateChip-UI is built to run on jQuery, the widespread and well-know JavaScript library. However, ChocolateChip-UI can optionally run on ChocolateChipJS. This is a mobile-first JavaScript library written to be small and fast, as much as 30% faster than jQuery. If you find that with jQuery your app's interactions feel sluggish, you might want to try using ChocolateChipJS. You can learn more about ChocolateChipJS from the <a href="/documentation.html#/chocolatechipjs" target='_blank'>documentation</a>. You can build the ChocolateChip-UI examples as follows:</p>
+
+<pre class="prettyprint"><code>// Build everything, including examples with ChocolateChipJS instead of jQuery:
+gulp --chocolatechipjs
+
+// Build only the Android examples and demos with ChocolateChipJS instead of jQuery:
+gulp android_examples --chocolatechipjs
+
+
+// Build only the iOS examples and demos with ChocolateChipJS instead of jQuery:
+gulp ios_examples --chocolatechipjs
+
+
+// Build only the Windows examples and demos with ChocolateChipJS instead of jQuery:
+gulp win_examples --chocolatechipjs
+
+// Build the right-to-left version with ChocolateChipJS:
+gulp --dir rtl --chocolatechipjs
+
+// Build only the Android right-to-left examples with ChocolateChipJS:
+gulp android_examples --dir rtl
+
+// Build only the iOS right-to-left examples with ChocolateChipJS:
+gulp ios_examples --dir rtl
+
+// Build only the Windows right-to-left examples with ChocolateChipJS:
+gulp win_examples --dir rtl
+
+</code></pre>
+
+<h3>LESS</h3>
+<p>ChocolateChip-UI uses LESS to create all of its styles. This makes it easy for you to customize the look and feel of ChocolateChip-UI if you want. LESS is a powerful CSS preprocessor. If you make changes to the LESS source files, you can rebuild the themes by running <code>gulp less</code> or <code>gulp themes</code>. This will create new copies of the CSS themes for all three operating systems.</p>
+
+
+<pre class="prettyprint"><code>gulp less
+// or
+gulp themes</code></pre>
+
+<script>
+  $(function() {
+    prettyPrint();
+  });
+</script>

@@ -1,0 +1,113 @@
+<h1>Event Management</h1>
+
+<p>Events are what brings your app to life. ChocolateChip-UI provides a number of ways for you to add events. The following are the core events. These work on desktop as well as mobile:</p>
+
+<ul class='list'>
+<li>$.eventStart</li>
+<li>$.eventMove</li>
+<li>$.eventEnd</li>
+<li>$.eventCancel</li>
+</ul>
+
+
+<p>Because you might be testing your app on the desktop as well as simulators and actual devices, ChocolateChip-UI renders these four event aliases differently depending on what the app is running on.</p>
+
+<p>On desktop:</p>
+
+<ul>
+  <li>$.eventStart: mousedown</li>
+  <li>$.eventMove: mousemove</li>
+  <li>$.eventEnd: mouseup</li>
+  <li>$.eventCancel: mousecancel</li>
+</ul>
+
+<p>On Android:</p>
+
+<ul>
+  <li>$.eventStart: touchstart</li>
+  <li>$.eventMove: touchmove</li>
+  <li>$.eventEnd: touchend</li>
+  <li>$.eventCancel: touchcancel</li>
+</ul>
+
+<p>On iOS:</p>
+
+<ul>
+  <li>$.eventStart: touchstart</li>
+  <li>$.eventMove: touchmove</li>
+  <li>$.eventEnd: touchend</li>
+  <li>$.eventCancel: touchcancel</li>
+</ul>
+
+<p>On Windows Phone 8 (IE10):</p>
+
+<ul>
+  <li>$.eventStart: MSPointerDown</li>
+  <li>$.eventMove: MSPointerMove</li>
+  <li>$.eventEnd: MSPointerEnd</li>
+  <li>$.eventCancel: MSPointerCancel</li>
+</ul>
+
+<p>On Windows Phone 8 (IE11):</p>
+
+<ul>
+  <li>$.eventStart: pointerdown</li>
+  <li>$.eventMove: pointermove</li>
+  <li>$.eventEnd: pointerup</li>
+  <li>$.eventCancel: pointercancel</li>
+</ul>
+
+
+<p>By using these event aliases you can write code that works across computing platforms:</p>
+
+
+<pre class="prettyprint"><code>
+$('#myButton').on($.eventStart, function() {
+  alert('You pushed my button!')
+});
+</code></pre>
+
+
+<p>On mobile devices there is a 45O millisecond delay from the time the user clicks to the execution of the click event. This results in interactions that feel sluggish and annoying. Many developers there prefer to use either touchstart or touchend events registered on buttons and other interactive controls. There is one problem with this approach: scrolling. If you have content in a scrollable container and attach a touchstart or touchend event, as soon as you try to scroll your content and touch an element with these, you could immediately cause the touch event to execute. This makes it extremely hard to scroll interactive content. To get around this problem, ChocolateChip-UI has a gestures module.</p>
+<p>When using these, thing of them as event aliases. For that reason you need to use them like you would a JavaScript variable–without quotes. If you use quotes on them, jQuery will not resolve their value and nothing will happen.</p>
+
+<p>In contrast to these aliased events, ChocolateChip-UI provides the following gestures which you can use like any other event:</p>
+
+<ul>
+  <li>singletap: 120 milliseconds delay</li>
+  <li>longtap: 750 milliseconds</li>
+  <li>doubletap: second tap occurs at most 250 milliseconds after first tap</li>
+  <li>swipe: must be at least </li>
+  <li>swipeup</li>
+  <li>swipedown</li>
+  <li>swipeleft</li>
+  <li>swiperight</li>
+</ul>
+
+<p>Using a swipe gesture:</p>
+
+<pre class="prettyprint"><code>$('.list li').on('swiperight', function() {
+    // perform some action when the user
+    // swipes to the right on a list item:
+    alert('You just swiped to the right!');
+    // Output the text of the list item swiped on:
+    console.log($(this).text());
+});
+</code></pre>
+
+<p>Instead of using a $.eventStart or $.eventEnd event for your controls in scrollable containers, we recommend you use the singletap event. Since it has a delay of 150 milliseconds, it gives sthe user enough time to initiate a scroll event and thus prevent any interaction with items in the scrolling container. Actually, navigation lists specifically use singletaps to register their events. This lets you flick your finger to scroll a list without firing a navigation event. But if you touch a navigation list item and do not scroll, a singletap gets registered and navigation occurs.</p>
+
+<p>Please note that these gesture do require quotes like normal events. If you fail to quote them, you will get an error about and undefined variable.</p>
+
+<p>Look at the gestures demo in the examples to see how to use them. </p>
+
+
+
+<script>
+   $(function() {
+      $('body').scrollTop(0);
+      prettyPrint();
+      $('#documentation').trigger('click');
+      $('#platformspecifics').addClass('selected');
+   });
+</script>
