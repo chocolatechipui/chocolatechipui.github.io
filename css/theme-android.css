@@ -245,6 +245,7 @@ nav > button:not(.segment).back {
   background-image: none;
   background-image: -webkit-linear-gradient(left, #000000, #000000);
   background-image: linear-gradient(left, #000000, #000000);
+  background-image: linear-gradient(to left, #000000, #000000);
   background-size: 19px 2px;
   background-repeat: no-repeat;
   background-position: 10px center;
@@ -286,6 +287,7 @@ nav > button:not(.segment).back::before {
   left: 6px;
   transition: all 0.25s ease-out;
   -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 nav > button:not(.segment).back::after {
   display: block;
@@ -298,6 +300,7 @@ nav > button:not(.segment).back::after {
   top: 22px !important;
   left: 6px;
   -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 body.isChrome a.button.back {
   top: 6px;
