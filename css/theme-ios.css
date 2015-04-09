@@ -630,7 +630,7 @@ div.horizontal.centered > .segmented {
   li.comp > aside > span.counter {
     margin-top: -4px;
   }
-  .list > li.nav::after {
+  li.comp > aside > .nav::after {
     margin-top: 4px;
   }
 }
