@@ -216,6 +216,9 @@ animation-name: none;\
 }\
 #theme nav > button.back::before {\
   background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D\'http%3A//www.w3.org/2000/svg\'%20xmlns%3D\'http%3A//www.w3.org/2000/svg\'%20version%3D\'1.1\'%20width%3D\'21\'%20height%3D\'35\'%20viewBox%3D\'0%200%2021%2035\'%20id%3D\'svg2\'%3E%3Cdefs%20id%3D\'defs8\'%20/%3E%3Cg%20transform%3D\'translate%28-2.1355929,0.0677963%29\'%20id%3D\'Page-1\'%20style%3D\'fill%3Anone%3Bstroke%3Anone\'%3E%3Cpath%20d%3D\'M%2021.353814,1.2365445%205.0903576,17.5%2021.353814,33.763456\'%20id%3D\'Rectangle-1\'%20style%3D\'stroke%3A%23' + $._navbarColor.split('#')[1] + '%3Bstroke-width%3A3\'%20/%3E%3C/g%3E%3C/svg%3E") !important;\
+}\
+@media screen and (-ms-high-contrast:none), (-ms-high-contrast:active) {\
+  color: ' + $._secondaryColor + '\
 }';
       $('#customStylesheet').html($._newStyle);
 
