@@ -219,7 +219,11 @@ animation-name: none;\
 }\
 @media screen and (-ms-high-contrast:none), (-ms-high-contrast:active) {\
   .list.select li.selected::after {\
-    color: ' + $._secondaryColor + '\
+    color: ' + $._secondaryColor + ';\
+    background-image: none !important;\
+  }\
+  .list.select li.selected::after {\
+    background-image: none !important;\
   }\
 }';
       $('#customStylesheet').html($._newStyle);
