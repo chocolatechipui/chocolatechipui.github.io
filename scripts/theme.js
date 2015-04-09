@@ -222,7 +222,7 @@ animation-name: none;\
     color: ' + $._secondaryColor + ';\
     background-image: none !important;\
   }\
-  .list.select li.selected::after {\
+  #theme button.back:before {\
     background-image: none !important;\
   }\
 }';
