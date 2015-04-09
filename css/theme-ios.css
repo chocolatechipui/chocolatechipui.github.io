@@ -622,6 +622,7 @@ div.horizontal.centered > .segmented {
   }
   .list.select li.selected::after {
     font-family: "Segoe UI Symbol";
+    margin-top: -30px;
     content: "\E008";
     background: none;
   }
