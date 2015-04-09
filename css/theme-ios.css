@@ -625,6 +625,7 @@ div.horizontal.centered > .segmented {
     margin-top: -30px;
     content: "\E008";
     background: none;
+    color: #007aff;
   }
 }
 /* Firefox only */
