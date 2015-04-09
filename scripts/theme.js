@@ -222,7 +222,7 @@ animation-name: none;\
     color: ' + $._secondaryColor + ';\
     background-image: none !important;\
   }\
-  #theme button.back:before {\
+  #theme nav > button.back:before {\
     background-image: none !important;\
   }\
 }';
