@@ -633,6 +633,9 @@ div.horizontal.centered > .segmented {
   li.comp > aside > .nav::after {
     margin-top: 4px;
   }
+  nav > h1 + button {
+    top: 0px;
+  }
 }
 /* Firefox only */
 /*@-moz-document url-prefix() { 
