@@ -630,7 +630,9 @@ div.horizontal.centered > .segmented {
   li.comp > aside > span.counter {
     margin-top: -4px;
   }
-
+  .list > li.nav::after {
+    margin-top: 4px;
+  }
 }
 /* Firefox only */
 /*@-moz-document url-prefix() { 
