@@ -615,7 +615,7 @@ div.horizontal.centered > .segmented {
 @media screen and (-ms-high-contrast:none), (-ms-high-contrast:active) { 
   #theme button.back:before {
     font-family: "Segoe UI Symbol";
-    content: "\E001";
+    content: "\E00E";
     background: none;
   }
   .list.select li.selected::after {
