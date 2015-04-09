@@ -627,6 +627,10 @@ div.horizontal.centered > .segmented {
     background-image: none !important;
     color: #007aff;
   }
+  li.comp > aside > span.counter {
+    margin-top: -4px;
+  }
+
 }
 /* Firefox only */
 /*@-moz-document url-prefix() { 
