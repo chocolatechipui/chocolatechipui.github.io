@@ -613,7 +613,14 @@ div.horizontal.centered > .segmented {
 }
 /* IE only */
 @media screen and (-ms-high-contrast:none), (-ms-high-contrast:active) { 
-
+  #theme button.back:before {
+    content: "\E001";
+    background: none;
+  }
+  .list.select li.selected::after {
+    content: "\E008";
+    background: none;
+  }
 }
 /* Firefox only */
 /*@-moz-document url-prefix() { 
