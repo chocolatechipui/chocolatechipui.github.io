@@ -1796,6 +1796,70 @@ var parsedTempl8 = $.template(myTemplate);
 $('#user').html(parsedTempl8(userInfo));
 </code></pre>
 
+<h2><a name="cc-template-repeater" class='anchor' href='#template_repeater' aria-hidden="true"><span class="octicon octicon-link"></span></a>$.template.repeater</h2>
+
+<p>This method enables you to output a template repeatedly based on the value of an array of data. This method can take two types of arrays: simple or consisting of objects. Using other data types will throw and error. You could use either of the following types of arrays:</p>
+
+<pre class="prettyprint"><code>var simpleArray = ["one", "two", "three", "four", "five"];
+var arrayOfObjects = [
+  {firstName: "John, lastName: "Doe", age: 22},
+  {firstName: "Suzy", lastName: "Que", age: 21},
+  {firstName: "Joe", lastName: "Bodoni", age: 30}
+];
+</code></pre>
+
+<p><code>$.template.repeater</code> takes three arguments:</p>
+
+<ul>
+  <li>element: the target in which the result will go</li>
+  <li>template: the template to repeat</li>
+  <li>data: an array of repeatable data</li>
+</ul>
+
+<p>Below are two examples of how to use <code>$.template.repeater</code>:</p>
+
+<pre class="prettyprint"><code>&lt;body&gt;
+  &lt;ol id='arrayList'&gt;
+  &lt;/ol&gt;
+  &lt;ul id="objectArrayList"&gt;&lt;/ul&gt;
+&lt;/body&gt;
+
+
+/* The JavaScript: */
+$(function() {
+  // Output a simple array of data:
+  var simpleArray = ['One','Two', 'Three', 'Four', 'Five'];
+  var repeaterTmplate1 = '&lt;li&gt;[[= data ]]&lt;/li&gt;';
+  $.template.repeater($('#arrayList'), repeaterTmplate1, simpleArray);
+
+  // Output an array of objects:
+  var arrayOfObjects = [
+    {firstName: "Albert", lastName: "Einstein"},
+    {firstName: "Steven", lastName: "Hawking"},
+    {firstName: "Neil", lastName: "deGrasse Tyson"}
+  ];
+  var repeaterTmplate2 = '&lt;li&gt;[[= data.firstName ]], [[= data.lastName]]&lt;/li&gt;';
+  $.template.repeater($('#objectArrayList'), repeaterTmplate2, arrayOfObjects);
+});
+</code></pre>
+
+<p>This will produce the following:</p>
+
+<pre class="prettyprint"><code>&lt;ol id="arrayList"&gt;
+  &lt;li&gt;One&lt;/li&gt;
+  &lt;li&gt;Two&lt;/li&gt;
+  &lt;li&gt;Three&lt;/li&gt;
+  &lt;li&gt;Four&lt;/li&gt;
+  &lt;li&gt;Five&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul id="objectArrayList"&gt;
+  &lt;li&gt;Albert, Einstein&lt;/li&gt;
+  &lt;li&gt;Steven, Hawking&lt;/li&gt;
+  &lt;li&gt;Neil, deGrasse Tyson&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p><strong>Behavior:</strong> By default, $.template.repeater appends its results to the target element. If you want it to replace the contents, then simple use <code>$(selector).empty()</code> before executing <code>$.template.repeater()</code></p>
+
 <h2>
 <a name="cc-pubsub" class="anchor" href="#pubsub" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pub/Sub</h2>
 
