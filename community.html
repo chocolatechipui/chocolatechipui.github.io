@@ -61,6 +61,9 @@
             setTimeout(function() {
               $('#community').html(data);
             }, 100);
+          },
+          error: function() {
+            window.location.pathname = '/404.html';
           }
         });
       }

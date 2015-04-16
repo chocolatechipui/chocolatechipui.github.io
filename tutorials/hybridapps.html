@@ -1,0 +1,69 @@
+<h1>Hybrid Apps</h1>
+
+<p>Most people want to use ChocolateChip-UI to make hybrid apps. Since ChocolateChip-UI provides themes for iOS, Android and Windows Phone, those are the three targets for hybrid apps.</p>
+
+<h3>iOS</h3>
+
+<p>Because of restrictions by Apple, you need to be on a Mac to make and test a hybrid app for iOS. You can easily use Xcode to create a Web View for your hybrid app. We have this process documented in the following <a href='http://wobbabits.tumblr.com/post/107524782642/creating-a-hybrid-app-for-ios' target='_blank'> blog post</a>. But rather than following that route, we've create an NPM module to make this easier. Just run a command line tool that creates the project for you. Here's how.</p>
+
+<h4>NPM</h4>
+
+<p>On your Mac, open the terminal and run the following command:</p>
+
+<pre class="prettyprint"><code>sudo npm install -g chui-ios
+</code></pre>
+<p>This will install our NPM module globally so that it's always available to run at all times. When you run this, you will need to enter the user password for your computer. After this is instalaled, you can run it in your terminal. Try running the following:</p>
+<pre class="prettyprint"><code>chui-ios
+</code></pre>
+
+You should see the following returned:
+
+<pre class="prettyprint"><code>$: chui-ios
+Usage: --proj "myApp" --username "Joe" --chuiapp "~/Documents/myWebApp"
+
+Options:
+  --proj                                                              [required]
+  --username                                                          [required]
+
+Missing required arguments: proj, username
+</code></pre>
+
+<p><code>chui-ios</code> accepts four arguments (the double hyphens are required):</p>
+<ul>
+  <li>--proj (the name of your project) </li>
+  <li>--username (your username on your computer)</li>
+  <li>--chuiapp (path to an existing ChUI Web app, otherwise it will create a default html page)</li>
+  <li>--appicons (path of icons for the hybrid path)</li>
+</ul>
+
+
+<p>To successfully create a project with this command line tool, you'll need to give your project a name, a single word name is best, and your username, that is, the name you use on your computer. Xcode needs to know what your username is so that it can find the frameworks it needs in your computer's file system. Not providing the username you use on your computer can result in a non-functional Xcode project.</p>
+
+<p>Adding the paths to an existing Web app and its icons is easy, type the argument name first, followed by a space. Then drage the folder on to the terminal. The path to that folder will appear after the argument. Here an example of how this command might look:</p>
+
+<pre class="prettyprint"><code>chui-ios --proj "Hamburger" --username "Wimpy" --chuiapp /Users/bombo/Documents/hamburger --appicons /Users/bombo/Desktop/hambuger-icons
+</code></pre>
+
+<p>Hitting "Return" will execute this command, resulting in an excode project created on the desktop with the name Hamburger. Inside you would find normal Xcode files, a folder called Website with your Web app files inside, and your icons, iTunes are and launch images already in place in Xcode. Double click the Xcode project icon will launch Xcode. Once that is done you can immediate run the project on the simulator, or directly on a tethered iPhone.</p>
+
+<p>You can find out more about this <a href='https://www.npmjs.com/package/chui-ios' target='_blank'>NPM module</a> for iOS hybrid apps on NPM.</p>
+
+<h3>Windows Phone</h3>
+
+<p>Making a hybrid app for Windows is so simple that we cannot even consider wasting time creating a command line tool for that. Microsoft has made this really easy using Visual Studio. If you already have Visual Studio, you are ready to go, otherwise, we recommend you download <a href='https://www.visualstudio.com/products/visual-studio-community-vs' target='_blank'> Visual Studio Community Edition</a>. It's completely free.</p>
+<p>Once you have Visual Studio installed, open it. Click "New Project...". Open the Visual C# tree of templates in the right side column of available templates. Then select "Store Apps" and "Windows Phone App and choose "WebView App (Windows Phone) in the center screen. Then click OK. This will create your WebView project. The resulting project will have a folder call Assets. These are your icons, etc. Replace these with replacements using your own artwork. There is also a folder called HTML. This is where your app goes. You can literally just copy and replace whatever is in there with your Web app. Just make sure your app's main file is called "index.html". After that, you're ready to run. You can read more a more detailed explanation on <a href='http://wobbabits.tumblr.com/post/108276823682/creating-a-hybrid-app-for-windows-phone-8' target='_blank'>our blog</a>.</p>
+
+<h3>Android</h3>
+
+<p>Currently we don't have a quick solution for creating an Android hybrid app, although we are exploring several possiblities. Currently Google offers their own IDE, Android Studio, which makes this a lot easier. You can read our blog post <a href='http://wobbabits.tumblr.com/post/108091466747/creating-a-hybrid-android-app' target='_blank'>how to create a hybrid app using Android Studio</a>.</p>
+
+
+
+<script>
+   $(function() {
+      $('body').scrollTop(0);
+      prettyPrint();
+      $('#documentation').trigger('click');
+      $('#platformspecifics').addClass('selected');
+   });
+</script>

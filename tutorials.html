@@ -56,6 +56,9 @@
             setTimeout(function() {
               $('#tutorials').html(data);
             }, 300);
+          },
+          error: function() {
+            window.location.pathname = '/404.html';
           }
         });
       }
@@ -115,15 +118,20 @@
         $('.submenu ul li').removeClass('selected');
         $('.submenu ul li').eq(10).addClass('selected');
       };
+      var hybridapps = function() {
+        getFile('./tutorials/hybridapps.html', 'hybridapps');
+        $('.submenu ul li').removeClass('selected');
+        $('.submenu ul li').eq(11).addClass('selected');
+      };
       var decoupling = function() {
         getFile('./tutorials/decoupling.html', 'decoupling');
         $('.submenu ul li').removeClass('selected');
-        $('.submenu ul li').eq(11).addClass('selected');
+        $('.submenu ul li').eq(12).addClass('selected');
       };
       var troubleshooting = function() {
         getFile('./tutorials/troubleshooting.html', 'troubleshooting');
         $('.submenu ul li').removeClass('selected');
-        $('.submenu ul li').eq(12).addClass('selected');
+        $('.submenu ul li').eq(13).addClass('selected');
       };
 
       var routes = {
@@ -138,6 +146,7 @@
         '#/editablelist': editablelist,
         '#/templates': templates,
         '#/icons': icons,
+        '#/hybridapps': hybridapps,
         '#/decoupling': decoupling,
         '#/troubleshooting': troubleshooting
       }
@@ -189,6 +198,7 @@
         <li><a href='#/editablelist'>Editable List</a></li>
         <li><a href='#/templates'>Templates</a></li>
         <li><a href='#/icons'>Icons</a></li>
+        <li><a href='#/hybridapps'>Hybrid Apps</a></li>
         <li><a href='#/decoupling'>Decoupling Code</a></li>
         <li><a href='#/troubleshooting'>Troubleshooting</a></li>
       </ul>
