@@ -237,6 +237,66 @@ $(function() {
 
 <p><strong>Behavior:</strong> By default, $.template.repeater appends its results to the target element. If you want it to replace the contents, then simple use <code>$(selector).empty()</code> before executing <code>$.template.repeater()</code></p>
 
+
+
+<h2><a name="cc-declarative-repeater" class='anchor' href='#declarative_repeater' aria-hidden="true"><span class="octicon octicon-link"></span></a>Declarative Template Repeater</h2>
+
+<p>ChocolateChip-UI also provides a way to use declarative repeater templates. You do this by putting the attribute <code>data-repeat</code> with its value being the name of a variable of the array of data you want it to render with. Because of the way JavaScript scopes work, you need to expose the data to the template engine so that it can parse the template with it. You do this by assigning it to <code>$.template.data</code>:</p>
+
+<pre class="prettyprint"><code>// Define some data:
+var renaissanceLuminaries = { persons: 
+  [
+    {firstName: "Albert", lastName: "Einstein"},
+    {firstName: "Steven", lastName: "Hawking"},
+    {firstName: "Neil", lastName: "deGrasse Tyson"},
+    {firstName: "Leonardo", lastName: "Da Vinci"},
+    {firstName: "Nicholas", lastName: "Copernicus"}  
+  ]
+};
+// Expose the data to the $.template.data object:
+$.template.data['luminaries'] = renaissanceLuminaries.persons;
+</code></pre>
+
+<p>Don't worry about this duplicating your data and taking up memory. After the template gets rendered, ChocolateChip-UI will delete the data object so that its memory gets garbage collected.</p>
+
+<p>Setting up a declarative template repeater is simple:</p>
+<pre class="prettyprint"><code>&lt;ul id="repeater" data-repeater="luminaries" class='cloak'&gt;
+  &lt;li&gt;[[= data.firstName ]], [[= data.lastName]]&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>With the template defined and our data assigned to the <code>$.template.data</code> object, we can invoke the repeater method. We do without passing any parameters. Every time you do so, it will search your document for declarative repeaters, so be careful to only do it when all templates have their data ready for render, because after rendering, that data gets deleted from the template data object.</p>
+<pre class="prettyprint"><code>// Parse any declarative repeaters:
+$.template.repeater();
+</code></pre>
+
+<p><strong>Note:</strong> You can keep the unrendered template of the declarative repeater from showing by putting the class "cloak" on it. You can see that class on the repeat above. This class hides the child elements of the repeater. When ChocolateChip-UI renders the repeater, it takes this class off before injecting the repetitive content into it.</p>
+
+
+<h2><a name="cc-template-index" class='anchor' href='#template_index' aria-hidden="true"><span class="octicon octicon-link"></span></a>$.template.index</h2>
+
+<p>When using a repeater, you may need to know what iteration your own, say, to output a numberic value. ChocolateChip-UI templates provides a way for you to do this using <code>$.template.index</code>. Like other JavaScript loop processes, it starts with 0 and increases after that. So, if you want to output numbers, you'll need to increase them by 1. Here's an example:</p>
+
+<pre class="prettyprint"><code>&lt;ul id="repeater" data-repeater="luminaries" class='cloak'&gt;
+  &lt;li&gt;[[= $.template.index + 1 ]]: [[= data.firstName ]], [[= data.lastName]]&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>This would create the following markup:</p>
+
+<pre class="prettyprint"><code>&lt;ul id="luminaries"&gt;
+  &lt;li&gt;1: Albert, Einstein&lt;/li&gt;
+  &lt;li&gt;2: Steven, Hawking&lt;/li&gt;
+  &lt;li&gt;3: Neil, deGrasse Tyson&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p><strong>Note:</strong> One last thing to bear in mind. Because template variables are actually JavaScript variables, you can perform any appropriate JavaScript operations directly on them. We are already doing that by increase the value of the <code>$.template.index</code> by 1 in each loop in the template above. Or you might want to do something such as capitalizing the last name using <code>String.toUpperCase()</code>:</p>
+
+<pre class="prettyprint"><code>&lt;ul id="repeater" data-repeater="luminaries" class='cloak'&gt;
+  &lt;li&gt;[[= $.template.index + 1 ]]: [[= data.firstName ]], [[= data.lastName.toUpperCase() ]]&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
 <script>
    $(function() {
       $('body').scrollTop(0);

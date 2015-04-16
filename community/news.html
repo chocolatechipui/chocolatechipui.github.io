@@ -1,4 +1,27 @@
   <h3>Latest News</h3>
+  <h4><strong>April 15, 2015</strong></h4>
+  <p>We've added the ability to have repeaters in ChocolateChip-UI's templates. There's two ways: through code or as declarative markup. You can read more about it in <a target="_blank" href="http://chocolatechip-ui.com/tutorials.html#/templates" tutorials</a>. Template repeaters let you do things such as:</p>
+
+  <pre class='prettyprint'><code>// Our data as an array of objects:
+var data = [{firstName: "Albert", lastName: "Einstein"},
+  {firstName: "Steven", lastName: "Hawking"},
+  {firstName: "Neil", lastName: "deGrasse Tyson"}
+];
+// Define our template:
+var listTemplate = '&lt;li&gt;[[= data.firstname ]] [[= data.lastname ]]&lt;/li&gt;';
+
+// Render the template to the page using the repeater:
+$.template.repeater($('#listOfPeople'), listTemplate, data);
+</pre></code>
+  <p>This will create the following markup:</p>
+  <pre class="prettyprint"><code>&lt;ul id="listOfPeople"&gt;
+  &lt;li&gt;Albert, Einstein&lt;/li&gt;
+  &lt;li&gt;Steven, Hawking&lt;/li&gt;
+  &lt;li&gt;Neil, deGrasse Tyson&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+
+  <h3>Latest News</h3>
   <h4><strong>April 3, 2015</strong></h4>
   <p>We are launching a new Android theme based on Google's design direction with Material Design which is implmented in Android 5.x (Lollipop). Google choose to use shadows and transparency extensively in this version of Android. Although Lollipop is fairly efficient on most devices, this is not the case with Android's mobile browsers. As such you may see better performance while testing on desktop Chrome than when running in an Android browser. Functionality will still be there, but the mobile browsers, depending on the device, may simpply not render some animations.</p>
 
@@ -23,8 +46,6 @@
   <p>This means you just have to pay attention to the colors you want. The theme roller will handle giving you text with the appropriate contrast for a background color. However, if you are not colorizing the navigation bars, on iOS and Android you must be careful to not choose a color that is too light. That's your choice. The theme roller shows you your chosen Operating Systems UI with your color choice in real time so you can see if you choices work or not.</p>
 
   <p>You can read more about <a href="http://bit.ly/17cS7iR" target='_blank'>how we came up with our contrast formula</a> on our Tumblr blog.</p>
-
-
 
 <script>
   (function() {
