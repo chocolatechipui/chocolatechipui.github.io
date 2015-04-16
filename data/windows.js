@@ -7,10 +7,13 @@ ChocolateChip-UI\n\
 ChUI-Windows.css\n\
 Copyright 2015 Sourcebits www.sourcebits.com\n\
 License: MIT\n\
-Version: 3.8.4\n\
+Version: 3.8.5\n\
 */\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
+}\n\
+.cloak > * {\n\
+  display: none;\n\
 }\n\
 html, body {\n\
   padding: 0;\n\

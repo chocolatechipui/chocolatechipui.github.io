@@ -8,6 +8,9 @@ Version: 3.8.3\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
 }\n\
+.cloak > * {\n\
+  display: none;\n\
+}\n\
 .ellipsis {\n\
   overflow: hidden;\n\
   text-overflow: ellipsis;\n\
