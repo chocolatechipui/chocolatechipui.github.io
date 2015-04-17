@@ -1510,14 +1510,717 @@ $('nav.current').find('.back').trigger('singletap');
 });
 </code></pre>
 
+
+
+
+
+
+
+
+
+<h2>
+<a name="cc-animation" class="anchor" href="#ecmascript_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>ECMAScript Promises</h2>
+
+<p>As of 3.8.6, the default build of ChocolateChipJS supports ECMAScript 6 promises. This includes all of its Ajax methods as well. ChocolateChipJS provides a polyfill for older browsers that do not have support for ECMAScript 6 promises, so you can use them in your code immediately.</p>
+
+<p>ECMAScript 6 Promises provide the following interface:</p>
+
+<ol>
+  <li>Promise</li>
+  <li>Promise.then()</li>
+  <li>Promise.resolve()</li>
+  <li>Promise.reject()</li>
+  <li>Promise.catch()</li>
+  <li>Promise.race()</li>
+  <li>Promise.all()</li>
+</ol>
+
+<p>If you are familiar and have been using jQuery or ChocolateChipJS's Deferred object, this will not look too foreign. Except for the last two: race and all. These have no equivalent with typical deferreds. They are features specific to ECMAScript promises.</p>
+
+<h3>The Promise Interface</h3>
+
+<p>An ECMAScript 6 promise is created with the "new" keyword. This returns an instance of the Promise object.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise();
+</code></pre>
+
+<p>When you create a promise, you can also provide a callback. This will be able to handle two arguments: resolve and reject:</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  var value;
+  // Do something to get value;
+  // ...
+  // Then test value to determine how to handle the promise:
+  if (value === 'good') {
+    resolve(value);
+  } else {
+    // When you reject the promise,
+    // you also get the reason it failed,
+    // which you can choose to output if you want:
+    reject(reason);
+  }
+});
+</code></pre>
+
+<h4>Then</h4>
+<p>Proimses provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
+
+
+<pre class="prettyprint"><code>// Create an instance of a promise:
+var myPromise = new Promise(function(resolve, reject) {
+  // Resolve the promise:
+  resolve('Success!');
+  // or reject it:
+  // reject('Lost in Space!');
+});
+myPromise.then(function(value) {
+  // Success:
+  console.log(value);
+},
+// Opps! There was a problem:
+function(reason) {
+  console.log(reason);
+});
+</code></pre>
+
+<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second fuction. Read the next part on Multiple Thens for more information.</p>
+
+<h4>Multiple Thens</h4>
+<p>The <code>then</code> method always returns a promsie. This means that you can chain mutliple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  resolve(1);
+});
+myPromise.then(function(value) {
+  console.log(value); // 1
+  // Return the value:
+  return value + 1;
+})
+.then(fuction(value) {
+  console.log(value) // 2
+})
+</code></pre>
+
+
+<h4>Resolve</h4>
+
+<p>We can resolve a promise at any time using the <code>resolve</code> method on the static Promise object. Once we execute the resolve method, the promise is disposed of. </p>
+
+<pre class="prettyprint"><code>// Define an alias for the resolve callback:
+var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+}).then(function(value) {
+  equal(value, 5, 'Promise fulfilled with Promise should resolve to actual value');
+  start();
+});
+fulfill(Promise.resolve(5));
+</code></pre>
+
+<h4>Reject</h4>
+
+<p>Like the resolve example above, we can similarly reject a promise using its method on the static Promise object. In this example we pass a value that gets returned with the rejection:</p>
+
+<pre class="prettyprint"><code>var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+})['catch'](function(value) {
+  console.log(value);
+});
+fulfill(Promise.reject(5));
+</code></pre>
+
+<h4>Catch</h4>
+
+<p>We can handle errors and exceptions using the <code>catch</code> method. This enables us to have a series of thens that only handle success situations. ECMAScript promise pass any exception along until their is some callback to handle it.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  resolve("Success!");
+});
+myPromise.then(function(value) {
+  console.log(value); // Success!
+  throw "Oops! Something went wrong.";
+})
+.catch(function(error) {
+  console.log(error); // Oops! Something went wrong.
+})
+</code></pre>
+
+<h4>Race</h4>
+
+<p>Sometimes you may need to execute several operations and any one of them could finish first. You want to take the result of the first to finishing, ignoring the others. ECMAScript promises enable this with the <code>race</code> method. This expects an array of promises as its argument.</p>
+
+<pre class="prettyprint"><code>var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.race([p1, p2, p3]).then(function(value) {
+  console.log('Promise.race() should resolve to: ' + value);
+});
+// Execute the second:
+f2(2);
+</code></pre>
+
+<h4>All</h4>
+<p>Unlike with race conditions, sometimes you want to execute a number of things and wait until they are all done before doing anything. In those cases you can use the <code>all</code> method. This expects an array of promises as its argument.</p>
+
+<pre class="prettyprint"><code>var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.all([p1, p2, p3])
+.then(function(value) {
+  console.log(value);
+});
+// Execute theme in opposite order:
+f3(3);
+f2(2);
+f1(1);
+</code></pre>
+
+
+<a name="cc-animation" class="anchor" href="#ajax_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax with ECMAScript Promises</h2>
+
+<p>You can use ECMAScript 6 promises with ChocolateChipJS's Ajax functions as well. These functions have been rewritten to always return promises. Below is a conceptual example showing the handling of a success and error in a GET request:</p>
+
+<pre class="prettyprint"><code>$.get('http://my.com/data/stuff.html')
+.then(function(response) {
+  console.log("Success!", response);
+}, function(error) {
+  console.error("Failed!", error);
+});
+</code></pre>
+
+<p>We could also further separate our error handling in a catch statement:</p>
+
+<pre class="prettyprint"><code>$.get('http://my.com/data/stuff.html')
+.then(function(response) {
+  console.log("Success!", response);
+})
+.then(function(data) {
+  $('#content').append(data);
+})
+.catch(function(error) {
+  console.error("Failed!", error);
+});
+</code></pre>
+
+<p>Here's an example of parsing the JSON text from a request:</p>
+
+<pre class="prettyprint"><code>$.get('story.json')
+.then(JSON.parse)
+.then(function(response) {
+  console.log("Yey JSON!", response);
+});
+</code></pre>
+
+<p>And here's an example of doing multiple Ajax requests but only output the first to come back:</p>
+
+<pre class="prettyprint"><code>var getStuff1 = $.get('data-1.json');
+var getStuff2 = $.get('data-1.json');
+var getStuff3 = $.get('data-1.json');
+Promise.race([getStuff1, getStuff2, getStuff3)])
+.then(function(response) {
+  $('#result').append(response);
+})
+.catch(function(error) {
+  console.log('There was a problem: ', error);
+})
+</code></pre>
+
+<p>Or we might want to wait for all of them to come back before outputting the results:</p>
+
+<pre class="prettyprint"><code>var getStuff1 = $.get('data-1.json');
+var getStuff2 = $.get('data-1.json');
+var getStuff3 = $.get('data-1.json');
+Promise.all([getStuff1, getStuff2, getStuff3)])
+.then(function(response) {
+  $('#result').append(response);
+})
+.catch(function(error) {
+  console.log('There was a problem: ', error);
+})
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>
+<a name="cc-deferred-object" class="anchor" href="#deferred-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deferred Object</h2>
+
+<p><strong>Note:</strong> As of version 3.8.6, ChocolateChipJS uses ECMAScript 6 promises. Previously it used a deferred object compatible with the jQuery implementation. If you prefer that, you can still build ChocolateChipJS with suppor for it using the flag <code>--deferredSupport</code>:</p>
+<pre class="prettyprint"><code>gulp --deferredSupport</code></pre>
+
+<p>The Deferred object can register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function. This implementation is based on the version in jQuery 1.7. Please examine the unit tests to see how to use it.</p>
+
+<p>The Deferred object is chainable, similar to the way ChocolateChip methods are chainable, but it has its own methods. After creating a Deferred object, you can use any of the methods below by either chaining directly from the object created, or saving the object in a variable and invoking one or more methods on that variable.</p>
+
+<ul>
+<li>$.Deferred</li>
+<li>done</li>
+<li>fail</li>
+<li>always</li>
+<li>pipe</li>
+<li>progress</li>
+<li>notify</li>
+<li>notifyWith</li>
+<li>state</li>
+<li>isResolved</li>
+<li>isRejected</li>
+<li>resolve</li>
+<li>resolveWith</li>
+<li>reject</li>
+<li>rejectWith</li>
+<li>then</li>
+<li>when</li>
+</ul><h3>
+<a name="cc-deferred" class="anchor" href="#deferred" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.Deferred</h3>
+
+<p>A constructor function that returns a chainable utility object with methods to register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function.</p>
+
+<p>The $.Deferred method can be passed an optional function, which is called just before the constructor returns and is passed the constructed deferred object as both the this object and as the first argument to the function. The called function can attach callbacks using <code>deferred.then()</code>, for example.</p>
+
+<p>A Deferred object starts in the pending state. Any callbacks added to the object with <code>deferred.then()</code>, <code>deferred.always()</code>, <code>deferred.done()</code>, or <code>deferred.fail()</code> are queued to be executed later. Calling <code>deferred.resolve()</code> or <code>deferred.resolveWith()</code> transitions the Deferred into the resolved state and immediately executes any doneCallbacks that are set. Calling <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> transitions the Deferred into the rejected state and immediately executes any failCallbacks that are set. Once the object has entered the resolved or rejected state, it stays in that state. Callbacks can still be added to the resolved or rejected Deferred — they will execute immediately.</p>
+
+<p>Enhanced Callbacks with $.Deferred</p>
+
+<p>In JavaScript it is common to invoke functions that optionally accept callbacks that are called within that function.</p>
+
+<p>$.Deferred() introduces several enhancements to the way callbacks are managed and invoked. In particular, $.Deferred() provides flexible ways to provide multiple callbacks, and these callbacks can be invoked regardless of whether the original callback dispatch has already occurred.</p>
+
+<p>One model for understanding Deferred is to think of it as a chain-aware function wrapper. The <code>deferred.then()</code>, <code>deferred.always()</code>, <code>deferred.done()</code>, and <code>deferred.fail()</code> methods specify the functions to be called and the deferred.resolve(args) or deferred.reject(args) methods "call" the functions with the arguments you supply. Once the Deferred has been resolved or rejected it stays in that state; a second call to <code>deferred.resolve()</code>, for example, is ignored. If more functions are added by <code>deferred.then()</code>, for example, after the Deferred is resolved, they are called immediately with the arguments previously provided.</p>
+
+<pre class="prettyprint"><code>var deferred = new $.Deferred();
+
+// or without the new keyword:
+
+var deferred = $.Deferred();
+</code></pre>
+
+<h3>
+<a name="cc-done" class="anchor" href="#done" aria-hidden="true"><span class="octicon octicon-link"></span></a>done</h3>
+
+<p>Add handlers to be called when the Deferred object is resolved. The argument can be a function, or array of functions, that is called when the Deferred is resolved or rejected.</p>
+
+<p>The <code>deferred.done()</code> method accepts one or more arguments, all of which can be either a single function or an array of functions. When the Deferred is resolved, the doneCallbacks are called. Callbacks are executed in the order they were added. Since <code>deferred.done()</code> returns the deferred object, other methods of the deferred object can be chained to this one, including additional <code>.done()</code> methods. When the Deferred is resolved, doneCallbacks are executed using the arguments provided to the resolve or resolveWith method call in the order they were added.</p>
+
+<pre class="prettyprint"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;deferred.done demo&lt;/title&gt;
+  &lt;script src="chui/chocolatechip.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;button&gt;Go&lt;/button&gt;
+&lt;p&gt;Ready...&lt;/p&gt;
+
+&lt;script&gt;
+// 3 functions to call when the Deferred object is resolved
+function fn1() {
+  $( "p" ).append( " 1 " );
+}
+function fn2() {
+  $( "p" ).append( " 2 " );
+}
+function fn3( n ) {
+  $( "p" ).append( n + " 3 " + n );
+}
+
+// Create a deferred object
+var dfd = $.Deferred();
+
+// Add handlers to be called when dfd is resolved
+dfd
+// .done() can take any number of functions or arrays of functions
+  .done( [ fn1, fn2 ], fn3, [ fn2, fn1 ] )
+// We can chain done methods, too
+  .done(function( n ) {
+    $( "p" ).append( n + " we're done." );
+  });
+
+// Resolve the Deferred object when the button is clicked
+$( "button" ).on( "click", function() {
+  dfd.resolve( "and" );
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>
+<a name="cc-fail" class="anchor" href="#fail" aria-hidden="true"><span class="octicon octicon-link"></span></a>fail</h3>
+
+<p>Add handlers to be called when the Deferred object is rejected. The argument can be a function, or array of functions, that is called when the Deferred is resolved or rejected.</p>
+
+<p>The <code>deferred.fail()</code> method accepts one or more arguments, all of which can be either a single function or an array of functions. When the Deferred is rejected, the failCallbacks are called. Callbacks are executed in the order they were added. Since <code>deferred.fail()</code> returns the deferred object, other methods of the deferred object can be chained to this one, including additional <code>deferred.fail()</code> methods. The failCallbacks are executed using the arguments provided to the <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> method call in the order they were added.</p>
+
+<pre class="prettyprint"><code>// Create a deferred object
+var dfd = $.Deferred();
+
+dfd.done(/* Do stuff when done */).fail(/* Do stuff when fail */);
+</code></pre>
+
+<h3>
+<a name="cc-always" class="anchor" href="#always" aria-hidden="true"><span class="octicon octicon-link"></span></a>always</h3>
+
+<p>Add handlers to be called when the Deferred object is either resolved or rejected. The argument can be a function, or array of functions, that is called when the Deferred is resolved or rejected.</p>
+
+<p>The argument can be either a single function or an array of functions. When the Deferred is resolved or rejected, the callbacks are called. Since <code>deferred.always()</code> returns the Deferred object, other methods of the Deferred object can be chained to this one, including additional <code>.always()</code> methods. When the Deferred is resolved or rejected, callbacks are executed in the order they were added, using the arguments provided to the resolve, reject, resolveWith or rejectWith </p>
+
+<pre class="prettyprint"><code>// Create a deferred object
+var dfd = $.Deferred();
+dfd
+  .done(/* Do stuff when done */)
+  .fail(/* Do stuff when fail */)
+  .always(/* This will always execute for done and fail */);
+</code></pre>
+
+<h3>
+<a name="cc-pipe" class="anchor" href="#pipe" aria-hidden="true"><span class="octicon octicon-link"></span></a>pipe</h3>
+
+<p>Utility method to filter and/or chain Deferreds. It accepts two arguments. The first is <code>doneFilter</code> that is called when the Deferred is resolved. The second is <code>failFilter</code> that is called when the Deferred is rejected.</p>
+
+<p>The <code>deferred.pipe()</code> method returns a new promise that filters the status and values of a deferred through a function. The <code>doneFilter</code> and <code>failFilter</code> functions filter the original Deferred's resolved / rejected status and values. If the filter function used is null, or not specified, the piped promise will be resolved or rejected with the same values as the original.</p>
+
 <h4>
-<a name="cc-deferred-ajax" class="anchor" href="#deferred-objects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deferred Objects</h4>
+<a name="cc-filter-resolve-example" class="anchor" href="#filter-resolve-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filter resolve example:</h4>
 
-<p>New to ChocolateChipJS version 3.5.5, Ajax requests now return deferred objects. This allows you to take advantage of the powerful features of deferreds and promises and eliminate callback hell when dealing with complex Ajax dependencies.</p>
+<pre class="prettyprint"><code>var defer = $.Deferred();
+var filtered = defer.pipe(function( value ) {
+  return value * 2;
+});
 
-<p><strong>ATTENTION:</strong> As of version 3.8.1 you can build ChocolateChipJS with support for ECMAScript 6 promises. When you do this, ChocolateChipJS switches out support for jQuery-compatible deferred objects and changes all its Ajax functionality to work with ECMAScript promises. This includes a polyfill for older browsers. Please read the documentation about ECMAScript promises further down.</p>
+defer.resolve( 5 );
+filtered.done(function( value ) {
+  alert( "Value is ( 2*5 = ) 10: " + value );
+});  
+</code></pre>
 
-<p>If the Ajax request was for JSON or was a GET request, the first argument exposed to the successful deferred is the XHR.responseText. Otherwise it is the XHR.status, which lets you know whether the POST, PUT or DELETE was successful or not.</p>
+<h4>
+<a name="cc-filter-reject-example" class="anchor" href="#filter-reject-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filter reject example:</h4>
+
+<pre class="prettyprint"><code>var defer = $.Deferred(),
+filtered = defer.pipe( null, function( value ) {
+  return value * 3;
+});
+
+defer.reject( 6 );
+filtered.fail(function( value ) {
+  alert( "Value is ( 3*6 = ) 18: " + value );
+});
+</code></pre>
+
+<h3>
+<a name="cc-progress" class="anchor" href="#progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>progress</h3>
+
+<p>Add handlers to be called when the Deferred object generates progress notifications. It is executed from the object onto which the promise methods have to be attached.</p>
+
+<p>The <code>deferred.promise()</code> method allows an asynchronous function to prevent other code from interfering with the progress or status of its internal request. The Promise exposes only the Deferred methods needed to attach additional handlers or determine the state (then, done, fail, always, pipe, progress, and state), but not ones that change the state (resolve, reject, notify, resolveWith, rejectWith, and notifyWith).</p>
+
+<p>If target is provided, <code>deferred.promise()</code> will attach the methods onto it and then return this object rather than create a new one. This can be useful to attach the Promise behavior to an object that already exists.</p>
+
+<p>If you are creating a Deferred, keep a reference to the Deferred so that it can be resolved or rejected at some point. Return only the Promise object via <code>deferred.promise()</code> so other code can register callbacks or inspect the current state.</p>
+
+<pre class="prettyprint"><code>var dfd = $.Deferred();
+// Do some stuff with dfd, 
+// then do something as it progresses:
+dfd.progress(function(value1, value2) {
+  equal(value1, param1, 'Should equal param1.');
+  equal(value2, param2, 'Should equal param2.');
+  return equal(this, context, 'Should be the context.');
+});
+</code></pre>
+
+<h3>
+<a name="cc-notify" class="anchor" href="#notify" aria-hidden="true"><span class="octicon octicon-link"></span></a>notify</h3>
+
+<p>Call the <code>progressCallbacks</code> on a Deferred object with the given args. Optional arguments are an object that is passed to the <code>progressCallbacks</code>.</p>
+
+<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state or reporting status by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
+
+<p>When <code>deferred.notify</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code> or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notify()</code>. Any calls to <code>deferred.notify()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
+
+<pre class="prettyprint"><code>var context, def, param1, param2, progressCalled;
+def = new $.Deferred();
+context = new Array();
+param1 = 'foo';
+param2 = 'bar';
+progressCalled = 0; 
+def.progress(function(value1, value2) {
+  progressCalled += 1;
+  equal(value1, param1, 'Should equal param1.');
+  equal(value2, param2, 'Should equal param2.');
+  return equal(this, context, 'Should be the context.');
+});
+def.notifyWith(context, param1, param2);
+equal(progressCalled, 2, 'Should equal 2.');
+def.resolve();
+def.notify();
+</code></pre>
+
+<h3>
+<a name="cc-notifywith" class="anchor" href="#notifywith" aria-hidden="true"><span class="octicon octicon-link"></span></a>notifyWith</h3>
+
+<p>Call the <code>progressCallbacks</code> on a Deferred object with the given context and args.</p>
+
+<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state or reporting status by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
+
+<p>When <code>deferred.notifyWith</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code>or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notifyWith()</code>. Any calls to <code>deferred.notifyWith()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
+
+<p>See example for <code>notify</code> above.</p>
+
+<h3>
+<a name="cc-state" class="anchor" href="#state" aria-hidden="true"><span class="octicon octicon-link"></span></a>state</h3>
+
+<p>Determine the current state of a Deferred object.</p>
+
+<p>"pending": The Deferred object is not yet in a completed state (neither "rejected" nor "resolved").
+"resolved": The Deferred object is in the resolved state, meaning that either <code>deferred.resolve()</code> or <code>deferred.resolveWith()</code> has been called for the object and the doneCallbacks have been called (or are in the process of being called).
+"rejected": The Deferred object is in the rejected state, meaning that either <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> has been called for the object and the failCallbacks have been called (or are in the process of being called).
+This method is primarily useful for debugging to determine, for example, whether a Deferred has already been resolved even though you are inside code that intended to reject it.</p>
+
+<p>You can use this to check the state of the deferred object and take some action based on it. You might use a switch state to test for the states you are interested in.</p>
+
+<pre class="prettyprint"><code>var dfd = $.Deferred();
+
+// Do some stuff with dfd.
+// Log its state:
+console.log(dfd.state());
+</code></pre>
+
+<h3>
+<a name="cc-isresolved" class="anchor" href="#isresolved" aria-hidden="true"><span class="octicon octicon-link"></span></a>isResolved</h3>
+
+<p><code>deferred.isResolved()</code> is used to determine whether a Deferred object has been resolved. This method does not accept any arguments. This is a convenience method for getting this value from the <code>state</code> method described above. </p>
+
+<p>Returns true if the Deferred object is in the resolved state, meaning that either <code>deferred.resolve()</code> or <code>deferred.resolveWith()</code> has been called for the object and the <code>doneCallbacks</code> have been called (or are in the process of being called).</p>
+
+<p>Note that a Deferred object can be in one of three states: pending, resolved, or rejected; use <code>deferred.isRejected()</code> to determine whether the Deferred object is in the rejected state. These methods are primarily useful for debugging, for example to determine whether a Deferred has already been resolved even though you are inside code that intended to reject it.</p>
+
+<h3>
+<a name="cc-isrejected" class="anchor" href="#isrejected" aria-hidden="true"><span class="octicon octicon-link"></span></a>isRejected</h3>
+
+<p><code>deferred.isRejected()</code> is used to determine whether a Deferred object has been rejected. This method does not accept any arguments. This is a convenience method for getting this value from the <code>state</code> method described above. </p>
+
+<p>Returns true if the Deferred object is in the rejected state, meaning that either <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> has been called for the object and the failCallbacks have been called (or are in the process of being called).</p>
+
+<p>Note that a Deferred object can be in one of three states: pending, resolved, or rejected; use <code>deferred.isResolved()</code> to determine whether the Deferred object is in the resolved state. These methods are primarily useful for debugging, for example to determine whether a Deferred has already been resolved even though you are inside code that intended to reject it.</p>
+
+<h3>
+<a name="cc-resolve" class="anchor" href="#resolve" aria-hidden="true"><span class="octicon octicon-link"></span></a>resolve</h3>
+
+<p>Resolve a Deferred object and call any <code>doneCallbacks</code> with the given args.</p>
+
+<pre class="prettyprint"><code>var dfd = $.Deferred();
+// Do stuff with the deferred.
+dfd.done(function() {/* Do stuff here */});
+// Resolve the deferred, which will 
+// cause dfd.done to execute:
+dfd.resolve();
+</code></pre>
+
+<h3>
+<a name="cc-resolvewith" class="anchor" href="#resolvewith" aria-hidden="true"><span class="octicon octicon-link"></span></a>resolveWith</h3>
+
+<p>Resolve a Deferred object and call any <code>doneCallbacks</code> with the given context and args. It accepts an optional array of arguments that are passed to the <code>doneCallbacks</code>.</p>
+
+<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
+
+<p>When the Deferred is rejected, any <code>doneCallbacks</code> added by <code>deferred.then</code> or <code>deferred.fail</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.reject()</code> call. Any <code>doneCallbacks</code> added after the Deferred enters the rejected state are executed immediately when they are added, using the arguments that were passed to the <code>deferred.reject()</code> call.</p>
+
+<pre class="prettyprint"><code>var context = ["one","two","three"];
+var defer = new $.Deferred(); 
+defer
+  .done(function() {
+    console.log('This has been resolved!');
+    context.forEach(function(ctx) {
+      console.log(ctx);
+    });
+  });
+  .fail(function() {
+    console.log('This has failed!');
+  });
+
+// Resolve the deferred and pass
+// the array as the context:
+defer.resolveWith(context);
+
+// outputs:
+// "This has been resolved!"
+// "one"
+// "two"
+// "three"
+
+</code></pre>
+
+<h3>
+<a name="cc-reject" class="anchor" href="#reject" aria-hidden="true"><span class="octicon octicon-link"></span></a>reject</h3>
+
+<p>Reject a Deferred object and call any <code>failCallbacks</code> with the given args. It accpets optional arguments that are passed to the <code>failCallbacks</code>.</p>
+
+<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
+
+<p>When the Deferred is rejected, any <code>failCallbacks</code> added by <code>deferred.then()</code> or <code>deferred.fail()</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.reject()</code> call. Any <code>failCallbacks</code> added after the Deferred enters the rejected state are executed immediately when they are added, using the arguments that were passed to the <code>deferred.reject()</code> call.</p>
+
+<pre class="prettyprint"><code>var context = ["one","two","three"];
+var defer = new $.Deferred(); 
+defer
+  .done(function() {
+    console.log('This has been resolved!');
+  });
+  .fail(function() {
+    console.log('This was rejected!')
+  });
+
+// Reject the deferred:
+defer.reject();
+
+// outputs:
+// "This was rejected!"
+
+</code></pre>
+
+<h3>
+<a name="cc-rejectwith" class="anchor" href="#rejectwith" aria-hidden="true"><span class="octicon octicon-link"></span></a>rejectWith</h3>
+
+<p>Reject a Deferred object and call any <code>failCallbacks with</code> the given context and args. This works just like <code>deferred.resolveWith</code>, except that <code>failCallbacks</code> are executed instead of <code>doneCallbacks</code>.</p>
+
+<pre class="prettyprint"><code>var context = ["one","two","three"];
+var defer = new $.Deferred(); 
+defer
+  .done(function() {
+    console.log('This has been resolved!');
+    context.forEach(function(ctx) {
+      console.log(ctx);
+    });
+  });
+  .fail(function() {
+    console.log('This was rejected!');
+    console.log('The array has ' + context.length + ' items.')
+  });
+
+// Resolve the deferred and pass
+// the array as the context:
+defer.rejectWith(context);
+
+// outputs:
+// "This was rejected"
+// "The array has 3 items."
+</code></pre>
+
+<h3>
+<a name="cc-then" class="anchor" href="#then" aria-hidden="true"><span class="octicon octicon-link"></span></a>then</h3>
+
+<p>Add handlers to be called when the Deferred object is resolved, rejected, or still in progress. It accepts the following arguments in order:</p>
+
+<ul>
+<li>doneCallbacks: A function, or array of functions, called when the Deferred is resolved.</li>
+<li>failCallbacks: A function, or array of functions, called when the Deferred is rejected.</li>
+<li>progressCallbacks: A function, or array of functions, called when the Deferred notifies progress.</li>
+</ul><p>Callbacks are executed in the order they were added. Since deferred.then returns a Promise, other methods of the Promise object can be chained to this one, including additional <code>deferred.then()</code> methods.</p>
+
+<pre class="prettyprint"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;deferred.then demo&lt;/title&gt;
+  &lt;script src="chui/chocolatechip.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;button&gt;Filter Resolve&lt;/button&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;script&gt;
+var filterResolve = function() {
+  var defer = $.Deferred(),
+    filtered = defer.then(function( value ) {
+      return value * 2;
+    });
+
+  defer.resolve( 5 );
+  filtered.done(function( value ) {
+    $( "p" ).html( "Value is ( 2*5 = ) 10: " + value );
+  });
+};
+
+$( "button" ).on( "click", filterResolve );
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>
+<a name="cc-when" class="anchor" href="#when" aria-hidden="true"><span class="octicon octicon-link"></span></a>when</h3>
+
+<p>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events. It accepsts one or more Deferred objects, or plain JavaScript objects.</p>
+
+<p>If a single Deferred is passed to <code>$.when</code>, its Promise object (a subset of the Deferred methods) is returned by the method. Additional methods of the Promise object can be called to attach callbacks, such as <code>deferred.then</code>. When the Deferred is resolved or rejected, usually by the code that created the Deferred originally, the appropriate callbacks will be called.</p>
+
+<p>If a single argument is passed to <code>$.when</code> and it is not a Deferred or a Promise, it will be treated as a resolved Deferred and any <code>doneCallbacks</code> attached will be executed immediately. The <code>doneCallbacks</code> are passed the original argument. In this case any <code>failCallbacks</code> you might set are never called since the Deferred is never rejected. For example:</p>
+
+<pre class="prettyprint"><code>$.when( { testing: 123 } ).done(function( x ) {
+   alert( x.testing ); // Alerts "123"
+});
+</code></pre>
+
+<p>In the case where multiple Deferred objects are passed to $.when, the method returns the Promise from a new "master" Deferred object that tracks the aggregate state of all the Deferreds it has been passed. The method will resolve its master Deferred as soon as all the Deferreds resolve, or reject the master Deferred as soon as one of the Deferreds is rejected. If the master Deferred is resolved, it is passed the resolved values of all the Deferreds that were passed to $.when.</p>
+
+<p>In the multiple Deferreds case where one of the Deferreds is rejected, $.when immediately fires the <code>failCallbacks</code> for its master Deferred. Note that some of the Deferreds may still be unresolved at that point.</p>
+
+<pre class="prettyprint"><code>$.when(asyncEvent()).then(
+  function(status){
+    alert(status + ' Things are going well.');
+    document.getElementById('foo').style.backgroundColor = 'green';
+  },
+  function(status){
+    alert(status + ' You fail this time.');
+    document.getElementById('foo').style.backgroundColor = 'red';
+  }
+);
+
+// another example
+function showDiv(){
+  var dfd = $.Deferred();
+  dfd.done(function(){
+    document.getElementById('foo').style.display = 'block';
+  });
+  setTimeout(function() { dfd2.resolve() }, 2000);
+  return dfd2.promise();
+}
+showDiv();
+</code></pre>
+
+
+
+
+
+
+
+
+<h4>
+  <a name="cc-deferred-ajax" class="anchor" href="#deferred-ajax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax with Deferred Objects</h4>
+
+<p>When doing Ajax requests with support for the deferred object, f the Ajax request was for JSON or was a GET request, the first argument exposed to the successful deferred is the XHR.responseText. Otherwise it is the XHR.status, which lets you know whether the POST, PUT or DELETE was successful or not.</p>
 
 <pre class="prettyprint"><code>$.ajax({ url : "/data/me.json"})
   .done(function(me) {
@@ -1681,6 +2384,10 @@ $.JSONP({
   console.log('There was a problem connecting to: ' + settings.url);
 });
 </code></pre>
+
+
+
+
 
 <h3>
 <a name="cc-form2json" class="anchor" href="#form2json" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.form2JSON</h3>
@@ -2434,232 +3141,7 @@ function showDiv(){
 showDiv();
 </code></pre>
 
-<h2>
-<a name="cc-animation" class="anchor" href="#ecmascript_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>ECMAScript Promises</h2>
 
-<p>As of version 3.8.1, ChocolateChipJS offers the ability to build with support for ECMAScript promises instead of the jQuery-compatible Deferred object. When you build ChocolateChipJS with support for promises, all the Ajax methods are updated to work with promises. It also includes a polyfill for browsers that don't yet support ECMAScript promises. To build the promises version, run gulp with the following flag:</p>
-
-<pre class="prettyprint"><code>gulp --promiseSupport true
-</code></pre>
-
-<p>Promises provide the following interface:</p>
-
-<ol>
-  <li>Promise</li>
-  <li>Promise.then()</li>
-  <li>Promise.resolve()</li>
-  <li>Promise.reject()</li>
-  <li>Promise.catch()</li>
-  <li>Promise.race()</li>
-  <li>Promise.all()</li>
-</ol>
-
-<p>If you are familiar and have been using jQuery or ChocolateChipJS's Deferred object, this will not look too foreign. Except for the last two: race and all. These have no equivalent with typical deferreds. They are features specific to ECMAScript promises.</p>
-
-<h3>The Promise Interface</h3>
-
-<p>An ECMAScript 6 promises is created with the "new" keyword. This returns an instance of the Promise object.</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise();
-</code></pre>
-
-<p>When you create a promise, you can also provide a callback. This will be able to handle two arguments: resolve and reject:</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
-  var value;
-  // Do something to get value;
-  // ...
-  // Then test value to determine how to handle the promise:
-  if (value === 'good') {
-    resolve(value);
-  } else {
-    // When you reject the promise,
-    // you also get the reason it failed,
-    // which you can choose to output if you want:
-    reject(reason);
-  }
-});
-</code></pre>
-
-<h4>Then</h4>
-<p>Proimses provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
-
-
-<pre class="prettyprint"><code>// Create an instance of a promise:
-var myPromise = new Promise(function(resolve, reject) {
-  // Resolve the promise:
-  resolve('Success!');
-  // or reject it:
-  // reject('Lost in Space!');
-});
-myPromise.then(function(value) {
-  // Success:
-  console.log(value);
-},
-// Opps! There was a problem:
-function(reason) {
-  console.log(reason);
-});
-</code></pre>
-
-<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second fuction. Read the next part on Multiple Thens for more information.</p>
-
-<h4>Multiple Thens</h4>
-<p>The <code>then</code> method always returns a promsie. This means that you can chain mutliple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
-  resolve(1);
-});
-myPromise.then(function(value) {
-  console.log(value); // 1
-  // Return the value:
-  return value + 1;
-})
-.then(fuction(value) {
-  console.log(value) // 2
-})
-</code></pre>
-
-
-<h4>Resolve</h4>
-
-<p>We can resolve a promise at any time using the <code>resolve</code> method on the static Promise object. Once we execute the resolve method, the promise is disposed of. </p>
-
-<pre class="prettyprint"><code>// Define an alias for the resolve callback:
-var fulfill;
-new Promise(function (resolve, reject) {
-  fulfill = resolve;
-}).then(function(value) {
-  equal(value, 5, 'Promise fulfilled with Promise should resolve to actual value');
-  start();
-});
-fulfill(Promise.resolve(5));
-</code></pre>
-
-<h4>Reject</h4>
-
-<p>Like the resolve example above, we can similarly reject a promise using its method on the static Promise object. In this example we pass a value that gets returned with the rejection:</p>
-
-<pre class="prettyprint"><code>var fulfill;
-new Promise(function (resolve, reject) {
-  fulfill = resolve;
-})['catch'](function(value) {
-  console.log(value);
-});
-fulfill(Promise.reject(5));
-</code></pre>
-
-<h4>Catch</h4>
-
-<p>We can handle errors and exceptions using the <code>catch</code> method. This enables us to have a series of thens that only handle success situations. ECMAScript promise pass any exception along until their is some callback to handle it.</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
-  resolve("Success!");
-});
-myPromise.then(function(value) {
-  console.log(value); // Success!
-  throw "Oops! Something went wrong.";
-})
-.catch(function(error) {
-  console.log(error); // Oops! Something went wrong.
-})
-</code></pre>
-
-<h4>Race</h4>
-
-<p>Sometimes you may need to execute several operations and any one of them could finish first. You want to take the result of the first to finishing, ignoring the others. ECMAScript promises enable this with the <code>race</code> method. This expects an array of promises as its argument.</p>
-
-<pre class="prettyprint"><code>var f1, f2, f3;
-var p1 = new Promise(function(f, r) { f1 = f; });
-var p2 = new Promise(function(f, r) { f2 = f; });
-var p3 = new Promise(function(f, r) { f3 = f; });
-Promise.race([p1, p2, p3]).then(function(value) {
-  console.log('Promise.race() should resolve to: ' + value);
-});
-// Execute the second:
-f2(2);
-</code></pre>
-
-<h4>All</h4>
-<p>Unlike with race conditions, sometimes you want to execute a number of things and wait until they are all done before doing anything. In those cases you can use the <code>all</code> method. This expects an array of promises as its argument.</p>
-
-<pre class="prettyprint"><code>var f1, f2, f3;
-var p1 = new Promise(function(f, r) { f1 = f; });
-var p2 = new Promise(function(f, r) { f2 = f; });
-var p3 = new Promise(function(f, r) { f3 = f; });
-Promise.all([p1, p2, p3])
-.then(function(value) {
-  console.log(value);
-});
-// Execute theme in opposite order:
-f3(3);
-f2(2);
-f1(1);
-</code></pre>
-
-
-<a name="cc-animation" class="anchor" href="#ajax_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax with ECMAScript Promises</h2>
-
-<p>You can use ECMAScript 6 promises with ChocolateChipJS's Ajax functions as well. These functions have been rewritten to always return promises. Below is a conceptual example showing the handling of a success and error in a GET request:</p>
-
-<pre class="prettyprint"><code>$.get('http://my.com/data/stuff.html')
-.then(function(response) {
-  console.log("Success!", response);
-}, function(error) {
-  console.error("Failed!", error);
-});
-</code></pre>
-
-<p>We could also further separate our error handling in a catch statement:</p>
-
-<pre class="prettyprint"><code>$.get('http://my.com/data/stuff.html')
-.then(function(response) {
-  console.log("Success!", response);
-})
-.then(function(data) {
-  $('#content').append(data);
-})
-.catch(function(error) {
-  console.error("Failed!", error);
-});
-</code></pre>
-
-<p>Here's an example of parsing the JSON text from a request:</p>
-
-<pre class="prettyprint"><code>$.get('story.json')
-.then(JSON.parse)
-.then(function(response) {
-  console.log("Yey JSON!", response);
-});
-</code></pre>
-
-<p>And here's an example of doing multiple Ajax requests but only output the first to come back:</p>
-
-<pre class="prettyprint"><code>var getStuff1 = $.get('data-1.json');
-var getStuff2 = $.get('data-1.json');
-var getStuff3 = $.get('data-1.json');
-Promise.race([getStuff1, getStuff2, getStuff3)])
-.then(function(response) {
-  $('#result').append(response);
-})
-.catch(function(error) {
-  console.log('There was a problem: ', error);
-})
-</code></pre>
-
-<p>Or we might want to wait for all of them to come back before outputting the results:</p>
-
-<pre class="prettyprint"><code>var getStuff1 = $.get('data-1.json');
-var getStuff2 = $.get('data-1.json');
-var getStuff3 = $.get('data-1.json');
-Promise.all([getStuff1, getStuff2, getStuff3)])
-.then(function(response) {
-  $('#result').append(response);
-})
-.catch(function(error) {
-  console.log('There was a problem: ', error);
-})
-</code></pre>
 
 <h2>
 <a name="cc-animation" class="anchor" href="#animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Animation</h2>
