@@ -3414,6 +3414,29 @@ word.capitalize(); // returns 'Chocolate'
 <pre class="prettyprint"><code>var name = $.capitalize("get out now"); // returns 'Get Out Now'
 </code></pre>
 
+<h2>Performance Testing</h2>
+<p>We've made some claims about the performance of ChocolateChipJS. You can see for yourself by running any of the following tests. These are all on jsperf.com. </p>
+<p>Basic DOM operations:</p>
+<ul>
+  <li><a href='https://jsperf.com/chocolatechip-vs-jquery-vs-zepto/10' target='_blank'>ChocolateChip vs jQuery vs Zepto (DOM actions)</a></li>
+  <li><a href='https://jsperf.com/domsubtreemodified-templates/5' target='_blank'>DOMSubtreeModified &amp; Templates</a></li>
+  <li><a href='https://jsperf.com/domnoderemovedfromdocument-templates/6' target='_blank'>DOMNodeRemovedFromDocument &amp; Templates</a></li>
+  <li><a href='http://jsperf.com/domrecursiveempty/7' target='_blank'>DOMRecursiveEmpty</a></li>
+</ul>
+<p>Smackdown between ChocolateChipJS, jQuery &amp; Zepto using templates:</p>
+<ul>
+  <li><a href='http://jsperf.com/chocolatechipjs-dot/8' target='_blank'>ChocolateChipJS &amp; doT</a></li>
+  <li><a href='http://jsperf.com/chocolatechipjs-handlebars/5' target='_blank'>ChocolateChipJS &amp; Handlebars</a></li>
+  <li><a href='http://jsperf.com/chocolatechipjs-underscore/5' target='_blank'>ChocolateChipJS &amp; Underscore</a></li>
+  <li><a href='http://jsperf.com/jquery-vs-chocolatechip-vs-zepto-dot-vs-handlebars-unde/4' target='_blank'>jQuery vs ChocolateChip vs Zepto &amp; doT vs Handlebars &amp; underscore</a></li>
+  <li><a href='http://jsperf.com/testing-chocolatechip-with-templating/20' target='_blank'>jQuery vs ChocolateChip vs Zepto &amp; doT vs Handlebars &amp; underscore</a></li>
+</ul>
+<p>ChocolateChipJS running various versions of its templating engine:</p>
+<ul>
+  <li><a href='http://jsperf.com/chocolatechipjs-chtemplate/5' target='_blank'>ChocolateChipJS &amp; chTemplate</a></li>
+  <li><a href='http://jsperf.com/choco/4' target='_blank'>ChocolateChip Performance</a></li>
+</ul>
+
 <script>
    $(function() {
       $('body').scrollTop(0);
