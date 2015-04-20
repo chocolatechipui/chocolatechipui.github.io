@@ -426,6 +426,22 @@ body > article > section {
   border: solid 1px #ccc;
 }
 
+.copyright {
+  text-align: center;
+  color: #666;
+  padding-bottom: 20px;
+}
+.copyright a {
+  color: #666;
+  text-decoration: none;
+}
+.copyright a:hover {
+  text-decoration: underline;
+}
+#landingPage .copyright, #landingPage .copyright a  {
+  color: #fafafa;
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 899px) {
