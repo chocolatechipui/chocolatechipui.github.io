@@ -3207,6 +3207,7 @@ $("#animate").on("click", function() {
 <li>$.isNumber()</li>
 <li>$.isInteger()</li>
 <li>$.isFloat()</li>
+<li>$.each()</li>
 <li>$.uuiNum()</li>
 <li>$.makeUuid()</li>
 <li>$.require()</li>
@@ -3360,6 +3361,22 @@ $.isInteger(1.1); // Will return 'false'
 // This is an integer:
 $.isFloat(1); // Will return 'false'
 </code></pre>
+
+
+
+<h3>
+<a name="cc-each" class="anchor" href="#each" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.each</h3>
+
+<p><code>$.each</code> is a method for looping arrays. The default <code>[].forEach()</code> method can sometimes be slow with large arrays. If you are experiencing performance problems with your arrays of nodes, try using this method instead. It takes two arguments, the array and a callback. The callback works just like the callback in the normal foreach array method:</p>
+
+<pre class="prettyprint"><code>var data = ['one', 'two', 'three', 'four', 'five'];
+$.each(data, function(ctx, icx) {
+  console.log(ctx);
+});
+</code></pre>
+
+<p>The above will output "one, two, three, four, five".</p>
+
 
 <h3>
 <a name="cc-uuinum" class="anchor" href="#uuinum" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.uuiNum</h3>

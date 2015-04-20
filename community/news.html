@@ -20,6 +20,21 @@ $.template.repeater($('#listOfPeople'), listTemplate, data);
   &lt;li&gt;Neil, deGrasse Tyson&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
+  <p>Declarative repeaters use the attribute <code>data-repeater</code>. Its value is the data that it will iterate for output. You use a temporary data assignment to bind the data:</p>
+  <pre class='prettyprint'><code>
+  &lt;ul data-repeat="people"&gt;
+    &lt;li&gt;[[= data.firstName ]] [[= data.lastName ]]&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;script&gt;
+    // Assign the data to the $.template.data object:
+    $.template.data["people"] = [{firstName: "Albert", lastName: "Einstein"},
+      {firstName: "Steven", lastName: "Hawking"},
+      {firstName: "Neil", lastName: "deGrasse Tyson"}
+    ];
+    // Render the template:
+    $.template.repeater();
+  &lt;/script&gt;
+  </code></pre>
 
   <h3>Latest News</h3>
   <h4><strong>April 3, 2015</strong></h4>
