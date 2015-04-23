@@ -55,9 +55,55 @@ Missing required arguments: proj, username
 
 <h3>Android</h3>
 
-<p>Currently we don't have a quick solution for creating an Android hybrid app, although we are exploring several possiblities. Currently Google offers their own IDE, Android Studio, which makes this a lot easier. You can read our blog post <a href='http://wobbabits.tumblr.com/post/108091466747/creating-a-hybrid-android-app' target='_blank'>how to create a hybrid app using Android Studio</a>.</p>
+<p>You can install the NPM package to enable creating hybrid apps for Android. This command-line tool works on Mac OS X and Windows.</p>
+
+<h4>Mac Install</h4>
+
+<p>Open the terminal and enter:</p>
+
+<pre class="prettyprint"><code>sudo npm install -g chui-android
+</code></pre>
+
+<p>After hitting return, you will be prompted to enter your password. When it is done you are ready to start creating Android hybrid apps. This does have two dependencies: Orancle's <a href='http://www.oracle.com/technetwork/java/javase/downloads/index.html' target='_blank'>Java</a> and Google's <a href='https://developer.android.com/tools/help/index.html' target='_blank'>Android Studio</a>.</p>
+
+<p>The <code>chui-android</code> command-line tool can accept four arguments. The first to are required:</p>
+
+<ul>
+<li>--proj (the name for your app)</li>
+<li>--user (your username)</li>
+<li>--app (path to your ChUI Web app - this is optional)</li>
+<li>--icons (path to a folder of your app's Android icons - this is optional)</li> 
+</ul>
+
+<p>If you leave out <code>--app</code> or <code>--icons</code>, the package will create a default Web page that the project will load and default icons. You can simply replace these at a later time with your final assets. When the command is finished, you will find a folder with your project's name on your desktop.</p>
+
+<p>Open Android Studio and import your project into it. After that you'll be able to run it in the emulolator or deploy it directly to a tethered device.</p>
+
+<h4>Windows Install</h4>
 
 
+<p>Open the command prompt and enter:</p>
+
+<pre class="prettyprint"><code>npm install -g chui-android
+</code></pre>
+
+<p>When the install is done you'll be ready to create an Android app. This does have two dependencies: Orancle's <a href='http://www.oracle.com/technetwork/java/javase/downloads/index.html' target='_blank'>Java</a> and Google's <a href='https://developer.android.com/tools/help/index.html' target='_blank'>Android Studio</a>.</p></p>
+
+
+<p>The <code>chui-android</code> command-line tool can accept four arguments. The first to are required:</p>
+
+<ul>
+<li>--proj (the name for your app)</li>
+<li>--user (your username)</li>
+<li>--app (path to your ChUI Web app - this is optional)</li>
+<li>--icons (path to a folder of your app's Android icons - this is optional)</li> 
+</ul>
+
+<p>If you leave out <code>--app</code> or <code>--icons</code>, the package will create a default Web page that the project will load and default icons. You can simply replace these at a later time with your final assets. When the command is finished, you will find a folder with your project's name on your desktop.</p>
+
+<p>Open Android Studio and import your project into it. After that you'll be able to run it in the emulolator or deploy it directly to a tethered device.</p>
+
+<p>You can find <a href='https://www.npmjs.com/package/chui-android' target='_blank'>full documentation</a> for this package for both Mac OS X and Windows on NPM.</p>
 
 <script>
    $(function() {
