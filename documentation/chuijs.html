@@ -60,7 +60,7 @@
 <a name="UIGoToArticle"></a>
 <h2>$.UIGoToArticle</h2>
 
-<p>This method is used by navigation lists. When you set up a navigation list, user interaction with it will automatically execute this method. You can also use it to direct a user to a specific article, perhaps through interaction with a button. In that case you would need to hook up an event listener to do so. To navigate to a particule article, just provide its id. The method will implement the animate effect for you:</p>
+<p>This method is used by navigation lists. When you set up a navigation list, user interaction with it will automatically execute this method. You can also use it to direct a user to a specific article, perhaps through interaction with a button. In that case you would need to hook up an event listener to do so. To navigate to a particular article, just provide its id. The method will implement the animate effect for you:</p>
 
 <pre class="prettyprint"><code>$.UIGoToArticle('#picutres');
 </code></pre>
@@ -68,7 +68,7 @@
 <a name="NavigationEnd"></a>
 <h2>NavigationEnd Event</h2>
 
-<p>ChocolateChip-UI creates a navigationend event that you can use to know when an article has finished transitioning. This event fires everytime an article transitions into view, so this will happen when the user naivgates forward and backward. For Android and iOS this only fires for navigation lists. On Windows 8.x or Windows Phone 8 this also happens with tab bars because they slide the article in and out.</p>
+<p>ChocolateChip-UI creates a navigationend event that you can use to know when an article has finished transitioning. This event fires every time an article transitions into view, so this will happen when the user navigates forward and backward. For Android and iOS this only fires for navigation lists. On Windows 8.x or Windows Phone 8 this also happens with tab bars because they slide the article in and out.</p>
 
 <p>The following example shows how to filter out back navigation to an article with an id of "main":</p>
 
@@ -86,7 +86,7 @@
 
 <p>As of version 3.7.0, ChocolateChip-UI offers the ability to make a list editable. This means that by tapping the "Edit" button, the user and delete or reorder the items in the list. Previously, in version 3.6.3 and earlier, you could only enable the ability of deleting list items using <code>UIDeletable</code>. You can read about that method below if you are using an earlier version of ChocolateChip-UI.</p>
 
-<p>Using a callback on the Done button, you can persist the changes that the user maeks. To make a list deletable, just execute `UIEditList` on it and pass it a number of options. Possible options are, a name for the Edit button, Done button, Delete button, and a callback to execute when the user is done. You can also set two flags -- `deletable` or `movable` tof false to limit the edit functionality to one or the other. This is useful where you only want the user to be able to either reorder or delete items in a list, but not both. By default both are enabled. The values for the buttons are to enable localization, otherwise the deraults will be used.</p>
+<p>Using a callback on the Done button, you can persist the changes that the user makes. To make a list deletable, just execute `UIEditList` on it and pass it a number of options. Possible options are, a name for the Edit button, Done button, Delete button, and a callback to execute when the user is done. You can also set two flags -- `deletable` or `movable` tof false to limit the edit functionality to one or the other. This is useful where you only want the user to be able to either reorder or delete items in a list, but not both. By default both are enabled. The values for the buttons are to enable localization, otherwise the deraults will be used.</p>
 
 <p>You can turn any type of list into an editable list. This means you can enable users to rearrange or delete list items. You can choose whether to allow both or only one of these depending on your need. You just need to pass in the necessary options to the constructor. You can use the following options to customize the editable list:</p>
 
@@ -191,9 +191,9 @@ if (movedItems) {
 });
 </code></pre>
 
-<p>If you allow the user to delete items from a list, you may walso want to also update your server side data. You could do this by posting the necessary info when the user deletes an item.</p>
+<p>If you allow the user to delete items from a list, you may also want to also update your server side data. You could do this by posting the necessary info when the user deletes an item.</p>
 
-<p>If you want to add list items to a deletable list after it's inital load, you can do so. Just insert the list items with the markup necessary to match your other list items, then reinitialize the deleteable list with the same options that you used originally. If you are going to do this often, you might want to just assign the <code>$.UIDeletable</code> setup to a variable so you can just use that:</p>
+<p>If you want to add list items to a deletable list after it's initial load, you can do so. Just insert the list items with the markup necessary to match your other list items, then reinitialize the deletable list with the same options that you used originally. If you are going to do this often, you might want to just assign the <code>$.UIDeletable</code> setup to a variable so you can just use that:</p>
 
 <pre class="prettyprint"><code>var initDeletables = $.UIDeletable({
   list: '#myList',
@@ -397,7 +397,7 @@ $.UISlideout.populate([{header:'Media'},{music:'Music'},{pictures:'Pictures'},{h
  </code></pre>
 
 
-<p>You might initialize your slideout with something like this. Notice that the second argumet to the callback will be the element tapped by the user "li".</p>
+<p>You might initialize your slideout with something like this. Notice that the second argument to the callback will be the element tapped by the user "li".</p>
 <pre class="prettyprint"><code>
 $.UISlideout({dynamic: true, callback: function(e, li) {
   var fruit = $(li).index();
@@ -482,7 +482,7 @@ $('.list > li').eq(3).find('aside').prepend( $.UICreateSwitch(sleepSwitch) );
 // Initialize the switch:
 $('.switch').UISwitch();</code></pre>
 
-<p>If you wish to create a switch for Android with the old, rectangular look, just pass the contsructor the property <code>style: "traditional"</code>:</p>
+<p>If you wish to create a switch for Android with the old, rectangular look, just pass the constructor the property <code>style: "traditional"</code>:</p>
 
 <pre class="prettyprint"><code>var sleepSwitch = {
   id : "sleepSwitch",
@@ -786,7 +786,7 @@ $('#showSheet').on('singletap', function() {
 
 <p>You can create a list with data values on the list items using the attribute: <code>data-select-value</code>. When UISelectList runs, it will attach these values onto the radio button that belongs to each list item. That way you can get the value of the radio button when the user selects that list item.</p>
 
-<p>You can add list items dynamically after the initial app load. You just need to make sure that you're added list items with everything they expect to work. The initialization added a data value to the list <code>data-select-value</code>. It also adds a hidden radio input with the form data for that item. This input needs to have the same name as the other radio inputs. If you provided a name for the radio inputs in your options, then use the same one. If you let $.UISelectList apply on automiatically, you'll need to grab that value from one of the list items to use for the new list items. If you create the new list items following all of these requirements, upon appending them to an existing selectable list, they will be selectable automatically.</p>
+<p>You can add list items dynamically after the initial app load. You just need to make sure that you're added list items with everything they expect to work. The initialization added a data value to the list <code>data-select-value</code>. It also adds a hidden radio input with the form data for that item. This input needs to have the same name as the other radio inputs. If you provided a name for the radio inputs in your options, then use the same one. If you let $.UISelectList apply on automatically, you'll need to grab that value from one of the list items to use for the new list items. If you create the new list items following all of these requirements, upon appending them to an existing selectable list, they will be selectable automatically.</p>
 
 <a name="UIStepper"></a>
 <h2>[].UIStepper</h2>
@@ -867,7 +867,7 @@ $('#busy3').find('.busy').UICenter();
 <a name="UIPopover"></a>
 <h2>$.UIPopover</h2>
 
-<p>As of version 3.6.3, ChocolateChip-UI uses <code>$.UIPopover()</code> for creating popovers. Earlier versions used the <code>[].UIPopover()</code> for the same purpose and is descibed in detail after this.</p>
+<p>As of version 3.6.3, ChocolateChip-UI uses <code>$.UIPopover()</code> for creating popovers. Earlier versions used the <code>[].UIPopover()</code> for the same purpose and is described in detail after this.</p>
 
 <p>Popovers are created with the <code>$.UIPopover()</code> method. You pass several values to it to define how you want it to displayed.</p>
 
@@ -1050,7 +1050,7 @@ $('button').on('swiperight', function() {
 <h2>$.subscriptions</h2>
 <p>The is a cache for all subscriptions. If you unsubscribe for a topic, the subscription will be removed.</p>
 
-<p>By convention, topics used for subscriptions use forward slashes to demark namespaces, something like a rest interface.</p>
+<p>By convention, topics used for subscriptions use forward slashes to demarcate namespaces, something like a rest interface.</p>
 
 <pre class="prettyprint"><code>// Possible topics:
 'user/new'
@@ -1110,7 +1110,7 @@ $.publish('news/update', 'We have nothing further to comment at this time.');
 <a name="UISetupCarousel"></a>
 <h2>$.UISetupCarousel</h2>
 <p>This method creates a swipable carousel. It uses mouse gestures to enable desktop testing. It also adjusts direction automatically when the document direction is set to "rtl" for "right-to-left" alphabets (Arabic, Hebrew, Farsi, Urdu, etc.).</p>
-<p>The carousel actually only has three panels, reducing the amount of memory it requires. As the user swipes, the widget updates the position and content of the panels on either side of the current panel. To initialze the carousel, you pass it an object of key-value parameters:</p>
+<p>The carousel actually only has three panels, reducing the amount of memory it requires. As the user swipes, the widget updates the position and content of the panels on either side of the current panel. To initialize the carousel, you pass it an object of key-value parameters:</p>
 <pre class="prettyprint"><code>var panels = [
   "&lt;h2&gt;Panel 1&lt;/h2&gt;&lt;h2&gt;&lt;/h2&gt;&lt;img src='../images/american-football.jpg'&gt;",
   "&lt;h2&gt;Panel 2&lt;/h2&gt;&lt;img src='../images/couple.jpg'&gt;",
@@ -1177,7 +1177,7 @@ $('button').on('singletap', function() {
 
 <a name="BindData" ></a>
 <h2>$.UIBindData()</h2>
-<p>As of version 3.7.0, ChocolateChip-UI offers a simple way to set up one-way data binding between from elements and static parts of the UI. This is done by the use of two attrbites: <code>data-controller</code> and <code>data-model</code>. You put <code>data-controller</code> on a form element, and <code>data-model</code> on the part of the UI where you want that value to be displayed. Both attributes need to have the same value so that ChocolateChip-UI can establish the relationship between them.</p>
+<p>As of version 3.7.0, ChocolateChip-UI offers a simple way to set up one-way data binding between from elements and static parts of the UI. This is done by the use of two attributes: <code>data-controller</code> and <code>data-model</code>. You put <code>data-controller</code> on a form element, and <code>data-model</code> on the part of the UI where you want that value to be displayed. Both attributes need to have the same value so that ChocolateChip-UI can establish the relationship between them.</p>
 <pre class='prettyprint'><code>&lt;ul class="list"&gt;
   &lt;li&gt;&lt;lable&gt;Enter data:&lt;/lable&gt; 
     &lt;input id='myText' data-controller='input-value' type='text'&gt;&lt;/li&gt;
@@ -1189,7 +1189,7 @@ $('button').on('singletap', function() {
 <p>To establish all of your data bindings, all you need to do is execute the following method at load time or at anyother time in your app's life cycle:</p>
 <pre class='prettyprint'><code>$.UIBindData();
 </code></pre>
-<p>This method will then scan the document for data-controlers and data-models. When it finds matches, it automatically creates delegated events that publish broadcasts with data when their values change. Similarly, it automatically creates mediators that listen for those broadcasts and update their data-model targets when they are received. To learn about more complex data binding setups, please read the chapter: "Mediators, Pub/Sub and Data Binding".</p>
+<p>This method will then scan the document for data-controllers and data-models. When it finds matches, it automatically creates delegated events that publish broadcasts with data when their values change. Similarly, it automatically creates mediators that listen for those broadcasts and update their data-model targets when they are received. To learn about more complex data binding setups, please read the chapter: "Mediators, Pub/Sub and Data Binding".</p>
 
 <a href="" name="UnBindData"></a>
 <h2>$.UIUnBindData()</h2>

@@ -125,7 +125,7 @@
 <a name="h2"></a>
 <h2>h2 (list title)</h2>
 
-<p>Use this as the title of a list. Place it directly befor the list that it represents.</p>
+<p>Use this as the title of a list. Place it directly before the list that it represents.</p>
 
 <pre class="prettyprint"><code>&lt;h2&gt;Fruits&lt;/h2&gt;
 &lt;ul class='list'&gt;
@@ -306,7 +306,7 @@
 <a name="p"></a>
 <h2>p (list detail)</h2>
 
-<p>The paragraph tag is used in a list item as the item detail, as well as after a list as a footer. It can also be used as the message container in a popup or sheet. You can put more than one p tag in a list item or after a list to accomodate your needs.</p>
+<p>The paragraph tag is used in a list item as the item detail, as well as after a list as a footer. It can also be used as the message container in a popup or sheet. You can put more than one p tag in a list item or after a list to accommodate your needs.</p>
 
 <a name="list"></a>
 <h2>list</h2>
@@ -352,7 +352,7 @@
 </code></pre>
 
 <a name="detail_disclosure_in_list"></a>
-<p>You can also make a list item show a detail disclosre by putting the class <code>show-detial</code> on it:</p>
+<p>You can also make a list item show a detail disclosure by putting the class <code>show-detial</code> on it:</p>
 
 <pre class="prettyprint"><code>&lt;ul class='list'&gt;
   &lt;li class='show-detail'&gt;
@@ -636,7 +636,7 @@ aside - div - aside
 <a name="popup"></a>
 <h2>popup</h2>
 
-<p>The popup control is created dynamically by the <code>$.UIPopup</code> method. It creates a div with the class 'popup'. It has two states, indicated by the following clases: opened, closed.</p>
+<p>The popup control is created dynamically by the <code>$.UIPopup</code> method. It creates a div with the class 'popup'. It has two states, indicated by the following classes: opened, closed.</p>
 
 <p>The popup has a header tag with an h1 inside it for the title. There is a div with the class panel that holds a p tag. This is where the popup's message is displayed. Lastly is a footer tag which holds at least one button for closing the popup. You could also initialize it with a second button to perform some action. This control gets created with the <code>$.UIPopup</code> method. Read the chapter 'Widgets' for more information about popups.</p>
 
@@ -709,7 +709,7 @@ aside - div - aside
 <a name="tabbar"></a>
 <h2>tabbar</h2>
 
-<p>A tab bar is a div with the class tabbar. You create a tab bar using the <code>UITabbar</code> method. On iOS the tab bar is at the bottom of the screen. To adjust the articles to its presence, the method also adds a class hasTabBar to the body tag. ChocolateChip-UI's CSS will then adjust everything for you. For Android and Windows Phone 8, the tab bar gets placed at the top, and ChocolateChip-UI adjusts your layouts to manage that properly.</p>
+<p>A tab bar is a div with the class tab bar. You create a tab bar using the <code>UITabbar</code> method. On iOS the tab bar is at the bottom of the screen. To adjust the articles to its presence, the method also adds a class hasTabBar to the body tag. ChocolateChip-UI's CSS will then adjust everything for you. For Android and Windows Phone 8, the tab bar gets placed at the top, and ChocolateChip-UI adjusts your layouts to manage that properly.</p>
 
 <p>The tab bar holds up to five buttons. You designate these in the options passed to the <code>UITabbar</code> method. You can also indicate icons to use for each button. On iOS the tab bar usually displays an icon with the button text. You can supply that icon information when you execute the method.</p>
 
@@ -759,7 +759,7 @@ aside - div - aside
 &lt;input type="range" id="rangeControl2" step='5' value="20" min="0" max="40"&gt;
 </code></pre>
 
-<p>YYou can attach an event listener for <code>input</code> to get the value when it changes. ChocolateChip-UI styles these so that they look appropriate for the device operating system. See the chapter "Widgets" for more information.</p>
+<p>You can attach an event listener for <code>input</code> to get the value when it changes. ChocolateChip-UI styles these so that they look appropriate for the device operating system. See the chapter "Widgets" for more information.</p>
 
 <a name="sheet"></a>
 <h2>sheet</h2>
@@ -847,9 +847,9 @@ $('.sheet .list').on('singletap', 'button', function() {
 
 <a name="grids"></a>
 <h2>Grids</h2>
-<p>ChocolateChip-UI version 3.5.1 has CSS Grids to enable you to create more complex layouts. These are specifically for use on tablets. Most apps targetting phones will be fine with the layouts provided by lists and comp lists.</p>
+<p>ChocolateChip-UI version 3.5.1 has CSS Grids to enable you to create more complex layouts. These are specifically for use on tablets. Most apps targeting phones will be fine with the layouts provided by lists and comp lists.</p>
 
-<p>ChocolateChip-UI uses the flexible box model to create grids. This means you should be aware of two things. 1. You're layouts will be proportinal to the available screen real estate. 2. Browsers may not align rows of grids to pixel perfection.</p>
+<p>ChocolateChip-UI uses the flexible box model to create grids. This means you should be aware of two things. 1. You're layouts will be proportional to the available screen real estate. 2. Browsers may not align rows of grids to pixel perfection.</p>
 
 <p>ChocolateChip-UI uses a series of classes to enable you do define your grids. The basic build block is <code>.grid</code>. Putting this tag on a div will mark it as a container for a serious of columns arranged in a row side by side.</p>
 
@@ -881,7 +881,7 @@ $('.sheet .list').on('singletap', 'button', function() {
    <li>flex10</li>
 </ul>
 
-<h3>Equal Heigth Columns</h3>
+<h3>Equal Height Columns</h3>
 <p>By default if one column has more content than others and is therefore taller, the other columns will stretch to match its height.</p>
 
 <p>A grid with ten columns equal width:</p>
@@ -924,7 +924,7 @@ $('.sheet .list').on('singletap', 'button', function() {
 </code></pre>
 
 <a name="wrap"></a>
-<p>To allow colums that exceed the grid width to wrap to the next row, just put the class "wrap" on the grid. Please note that the columns will exapnd to fill their available space base on their flex values.</p>
+<p>To allow columns that exceed the grid width to wrap to the next row, just put the class "wrap" on the grid. Please note that the columns will expand to fill their available space base on their flex values.</p>
 
 <pre class="prettyprint"><code>&lt;div class="grid wrap"&gt;
   &lt;div class="col flex-1"&gt;&lt;p&gt;1&lt;/p&gt;&lt;/div&gt;
@@ -963,7 +963,7 @@ $('.sheet .list').on('singletap', 'button', function() {
   &lt;/ul&gt;
 &lt;/div&gt; 
 </code></pre>
-<p>These scroll panels can be udated life with dynamic content without breaking.</p>
+<p>These scroll panels can be updated life with dynamic content without breaking.</p>
 <h4>Customizing Scroll Panels</h4>
 <p>You may want to customize the default dimensions of a scroll panel. Below is a list of the CSS definitions to modify your scroll panels:</p>
 

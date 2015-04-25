@@ -69,7 +69,7 @@ $('#myButton').on($.eventStart, function() {
 
 
 <p>On mobile devices there is a 45O millisecond delay from the time the user clicks to the execution of the click event. This results in interactions that feel sluggish and annoying. Many developers there prefer to use either touchstart or touchend events registered on buttons and other interactive controls. There is one problem with this approach: scrolling. If you have content in a scrollable container and attach a touchstart or touchend event, as soon as you try to scroll your content and touch an element with these, you could immediately cause the touch event to execute. This makes it extremely hard to scroll interactive content. To get around this problem, ChocolateChip-UI has a gestures module.</p>
-<p>When using these, thing of them as event aliases. For that reason you need to use them like you would a JavaScript variable–without quotes. If you use quotes on them, jQuery will not resolve their value and nothing will happen.</p>
+<p>When using these, think of them as event aliases. As such you need to use them like you would a JavaScript variable–without quotes. If you use quotes on them, jQuery will not resolve their value and nothing will happen.</p>
 
 <p>In contrast to these aliased events, ChocolateChip-UI provides the following gestures which you can use like any other event:</p>
 
@@ -95,9 +95,9 @@ $('#myButton').on($.eventStart, function() {
 });
 </code></pre>
 
-<p>Instead of using a $.eventStart or $.eventEnd event for your controls in scrollable containers, we recommend you use the singletap event. Since it has a delay of 150 milliseconds, it gives sthe user enough time to initiate a scroll event and thus prevent any interaction with items in the scrolling container. Actually, navigation lists specifically use singletaps to register their events. This lets you flick your finger to scroll a list without firing a navigation event. But if you touch a navigation list item and do not scroll, a singletap gets registered and navigation occurs.</p>
+<p>Instead of using a $.eventStart or $.eventEnd event for your controls in scrollable containers, we recommend you use the singletap event. Since it has a delay of 150 milliseconds, it gives the user enough time to initiate a scroll event and thus prevent any interaction with items in the scrolling container. Actually, navigation lists specifically use singletaps to register their events. This lets you flick your finger to scroll a list without firing a navigation event. But if you touch a navigation list item and do not scroll, a singletap gets registered and navigation occurs.</p>
 
-<p>Please note that these gesture do require quotes like normal events. If you fail to quote them, you will get an error about and undefined variable.</p>
+<p>Please note that these gestures do require quotes like normal events. If you fail to quote them, you will get an error about an undefined variable.</p>
 
 <p>Look at the gestures demo in the examples to see how to use them. </p>
 

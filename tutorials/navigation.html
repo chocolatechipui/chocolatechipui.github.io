@@ -1,6 +1,6 @@
 <h1>Navigation</h1>
 
-<p>ChocolateChip-UI provides a convenient solution for implementing navigation lists. This is a common way for uses to get to deeper screens of information. Unlike Web pages, where navigation leads to a new page and subsequent page load, ChocolateChip-UI apps are a single page. The user is transitions for one part of the page to another. The navigation module creates the experience of navigating to another place.</p>
+<p>ChocolateChip-UI provides a convenient solution for implementing navigation lists. This is a common way for uses to get to deeper screens of information. Unlike Web pages, where navigation leads to a new page and subsequent page load, ChocolateChip-UI apps are a single page. The user is transitioned from one part of the page to another. The navigation module creates the experience of navigating to another place.</p>
 
 <p>Navigation is from one article to another. During this process, the current article and its nav are slid off out of view while the destination article and its nav are slid into view. You don't need to do anything to make this happen other than set up your articles for navigation.</p>
 
@@ -54,7 +54,7 @@ $('#song').on('singletap', 'li', function() {
 
 <h3>$.UIGoToArticle()</h3>
 
-<p>This method works by passing it a selector for the article you wish to go to. YOu could hook this method up to a button or any other interactive element so that when the user presses it, he gets directed to the intended article.</p>
+<p>This method works by passing it a selector for the article you wish to go to. You could hook this method up to a button or any other interactive element so that when the user presses it, he gets directed to the intended article.</p>
 
 <pre class="prettyprint">$(function() {
    // Attach event to 'gotToLast' button:
@@ -74,7 +74,7 @@ $('#song').on('singletap', 'li', function() {
 
 <h2>Non-Linear Back Navigation</h2>
 
-<p>Sometimes you need to be able to give the user the ability to return to an article several stages back in navigation history. By default, the <code>back button</code> always returns the user to the previous article. You can get around this by using a <code>backTo button</code> with the method <code>$.UIGoBackToArticle</code>. A "backTo" button is just a normal button with the class "backTo" instead of "back". This styles the button the same as a normal back button, but does not automatically execute back navigation. Instead you need to wire that up with the <code>$.UIGoBackToArticle</code> method. You provide the method the article to which you wish to return the user.</p>
+<p>Sometimes you need to be able to give the user the ability to return to an article several stages back in navigation history. By default, the <code>back button</code> always returns the user to the previous article. You can get around this by using a <code>backTo button</code> with the method <code>$.UIGoBackToArticle</code>. A "backTo" button is just a normal button with the class "backTo" instead of "back". This styles the button the same as a normal back button, but does not automatically execute back navigation. Instead you need to wire that up with the <code>$.UIGoBackToArticle</code> method. You provide the method with the article to which you wish to return the user.</p>
 
 <pre class="prettyprint"><code>&lt;nav class='current'&gt;
     &lt;a id='backToMain' class='button backTo'&amp;gt;Back&amp;lt;/a&gt;
@@ -199,7 +199,7 @@ var recipesList = $('#recipesList');
 &lt;/ul&gt;
 </code></pre>
 
-<p>You'll notice that all out navigation list items have the same value for their <code>data-goto</code> attributes. Notice that each list item has a special ID. This relates to the ID of each chunk of data in our recipes object. Using this ID we can know which recipe to display.</p>
+<p>You'll notice that all our navigation list items have the same value for their <code>data-goto</code> attributes. Notice that each list item has a special ID. This relates to the ID of each chunk of data in our recipes object. Using this ID we can know which recipe to display.</p>
 
 <p>By default, any navigation list with a data-goto attribute will navigate to the article indicated. We do not need to write any code for that. But to get the dynamic functionality we want, we need to wire up an even handler on our navigation list so that we can get the recipe ID of the list item the user tapped. Here's the event handler for that:</p>
 

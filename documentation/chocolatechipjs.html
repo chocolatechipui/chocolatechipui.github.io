@@ -45,7 +45,7 @@ $('div').hasClass('silly').css({'background-color': 'red'});
 $('button').hasAttr('disabled').css({'background-color': 'red'});
 </code></pre>
 
-<p>By returning the element in these checks, ChocolateChipJS gives you immediate access to the element so you can do something with it. To accompish the same tasks with jQuery would require something like this:</p>
+<p>By returning the element in these checks, ChocolateChipJS gives you immediate access to the element so you can do something with it. To accomplish the same tasks with jQuery would require something like this:</p>
 
 <p>jQuery:</p>
 
@@ -197,7 +197,7 @@ This will make myObj equal:
 */
 </code></pre>
 
-<p>If you only pass in the object to extend with, ChocolateChipJS will assume you want to extned its $:</p>
+<p>If you only pass in the object to extend with, ChocolateChipJS will assume you want to extened its $:</p>
 
 <pre class="prettyprint"><code>$({
   myFunc : function(msg) {
@@ -209,7 +209,7 @@ This will make myObj equal:
 $.myFunc('This is the message.');
 </code></pre>
 
-<p>ChocolateChipJS also offer <code>$.fn.extend</code>. This allows you to extned the collection object so that you can add new methods to loopable arrays, particularly node elements. This version takes one argument, the property or properties to add to the <code>$.fn</code> object. Because this extend the collection object, you should always check the length of the object and return and empty array if it has no length or there are no arguments. Because this is a colleciton, we need to loop over the items to act on them. After doing whatever it is we want to do with the items in the collection, we return the collection using the keyword <code>this</code>.</p>
+<p>ChocolateChipJS also offer <code>$.fn.extend</code>. This allows you to extned the collection object so that you can add new methods to loopable arrays, particularly node elements. This version takes one argument, the property or properties to add to the <code>$.fn</code> object. Because this extend the collection object, you should always check the length of the object and return and empty array if it has no length or there are no arguments. Because this is a collection, we need to loop over the items to act on them. After doing whatever it is we want to do with the items in the collection, we return the collection using the keyword <code>this</code>.</p>
 
 <pre class="prettyprint"><code>$.fn.extend({
   changeTextColor: function(color) {
@@ -430,7 +430,7 @@ $('li').parent().css('border','solid 1px red');
 <h3>
 <a name="cc-ancestor" class="anchor" href="#ancestor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ancestor</h3>
 
-<p>This method returns the matching anchestor of an element. This will be the first ancestor matching the selector.</p>
+<p>This method returns the matching ancestor of an element. This will be the first ancestor matching the selector.</p>
 
 <pre class="prettyprint"><code>// Get the id of the ancestor article:
 $('ul').ancestor('article')[0].id
@@ -819,7 +819,7 @@ var value = $('li').eq(0).dataset('availability');
 <h3>
 <a name="cc-data" class="anchor" href="#data" aria-hidden="true"><span class="octicon octicon-link"></span></a>data</h3>
 
-<p>This method will get and set data in relation to an element. Unlike the HTML5 data attribue, nothing is stored on the element. Instead the data is stored in a cache and tied to the element through its id. If the element has no id at the time the data is bound, the element is given a unique id to identify it in the cache.</p>
+<p>This method will get and set data in relation to an element. Unlike the HTML5 data attribute, nothing is stored on the element. Instead the data is stored in a cache and tied to the element through its id. If the element has no id at the time the data is bound, the element is given a unique id to identify it in the cache.</p>
 
 <pre class="prettyprint"><code>$('li').on('singletap', function() { 
   // Store the list item title in the list's data cache: 
@@ -1257,7 +1257,7 @@ var value = $('li').eq(0).dataset('availability');
 <h3>
 <a name="cc-data-2" class="anchor" href="#data-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>data</h3>
 
-<p>This method will get and set data in relation to an element. Unlike the HTML5 data attribue, nothing is stored on the element. Instead the data is stored in a cache and tied to the element through its id. If the element has no id at the time the data is bound, the element is given a unique id to identify it in the cache.</p>
+<p>This method will get and set data in relation to an element. Unlike the HTML5 data attribute, nothing is stored on the element. Instead the data is stored in a cache and tied to the element through its id. If the element has no id at the time the data is bound, the element is given a unique id to identify it in the cache.</p>
 
 <pre class="prettyprint"><code>$('li').on('singletap', function() { 
   // Store the list item title in the list's data cache: 
@@ -1322,7 +1322,7 @@ console.log(event.target.nodeName);
 <h3>
 <a name="cc-unbind" class="anchor" href="#unbind" aria-hidden="true"><span class="octicon octicon-link"></span></a>unbind</h3>
 
-<p>This method will unbind and event from an element. When events are bound, memory is taken up by that. Unbinding events that are no longer needed will free up memory. In order to unbind an event you need to have acces to the element, the function, and the capture phase used, otherwise you will not be able to unbind it. Fortunately, ChocolateChipJS uses a caching system when bind events. This keeps a log of all events attached to an element. When you execute the unbind method on an element, the method searches the cache for the element and removes all events in the cache that match the parameters provided. If you only passed no arguments, all event handlers would be removed from the element. If you passed the only an event, all events of that type would be deleted, even if there were multiple instances of the event with different callbacks. If you named the callback which the event uses, you can pass the event and the callback name to only remove that event. Similarly, you can further distinguish which event your are removing by also providing the capture phase.</p>
+<p>This method will unbind and event from an element. When events are bound, memory is taken up by that. Unbinding events that are no longer needed will free up memory. In order to unbind an event you need to have access to the element, the function, and the capture phase used, otherwise you will not be able to unbind it. Fortunately, ChocolateChipJS uses a caching system when bind events. This keeps a log of all events attached to an element. When you execute the unbind method on an element, the method searches the cache for the element and removes all events in the cache that match the parameters provided. If you only passed no arguments, all event handlers would be removed from the element. If you passed the only an event, all events of that type would be deleted, even if there were multiple instances of the event with different callbacks. If you named the callback which the event uses, you can pass the event and the callback name to only remove that event. Similarly, you can further distinguish which event your are removing by also providing the capture phase.</p>
 
 <pre class="prettyprint"><code>// Remove all events from the button:
 $('#myButton').unbind();
@@ -1449,7 +1449,7 @@ $('nav.current').find('.back').trigger('singletap');
 </ul><h3>
 <a name="cc-ajax-2" class="anchor" href="#ajax-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.ajax</h3>
 
-<p>This method allows you to execute an Ajax operation. You pass in an object literal of the properties you wish to execute. It expects at a minimal a URL to access. It has the foolowing default settings:</p>
+<p>This method allows you to execute an Ajax operation. You pass in an object literal of the properties you wish to execute. It expects at a minimal a URL to access. It has the following default settings:</p>
 
 <pre class="prettyprint"><code>var settings = {
   type: 'GET',
@@ -1563,7 +1563,7 @@ $('nav.current').find('.back').trigger('singletap');
 </code></pre>
 
 <h4>Then</h4>
-<p>Proimses provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
+<p>Promises provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
 
 
 <pre class="prettyprint"><code>// Create an instance of a promise:
@@ -1583,10 +1583,10 @@ function(reason) {
 });
 </code></pre>
 
-<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second fuction. Read the next part on Multiple Thens for more information.</p>
+<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second function. Read the next part on Multiple Thens for more information.</p>
 
 <h4>Multiple Thens</h4>
-<p>The <code>then</code> method always returns a promsie. This means that you can chain mutliple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
+<p>The <code>then</code> method always returns a promsie. This means that you can chain multiple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
 
 <pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
   resolve(1);
@@ -1764,7 +1764,7 @@ Promise.all([getStuff1, getStuff2, getStuff3)])
 <h2>
 <a name="cc-deferred-object" class="anchor" href="#deferred-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deferred Object</h2>
 
-<p><strong>Note:</strong> As of version 3.8.6, ChocolateChipJS uses ECMAScript 6 promises. Previously it used a deferred object compatible with the jQuery implementation. If you prefer that, you can still build ChocolateChipJS with suppor for it using the flag <code>--deferredSupport</code>:</p>
+<p><strong>Note:</strong> As of version 3.8.6, ChocolateChipJS uses ECMAScript 6 promises. Previously it used a deferred object compatible with the jQuery implementation. If you prefer that, you can still build ChocolateChipJS with support for it using the flag <code>--deferredSupport</code>:</p>
 <pre class="prettyprint"><code>gulp --deferredSupport</code></pre>
 
 <p>The Deferred object can register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function. This implementation is based on the version in jQuery 1.7. Please examine the unit tests to see how to use it.</p>
@@ -1983,7 +1983,7 @@ def.notify();
 
 <p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state or reporting status by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
 
-<p>When <code>deferred.notifyWith</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code>or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notifyWith()</code>. Any calls to <code>deferred.notifyWith()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
+<p>When <code>deferred.notifyWith</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code> or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notifyWith()</code>. Any calls to <code>deferred.notifyWith()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
 
 <p>See example for <code>notify</code> above.</p>
 
@@ -2074,7 +2074,7 @@ defer.resolveWith(context);
 <h3>
 <a name="cc-reject" class="anchor" href="#reject" aria-hidden="true"><span class="octicon octicon-link"></span></a>reject</h3>
 
-<p>Reject a Deferred object and call any <code>failCallbacks</code> with the given args. It accpets optional arguments that are passed to the <code>failCallbacks</code>.</p>
+<p>Reject a Deferred object and call any <code>failCallbacks</code> with the given args. It accepts optional arguments that are passed to the <code>failCallbacks</code>.</p>
 
 <p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
 
@@ -2172,7 +2172,7 @@ $( "button" ).on( "click", filterResolve );
 <h3>
 <a name="cc-when" class="anchor" href="#when" aria-hidden="true"><span class="octicon octicon-link"></span></a>when</h3>
 
-<p>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events. It accepsts one or more Deferred objects, or plain JavaScript objects.</p>
+<p>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events. It accepts one or more Deferred objects, or plain JavaScript objects.</p>
 
 <p>If a single Deferred is passed to <code>$.when</code>, its Promise object (a subset of the Deferred methods) is returned by the method. Additional methods of the Promise object can be called to attach callbacks, such as <code>deferred.then</code>. When the Deferred is resolved or rejected, usually by the code that created the Deferred originally, the appropriate callbacks will be called.</p>
 
@@ -2332,9 +2332,9 @@ $.get('/data/suits.html')
 };
 </code></pre>
 
-<p>Be aware that you have no control over when the remote server will respod to your JSONP request. It could take some time. If you would prefer to have more control over what happens, you can provide a timeout value great than 0. If the remote server has not responded by the time the timeout finishes, the request will be canceled.</p>
+<p>Be aware that you have no control over when the remote server will respond to your JSONP request. It could take some time. If you would prefer to have more control over what happens, you can provide a timeout value great than 0. If the remote server has not responded by the time the timeout finishes, the request will be canceled.</p>
 
-<p>Like normal Ajax requests, $.JSONP also returns a deferred object. This allows you to use the usal deferred method chaining with your JSONP request. When the deferred object is resolved, it returns the following values in order: data (the data retrieved, 'resolved' (a string), settings (the settings object used to initialize the request). When the deferred object is rejected, it returns the following values: 'timedout' (a string), settings (the settings object used to initialize the request).</p>
+<p>Like normal Ajax requests, $.JSONP also returns a deferred object. This allows you to use the usual deferred method chaining with your JSONP request. When the deferred object is resolved, it returns the following values in order: data (the data retrieved, 'resolved' (a string), settings (the settings object used to initialize the request). When the deferred object is rejected, it returns the following values: 'timedout' (a string), settings (the settings object used to initialize the request).</p>
 
 <pre class="prettyprint"><code>$.JSONP({
   url: 'https://api.github.com/users/yui?callback=?', 
@@ -2429,7 +2429,7 @@ For this method to work properly you must name all form elements that you want t
 
 <p>Disabled form elements or ones which have no value will be ignored.</p>
 
-<p>If you need to create an array from something like a set of choices, you’ll need to marke the name with brackets “[]” to indicate that it’s an array:</p>
+<p>If you need to create an array from something like a set of choices, you’ll need to mark the name with brackets “[]” to indicate that it’s an array:</p>
 
 <pre class="prettyprint"><code>&lt;div&gt;Favorite food&lt;/div&gt;
 &lt;p&gt;
@@ -2608,7 +2608,7 @@ $.template.repeater();
 
 <h2><a name="cc-template-index" class='anchor' href='#template_index' aria-hidden="true"><span class="octicon octicon-link"></span></a>$.template.index</h2>
 
-<p>When using a repeater, you may need to know what iteration your own, say, to output a numberic value. ChocolateChip-UI templates provides a way for you to do this using <code>$.template.index</code>. Like other JavaScript loop processes, it starts with 0 and increases after that. So, if you want to output numbers, you'll need to increase them by 1. Here's an example:</p>
+<p>When using a repeater, you may need to know what iteration your own, say, to output a numeric value. ChocolateChip-UI templates provides a way for you to do this using <code>$.template.index</code>. Like other JavaScript loop processes, it starts with 0 and increases after that. So, if you want to output numbers, you'll need to increase them by 1. Here's an example:</p>
 
 <pre class="prettyprint"><code>&lt;ul id="repeater" data-repeater="luminaries" class='cloak'&gt;
   &lt;li&gt;[[= $.template.index + 1 ]]: [[= data.firstName ]], [[= data.lastName]]&lt;/li&gt;
@@ -2642,7 +2642,7 @@ $.template.repeater();
 
 <p>The is a cache for all subscriptions. If you unsubscribe for a topic, the subscription will be removed.</p>
 
-<p>By convention, topics used for subscriptions use forward slashes to demark namespaces, something like a rest interface.</p>
+<p>By convention, topics used for subscriptions use forward slashes to define namespaces, something like a rest interface.</p>
 
 <pre class="prettyprint"><code>// Possible topics:
 'user/new'
@@ -2914,7 +2914,7 @@ def.notify();
 
 <p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state or reporting status by returning a restricted promise object through <code>deferred.promise()</code>.</p>
 
-<p>When <code>deferred.notifyWith</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code>or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notifyWith()</code>. Any calls to <code>deferred.notifyWith()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
+<p>When <code>deferred.notifyWith</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code> or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notifyWith()</code>. Any calls to <code>deferred.notifyWith()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
 
 <p>See example for <code>notify</code> above.</p>
 
@@ -3005,7 +3005,7 @@ defer.resolveWith(context);
 <h3>
 <a name="cc-reject" class="anchor" href="#reject" aria-hidden="true"><span class="octicon octicon-link"></span></a>reject</h3>
 
-<p>Reject a Deferred object and call any <code>failCallbacks</code> with the given args. It accpets optional arguments that are passed to the <code>failCallbacks</code>.</p>
+<p>Reject a Deferred object and call any <code>failCallbacks</code> with the given args. It accepts optional arguments that are passed to the <code>failCallbacks</code>.</p>
 
 <p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state by returning a restricted promise object through <code>deferred.promise()</code>.</p>
 
@@ -3103,7 +3103,7 @@ $( "button" ).on( "click", filterResolve );
 <h3>
 <a name="cc-when" class="anchor" href="#when" aria-hidden="true"><span class="octicon octicon-link"></span></a>when</h3>
 
-<p>This provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events. It accepsts one or more Deferred objects, or plain JavaScript objects.</p>
+<p>This provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events. It accepts one or more Deferred objects, or plain JavaScript objects.</p>
 
 <p>If a single Deferred is passed to <code>$.when</code>, its promise object (a subset of the Deferred methods) is returned by the method. Additional methods of the promise object can be called to attach callbacks, such as <code>deferred.then</code>. When the Deferred is resolved or rejected, usually by the code that created the Deferred originally, the appropriate callbacks will be called.</p>
 
@@ -3281,7 +3281,7 @@ $('button').on('click', $.noop);
 <h3>
 <a name="cc-w" class="anchor" href="#w" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.w</h3>
 
-<p>This method takes a space-delimited string of words and returns it as an array where the inidividual words are indeces.</p>
+<p>This method takes a space-delimited string of words and returns it as an array where the individual words are indices.</p>
 
 <pre class="prettyprint"><code>var str = 'This is an example of a string'
 var strArray = $.w(str) // Returns ['This','is','an','example','of','a','string']
