@@ -62,7 +62,7 @@
 
 <p>This method is used by navigation lists. When you set up a navigation list, user interaction with it will automatically execute this method. You can also use it to direct a user to a specific article, perhaps through interaction with a button. In that case you would need to hook up an event listener to do so. To navigate to a particular article, just provide its id. The method will implement the animate effect for you:</p>
 
-<pre class="prettyprint"><code>$.UIGoToArticle('#picutres');
+<pre class="prettyprint"><code>$.UIGoToArticle('#pictures');
 </code></pre>
 
 <a name="NavigationEnd"></a>
@@ -86,7 +86,7 @@
 
 <p>As of version 3.7.0, ChocolateChip-UI offers the ability to make a list editable. This means that by tapping the "Edit" button, the user and delete or reorder the items in the list. Previously, in version 3.6.3 and earlier, you could only enable the ability of deleting list items using <code>UIDeletable</code>. You can read about that method below if you are using an earlier version of ChocolateChip-UI.</p>
 
-<p>Using a callback on the Done button, you can persist the changes that the user makes. To make a list deletable, just execute `UIEditList` on it and pass it a number of options. Possible options are, a name for the Edit button, Done button, Delete button, and a callback to execute when the user is done. You can also set two flags -- `deletable` or `movable` tof false to limit the edit functionality to one or the other. This is useful where you only want the user to be able to either reorder or delete items in a list, but not both. By default both are enabled. The values for the buttons are to enable localization, otherwise the deraults will be used.</p>
+<p>Using a callback on the Done button, you can persist the changes that the user makes. To make a list deletable, just execute `UIEditList` on it and pass it a number of options. Possible options are, a name for the Edit button, Done button, Delete button, and a callback to execute when the user is done. You can also set two flags -- `deletable` or `movable` tof false to limit the edit functionality to one or the other. This is useful where you only want the user to be able to either reorder or delete items in a list, but not both. By default both are enabled. The values for the buttons are to enable localization, otherwise the defaults will be used.</p>
 
 <p>You can turn any type of list into an editable list. This means you can enable users to rearrange or delete list items. You can choose whether to allow both or only one of these depending on your need. You just need to pass in the necessary options to the constructor. You can use the following options to customize the editable list:</p>
 
