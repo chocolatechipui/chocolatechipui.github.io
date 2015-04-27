@@ -1186,7 +1186,7 @@ $('button').on('singletap', function() {
   &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-<p>To establish all of your data bindings, all you need to do is execute the following method at load time or at anyother time in your app's life cycle:</p>
+<p>To establish all of your data bindings, all you need to do is execute the following method at load time or at any other time in your app's life cycle:</p>
 <pre class='prettyprint'><code>$.UIBindData();
 </code></pre>
 <p>This method will then scan the document for data-controllers and data-models. When it finds matches, it automatically creates delegated events that publish broadcasts with data when their values change. Similarly, it automatically creates mediators that listen for those broadcasts and update their data-model targets when they are received. To learn about more complex data binding setups, please read the chapter: "Mediators, Pub/Sub and Data Binding".</p>
