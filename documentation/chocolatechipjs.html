@@ -1001,7 +1001,7 @@ $('&lt;li&gt;Movies&lt;/li&gt;&lt;li&gt;Songs&lt;/li&gt;&lt;li&gt;Pictures&lt;/l
 
 <p>This method allows you to insert content at a particular position in an element's collection of child nodes. Although there are methods to append or prepend an element, there is no straightforward way to insert something at position 5, etc. This method provides that functionality. It takes two parameters: the content to insert, and the position. If no position is supplied, the content is appended at the end of the container. If the container has no child elements, then, regardless of the position supplied, the content will simply be inserted as the first child of the element.</p>
 
-<p>Position positions are 'first' or 'last' for appending to these position, or an integer value. This is one-based, so the first position will be 1, the second: 2, the third: 3, etc.</p>
+<p>Position value can be 'first' or 'last' for appending to the target, or an integer value. This is one-based, so the first position will be 1, the second: 2, the third: 3, etc.</p>
 
 <pre class="prettyprint"><code>// Insert as last child of list item:
 $('li').eq(2).insert('&lt;aside&gt;&lt;span class="nav"&gt;&lt;/span&gt;&lt;/aside&gt;', 'last');
@@ -1131,11 +1131,6 @@ $.replace(oldTag, newTag);
 <li>$(selector).width()</li>
 <li>$(selector).height()</li>
 <li>$(selector).text()</li>
-<li>$(selector).html()</li>
-<li>$(selector).attr()</li>
-<li>$(selector).class()</li>
-<li>$(selector).dataset()</li>
-<li>$(selector).data()</li>
 </ul><h3>
 <a name="cc-offset" class="anchor" href="#offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>offset</h3>
 
@@ -1195,75 +1190,7 @@ var text = $('li').eq(0).text();
 var text = $('li').text();
 </code></pre>
 
-<h3>
-<a name="cc-html-3" class="anchor" href="#html-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>html</h3>
-
-<p>This method will replace the contents of the target element(s) with the content provided. If no argument is provided, it will return all the contents of the element, including nodes. If a string is provided as an argument, that string will replace the contents of the element. If the string is markup, it will be converted to nodes before inserting. If the string is empty (''), then the contents of the element will be replaced with an empty text node.</p>
-
-<pre class="prettyprint"><code> // Get all the items in the menu:
-var contents = $('#menu').html();
-
-// Empty the first item in the list:
-$('li').eq(0).html('');
-
-// Replace the content of all list items with text:
-$('li').html('New Text Here!');
-
-// Replace the content of all list items with new markup:
-$('li').html('&lt;h2&gt;New List Title&lt;/h2&gt;');
-</code></pre>
-
-<h3>
-<a name="cc-attr-2" class="anchor" href="#attr-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>attr</h3>
-
-<p>This method gets or sets the attribute of elements. If only an attribute is provided, it will return the attribute value of the first element in the collection. If an attribute and value are provided, they will be set on all elements in the array.</p>
-
-<pre class="prettyprint"><code>// Get the checked state of the input in the first list item.
-// (true or false): 
-var checked = $('li').find('input').attr('checked'); 
-
-// Set the checked state: 
-var checked = $('li').eq(0).find('input').attr('checked', 'checked');
-
-// Set the aria role of all buttons: 
-$('button').attr('role', 'button');
-</code></pre>
-
-<h3>
-<a name="cc-dataset-2" class="anchor" href="#dataset-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>dataset</h3>
-
-<p>This method is used to get or set HTML5 data attributes on elements. You provide two arguments for setting a value: the attribute name and the value for it. The attribute provided will automatically have 'data-' prepended to it, so you just provide the name for the attribute and the value it should hold. The value must be a string. You could store not string data by converting it to a string. However, ChocolateChipJS provides a more efficient way to do this using the data method, which allows you to cache data objects in relation to an element.</p>
-
-<p>To retrieve a dataset, just provide the name of the attribute as an argument.</p>
-
-<pre class="prettyprint"><code>// Set a data attribute.
-// This will attrach the attribute like so: data-price='$2.00'.
-$('li').eq(0).dataset('price', '$2.00');
-
-// Get the data attribute:
-var price = $('li').eq(0).dataset('price');
-
-// Set the data attribute on all list items:
-$('li').dataset('availability', 'in-stock');
-</code></pre>
-
-<p>When getting the data attribute on an array of elements, this method will return the value of the first element only:</p>
-
-<pre class="prettyprint"><code>var value = $('li').dataset('availability');
-// This is the same as:
-var value = $('li').eq(0).dataset('availability');
-</code></pre>
-
-<h3>
-<a name="cc-data-2" class="anchor" href="#data-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>data</h3>
-
-<p>This method will get and set data in relation to an element. Unlike the HTML5 data attribute, nothing is stored on the element. Instead the data is stored in a cache and tied to the element through its id. If the element has no id at the time the data is bound, the element is given a unique id to identify it in the cache.</p>
-
-<pre class="prettyprint"><code>$('li').on('singletap', function() { 
-  // Store the list item title in the list's data cache: 
-  $(this).parent().data('selectedItem', $(this).find(h3).text());
-});
-</code></pre>
+ 
 
 <h2>
 <a name="cc-events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h2>
@@ -1505,7 +1432,7 @@ $('nav.current').find('.back').trigger('singletap');
     "Accept" : "text/plain"
   },
   data: myData,
-  success : mySuccessCallback,
+  success: mySuccessCallback,
   error: myErrorCallback
 });
 </code></pre>
