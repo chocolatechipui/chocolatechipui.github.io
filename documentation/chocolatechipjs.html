@@ -1438,6 +1438,77 @@ $('nav.current').find('.back').trigger('singletap');
 </code></pre>
 
 
+<h3>
+<a name="cc-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.get</h3>
+
+<p>This is a short cut for doing a get request. It can handle the following parameters: url, data, success, dataType. At very least you can pass it the url and a function to execute on success.</p>
+
+<pre class="prettyprint"><code>// Get an html fragment and insert it in the document:
+$.get('/data/suits.html', function(data) {
+  $('#products').html(data);
+});
+</code></pre>
+
+
+<h3>
+<a name="cc-getjson" class="anchor" href="#getjson" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.getJSON</h3>
+
+<p>This is a shortcut for getting a JSON object from a server. It expects three parameters: url, data, and success. If no data is provided, it will execute with just the url and success callback.</p>
+
+<pre class="prettyprint"><code>$.getJSON('/data/deserts.json', function(deserts) {
+  deserts.forEach(desert) {
+    $('#deserts').append('&lt;li&gt;' + desert.name + '&lt;/li&gt;');
+  });
+});
+</code></pre>
+
+<h3>
+<a name="cc-post" class="anchor" href="#post" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.post</h3>
+
+<p>This method is a shortcut for doing a post. It expects these parameters: url, data, success, dataType.</p>
+
+<pre class="prettyprint"><code>$.post("updateUser.php", 
+  { "name": "Joe", "time": "10PM" }, 
+  function() {
+    console.log('The POST was successful.')
+  },
+  "json"
+);
+</code></pre>
+
+
+<h3>
+<a name="cc-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.JSONP</h3>
+
+<p>This method allows you to perform requests from remote sites that support JSONP. It does this by sending a callback along with the request, hence the name JSON with Padding. It expects two arguments: a url and a callback to execute once the data has returned. Normally, the url should end with the phrase: &amp;callback=?. However, there are some services out there that expect a slightly different ending. Please check the documentation for any API before trying to implement a JSONP request.</p>
+
+<p>Because the data lives on a remote server, you'll need to read the documentation for the service to understand its format so that you can output it to your app.</p>
+
+<p>$.JSONP has the following default settings, which you can override:</p>
+
+<pre class="prettyprint"><code>var settings = {
+  url : null,
+  callback: $.noop,
+  callbackType : 'callback=?',
+  timeout: null
+};
+</code></pre>
+
+<p>Be aware that you have no control over when the remote server will respond to your JSONP request. It could take some time. If you would prefer to have more control over what happens, you can provide a timeout value great than 0. If the remote server has not responded by the time the timeout finishes, the request will be canceled.</p>
+
+<p>With timeout:</p>
+
+<pre class="prettyprint"><code>$.JSONP({
+  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;country=US&amp;callback=?', 
+  callback: function(data){
+    $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
+  },
+  // 5 second timeout:
+  timeout: 5000
+});
+</code></pre>
+
+
 
 
 
@@ -1669,8 +1740,28 @@ Promise.all([getStuff1, getStuff2, getStuff3)])
 })
 </code></pre>
 
+<p>Here's an example of a JSONP request with a promise:</p>
 
+<pre class="prettyprint"><code>$.JSONP({url: 'https://api.github.com/users/yui?callback=?'})
+.then(function(response) {
+  $('.list').append('&lt;li&gt;&lt;h3&gt;The name of the library&lt;/h3&gt;&lt;h4&gt;' + lib.data.name + '&lt;/h4&gt;&lt;/li&gt;');
+})
+.catch(function(err) {
+  console.log('Unable to get data.')
+});
 
+$.JSONP({
+  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;
+})
+.then(function(response) {
+  $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
+})
+.catch(function(err) {
+  console.log('Unable to get data.')
+});
+</code></pre>
+
+<p>You could also use <code>Promise.all</code> or <code>Promise.race</code> to handle both JSONP request at the same time.</p>
 
 
 
@@ -2164,7 +2255,7 @@ showDiv();
 </code></pre>
 
 <h3>
-<a name="cc-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>get</h3>
+<a name="cc-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.get</h3>
 
 <p>This is a short cut for doing a get request. It can handle the following parameters: url, data, success, dataType. At very least you can pass it the url and a function to execute on success.</p>
 
