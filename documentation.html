@@ -103,6 +103,11 @@
         $('.submenu ul li').removeClass('selected');
         $('.submenu ul li').eq(7).addClass('selected');
       };
+      var typescript = function() {
+        getFile('./documentation/typescript.html', 'typescript');
+        $('.submenu ul li').removeClass('selected');
+        $('.submenu ul li').eq(8).addClass('selected');
+      };
       var routes = {
         '#/building': building,
         '#/markup': markup,
@@ -112,6 +117,7 @@
         '#/platformsupport': platformsupport,
         '#/jquerysupport': jquerysupport,
         '#/extending': extending,
+        '#/typescript': typescript,
         '#/': building
       }
       var router = Router(routes);
@@ -157,6 +163,7 @@
         <li><a href="#/platformsupport">Platform Support</a></li>
         <li><a href="#/extending">Extending</a></li>
         <li><a href="#/chocolatechipjs">ChocolateChipJS</a></li>
+        <li><a href="#/typescript">TypeScript</a></li>
       </ul>
     </div>
   </menu>
