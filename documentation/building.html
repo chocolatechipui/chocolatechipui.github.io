@@ -4,6 +4,29 @@
 
 <p>You do not need to build ChocolateChip-UI to begin using it. There are pre-compiled versions in the <code>dist</code> folder in the downloaded <a target='_blank' href='https://github.com/chocolatechipui/chocolatechip-ui'>source files</a>. However, if you want working examples or want to customize ChocolateChip-UI, you'll need to know how to build it.</p>
 
+<h2>NPM Module: Chui</h2>
+
+<p>If you want, you can install the NPM module <code>chui</code>. This enables you to run a command in the terminal to create a project with the resources for the type of app you will to make. Installation is easy:</p>
+
+<pre class='prettyprint'><code>sudo npm install chui -g</code></pre>
+
+<p>Once installed, you can customize the results with different arguments:</p>
+
+<pre class="prettyprint"><code>// Create a plain file in a folder named Fruits in ~/Documents/Dev 
+// with the Android theme, default libarary will be jQuery:
+chui --name Fruits --path ~/Documents/Dev/ --os android 
+ 
+// or create a tabbar interface in a folder Fruits on the desktop 
+// for iOS using the library ChocolateChipJS:
+chui --name Fruits --lib chocolatechip --os ios --type tabbar
+ 
+// or create a slide out menu for Windows Phone in Fruits on the desktop, 
+// default libarary will be jQuery:
+chui --name Fruits --os win --type slideout
+</code></pre>
+
+<p>Please read the <a href="https://www.npmjs.com/package/chui">documentation</a> to learn about all the features and options.</p>
+
 <h3>Setup with Gulp</h3>
 
 <p>ChocolateChip-UI uses the Gulp Node module to enable building the framework. ChocolateChip-UI has no dependency on Nodejs or Gulpjs for running, so you do not need them in your project. As of version 3.6.0, Gulp is the default way of building ChocolateChip-UI.</p>
