@@ -1415,7 +1415,7 @@ $('nav.current').find('.back').trigger('singletap');
     $("#content").html(me.firstName + " " + me.lastName);
   },
   error: function(data) {
-    content.html("&lt;h4&gt;There was an error while trying to get the file.&lt;/h4&gt;");
+    $(content).html("&lt;h4&gt;There was an error while trying to get the file.&lt;/h4&gt;");
   }
 });
 </code></pre>
@@ -2282,9 +2282,9 @@ $.get('/data/suits.html')
 
 <p>This is a shortcut for getting a JSON object from a server. It expects three parameters: url, data, and success. If no data is provided, it will execute with just the url and success callback.</p>
 
-<pre class="prettyprint"><code>$.getJSON('/data/deserts.json', function(deserts) {
-  deserts.forEach(desert) {
-    $('#deserts').append('&lt;li&gt;' + desert.name + '&lt;/li&gt;');
+<pre class="prettyprint"><code>$.getJSON('/data/deserts.json', function(desserts) {
+  desserts.forEach(function(dessert) {
+    $('#deserts').append('<li>' + dessert.name + '</li>');
   });
 });
 </code></pre>
@@ -3177,10 +3177,10 @@ showDiv();
       "-webkit-transform-style" : "preserve-3d",
       "-webkit-perspective": 500
     },
-    2,
+    "2s",
     "ease-in-out"
   );
-});
+);
 </code></pre>
 
 <p>You can include in the object an optional callback to execute when the animation ends:</p>
@@ -3198,9 +3198,9 @@ $("#animate").on("click", function() {
       "-webkit-perspective": 500,
       onEnd: saySomething 
     },
-    2,
+    "2s",
     "ease-in-out");
-});
+);
 </code></pre>
 
 <h2>
