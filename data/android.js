@@ -10,7 +10,7 @@ ChocolateChip-UI\n\
 ChUI-Android.css\n\
 Copyright 2015 Sourcebits www.sourcebits.com\n\
 License: MIT\n\
-Version: 3.8.6\n\
+Version: 3.8.8\n\
 */\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
