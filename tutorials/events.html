@@ -127,7 +127,7 @@ $('#myButton').on($.eventStart, function() {
 });
 </code></pre>
 
-<p>Notice that we are passing in <code>e</code> as a reference to the event, and then using that to fire <code>e.stopPropagation()</code> <em>after</em> we execute our code. This prevents the singletap event from reaching the navigation event. With this you can grab the button and scroll up or down and then let go, the button's event will not fire. You can tap the list item content next to the button and a normal navigation will take place. Or you can tap directly on the button and you will get the alert.</p>
+<p>Notice that we are passing in <code>e</code> as a reference to the event, and then using that to fire <code>e.stopPropagation()</code> <em>after</em> we execute our code. This prevents the <code>singletap</code> event from reaching the navigation event. With this you can grab the button and scroll up or down and then let go, the button's event will not fire. You can tap the list item content next to the button and a normal navigation will take place. Or you can tap directly on the button and you will get the alert.</p>
 
 <p>So, when you want to have interactive targets in a scrolling list or anywhere where the user needs to scroll, use this combination of <code>singletap</code> and <code>stopPropagation</code>.</p>
 
