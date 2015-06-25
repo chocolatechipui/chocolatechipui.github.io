@@ -27,6 +27,22 @@
 
 <p><strong>Please note</strong>, you do not need to write your code in typescript to take advantage of many of these features.</p>
 
+<h2>TSD</h2>
+<p>You can also use the NPM module, <a href="https://www.npmjs.com/package/tsd">tsd</a> to install ChocolateChip-UI's TypeScript declaration files in your project. These files are now available from <a href="http://definitelytyped.org">Definitely Typed</a>. But you can simply install <code>tsd</code> and execute it from your terminal any time your want any type of declaration file. Installing <code>tsd</code> is easy:</p>
+
+<pre class="prettypring"><code>// Mac:
+sudo npm install -g tsd
+// Windows:
+npm install -g tsd
+</code></pre>
+
+<p>After that you can use the terminal to <code>cd</code> to your project's folder and then run the following command:</p>
+<pre class="prettypring"><code>tsd init // This creates a tsd.config file and typings folder.
+tsd install chui --save  // This install ChUI and saves its reference in the tsd.d.ts file
+// Install either jQuery or ChocolateChipJs:
+tsd install jquery --save //or tsd install chocolatechipjs --save
+</code></pre>
+
 
 <script>
    $(function() {
