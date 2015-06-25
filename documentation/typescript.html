@@ -11,13 +11,13 @@
 
 <p>For Visual Studio Code, TypeScript support is built in. For most editors you will need to put a reference to the TypeScript declaration files in your JavaScript. You do this by placing a referene comment at the top of your script. Notice the three slashes. These are required:</p>
 
-<pre class="prettypring"><code>/// &lt;reference path="typings/jquery/jquery.d.ts" /&gt;
+<pre class="prettyprint"><code>/// &lt;reference path="typings/jquery/jquery.d.ts" /&gt;
 /// &lt;reference path="typings/chui/chui.d.ts" /&gt;
 </code></pre>
 
 <p>If you're using ChocolateChipJS instead of jQuery, then use the following:</p>
 
-<pre class="prettypring"><code>/// &lt;reference path="typings/chocolatechip/chocolatechip.d.ts" /&gt;
+<pre class="prettyprint"><code>/// &lt;reference path="typings/chocolatechip/chocolatechip.d.ts" /&gt;
 /// &lt;reference path="typings/chui/chui.d.ts" /&gt;
 </code></pre>
 
@@ -30,14 +30,14 @@
 <h2>TSD</h2>
 <p>You can also use the NPM module, <a href="https://www.npmjs.com/package/tsd">tsd</a> to install ChocolateChip-UI's TypeScript declaration files in your project. These files are now available from <a href="http://definitelytyped.org">Definitely Typed</a>. But you can simply install <code>tsd</code> and execute it from your terminal any time your want any type of declaration file. Installing <code>tsd</code> is easy:</p>
 
-<pre class="prettypring"><code>// Mac:
+<pre class="prettyprint"><code>// Mac:
 sudo npm install -g tsd
 // Windows:
 npm install -g tsd
 </code></pre>
 
 <p>After that you can use the terminal to <code>cd</code> to your project's folder and then run the following command:</p>
-<pre class="prettypring"><code>tsd init // This creates a tsd.config file and typings folder.
+<pre class="prettyprint"><code>tsd init // This creates a tsd.config file and typings folder.
 tsd install chui --save  // This install ChUI and saves its reference in the tsd.d.ts file
 // Install either jQuery or ChocolateChipJs:
 tsd install jquery --save //or tsd install chocolatechipjs --save
