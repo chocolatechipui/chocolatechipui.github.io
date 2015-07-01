@@ -536,7 +536,7 @@ color: ' + $._contrast + ';\
     }
 
     // Initialize color picker when showing:
-    secondaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: '#007aff',
+    secondaryColorInput.spectrum({flat: true, showInput: true, showInitial: true, showButtons: false, preferredFormat: "hex", showPalette: true, palette: chuiPalette, showSelectionPalette: false, color: $._color,
       move: function(color) {
         $._secondaryColorActive = true;
         $._secondaryColor = color.toHexString();
