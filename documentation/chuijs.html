@@ -27,6 +27,90 @@
 
 <p>This is used by ChUI.js to define how far a user must drag the mouse, stylus or finger before a swipe gesture is registered. The default value is 30 pixels. Decreasing this might cause swipe gestures being registered too easily for the user to interact with other controls that expect taps/clicks/touches. Increasing it will make the shorter swipes harder to detect. If you want to register swipe events, 30 to 50 is the optimal amount.</p>
 
+<a name="Gestures"></a>
+<h2>Gestures:</h2>
+
+<p>ChUI.js provides a number of gestures for you to use in your app. These get translated to appropriate events on each platform. They are as follows:</p>
+
+<ul class='list'>
+<li>tap</li>
+<li>singletap</li>
+<li>longtap</li>
+<li>doubletap</li>
+<li>swipe</li>
+<li>swipeleft</li>
+<li>swiperight</li>
+<li>swipeup</li>
+<li>swipedown</li>
+</ul>
+
+<p>Tap is a generic tap, this could be a singletap, doubletap or longtap event. The same with swipe, it will be either a left, right, up or down swipe. These two are not very useful unless you want to check for a very generic user interaction.</p>
+
+<p>A singletap has a delay of 150 milliseconds. In general, if you want to interact with anything that is in a scrollable container, you want to use a singletap event. This will allow you to scroll without triggering an event on any actionable items in the container. You can register a singletap and a doubletap on the same element, or a longtap too, to set up different results. Swipes work just like any other events as well.</p>
+
+<p>To use these gestures, put them in quotes just as you would any normal DOM event:</p>
+
+<pre class="prettyprint"><code>$('a').on('singletap', function() {
+  // Do stuff here
+  alert('Single Tap');
+});
+$('button').on('doubletap', function() {
+  // Do stuff here
+  alert('Double Tap');
+});
+$('button').on('longtap', function() {
+  // Do stuff here
+  alert('Long Tap');
+});
+$('button').on('swipeleft', function() {
+  // Do stuff here
+  alert('Swipe Left');
+});
+$('button').on('swiperight', function() {
+  // Do stuff here
+  alert('Swipe Right');
+});
+</code></pre>
+
+<h2>Detectors</h2>
+<p>ChocolateChip-UI provides a number of detectors to enable to to determine various features and properties of the browser, device and operating system. These are boolean, so if they are <code>true</code>, they are valid.</p>
+
+<ul>
+  <li>isMobile</li>
+  <li>isTrident</li>
+  <li>isIEEdge</li>
+  <li>isWinPhone</li>
+  <li>isiPhone</li>
+  <li>isiPad</li>
+  <li>isiPod</li>
+  <li>isiOS</li>
+  <li>isAndroid</li>
+  <li>isWebOS</li>
+  <li>isBlackberry</li>
+  <li>isTouchEnabled</li>
+  <li>isOnline</li>
+  <li>isStandalone</li>
+  <li>isiOS6</li>
+  <li>isiOS7</li>
+  <li>isiOS8</li>
+  <li>isiOS9</li>
+  <li>isWin</li>
+  <li>isIE10</li>
+  <li>isIE11</li>
+  <li>isWebkit</li>
+  <li>isDesktop</li>
+  <li>isSafari</li>
+  <li>isChrome</li>
+  <li>isNativeAndroid</li>
+  <li>isWideScreen</li>
+  <li>isWideScreenPortrait</li>
+</ul>
+
+<p>You can use these in a conditional:</p>
+<pre class="prettyprint"><code>if ($.isStandalone) {
+   $('.standalone').show();
+}
+</code></pre>
 <a name="Uuid"></a>
 <h2>$.Uuid</h2>
 
@@ -995,51 +1079,6 @@ $.UIHideNavBar();
 $.UIShowNavBar();
 </code></pre>
 
-<a name="Gestures"></a>
-<h2>Gestures:</h2>
-
-<p>ChUI.js provides a number of gestures for you to use in your app. These get translated to appropriate events on each platform. They are as follows:</p>
-
-<ul class='list'>
-<li>tap</li>
-<li>singletap</li>
-<li>longtap</li>
-<li>doubletap</li>
-<li>swipe</li>
-<li>swipeleft</li>
-<li>swiperight</li>
-<li>swipeup</li>
-<li>swipedown</li>
-</ul>
-
-<p>Tap is a generic tap, this could be a singletap, doubletap or longtap event. The same with swipe, it will be either a left, right, up or down swipe. These two are not very useful unless you want to check for a very generic user interaction.</p>
-
-<p>A singletap has a delay of 150 milliseconds. In general, if you want to interact with anything that is in a scrollable container, you want to use a singletap event. This will allow you to scroll without triggering an event on any actionable items in the container. You can register a singletap and a doubletap on the same element, or a longtap too, to set up different results. Swipes work just like any other events as well.</p>
-
-<p>To use these gestures, put them in quotes just as you would any normal DOM event:</p>
-
-<pre class="prettyprint"><code>$('a').on('singletap', function() {
-  // Do stuff here
-  alert('Single Tap');
-});
-$('button').on('doubletap', function() {
-  // Do stuff here
-  alert('Double Tap');
-});
-$('button').on('longtap', function() {
-  // Do stuff here
-  alert('Long Tap');
-});
-$('button').on('swipeleft', function() {
-  // Do stuff here
-  alert('Swipe Left');
-});
-$('button').on('swiperight', function() {
-  // Do stuff here
-  alert('Swipe Right');
-});
-</code></pre>
-
 <a name="pubSub"></a>
 <h1>Pub/Sub</h1>
 <p>Pub/sub is a popular and useful programming pattern to help decouple code. This allows you to set up methods that "subscribe" to a topic, something like a radio channel. When you publish data to a topic, all methods that are subscribed to that topic will execute with that data. It thus provides an easy way to pass the same data to multiple functions without having to enclose them in one function.</p>
@@ -1205,6 +1244,8 @@ $('button').on('singletap', function() {
   });
 &lt;/script&gt;
 </code></pre>
+
+
 
 <script>
 	$(function() {
