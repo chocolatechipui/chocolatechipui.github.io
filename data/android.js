@@ -5,12 +5,11 @@ if ($._navbarBkgdColor) {
   var androidNavbarColor = $('#primaryColorChooser .sp-input-container input').val();
 }
 
-var stylesheet = '/*\n\
-ChocolateChip-UI\n\
+var stylesheet = 'ChocolateChip-UI\n\
 ChUI-Android.css\n\
 Copyright 2015 Sourcebits www.sourcebits.com\n\
 License: MIT\n\
-Version: 3.8.10\n\
+Version: 3.9.0\n\
 */\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
@@ -43,7 +42,11 @@ Version: 3.8.10\n\
     background-size: 1100% 1100%;\n\
   }\n\
 }\n\
-html, body {\n\
+/* ==============================\n\
+   Body\n\
+   =========================== */\n\
+html,\n\
+body {\n\
   padding: 0;\n\
   margin: 0;\n\
   position: absolute;\n\
@@ -60,9 +63,12 @@ body {\n\
   -webkit-user-select: none;\n\
   -webkit-tap-highlight-color: transparent;\n\
 }\n\
-html,body,h1,h2,h3,h4,h5,p,div,span,ul,ol,li,pre,blockquote,article,section,nav,aside,header,footer,address,dl,tdt,dd,figure,figcaption,a,em,strong,abbr,time,code,sup,sub,i,b,u,ruby,table,thead,tbody,th,tr,td,label,input,button,select,option,textarea,menu,body {\n\
-    font: 100 14px/18px Roboto, SegoeWP, HelveticaNeue, sans-serif;\n\
+html, body, h1, h2, h3, h4, h5, p, div, span, ul, ol, li, pre, blockquote, article, section, nav, aside, header, footer, address, dl, tdt, dd, figure, figcaption, a, em, strong, abbr, time, code, sup, sub, i, b, u, ruby, table, thead, tbody, th, tr, td, label, input, button, select, option, textarea, menu, body {\n\
+  font: 100 14px/18px Roboto, SegoeWP, HelveticaNeue, sans-serif;\n\
 }\n\
+/* ==============================\n\
+   Article (view) styles      \n\
+   =========================== */\n\
 article {\n\
   position: absolute;\n\
   top: 52px;\n\
@@ -70,9 +76,9 @@ article {\n\
   bottom: 0;\n\
   left: 0;\n\
   padding-top: 1px;\n\
-  -webkit-transition: all .45s ease-out;\n\
-  -moz-transition: all .45s ease-out;\n\
-  transition: all .45s ease-out;\n\
+  -webkit-transition: all 0.45s ease-out;\n\
+  -moz-transition: all 0.45s ease-out;\n\
+  transition: all 0.45s ease-out;\n\
   overflow-x: hidden;\n\
   overflow-y: auto;\n\
   -webkit-overflow-scrolling: touch;\n\
@@ -99,23 +105,23 @@ article > section {\n\
 .hide-navbars article {\n\
   top: 0;\n\
 }\n\
+/* ==============================\n\
+   Article navigation states    \n\
+   =========================== */\n\
 .current {\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
   -moz-transform: translate3d(0, 0, 0);\n\
   transform: translate3d(0, 0, 0);\n\
-  visibility: visible;\n\
 }\n\
 .next {\n\
   -webkit-transform: translate3d(105%, 0, 0);\n\
   -moz-transform: translate3d(105%, 0, 0);\n\
   transform: translate3d(105%, 0, 0);\n\
-  visibility: hidden;\n\
 }\n\
 .previous {\n\
-  -webkit-transform: translate3d(-100%, 0, 0);\n\
-  -moz-transform: translate3d(-100%, 0, 0);\n\
-  transform: translate3d(-100%, 0, 0);\n\
-  visibility: hidden;\n\
+  -webkit-transform: translate3d(0, 0, 0);\n\
+  -moz-transform: translate3d(0, 0, 0);\n\
+  transform: translate3d(0, 0, 0);\n\
 }\n\
 html[dir=rtl] .current {\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
@@ -132,6 +138,39 @@ html[dir=rtl] .previous {\n\
   -moz-transform: translate3d(105%, 0, 0);\n\
   transform: translate3d(105%, 0, 0);\n\
 }\n\
+body.isNativeAndroidBrowser .current {\n\
+  -webkit-transform: 0 0 0;\n\
+  -moz-transform: 0 0 0;\n\
+  transform: 0 0 0;\n\
+}\n\
+body.isNativeAndroidBrowser .next {\n\
+  -webkit-transform: 105% 0 0;\n\
+  -moz-transform: 105% 0 0;\n\
+  transform: 105% 0 0;\n\
+}\n\
+body.isNativeAndroidBrowser .previous {\n\
+  -webkit-transform: -100% 0 0;\n\
+  -moz-transform: -100% 0 0;\n\
+  transform: -100% 0 0;\n\
+}\n\
+html[dir=rtl] body.isNativeAndroidBrowser .current {\n\
+  -webkit-transform: translate3d(0, 0, 0);\n\
+  -moz-transform: translate3d(0, 0, 0);\n\
+  transform: translate3d(0, 0, 0);\n\
+}\n\
+html[dir=rtl] body.isNativeAndroidBrowser .next {\n\
+  -webkit-transform: translate3d(-100%, 0, 0);\n\
+  -moz-transform: translate3d(-100%, 0, 0);\n\
+  transform: translate3d(-100%, 0, 0);\n\
+}\n\
+html[dir=rtl] body.isNativeAndroidBrowser .previous {\n\
+  -webkit-transform: translate3d(105%, 0, 0);\n\
+  -moz-transform: translate3d(105%, 0, 0);\n\
+  transform: translate3d(105%, 0, 0);\n\
+}\n\
+/* ==============================\n\
+   Scrollers\n\
+   =========================== */\n\
 .scroller-vertical,\n\
 .scroller-horizontal {\n\
   -webkit-box-flex: 1 !important;\n\
@@ -158,6 +197,9 @@ article > section > :last-child::after,\n\
 .scroller-vertical > :last-child::after {\n\
   margin-bottom: 100px;\n\
 }\n\
+/* ==============================\n\
+   Horizontal Panels\n\
+   =========================== */\n\
 .vertical,\n\
 li.comp > aside.vertical {\n\
   display: -moz-box;\n\
@@ -206,6 +248,9 @@ li.comp > aside.vertical {\n\
   -webkit-align-items: flex-start;\n\
   align-items: flex-start;\n\
 }\n\
+/* ==============================\n\
+   Buttons                \n\
+   =========================== */\n\
 .align-flush {\n\
   position: absolute;\n\
   top: auto;\n\
@@ -222,7 +267,9 @@ button {\n\
 button:focus {\n\
   outline: none;\n\
 }\n\
-button:not(.segment) {\n\
+button:not(.segment),\n\
+button:not(.back),\n\
+button:not(.backTo) {\n\
   -webkit-appearance: none;\n\
   box-shadow: none;\n\
   border: none;\n\
@@ -270,32 +317,17 @@ button:not(.segment) {\n\
   background-position: center center;\n\
   -webkit-animation-fill-mode: forwards;\n\
 }\n\
-button:not(.segment):not(.back),\n\
-button:not(.segment):not(.backTo) {\n\
-  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025) 10%);\n\
-  background-size: 1000% 1000%;\n\
-  background-repeat: no-repeat;\n\
-  background-position: center center;\n\
-  box-shadow: 0 1px 4px #666666;\n\
-  -webkit-animation-timing-function: ease-out;\n\
-  animation-timing-function: ease-out;\n\
-  -webkit-animation-duration: .5s;\n\
-  animation-duration: .5s;\n\
-  -webkit-animation-fill-mode: forwards;\n\
-  animation-fill-mode: forwards;\n\
-}\n\
-button:not(.segment):not(.back).selected,\n\
-button:not(.segment):not(.backTo).selected {\n\
-  animation-name: tapRipple;\n\
-  box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.25);\n\
-}\n\
-button:not(.segment):focus {\n\
+button:not(.segment):focus,\n\
+button:not(.back):focus,\n\
+button:not(.backTo):focus {\n\
   outline: none !important;\n\
 }\n\
-button:not(.segment).no-border {\n\
+button:not(.segment).no-border,\n\
+button:not(.back).no-border,\n\
+button:not(.backTo).no-border {\n\
   border: none !important;\n\
 }\n\
-button:not(.segment).action {\n\
+button.action {\n\
   color: #666666;\n\
   background-color: #f5f5f5;\n\
   margin: 0 auto;\n\
@@ -308,15 +340,34 @@ button:not(.segment).action {\n\
   display: -webkit-flex;\n\
   display: flex;\n\
 }\n\
-section > button:not(.segment).action {\n\
+section > button.action.action {\n\
   margin: 20px auto;\n\
 }\n\
-.isDesktop button:not(.segment).action:hover {\n\
+.isDesktop button.action:hover {\n\
   box-shadow: 0 3px 7px #666666;\n\
   box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.25);\n\
 }\n\
-nav > button:not(.segment).back,\n\
-nav > button:not(.segment).backTo {\n\
+button:not(.back),\n\
+button:not(.backTo) {\n\
+  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025) 10%);\n\
+  background-size: 1000% 1000%;\n\
+  background-repeat: no-repeat;\n\
+  background-position: center center;\n\
+  box-shadow: 0 1px 4px #666666;\n\
+  -webkit-animation-timing-function: ease-out;\n\
+  animation-timing-function: ease-out;\n\
+  -webkit-animation-duration: .5s;\n\
+  animation-duration: .5s;\n\
+  -webkit-animation-fill-mode: forwards;\n\
+  animation-fill-mode: forwards;\n\
+}\n\
+button:not(.back).selected,\n\
+button:not(.backTo).selected {\n\
+  animation-name: tapRipple;\n\
+  box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.25);\n\
+}\n\
+nav > .back,\n\
+nav > .backTo {\n\
   padding: 10px;\n\
   text-align: left;\n\
   background-color: transparent;\n\
@@ -339,7 +390,7 @@ nav > button:not(.segment).backTo {\n\
   transition: all 0.4s ease-out;\n\
   font-size: 0 !important;\n\
   -webkit-animation-name: "";\n\
-  top: 0;\n\
+  top: 12px;\n\
   -webkit-animation-duration: 0.5s;\n\
   -webkit-animation-timing-function: ease-out;\n\
   -webkit-animation-fill-mode: forwards;\n\
@@ -347,14 +398,18 @@ nav > button:not(.segment).backTo {\n\
   animation-timing-function: ease-out;\n\
   animation-fill-mode: forwards;\n\
 }\n\
-nav > button:not(.segment).back:hover,\n\
-nav > button:not(.segment).backTo:hover {\n\
+body.isDesktopChrome nav > button.back,\n\
+body.isDesktopChrome nav > button.backTo {\n\
+  top: 4px !important;\n\
+}\n\
+nav > .back:hover,\n\
+nav > .backTo:hover {\n\
   -webkit-animation-name: backButtonRipple;\n\
   animation-name: backButtonRipple;\n\
   background-color: transparent !important;\n\
 }\n\
-nav > button:not(.segment).back::before,\n\
-nav > button:not(.segment).backTo::before {\n\
+nav > .back::before,\n\
+nav > .backTo::before {\n\
   display: block;\n\
   content: "";\n\
   -webkit-mask-image: none !important;\n\
@@ -366,11 +421,13 @@ nav > button:not(.segment).backTo::before {\n\
   left: 6px;\n\
   transition: all 0.25s ease-out;\n\
   -webkit-transform: rotate(-45deg);\n\
+  transform: rotate(-45deg);\n\
 }\n\
-nav > button:not(.segment).back::after,\n\
-nav > button:not(.segment).backTo::after {\n\
+nav > .back::after,\n\
+nav > .backTo::after {\n\
   display: block;\n\
   content: "";\n\
+  -webkit-mask-image: none !important;\n\
   background-color: ' + $._contrast + ';\n\
   height: 2px;\n\
   width: 14px;\n\
@@ -378,25 +435,23 @@ nav > button:not(.segment).backTo::after {\n\
   top: 22px !important;\n\
   left: 6px;\n\
   -webkit-transform: rotate(45deg);\n\
+  transform: rotate(45deg);\n\
 }\n\
-body.isChrome a.button.back,\n\
-body.isChrome a.button.backTo {\n\
+body.isChrome button.back,\n\
+body.isChrome button.backTo {\n\
   top: 6px;\n\
 }\n\
 body.isNativeAndroidBrowser button.back,\n\
 body.isNativeAndroidBrowser button.backTo {\n\
-  top: 0;\n\
+  top: 6px;\n\
   bottom: 0;\n\
 }\n\
 body.isNativeAndroidBrowser button.back::after,\n\
 body.isNativeAndroidBrowser button.backTo::after {\n\
-  top: -2px;\n\
-}\n\
-body.isNativeAndroidBrowser button.backTo::after {\n\
   top: 2px;\n\
 }\n\
 body.isNativeAndroidBrowser button.back::before {\n\
-  top: 8px;\n\
+  top: 12px;\n\
 }\n\
 nav > button,\n\
 nav > div > button,\n\
@@ -421,21 +476,30 @@ html[dir=rtl] button.back,\n\
 html[dir=rtl] button.backTo {\n\
   margin: 0 0 0 16px;\n\
 }\n\
+html[dir=rtl] button.back::before,\n\
+html[dir=rtl] button.backTo::before {\n\
+  top: 12px;\n\
+  left: 17px;\n\
+  -webkit-transform: rotate(45deg);\n\
+  transform: rotate(45deg);\n\
+}\n\
 html[dir=rtl] button.back::after,\n\
 html[dir=rtl] button.backTo::after {\n\
-  -webkit-transform: rotate(180deg);\n\
-  -moz-transform: rotate(180deg);\n\
-  transform: rotate(180deg);\n\
   right: auto;\n\
+  left: 17px;\n\
+  -webkit-transform: rotate(-45deg);\n\
+  transform: rotate(-45deg);\n\
 }\n\
 html[dir=rtl] button.align-flush {\n\
   left: 10px;\n\
   right: auto;\n\
 }\n\
+/* ==============================\n\
+   Nav bars               \n\
+   =========================== */\n\
 #global-nav {\n\
   background-color: '+ $._bkgdColor +';\n\
   overflow: hidden;\n\
-  box-shadow: 0 1px 2px #666666;\n\
   padding: 0 5px;\n\
   z-index: 1111111111;\n\
 }\n\
@@ -455,12 +519,12 @@ nav {\n\
   -moz-box-pack: start;\n\
   -webkit-justify-content: start;\n\
   justify-content: flex-start;\n\
-  -webkit-box-align: center;\n\
-  -moz-box-align: center;\n\
-  -webkit-align-items: center;\n\
-  align-items: center;\n\
+  -webkit-box-align: start;\n\
+  -moz-box-align: start;\n\
+  -webkit-align-items: flex-start;\n\
+  align-items: flex-start;\n\
   display: flex;\n\
-  text-align: center;\n\
+  text-align: left;\n\
   position: absolute;\n\
   top: 0;\n\
   left: 0;\n\
@@ -481,15 +545,18 @@ nav.current {\n\
 nav > button:first-child {\n\
   margin-left: 0;\n\
 }\n\
+nav > button:last-child {\n\
+  margin-right: 0 !important;\n\
+}\n\
 nav > h1 {\n\
   text-align: left;\n\
   display: inline-block;\n\
-  margin: 0 16px 0 8px;\n\
+  margin: 0 16px 0 0;\n\
   -webkit-box-flex: 1 !important;\n\
   -moz-box-flex: 1 !important;\n\
   -webkit-flex: 1 !important;\n\
   flex: 1 !important;\n\
-  font: 100 14pt/30pt Roboto, SegoeWP, HelveticaNeue, Sans-serif !important;\n\
+  font: 100 14pt/34pt Roboto, SegoeWP, HelveticaNeue, Sans-serif !important;\n\
   position: relative;\n\
   z-index: -1;\n\
   white-space: nowrap;\n\
@@ -499,7 +566,7 @@ nav > h1 {\n\
 nav > h1 + button {\n\
   margin: 5px 5px 0 0;\n\
   position: absolute;\n\
-  top: 0;\n\
+  top: 4px !important;\n\
   right: 10px;\n\
 }\n\
 nav > button,\n\
@@ -526,6 +593,9 @@ html[dir=rtl] body.isNativeAndroidBrowser nav > h1 + button {\n\
   margin-top: 0;\n\
   position: absolute !important;\n\
 }\n\
+/* ==============================\n\
+   Lists                 \n\
+   =========================== */\n\
 @-webkit-keyframes listRipple {\n\
   0% {\n\
     background-size: 0% 100%;\n\
@@ -578,8 +648,8 @@ html[dir=rtl] body.isNativeAndroidBrowser nav > h1 + button {\n\
   content: "";\n\
   width: 7px;\n\
   height: 7px;\n\
-  border-right: solid 3px ' + $._secondaryColor + ';\n\
-  border-top: solid 3px ' + $._secondaryColor + ';\n\
+  border-right: solid 2px ' + $._secondaryColor + ';\n\
+  border-top: solid 2px ' + $._secondaryColor + ';\n\
   -webkit-transform: rotate(45deg);\n\
   -moz-transform: rotate(45deg);\n\
   transform: rotate(45deg);\n\
@@ -599,7 +669,7 @@ html[dir=rtl] body.isNativeAndroidBrowser nav > h1 + button {\n\
   border-radius: 20px;\n\
   border: solid 1px ' + $._secondaryColor + ';\n\
   color: ' + $._secondaryColor + ';\n\
-  font: bold 14px/0 Roboto, SegoeWP, HelveticaNeue, Sans-serif;\n\
+  font: bold 14px/0.23 Roboto, Sans-serif;\n\
   -webkit-box-sizing: border-box;\n\
   -moz-box-sizing: border-box;\n\
   box-sizing: border-box;\n\
@@ -614,6 +684,9 @@ html[dir=rtl] body.isNativeAndroidBrowser nav > h1 + button {\n\
 h2 + .list {\n\
   margin-top: 0;\n\
 }\n\
+/* ==============================\n\
+   List Footer\n\
+   =========================== */\n\
 p {\n\
   font-family: "Roboto Regular", "HeveletcaNeue", Helvetica, sans-serif;\n\
 }\n\
@@ -629,8 +702,14 @@ p {\n\
 li[data-show-article].touched {\n\
   cursor: pointer;\n\
 }\n\
+.isDesktop .list > li[data-goto].nav:hover::after {\n\
+  border-color: #007aff;\n\
+}\n\
+/* ==============================\n\
+   list title & subtitle      \n\
+   ============================ */\n\
 .list > li {\n\
-  color: #666;\n\
+  color: #666666;\n\
 }\n\
 .list > li > h3,\n\
 .list > li > h4 {\n\
@@ -649,12 +728,12 @@ li[data-show-article].touched {\n\
   font-size: 14pt;\n\
   line-height: 18pt;\n\
   margin-bottom: 2px;\n\
-  color: #666;\n\
+  color: #666666;\n\
 }\n\
 .list > li h4 {\n\
   font-family: "Roboto Regular", "HeveletcaNeue", Helvetica, sans-serif;\n\
   font-weight: normal;\n\
-  color: #666;\n\
+  color: #666666;\n\
 }\n\
 .list > li > h4,\n\
 .list > li > div > h4,\n\
@@ -676,12 +755,18 @@ li[data-show-article].touched {\n\
 .list > li + .button.action {\n\
   margin-top: 40px;\n\
 }\n\
+/* ==============================\n\
+   List detail             \n\
+   ============================ */\n\
 .list > li > p {\n\
   margin: 6px 16px 6px 0;\n\
   font-size: 12pt;\n\
   line-height: 14pt;\n\
   color: #666666;\n\
 }\n\
+/* ==============================\n\
+   List title\n\
+   =========================== */\n\
 section h2 {\n\
   font: normal 11pt/12pt "Roboto Regular", SegoeWP, HelveticaNeue, Sans-serif;\n\
   color: #4d4d4d;\n\
@@ -716,13 +801,16 @@ html[dir=rtl] .list > li.nav::after {\n\
   right: auto;\n\
   left: 16px;\n\
   border: none;\n\
-  border-left: solid 3px #666666;\n\
-  border-bottom: solid 3px #666666;\n\
+  border-left: solid 2px #666666;\n\
+  border-bottom: solid 2px #666666;\n\
 }\n\
 html[dir=rtl] li.show-detail::after {\n\
   left: 16px;\n\
   right: auto;\n\
 }\n\
+/* ==============================\n\
+   Comp List Items          \n\
+   =========================== */\n\
 li.comp {\n\
   display: -webkit-box;\n\
   -webkit-box-orient: horizontal;\n\
@@ -822,8 +910,8 @@ li.comp > aside > .nav::after {\n\
   content: "";\n\
   width: 7px;\n\
   height: 7px;\n\
-  border-right: solid 3px ' + $._secondaryColor + ';\n\
-  border-top: solid 3px ' + $._secondaryColor + ';\n\
+  border-right: solid 2px ' + $._secondaryColor + ';\n\
+  border-top: solid 2px ' + $._secondaryColor + ';\n\
   -webkit-transform: rotate(45deg) translate3d(2px, -2px, 0);\n\
   -moz-transform: rotate(45deg) translate3d(2px, -2px, 0);\n\
   transform: rotate(45deg) translate3d(2px, -2px, 0);\n\
@@ -840,7 +928,7 @@ li.comp > aside > .show-detail::after {\n\
   border-radius: 20px;\n\
   border: solid 1px ' + $._secondaryColor + ';\n\
   color: ' + $._secondaryColor + ';\n\
-  font: bold 14px/0 Roboto, Times, serif;\n\
+  font: bold 14px/0.23 Roboto, sans-serif;\n\
   -webkit-box-sizing: border-box;\n\
   -moz-box-sizing: border-box;\n\
   box-sizing: border-box;\n\
@@ -880,8 +968,8 @@ html[dir=rtl] li.comp aside > span.nav::after {\n\
   right: auto;\n\
   left: 16px;\n\
   border: none;\n\
-  border-left: solid 3px ' + $._secondaryColor + ';\n\
-  border-bottom: solid 3px ' + $._secondaryColor + ';\n\
+  border-left: solid 2px ' + $._secondaryColor + ';\n\
+  border-bottom: solid 2px ' + $._secondaryColor + ';\n\
 }\n\
 html[dir=rtl] li.comp aside > h4 {\n\
   margin-left: 5px;\n\
@@ -900,15 +988,19 @@ html[dir=rtl] li.comp div > h3 + h4 {\n\
 }\n\
 @media only screen and (max-width: 480px) and (orientation: portrait) {\n\
   li.comp > div:first-child + aside > h4:nth-child(1) {\n\
-    max-width: 45% !important;\n\
     flex: 1;\n\
   }\n\
   li.comp > div:first-child + aside {\n\
     -webkit-box-pack: end;\n\
     -webkit-justify-content: end;\n\
     justify-content: flex-end;\n\
+    display: flex;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Grids\n\
+   =========================== */\n\
+/* Grid: */\n\
 .grid {\n\
   display: -webkit-box;\n\
   -webkit-box-orient: horizontal;\n\
@@ -930,12 +1022,14 @@ html[dir=rtl] li.comp div > h3 + h4 {\n\
   -ms-flex-wrap: wrap;\n\
   flex-wrap: wrap;\n\
 }\n\
+/* Column: */\n\
 .col {\n\
   -webkit-box-flex: 1 1 auto;\n\
   -webkit-flex: 1 1 auto;\n\
   -ms-flex: 1 1 auto;\n\
   flex: 1 1 auto;\n\
 }\n\
+/* Centered grids: */\n\
 .grid.center {\n\
   -webkit-box-pack: center;\n\
   -webkit-justify-content: center;\n\
@@ -950,6 +1044,7 @@ html[dir=rtl] li.comp div > h3 + h4 {\n\
   flex-grow: 0;\n\
   flex-shrink: 0;\n\
 }\n\
+/* Columns: */\n\
 .flex-1 {\n\
   -webkit-flex-basis: 10%;\n\
   -ms-flex-basis: 10%;\n\
@@ -1042,6 +1137,9 @@ html[dir=rtl] .grid {\n\
   -ms-flex-direction: row;\n\
   flex-direction: row;\n\
 }\n\
+/* ==============================\n\
+   Segmented Control\n\
+   =========================== */\n\
 .segmented:not(.paging) {\n\
   display: -moz-box;\n\
   display: inline-flex;\n\
@@ -1143,6 +1241,9 @@ html[dir=rtl] .segmented.align-flush {\n\
   left: 15px;\n\
   right: auto;\n\
 }\n\
+/* ==============================\n\
+   Segmented Paging Control\n\
+   =========================== */\n\
 .isNativeAndroidBrowser .segmented.paging {\n\
   top: 0px !important;\n\
 }\n\
@@ -1158,6 +1259,11 @@ html[dir=rtl] .segmented.align-flush {\n\
   margin: 0 !important;\n\
   width: 30px !important;\n\
   height: 30px !important;\n\
+}\n\
+.segmented.paging.horizontal > button:hover,\n\
+.segmented.paging.horizontal > button.selected {\n\
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.07) !important;\n\
+  background-color: rgba(0, 0, 0, 0.07) !important;\n\
 }\n\
 .segmented.paging.horizontal > button:first-of-type::before,\n\
 html[dir=rtl] .segmented.paging.horizontal > button:last-of-type::before {\n\
@@ -1194,7 +1300,7 @@ html[dir=rtl] .segmented.paging.horizontal > button:last-of-type::before {\n\
   border-right: none;\n\
   border-bottom: none;\n\
   right: 6px !important;\n\
-  left: 0 !important;\n\
+  left: 0px !important;\n\
 }\n\
 html[dir=rtl] .segmented.paging.horizontal > button:first-of-type::before {\n\
   border-left: none;\n\
@@ -1212,7 +1318,8 @@ html[dir=rtl] .segmented.paging.horizontal > button:first-of-type::before {\n\
   width: 30px !important;\n\
   height: 30px !important;\n\
 }\n\
-.segmented.paging.vertical > button:hover {\n\
+.segmented.paging.vertical > button:hover,\n\
+.segmented.paging.vertical > button.selected {\n\
   box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.07) !important;\n\
   background-color: rgba(0, 0, 0, 0.07) !important;\n\
 }\n\
@@ -1330,6 +1437,9 @@ html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:last
 html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:first-of-type {\n\
   -webkit-box-ordinal-group: 1;\n\
 }\n\
+/* ==============================\n\
+   Toolbar Styles\n\
+   =========================== */\n\
 .toolbar {\n\
   position: fixed;\n\
   bottom: 0;\n\
@@ -1356,9 +1466,9 @@ html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:firs
   -webkit-align-items: center;\n\
   align-items: center;\n\
   display: -webkit-box !important;\n\
-  -webkit-transition: all 0.15s ease-out;\n\
-  -moz-transition: all 0.15s ease-out;\n\
-  transition: all 0.15s ease-out;\n\
+  -webkit-transition: all 0.45s ease-out;\n\
+  -moz-transition: all 0.45s ease-out;\n\
+  transition: all 0.45s ease-out;\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
   -moz-transform: translate3d(0, 0, 0);\n\
   transform: translate3d(0, 0, 0);\n\
@@ -1371,7 +1481,7 @@ html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:firs
 .toolbar > button {\n\
   color: ' + $._contrast + ' !important;\n\
   background-color: #f5f5f5;\n\
-  background-image: -webkit-radial-gradient(circle, ' + $._androidTapColor + ' 10%) !important;\n\
+  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.025) 10%);\n\
   background-size: 1000% 1000%;\n\
   background-repeat: no-repeat;\n\
   background-position: center center;\n\
@@ -1415,9 +1525,9 @@ div.toolbar.next {\n\
   transform: translate3d(105%, 0, 0);\n\
 }\n\
 div.toolbar.previous {\n\
-  -webkit-transform: translate3d(-100%, 0, 0);\n\
-  -moz-transform: translate3d(-100%, 0, 0);\n\
-  transform: translate3d(-100%, 0, 0);\n\
+  -webkit-transform: translate3d(0, 0, 0);\n\
+  -moz-transform: translate3d(0, 0, 0);\n\
+  transform: translate3d(0, 0, 0);\n\
 }\n\
 html[dir=rtl] div.toolbar.current {\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
@@ -1445,6 +1555,9 @@ html[dir=rtl] .splitlayout > .detail + .toolbar {\n\
   right: 320px;\n\
   left: 0;\n\
 }\n\
+/* ==============================\n\
+   Split Layout Styles\n\
+   =========================== */\n\
 body.splitlayout {\n\
   display: -moz-box;\n\
   display: flex;\n\
@@ -1465,6 +1578,7 @@ body.splitlayout {\n\
 .splitlayout > nav {\n\
   background-color: ' + androidNavbarColor + ';\n\
   border-bottom: solid 1px #a7a7aa;\n\
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);\n\
 }\n\
 .splitlayout > nav:first-of-type {\n\
   width: 320px;\n\
@@ -1477,7 +1591,7 @@ body.splitlayout {\n\
   z-index: auto;\n\
   text-align: left;\n\
 }\n\
-.splitlayout > .master + nav:not(:last-of-type) {\n\
+.splitlayout > .master + nav:not(":last-of-type") {\n\
   width: 320px;\n\
   right: auto;\n\
   border-right: solid 1px #c8c8c7 !important;\n\
@@ -1549,6 +1663,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
     left: 260px !important;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Mask Control\n\
+   =========================== */\n\
 .mask {\n\
   display: block;\n\
   background-color: rgba(0, 0, 0, 0.5);\n\
@@ -1562,6 +1679,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   z-index: 1111111111;\n\
   cursor: pointer;\n\
 }\n\
+/* ==============================\n\
+   Busy Control\n\
+   =========================== */\n\
 .busy {\n\
   -webkit-animation: spin 1.77s infinite ease-out;\n\
   -webkit-transform-origin: center center;\n\
@@ -1612,6 +1732,15 @@ html[dir=rtl] .busy.align-flush {\n\
   right: auto !important;\n\
   float: left !important;\n\
 }\n\
+.busy.align-flush {\n\
+  position: absolute;\n\
+  right: 10px;\n\
+  top: 10px;\n\
+  bottom: auto;\n\
+}\n\
+/* ==============================\n\
+   Popover Control\n\
+   =========================== */\n\
 .popover {\n\
   width: 300px;\n\
   background-color: #f5f5f5;\n\
@@ -1665,7 +1794,7 @@ button.show-popover {\n\
   position: relative;\n\
   background-color: transparent !important;\n\
   border: none !important;\n\
-  padding: 6px 20px 2px 20px !important;\n\
+  padding: 6px 22px 2px 20px !important;\n\
   margin: 0 10px 0 0 !important;\n\
   box-shadow: none !important;\n\
   font-size: 13px !important;\n\
@@ -1683,21 +1812,21 @@ button.show-popover::after {\n\
   content: "";\n\
   display: block;\n\
   position: absolute;\n\
-  right: 0px;\n\
+  right: 6px;\n\
   bottom: 18px;\n\
   width: 0px;\n\
   height: 0px;\n\
-  border-right: solid 6px ' + $._contrast + ';\n\
-  border-bottom: solid 6px ' + $._contrast + ';\n\
-  border-top: solid 6px transparent;\n\
-  border-left: solid 6px transparent;\n\
+  border-right: solid 4px ' + $._contrast + ';\n\
+  border-bottom: solid 4px ' + $._contrast + ';\n\
+  border-top: solid 4px transparent;\n\
+  border-left: solid 4px transparent;\n\
   -webkit-transform: rotate(45deg);\n\
   -moz-transform: rotate(45deg);\n\
   transform: rotate(45deg);\n\
 }\n\
 nav > button.show-popover::after {\n\
-  border-right: solid 6px ' + $._contrast + ';\n\
-  border-bottom: solid 6px ' + $._contrast + ';\n\
+  border-right: solid 4px ' + $._contrast + ';\n\
+  border-bottom: solid 4px ' + $._contrast + ';\n\
 }\n\
 nav > h1 + button.show-popover.align-flush {\n\
   margin: 8px 0 0 0 !important;\n\
@@ -1724,6 +1853,9 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {\n\
   border-top: solid 6px transparent;\n\
   border-right: solid 6px transparent;\n\
 }\n\
+/* ==============================\n\
+   Popup Control\n\
+   =========================== */\n\
 .isNativeAndroidBrowser .popup {\n\
   box-shadow: 0 0 6px 4px #666;\n\
 }\n\
@@ -1740,7 +1872,7 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {\n\
   z-index: 10000;\n\
   margin-left: auto;\n\
   margin-right: auto;\n\
-  box-shadow: 0 0 6px 4px #888888;\n\
+  box-shadow: 0 0 6px 4px rgba(0, 0, 0, 0.2);\n\
   border-radius: 3px;\n\
   min-height: 100px;\n\
   z-index: 11111111111;\n\
@@ -1822,11 +1954,15 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {\n\
   background-color: #ffffff;\n\
   color: #666666;\n\
   font-size: 12pt;\n\
-  padding-top: 4px;\n\
+  padding: 4px 20px !important;\n\
   max-width: 320px !important;\n\
   margin: 0 !important;\n\
   border: none;\n\
   box-shadow: none !important;\n\
+}\n\
+.isDesktop .popup > footer > button:hover {\n\
+  box-shadow: none;\n\
+  background-color: rgba(0, 0, 0, 0.025);\n\
 }\n\
 .popup > footer > button.selected {\n\
   -webkit-animation-name: tapRipple;\n\
@@ -1840,6 +1976,9 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {\n\
   box-shadow: none;\n\
   border: none;\n\
 }\n\
+/* ============================== \n\
+   Deletable Lists\n\
+   =========================== */\n\
 .list.editable > li,\n\
 .list.deletable > li {\n\
   overflow: hidden;\n\
@@ -1916,7 +2055,8 @@ li.selected > .deletion-indicator::before {\n\
   display: block !important;\n\
   width: 22px;\n\
   height: 22px;\n\
-  background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%22140px%22%20height%3D%22144px%22%20viewBox%3D%220%200%20140%20144%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M47.9487979,122.136928%20L92.9487978,122.136928%20L92.9487978,22.1369286%20L81.3308475,22.1369281%20L81.3308475,109.597461%20L47.9487979,109.597462%20L47.9487979,122.136928%20Z%22%20id%3D%22Rectangle-1%22%20fill%3D%22%23ffffff%22%20transform%3D%22translate%2870.448798,%2072.136929%29%20rotate%2835.000000%29%20translate%28-70.448798,%20-72.136929%29%20%22%3E%3C/path%3E%3C/g%3E%3C/svg%3E");\n\
+  background-image: none;\n\
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%22140px%22%20height%3D%22144px%22%20viewBox%3D%220%200%20140%20144%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M47.9487979,122.136928%20L92.9487978,122.136928%20L92.9487978,22.1369286%20L81.3308475,22.1369281%20L81.3308475,109.597461%20L47.9487979,109.597462%20L47.9487979,122.136928%20Z%22%20id%3D%22Rectangle-1%22%20fill%3D%22%23ffffff%22%20transform%3D%22translate%2870.448798,%2072.136929%29%20rotate%2835.000000%29%20translate%28-70.448798,%20-72.136929%29%20%22%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;\n\
   background-position: 50% 50%;\n\
   background-size: 100% 100%;\n\
   background-repeat: no-repeat;\n\
@@ -1997,11 +2137,11 @@ button.delete {\n\
   font-weight: 200;\n\
   margin-right: 0 !important;\n\
   color: transparent;\n\
-  background-color: #eeeeee;\n\
+  background-color: rgba(102, 102, 102, 0.2);\n\
   background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%2283px%22%20height%3D%22108px%22%20viewBox%3D%220%200%2083%20108%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle-1%22%20fill%3D%22%233A3A3A%22%20x%3D%225%22%20y%3D%2224%22%20width%3D%2272%22%20height%3D%2284%22%20rx%3D%228%22%3E%3C/rect%3E%3Cpath%20d%3D%22M-0.411132812,17.9316406%20L-0.411132812,6.22558594%20L20.1357422,6.48730469%20L25.3134766,0.25390625%20L57.4667969,0.25390625%20L62.6025391,6.48730469%20L82.9248047,6.48730469%20L82.9248047,17.8554688%20L-0.411132812,17.9316406%20Z%22%20id%3D%22Path-1%22%20fill%3D%22%233A3A3A%22%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;\n\
   background-position: 50% 50% !important;\n\
   background-size: auto 20px !important;\n\
-  background-repeat: no-repeat;\n\
+  background-repeat: no-repeat !important;\n\
   box-shadow: inset 2px 2px 2px rgba(51, 51, 51, 0.2);\n\
   border-radius: 0;\n\
   border-bottom: 1px solid rgba(51, 51, 51, 0.2);\n\
@@ -2054,8 +2194,8 @@ html[dir=rtl] .list.deletable.showIndicators li > button.delete {\n\
   -moz-transform: translate3d(-60px, 0, 0);\n\
   transform: translate3d(-60px, 0, 0);\n\
   border-right: none;\n\
-  border-left: 1px solid gba(51, 51, 51, 0.2) !important;\n\
-  box-shadow: inset -2px 2px 2px gba(51, 51, 51, 0.2)\n\
+  border-left: 1px solid rgba(51, 51, 51, 0.2) !important;\n\
+  box-shadow: inset -2px 2px 2px rgba(51, 51, 51, 0.2);\n\
 }\n\
 html[dir=rtl] .list.editable.showIndicators li.selected > button.delete,\n\
 html[dir=rtl] .list.deletable.showIndicators li.selected > button.delete {\n\
@@ -2091,6 +2231,9 @@ html[dir=rtl] .deletion-indicator {\n\
   right: -40px;\n\
   left: auto;\n\
 }\n\
+/* ==============================\n\
+   Form Styles\n\
+   =========================== */\n\
 input[type=text],\n\
 input[type=email],\n\
 input[type=password],\n\
@@ -2101,6 +2244,7 @@ textarea {\n\
   -webkit-appearance: none;\n\
   border: none;\n\
   background-color: transparent;\n\
+  /* Create the bracket around inputs: */\n\
   background-image: -webkit-linear-gradient(left, #888888, #888888);\n\
   background-image: linear-gradient(left, #888888, #888888);\n\
   background-size: 100% 1px;\n\
@@ -2198,6 +2342,17 @@ input[type="search"]:focus {\n\
   background-image: -webkit-linear-gradient(left, #81cfeb, #81cfeb), -webkit-linear-gradient(left, #81cfeb, #81cfeb), -webkit-linear-gradient(left, #81cfeb, #81cfeb);\n\
   background-image: linear-gradient(left, #81cfeb, #81cfeb), linear-gradient(left, #81cfeb, #81cfeb), linear-gradient(left, #81cfeb, #81cfeb);\n\
 }\n\
+/* ==============================\n\
+   Icon Styles\n\
+   =========================== */\n\
+/*\n\
+  Put a class or id on each icon.\n\
+  The use a png or svg image as \n\
+  a background image. Apply a\n\
+  background color too.\n\
+  See page article of demo\n\
+  paging control for example.\n\
+*/\n\
 .icon {\n\
   width: 40px;\n\
   height: 40px;\n\
@@ -2209,6 +2364,9 @@ input[type="search"]:focus {\n\
 li > aside > span.icon {\n\
   margin-left: 0;\n\
 }\n\
+/* ==============================\n\
+   Range Control\n\
+   =========================== */\n\
 input[type="range"] {\n\
   -webkit-appearance: none !important;\n\
   outline: none;\n\
@@ -2278,23 +2436,25 @@ html[dir=rtl] input[type="range"] {\n\
 html[dir=rtl] body.isNativeAndroidBrowser input[type="range"] {\n\
   background-position: left center;\n\
 }\n\
+/* ============================== \n\
+   Select List\n\
+   =========================== */\n\
 .list.select li {\n\
-  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.065) 20%);\n\
+  -webkit-animation-timing-function: ease-out;\n\
+  animation-timing-function: ease-out;\n\
+  -webkit-animation-duration: .5s;\n\
+  animation-duration: .5s;\n\
+  -webkit-animation-fill-mode: forwards;\n\
+  animation-fill-mode: forwards;\n\
+  background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.045) 20%);\n\
   background-size: 1000% 1000%;\n\
   background-repeat: no-repeat;\n\
   background-position: center center;\n\
-  -webkit-animation-timing-function: ease-out;\n\
-  animation-timing-function: ease-out;\n\
-  -webkit-animation-duration: .2s;\n\
-  animation-duration: .2s;\n\
-  -webkit-animation-fill-mode: forwards;\n\
-  animation-fill-mode: forwards;\n\
 }\n\
 .list.select li.selected {\n\
   -webkit-animation-name: listRipple;\n\
   animation-name: listRipple;\n\
 }\n\
-.list.select li:hover::after,\n\
 .list.select li.selected::after {\n\
   background-color: ' + $._secondaryColor + ';\n\
   -webkit-transition: all 0.125s ease-in-out;\n\
@@ -2324,6 +2484,9 @@ html[dir=rtl] body.isNativeAndroidBrowser input[type="range"] {\n\
 html[dir=rtl] .list.select li::after {\n\
   float: left;\n\
 }\n\
+/* ==============================\n\
+   Sheet Control\n\
+   =========================== */\n\
 .sheet {\n\
   position: absolute;\n\
   top: 0;\n\
@@ -2416,21 +2579,24 @@ html[dir=rtl] .sheet > section > h2 {\n\
   font-size: 16pt !important;\n\
   line-height: 20pt !important;\n\
 }\n\
+/* ==============================\n\
+   Slide Out\n\
+   =========================== */\n\
 body.isNativeAndroidBrowser .slide-out {\n\
   visibility: visible;\n\
 }\n\
 .slide-out {\n\
   position: absolute;\n\
-  top: 52px;\n\
-  left: 0;\n\
+  top: 48px;\n\
+  right: 0;\n\
   bottom: 0;\n\
   background-color: #fafafa;\n\
   z-index: 111111111;\n\
-  width: 100%;\n\
+  width: 90%;\n\
   visibility: hidden;\n\
-  -webkit-transform: translate3d(-100%, 0, 0);\n\
-  -moz-transform: translate3d(-100%, 0, 0);\n\
-  transform: translate3d(-100%, 0, 0);\n\
+  -webkit-transform: translate3d(100%, 0, 0);\n\
+  -moz-transform: translate3d(100%, 0, 0);\n\
+  transform: translate3d(100%, 0, 0);\n\
   -webkit-transition: all 0.25s ease-out;\n\
   -moz-transition: all 0.25s ease-out;\n\
   transition: all 0.25s ease-out;\n\
@@ -2458,6 +2624,8 @@ body.isNativeAndroidBrowser .slide-out {\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
   -moz-transform: translate3d(0, 0, 0);\n\
   transform: translate3d(0, 0, 0);\n\
+  border-left: solid 1px #c8c8c8;\n\
+  box-shadow: -3px 0 6px rgba(0, 0, 0, 0.25);\n\
 }\n\
 .slide-out > section {\n\
   -webkit-box-flex: 1 !important;\n\
@@ -2477,6 +2645,7 @@ body.isNativeAndroidBrowser .slide-out {\n\
   -webkit-animation-fill-mode: forwards;\n\
   animation-fill-mode: forwards;\n\
   background-image: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.045) 20%);\n\
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.045) 20%);\n\
   background-size: 1000% 1000%;\n\
   background-repeat: no-repeat;\n\
   background-position: center center;\n\
@@ -2490,7 +2659,7 @@ nav > button.slide-out-button {\n\
   position: absolute;\n\
   z-index: 1111111;\n\
   top: 8px;\n\
-  left: 10px;\n\
+  right: 10px;\n\
   width: 35px;\n\
   height: 35px;\n\
   background-image: -webkit-linear-gradient(left, #000000, #000000) !important;\n\
@@ -2526,9 +2695,9 @@ nav > button.slide-out-button.focused {\n\
   background-image: linear-gradient(left, #000000, #000000);\n\
   background-repeat: no-repeat;\n\
   -webkit-animation-name: "";\n\
-  -webkit-transform: rotate(360deg);\n\
+  -webkit-transform: rotate(180deg);\n\
   animation-name: "";\n\
-  transform: rotate(360deg);\n\
+  transform: rotate(180deg);\n\
   background-position: 9px center;\n\
 }\n\
 nav > button.slide-out-button.focused::before {\n\
@@ -2570,23 +2739,43 @@ nav > button.slide-out-button::after {\n\
   transition: all 0.25s ease-out;\n\
 }\n\
 body.slide-out-app > article {\n\
-  display: none !important;\n\
+  display: none;\n\
 }\n\
 body.slide-out-app > article.show {\n\
   display: block !important;\n\
   z-index: 100;\n\
 }\n\
+body.slide-out-app > article.navigable {\n\
+  display: block !important;\n\
+}\n\
+body.slide-out-app > nav {\n\
+  box-shadow: none !important;\n\
+}\n\
 body.slide-out-app > #global-nav {\n\
   box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2) !important;\n\
 }\n\
-body.slide-out-app > nav.show:not(:first-of-type) {\n\
+body.slide-out-app > nav > .back,\n\
+body.slide-out-app > nav > .backTo {\n\
+  left: 0;\n\
+  right: auto;\n\
+}\n\
+body.slide-out-app > nav:not(:first-of-type).show {\n\
   display: block !important;\n\
   z-index: 1111111111;\n\
-  left: 200px;\n\
-  right: 200px;\n\
+  left: 0;\n\
+  right: 80px;\n\
 }\n\
 body.slide-out-app > nav:not(:first-of-type) {\n\
   display: none !important;\n\
+}\n\
+body.slide-out-app > nav:not(:first-of-type).current {\n\
+  display: -webkit-flex !important;\n\
+  display: flex !important;\n\
+  width: 80% !important;\n\
+  left: 0 !important;\n\
+}\n\
+body.isNativeAndroidBrowser.slide-out-app > nav.current {\n\
+  display: block !important;\n\
 }\n\
 .slideout-header {\n\
   background-color: #fafafa !important;\n\
@@ -2596,18 +2785,40 @@ body.slide-out-app > nav:not(:first-of-type) {\n\
   margin-left: 0;\n\
   color: #4d4d4d !important;\n\
 }\n\
-html[dir=rtl] button.slide-out-button {\n\
-  right: 5px !important;\n\
-  left: auto !important;\n\
+html[dir=rtl] body.slide-out-app button.slide-out-button {\n\
+  left: 5px !important;\n\
+  right: auto !important;\n\
 }\n\
-html[dir=rtl] .slide-out {\n\
-  -webkit-transform: translate3d(100%, 0, 0);\n\
-  transform: translate3d(100%, 0, 0);\n\
+html[dir=rtl] body.slide-out-app button.slide-out-button.focused::before {\n\
+  -webkit-transform: rotate(45deg);\n\
+  transform: rotate(45deg);\n\
+  left: 16px;\n\
 }\n\
-html[dir=rtl] .slide-out.open {\n\
+html[dir=rtl] body.slide-out-app button.slide-out-button.focused::after {\n\
+  -webkit-transform: rotate(-45deg);\n\
+  transform: rotate(-45deg);\n\
+  left: 16px;\n\
+}\n\
+html[dir=rtl] body.slide-out-app .slide-out {\n\
+  right: 10%;\n\
+  left: auto;\n\
+  -webkit-transform: translate3d(-100%, 0, 0);\n\
+  transform: translate3d(-100%, 0, 0);\n\
+}\n\
+html[dir=rtl] body.slide-out-app .slide-out.open {\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
   transform: translate3d(0, 0, 0);\n\
+  border-left: none;\n\
+  border-right: solid 1px #c8c8c8;\n\
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.25);\n\
 }\n\
+html[dir=rtl] body.slide-out-app > nav:not(:first-of-type).show {\n\
+  left: auto !important;\n\
+  right: 0;\n\
+}\n\
+/* ==============================\n\
+   Stepper Control\n\
+   =========================== */\n\
 .stepper {\n\
   display: -moz-box;\n\
   display: inline-flex;\n\
@@ -2702,6 +2913,9 @@ html[dir=rtl] .stepper > button:last-of-type {\n\
 html[dir=rtl] body.isNativeAndroidBrowser .stepper > button > span {\n\
   padding-right: 8px;\n\
 }\n\
+/* ==============================\n\
+   Switched List Items        \n\
+   =========================== */\n\
 li.switched {\n\
   display: -webkit-box;\n\
   -webkit-box-orient: horizontal;\n\
@@ -2736,6 +2950,9 @@ html[dir=rtl] li.switched h4 {\n\
   text-align: left;\n\
   margin-left: 10px;\n\
 }\n\
+/* ==============================\n\
+   Switch\n\
+   =========================== */\n\
 @keyframes switchRipple {\n\
   0% {\n\
     box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.35);\n\
@@ -2811,13 +3028,14 @@ html[dir=rtl] li.switched h4 {\n\
   overflow: hidden;\n\
 }\n\
 .switch.traditional > em {\n\
-  width: 30px;\n\
+  width: 22px;\n\
   height: 22px;\n\
   top: -1px;\n\
   border-radius: 0;\n\
   border: solid 1px #919191;\n\
   border-top: solid 1px #e5e5e5;\n\
   background-color: #cecece;\n\
+  box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.3);\n\
 }\n\
 .isDesktop .switch.traditional:hover {\n\
   box-shadow: 0 0 2px 2px ' + $._secondaryColor + ';\n\
@@ -2827,10 +3045,11 @@ html[dir=rtl] li.switched h4 {\n\
   position: relative;\n\
   z-index: 30;\n\
   top: 0;\n\
-  width: 18px;\n\
-  height: 18px;\n\
+  width: 20px;\n\
+  height: 20px;\n\
   border-radius: 50%;\n\
   background-color: #fff;\n\
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.35);\n\
   pointer-events: none;\n\
   -webkit-transform: translate3d(-1px, 0, 0);\n\
   -moz-transform: translate3d(-1px, 0, 0);\n\
@@ -2847,9 +3066,9 @@ html[dir=rtl] li.switched h4 {\n\
   background-size: 100% 14px, 100% 14px;\n\
 }\n\
 .switch.on > em {\n\
-  -webkit-transform: translate3d(22px, 0, 0);\n\
-  -moz-transform: translate3d(22px, 0, 0);\n\
-  transform: translate3d(22px, 0, 0);\n\
+  -webkit-transform: translate3d(20px, 0, 0);\n\
+  -moz-transform: translate3d(20px, 0, 0);\n\
+  transform: translate3d(20px, 0, 0);\n\
   background-color: ' + $._secondaryColor + ';\n\
   animation-name: switchRipple;\n\
 }\n\
@@ -2887,6 +3106,9 @@ html[dir=rtl] .switch > em {\n\
   -moz-transform: translate3d(2px, 0, 0);\n\
   transform: translate3d(2px, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Tab Bar\n\
+   =========================== */\n\
 body.hasTabBar article {\n\
   top: 97px !important;\n\
 }\n\
@@ -2906,7 +3128,7 @@ body.hasTabBar article .next:not(.navigable) {\n\
   -webkit-box-sizing: border-box;\n\
   -moz-box-sizing: border-box;\n\
   box-sizing: border-box;\n\
-  height: 30px;\n\
+  height: 44px;\n\
   position: absolute;\n\
   left: 0;\n\
   top: 47px;\n\
@@ -2925,7 +3147,7 @@ body.hasTabBar article .next:not(.navigable) {\n\
   height: 100%;\n\
   text-align: center;\n\
   line-height: 17px;\n\
-  padding: 6px 10px 4px;\n\
+  padding: 10px 10px 4px;\n\
   border: none;\n\
   border-bottom: solid 1px #cecece;\n\
   box-shadow: none !important;\n\
@@ -2943,7 +3165,7 @@ body.hasTabBar article .next:not(.navigable) {\n\
   opacity: 1 !important;\n\
   box-shadow: none !important;\n\
   border-bottom: solid 3px ' + $._color + ';\n\
-  padding: 6px 10px 3px;\n\
+  padding: 11px 10px 3px;\n\
 }\n\
 .tabbar > button.more {\n\
   font-size: 0;\n\
@@ -2962,11 +3184,11 @@ body.hasTabBar article .next:not(.navigable) {\n\
   -moz-box-align: center;\n\
   -webkit-align-items: center;\n\
   align-items: center;\n\
-  padding: 8px 10px 3px;\n\
+  padding: 13px 10px 3px;\n\
 }\n\
 .tabbar > button.more.selected,\n\
 .tabbar > button.more:hover {\n\
-  padding: 8px 10px 3px;\n\
+  padding: 13px 10px 3px;\n\
 }\n\
 .tabbar > button.more > label {\n\
   display: none;\n\
@@ -2978,7 +3200,7 @@ body.hasTabBar article .next:not(.navigable) {\n\
   width: 40px;\n\
   background-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_2%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2248px%22%20height%3D%2248px%22%20viewBox%3D%220%200%2048%2048%22%20enable-background%3D%22new%200%200%2048%2048%22%20xml%3Aspace%3D%22preserve%22%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3C%2Fsvg%3E");\n\
   background-position: 50% 50%;\n\
-  background-size: 100% 100%;\n\
+  background-size: 40% 40%;\n\
   background-repeat: no-repeat;\n\
 }\n\
 .tabbar > button > span,\n\
@@ -2989,12 +3211,9 @@ body.hasTabBar article .next:not(.navigable) {\n\
   -webkit-flex: 1 !important;\n\
   flex: 1 !important;\n\
 }\n\
-html[dir=rtl] .tabbar > button:first-child {\n\
-  border-right: none !important;\n\
-}\n\
-html[dir=rtl] .tabbar > button:last-child {\n\
-  border-right: solid 1px #666666 !important;\n\
-}\n\
+/* ============================== \n\
+   Carousel styles\n\
+   =========================== */\n\
 #carousel {\n\
   width: 100%;\n\
   height: 100%;\n\

@@ -2,12 +2,12 @@ var pagingColor = $.navbarBkgdColor ? $._bkgdContrastColor : $._color;
 var toolbarButtonBkgd = $.navbarBkgdColor ? "rgba(0,0,0,.1)" : "#c0c0c0";
 var winNavBackgroundColor = 'transparent';
 if ($._navbarBkgdColor) winNavBackgroundColor = $._color;
-var stylesheet = '/*\n\
-ChocolateChip-UI\n\
-ChUI-Windows.css\n\
+
+var stylesheet = 'ChocolateChip-UI\n\
+ChUI-Win.css\n\
 Copyright 2015 Sourcebits www.sourcebits.com\n\
 License: MIT\n\
-Version: 3.8.10\n\
+Version: 3.9.0\n\
 */\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
@@ -15,7 +15,11 @@ Version: 3.8.10\n\
 .cloak > * {\n\
   display: none;\n\
 }\n\
-html, body {\n\
+/* ==============================\n\
+   Body\n\
+   =========================== */\n\
+html,\n\
+body {\n\
   padding: 0;\n\
   margin: 0;\n\
   position: absolute;\n\
@@ -28,6 +32,7 @@ html, body {\n\
   -ms-touch-action: none;\n\
 }\n\
 body {\n\
+  /* Change background color for your app: */\n\
   background-color: #000000;\n\
   font: normal 10pt/13pt SegoeWP, SegoeUI, HelveticaNeue, Sans-serif;\n\
   -ms-user-select: none;\n\
@@ -35,6 +40,9 @@ body {\n\
 body * {\n\
   -ms-user-select: none;\n\
 }\n\
+/* ==============================\n\
+   Article (view) styles\n\
+   =========================== */\n\
 article {\n\
   position: absolute;\n\
   top: 45pt;\n\
@@ -58,6 +66,9 @@ article {\n\
 .hide-navbars article {\n\
   top: 0;\n\
 }\n\
+/* ==============================\n\
+  Article navigation states\n\
+  ============================== */\n\
 .current {\n\
   transform: translate3d(0, 0, 0);\n\
   opacity: 1;\n\
@@ -79,6 +90,9 @@ html[dir=rtl] .next {\n\
 html[dir=rtl] .previous {\n\
   transform: translate3d(105%, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Scrollers\n\
+   =========================== */\n\
 article > section,\n\
 .scroller-vertical,\n\
 .scroller-horizontal {\n\
@@ -106,6 +120,9 @@ article > section > :last-child:not(button)::after {\n\
   display: block;\n\
   margin-bottom: 100px;\n\
 }\n\
+/* ==============================\n\
+  Horizontal Panels\n\
+  ============================== */\n\
 .horizontal {\n\
   display: -ms-flexbox;\n\
   display: flex;\n\
@@ -126,6 +143,9 @@ article > section > :last-child:not(button)::after {\n\
   -ms-flex-align: center;\n\
   align-items: center;\n\
 }\n\
+/* ==============================\n\
+   Buttons\n\
+   =========================== */\n\
 button {\n\
   cursor: pointer;\n\
   text-decoration: none;\n\
@@ -169,13 +189,14 @@ button.backTo {\n\
   border-radius: 50%;\n\
   border-width: 2px;\n\
   border-style: solid;\n\
-  border-color: #ffffff;\n\
+  border-color: #ffffff !important;\n\
   padding: 0;\n\
   text-align: center;\n\
   width: 41px;\n\
   height: 41px;\n\
   font-size: 0;\n\
   line-height: 30px !important;\n\
+  /* line-height must match the content box height. */\n\
   vertical-align: baseline;\n\
   overflow: hidden;\n\
 }\n\
@@ -183,7 +204,7 @@ button.back::before,\n\
 button.backTo::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\\E0D5";\n\
+  content: "\E0D5";\n\
   vertical-align: 50%;\n\
   font-size: 14pt;\n\
   display: block;\n\
@@ -222,6 +243,9 @@ html[dir=rtl] button.align-flush {\n\
   left: 16px;\n\
   right: auto;\n\
 }\n\
+/* ============================== \n\
+   Nav bars\n\
+   =========================== */\n\
 #global-nav {\n\
   background-color: #000000;\n\
   overflow: hidden;\n\
@@ -307,8 +331,17 @@ html[dir=rtl] .slide-out-app > nav > h1 {\n\
   margin-right: 80px !important;\n\
   margin-left: auto;\n\
 }\n\
-nav > h1,h2,h3,h4,h5,\n\
-section h2,p,li,\n\
+/* ==============================\n\
+   Lists\n\
+   =========================== */\n\
+nav > h1,\n\
+h2,\n\
+h3,\n\
+h4,\n\
+h5,\n\
+section h2,\n\
+p,\n\
+li,\n\
 .list > li > p {\n\
   color: #ffffff;\n\
 }\n\
@@ -358,6 +391,18 @@ section h2,p,li,\n\
 .list > li[data-show-article]:hover * {\n\
   color: #ffffff;\n\
 }\n\
+/* ==============================\n\
+   List footer\n\
+   =========================== */\n\
+.list ~ p {\n\
+  margin: 10px 25px 0;\n\
+}\n\
+.list ~ p + p {\n\
+  margin-top: 5pt;\n\
+}\n\
+/* ==============================\n\
+   List title & subtitle\n\
+   =========================== */\n\
 .list > li > h3,\n\
 .list > li > h4 {\n\
   width: 80%;\n\
@@ -403,6 +448,9 @@ section h2.normal-case {\n\
 section h2.wrap {\n\
   white-space: normal;\n\
 }\n\
+/* ==============================\n\
+   List detail\n\
+   =========================== */\n\
 section > p,\n\
 .list > li > p,\n\
 .list > li > div > p {\n\
@@ -423,6 +471,9 @@ html[dir=rtl] .list > li.show-detail::after {\n\
   left: 10px;\n\
   right: auto;\n\
 }\n\
+/* ==============================\n\
+   Comp List Items\n\
+   =========================== */\n\
 li.comp {\n\
   display: -ms-flexbox;\n\
   display: flex;\n\
@@ -539,6 +590,10 @@ html[dir=rtl] li.comp > aside > span.date-time {\n\
     text-overflow: ellipsis;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Grids\n\
+   =========================== */\n\
+/* Grid: */\n\
 .grid {\n\
   display: -webkit-box;\n\
   -webkit-box-orient: horizontal;\n\
@@ -675,6 +730,9 @@ html[dir=rtl] .grid {\n\
   -ms-flex-direction: row;\n\
   flex-direction: row;\n\
 }\n\
+/* ==============================\n\
+   Segmented Control\n\
+   =========================== */\n\
 .segmented {\n\
   display: -ms-flexbox;\n\
   display: flex;\n\
@@ -739,6 +797,9 @@ html[dir=rtl] .segmented > button {\n\
 html[dir=rtl] .segmented > button:first-of-type {\n\
   border-right: solid 2px #ffffff;\n\
 }\n\
+/* ==============================\n\
+   Segmented Paging Control\n\
+   =========================== */\n\
 .segmented.paging > button {\n\
   display: -ms-flexbox;\n\
   display: flex;\n\
@@ -789,17 +850,17 @@ nav .segmented.paging > button {\n\
   border-radius: 50%;\n\
 }\n\
 .segmented.paging.horizontal > button:first-of-type::before {\n\
-  content: "\\E09E";\n\
+  content: "\E09E";\n\
   margin-left: -2px;\n\
 }\n\
 .segmented.paging.horizontal > button:last-of-type::before {\n\
-  content: "\\E09F";\n\
+  content: "\E09F";\n\
 }\n\
 .segmented.paging.vertical > button:first-of-type::before {\n\
-  content: "\\E0A0";\n\
+  content: "\E0A0";\n\
 }\n\
 .segmented.paging.vertical > button:last-of-type::before {\n\
-  content: "\\E0A1";\n\
+  content: "\E0A1";\n\
 }\n\
 article.paging > section {\n\
   position: absolute;\n\
@@ -851,6 +912,9 @@ html[dir=rtl] article.paging.horizontal > section.previous {\n\
 html[dir=rtl] article.paging.horizontal > section.next {\n\
   transform: translate3d(-100%, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Toolbar Styles\n\
+   =========================== */\n\
 div.toolbar {\n\
   position: fixed;\n\
   bottom: 0;\n\
@@ -920,6 +984,9 @@ html[dir=rtl] div.toolbar.next {\n\
 html[dir=rtl] div.toolbar.previous {\n\
   transform: translate3d(105%, 0, 0) !important;\n\
 }\n\
+/* ==============================\n\
+   Split Layout Styles\n\
+   =========================== */\n\
 body.splitlayout {\n\
   display: -ms-flexbox;\n\
   -ms-flex-direction: row;\n\
@@ -1014,6 +1081,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
     left: 260px !important;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Mask Control\n\
+   =========================== */\n\
 .mask {\n\
   display: block;\n\
   background-color: #000;\n\
@@ -1027,6 +1097,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   z-index: 9999;\n\
   cursor: pointer;\n\
 }\n\
+/* ==============================\n\
+   Busy Control\n\
+   =========================== */\n\
 .busy {\n\
   width: 150px;\n\
   display: block;\n\
@@ -1042,6 +1115,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
 nav > .busy {\n\
   width: 80px;\n\
 }\n\
+/* ==============================\n\
+   Popover Control\n\
+   =========================== */\n\
 .popover {\n\
   min-width: 200px;\n\
   background-color: #000000;\n\
@@ -1085,6 +1161,9 @@ button.show-popover:hover {\n\
   background-color: #ffffff;\n\
   color: #000000;\n\
 }\n\
+/* ==============================\n\
+   Popup Control\n\
+   =========================== */\n\
 .popup {\n\
   display: -ms-flexbox;\n\
   display: flex;\n\
@@ -1187,6 +1266,9 @@ html[dir=rtl] .popup footer > button:first-of-type {\n\
   border-right: solid 2px #000000;\n\
   border-left: solid 2px #000000;\n\
 }\n\
+/* ============================== \n\
+   Editable Lists\n\
+   =========================== */\n\
 .list.editable > li,\n\
 .list.deletable > li {\n\
   overflow: hidden;\n\
@@ -1211,7 +1293,7 @@ html[dir=rtl] .popup footer > button:first-of-type {\n\
 .list.editable > li > .move-down::after,\n\
 .list.deletable > li > .move-down::after {\n\
   display: block;\n\
-  content: "\\E0A0";\n\
+  content: "\E0A0";\n\
   width: 27px;\n\
   height: 27px;\n\
   position: absolute;\n\
@@ -1232,7 +1314,7 @@ html[dir=rtl] .popup footer > button:first-of-type {\n\
 .list.editable > li > .move-down,\n\
 .list.deletable > li > .move-down {\n\
   margin-right: 10px !important;\n\
-  content: "\\E0A1";\n\
+  content: "\E0A1";\n\
 }\n\
 .list.editable > li:first-of-type > .move-up,\n\
 .list.deletable > li:first-of-type > .move-up {\n\
@@ -1270,7 +1352,7 @@ li.selected > .deletion-indicator::before {\n\
   font-weight: normal;\n\
   font-size: 13pt;\n\
   text-align: left;\n\
-  content: "\\E008";\n\
+  content: "\E008";\n\
   color: ' + $._color + ';\n\
   display: block;\n\
   margin: -2px 0 0 -4px;\n\
@@ -1354,7 +1436,7 @@ button.delete:hover::before {\n\
 button.delete::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\\E107";\n\
+  content: "\E107";\n\
   vertical-align: 50%;\n\
   font-size: 14pt;\n\
   display: block;\n\
@@ -1425,11 +1507,18 @@ html[dir=rtl] .list.showIndicators > li.selected {\n\
 html[dir=rtl] .list.showIndicators > li.selected > button.delete {\n\
   transform: translate3d(6px, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Form Styles\n\
+   =========================== */\n\
 input:not([type=range]),\n\
 textarea {\n\
   border: solid 2px #ffffff;\n\
   background: transparent !important;\n\
   padding: 5px;\n\
+  color: #ffffff;\n\
+}\n\
+input:focus:not([type=range]) {\n\
+  border-color: #007aff;\n\
   color: #ffffff;\n\
 }\n\
 input[type="range"]::-ms-fill-lower {\n\
@@ -1537,6 +1626,16 @@ html[dir=rtl] select::-ms-expand {\n\
   border: solid 3px #fff;\n\
   color: #fff;\n\
 }\n\
+/* ==============================\n\
+   Icon Styles\n\
+   =========================== */\n\
+/*\n\
+  Put a class or id on each icon.\n\
+  The use a png or svg image as \n\
+  a background image. Apply a\n\
+  background color too.\n\
+  See page article of demo\n\
+  paging control for example.\n\
 */\n\
 .icon {\n\
   height: 40px;\n\
@@ -1546,11 +1645,19 @@ html[dir=rtl] select::-ms-expand {\n\
   background-size: auto 70%;\n\
   border-radius: 0;\n\
 }\n\
+/* ==============================\n\
+   Range Control\n\
+   =========================== */\n\
 input[type="range"] {\n\
   display: block;\n\
   margin-top: 20px;\n\
   margin-bottom: 20px;\n\
 }\n\
+/* Use color attribute for left side of range control */\n\
+/* Use color attribute for right side of range control */\n\
+/* ============================== \n\
+   Select List\n\
+   =========================== */\n\
 .list.select li::before {\n\
   content: "";\n\
   display: block;\n\
@@ -1571,6 +1678,9 @@ input[type="range"] {\n\
 .list.select li > input {\n\
   display: none;\n\
 }\n\
+/* ==============================\n\
+   Sheet Control\n\
+   =========================== */\n\
 .sheet {\n\
   position: absolute;\n\
   top: 0;\n\
@@ -1640,7 +1750,7 @@ input[type="range"] {\n\
   height: 28pt;\n\
 }\n\
 .sheet > div.handle::before {\n\
-  content: "\\E0A0";\n\
+  content: "\E0A0";\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
   font-size: 24pt;\n\
@@ -1649,16 +1759,19 @@ input[type="range"] {\n\
   display: block;\n\
   margin-bottom: 10px;\n\
 }\n\
-.slide-out {\n\
+/* ==============================\n\
+   Slide Out\n\
+   =========================== */\n\
+body.slide-out-app > .slide-out {\n\
   position: absolute;\n\
   top: 44pt;\n\
-  left: 0;\n\
+  right: 0;\n\
   bottom: 0;\n\
   background-color: #000000;\n\
   z-index: 111111111;\n\
-  width: 100%;\n\
+  width: 90%;\n\
   visibility: hidden;\n\
-  transform: translate3d(-100%, 0, 0);\n\
+  transform: translate3d(100%, 0, 0);\n\
   transition: all 0.25s ease-out;\n\
   overflow-x: hidden;\n\
   overflow-y: auto;\n\
@@ -1671,12 +1784,14 @@ input[type="range"] {\n\
   justify-content: flex-start;\n\
   -ms-flex-align: stretch;\n\
   align-items: stretch;\n\
+  border-left: solid 1px rgba(255, 255, 255, 0.5);\n\
+  box-shadow: -3px 0 8px rgba(255, 255, 255, 0.25);\n\
 }\n\
-.slide-out.open {\n\
+body.slide-out-app > .slide-out.open {\n\
   visibility: visible;\n\
   transform: translate3d(0, 0, 0);\n\
 }\n\
-.slide-out > section {\n\
+body.slide-out-app > .slide-out > section {\n\
   -ms-flex: 1;\n\
   flex: 1;\n\
   padding-bottom: 100px;\n\
@@ -1684,21 +1799,22 @@ input[type="range"] {\n\
   overflow-y: auto;\n\
   -ms-overflow-style: -ms-autohiding-scrollbar;\n\
 }\n\
-.slide-out > section > ul.list {\n\
+body.slide-out-app > .slide-out > section > ul.list {\n\
   margin-top: 20px;\n\
 }\n\
-button.slide-out-button {\n\
+body.slide-out-app button.slide-out-button {\n\
   position: absolute;\n\
   z-index: 1111111;\n\
-  top: 0 !important;\n\
-  left: 15px;\n\
+  top: 16px !important;\n\
+  right: 15px !important;\n\
+  left: auto !important;\n\
   height: 35px;\n\
   width: 35px;\n\
   box-sizing: border-box;\n\
-  margin-left: -5px !important;\n\
+  margin-left: 20px !important;\n\
 }\n\
-button.slide-out-button::before {\n\
-  content: "\\E179";\n\
+body.slide-out-app button.slide-out-button::before {\n\
+  content: "\E179";\n\
   height: 35px;\n\
   width: 35px;\n\
   color: #ffffff;\n\
@@ -1709,12 +1825,17 @@ button.slide-out-button::before {\n\
   display: block;\n\
   margin: 2px 0 0 -5px;\n\
 }\n\
-button.slide-out-button:hover::before {\n\
+body.slide-out-app button.slide-out-button:hover::before {\n\
   color: #000000;\n\
 }\n\
 body.slide-out-app > article,\n\
 body.slide-out-app > nav:not(:first-of-type) {\n\
-  display: none !important;\n\
+  display: none;\n\
+}\n\
+body.slide-out-app > article.current,\n\
+body.slide-out-app > nav:not(:first-of-type).current {\n\
+  display: -ms-flexbox !important;\n\
+  display: flex !important;\n\
 }\n\
 body.slide-out-app > article.show,\n\
 body.slide-out-app > nav.show {\n\
@@ -1729,18 +1850,28 @@ body.slide-out-app > nav.show {\n\
   color: #ffffff !important;\n\
   margin-top: 20px !important;\n\
 }\n\
-html[dir=rtl] .slide-out {\n\
-  transform: translate3d(100%, 0, 0);\n\
+html[dir=rtl] body.slide-out-app .slide-out {\n\
+  transform: translate3d(-100%, 0, 0);\n\
+  right: auto !important;\n\
+  left: 0 !important;\n\
+  border-left: none;\n\
+  border-right: solid 1px rgba(255, 255, 255, 0.5);\n\
+  box-shadow: 3px 0 8px rgba(255, 255, 255, 0.25);\n\
 }\n\
-html[dir=rtl] .slide-out.open {\n\
+html[dir=rtl] body.slide-out-app .slide-out.open {\n\
   transform: translate3d(0, 0, 0);\n\
 }\n\
-html[dir=rtl] button.slide-out-button {\n\
+html[dir=rtl] body.slide-out-app button.slide-out-button {\n\
   margin-right: 10px !important;\n\
+  left: 0px !important;\n\
+  right: auto !important;\n\
 }\n\
-html[dir=rtl] button.slide-out-button::before {\n\
+html[dir=rtl] body.slide-out-app button.slide-out-button::before {\n\
   margin: 2px -17px 0 0 !important;\n\
 }\n\
+/* ==============================\n\
+   Stepper Control\n\
+   =========================== */\n\
 .stepper {\n\
   -ms-flex-align: start;\n\
   display: flex;\n\
@@ -1792,7 +1923,7 @@ html[dir=rtl] button.slide-out-button::before {\n\
 .stepper > button:first-of-type::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\\E108";\n\
+  content: "\E108";\n\
 }\n\
 .stepper > button:last-of-type {\n\
   border-left: none;\n\
@@ -1800,7 +1931,7 @@ html[dir=rtl] button.slide-out-button::before {\n\
 .stepper > button:last-of-type::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\\E109";\n\
+  content: "\E109";\n\
 }\n\
 html[dir=rtl] .stepper > button:first-of-type {\n\
   border-right: solid 2px #ffffff;\n\
@@ -1808,6 +1939,9 @@ html[dir=rtl] .stepper > button:first-of-type {\n\
 html[dir=rtl] .stepper > button:last-of-type {\n\
   border-left: solid 2px #ffffff;\n\
 }\n\
+/* ==============================\n\
+   Switched List Items\n\
+   =========================== */\n\
 li.switched {\n\
   display: -ms-flexbox;\n\
   display: flex;\n\
@@ -1843,6 +1977,9 @@ html[dir=rtl] li.switched h4 {\n\
   margin-left: 10px;\n\
   margin-right: auto;\n\
 }\n\
+/* ==============================\n\
+   Switch\n\
+   =========================== */\n\
 .switch {\n\
   position: relative;\n\
   height: 25px;\n\
@@ -1912,6 +2049,9 @@ html[dir=rtl] .switch.on > em {\n\
   -ms-transform: translate3d(2px, 0, 0);\n\
   transform: translate3d(2px, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Tab Bar\n\
+   =========================== */\n\
 .tabbar {\n\
   height: 47px;\n\
   padding: 1px 5px;\n\
@@ -1949,7 +2089,7 @@ html[dir=rtl] .switch.on > em {\n\
 .tabbar > button.more::before {\n\
   font-family: "Segoe UI Symbol";\n\
   font-weight: normal;\n\
-  content: "\\E10C";\n\
+  content: "\E10C";\n\
   font-size: 20pt;\n\
   line-height: 0.85;\n\
 }\n\
@@ -1962,10 +2102,18 @@ html[dir=rtl] .switch.on > em {\n\
 body.hasTabBar > article {\n\
   top: 95px !important;\n\
 }\n\
+/* ==============================\n\
+   Media Queries for landscape \n\
+   & portrait layouts\n\
+   =========================== */\n\
 @media only screen and (device-width: 480px) and (orientation: portrait) {\n\
   @-ms-viewport {\n\
     width: 240px;\n\
   }\n\
+  /*\n\
+    IMPORTANT! Define width for html and body\n\
+    to prevent horizontal scrolling when viewport is resized.\n\
+  */\n\
   html,\n\
   body,\n\
   body {\n\
@@ -1991,6 +2139,7 @@ body.hasTabBar > article {\n\
     width: 30px;\n\
     height: 30px;\n\
     line-height: 18px !important;\n\
+    /* line-height must match the content box height. */\n\
     -ms-flex: none;\n\
     flex: none;\n\
   }\n\
@@ -2031,6 +2180,10 @@ body.hasTabBar > article {\n\
     padding: 1px 6px;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Media Query Adjustments\n\
+   =========================== */\n\
+/* For small, narrow phones in portrait mode: */\n\
 @media only screen and (device-width: 480px) and (orientation: portrait) {\n\
   .popover {\n\
     width: 200px;\n\
@@ -2102,6 +2255,7 @@ body.hasTabBar > article {\n\
     margin: -1px 0 0 -6px;\n\
   }\n\
 }\n\
+/* For small, narrow phones in landscape mode: */\n\
 @media only screen and (device-width: 480px) and (orientation: landscape) {\n\
   @-ms-viewport {\n\
     width: 480px;\n\
@@ -2122,16 +2276,21 @@ body.hasTabBar > article {\n\
     position: static;\n\
   }\n\
 }\n\
+/* For normal phones in portrait mode: */\n\
 @media only screen and (device-width: 768px) and (orientation: portrait) {\n\
   @-ms-viewport {\n\
     width: 384px;\n\
   }\n\
 }\n\
+/* For normal phones in landscape mode: */\n\
 @media only screen and (device-width: 768px) and (orientation: landscape) {\n\
   @-ms-viewport {\n\
     width: 512px;\n\
   }\n\
 }\n\
+/* ============================== \n\
+   Carousel styles\n\
+   =========================== */\n\
 #carousel {\n\
   width: 100%;\n\
   height: 100%;\n\

@@ -1,26 +1,40 @@
-var stylesheet = '/*\n\
-ChocolateChip-UI\n\
+var stylesheet = 'ChocolateChip-UI\n\
 ChUI-iOS.css\n\
 Copyright 2015 Sourcebits www.sourcebits.com\n\
 License: MIT\n\
-Version: 3.8.10\n\
+Version: 3.9.0\n\
 */\n\
 .attentionGrapper {\n\
   color: ' + $._secondaryColor + ' !important;\n\
 }\n\
+/* \n\
+  Flex parameters:\n\
+  #flex > .display(<flex> | <inline-flex>);\n\
+  #flex > .flex-direction(row | row-reverse | column | column-reverse);\n\
+  #flex > .justify-content(flex-start | flex-end | center | space-between | space-around);\n\
+  #flex > .align-content(flex-start | flex-end | center | space-between | space-around | stretch);\n\
+  #fkex > .flex(none | [ <flex-grow> <flex-shrink> | <flex-basis> ]);\n\
+*/\n\
 .cloak > * {\n\
   display: none;\n\
 }\n\
+/* ==============================\n\
+   Typography\n\
+   =========================== */\n\
 .ellipsis {\n\
   overflow: hidden;\n\
   text-overflow: ellipsis;\n\
   white-space: nowrap;\n\
 }\n\
-html,body,h1,h2,h3,h4,h5,p,div,span,ul,ol,li,pre,blockquote,article,section,nav,aside,header,footer,address,dl,tdt,dd,figure,figcaption,a,em,strong,abbr,time,code,sup,sub,i,b,u,ruby,table,thead,tbody,th,tr,td,label,input,button,select,option,textarea,menu,body {\n\
+html, body, h1, h2, h3, h4, h5, p, div, span, ul, ol, li, pre, blockquote, article, section, nav, aside, header, footer, address, dl, tdt, dd, figure, figcaption, a, em, strong, abbr, time, code, sup, sub, i, b, u, ruby, table, thead, tbody, th, tr, td, label, input, button, select, option, textarea, menu, body {\n\
   font-family: -apple-system-font;\n\
   -webkit-font-smoothing: antialiased;\n\
 }\n\
-html,body {\n\
+/* ==============================\n\
+   Body\n\
+   =========================== */\n\
+html,\n\
+body {\n\
   padding: 0;\n\
   margin: 0;\n\
   position: absolute;\n\
@@ -41,7 +55,12 @@ body {\n\
 body.isDesktop {\n\
   font-family: "Helvetica Neue", HelveticaNeue, Helvetica, sans-serif;\n\
 }\n\
-body.isDesktop h1,body.isDesktop h2,body.isDesktop h3,body.isDesktop h4,body.isDesktop h5,body.isDesktop p {\n\
+body.isDesktop h1,\n\
+body.isDesktop h2,\n\
+body.isDesktop h3,\n\
+body.isDesktop h4,\n\
+body.isDesktop h5,\n\
+body.isDesktop p {\n\
   font-family: "Helvetica Neue", HelveticaNeue;\n\
 }\n\
 h1 {\n\
@@ -79,6 +98,9 @@ cite {\n\
 figure {\n\
   font: -apple-system-figure;\n\
 }\n\
+/* ==============================\n\
+   Article (view)\n\
+   =========================== */\n\
 article {\n\
   position: absolute;\n\
   top: 45px;\n\
@@ -117,6 +139,9 @@ article {\n\
     transition: all 0.25s ease-out;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Article navigation states\n\
+   =========================== */\n\
 .current {\n\
   opacity: 1;\n\
   visibility: visible;\n\
@@ -147,6 +172,9 @@ html[dir=rtl] .previous {\n\
   -webkit-transform: translate3d(105%, 0, 0);\n\
   transform: translate3d(105%, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Scrollers\n\
+   =========================== */\n\
 .scroller-vertical,\n\
 .scroller-horizontal {\n\
   -webkit-box-flex: 1;\n\
@@ -174,6 +202,9 @@ article > section,\n\
   width: 100%;\n\
   min-height: 100% !important;\n\
 }\n\
+/* ==============================\n\
+   Horizontal Panels\n\
+   =========================== */\n\
 .vertical,\n\
 li.comp > aside.vertical {\n\
   display: flex;\n\
@@ -208,6 +239,9 @@ li.comp > aside.vertical {\n\
   -webkit-align-items: center;\n\
   align-items: center;\n\
 }\n\
+/* ============================== \n\
+   Buttons\n\
+   =========================== */\n\
 button {\n\
   border: none;\n\
   background: none;\n\
@@ -231,6 +265,7 @@ button {\n\
   border-color: ' + $._color + ';\n\
   background-color: rgba(255, 255, 255, 0.01);\n\
   -webkit-font-smoothing: antialiased;\n\
+  margin: 0 5px;\n\
 }\n\
 .isDesktop button:hover {\n\
   cursor: pointer;\n\
@@ -253,17 +288,13 @@ button.backTo {\n\
 button.back::before,\n\
 button.backTo::before {\n\
   display: block;\n\
-}\n\
-button.back::before,\n\
-button.backTo::before {\n\
-  display: block;\n\
   content: "";\n\
   border: solid 1px transparent;\n\
   background-color: ' + $._navbarColor + ';\n\
   -webkit-mask-position: 50% 50%;\n\
   -webkit-mask-size: 90% 90%;\n\
   -webkit-mask-repeat: no-repeat;\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20version%3D"1.1"%20width%3D"21"%20height%3D"35"%20viewBox%3D"0%200%2021%2035"%20id%3D"svg2"%3E%3Cdefs%20id%3D"defs8"%20/%3E%3Cg%20transform%3D"translate%28-2.1355929,0.0677963%29"%20id%3D"Page-1"%20style%3D"fill%3Anone%3Bstroke%3Anone"%3E%3Cpath%20d%3D"M%2021.353814,1.2365445%205.0903576,17.5%2021.353814,33.763456"%20id%3D"Rectangle-1"%20style%3D"stroke%3A%23000%3Bstroke-width%3A3"%20/%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20version%3D"1.1"%20width%3D"21"%20height%3D"35"%20viewBox%3D"0%200%2021%2035"%20id%3D"svg2"%3E%3Cdefs%20id%3D"defs8"%20%2F%3E%3Cg%20transform%3D"translate(-2.1355929%2C0.0677963)"%20id%3D"Page-1"%20style%3D"fill%3Anone%3Bstroke%3Anone"%3E%3Cpath%20d%3D"M%2021.353814%2C1.2365445%205.0903576%2C17.5%2021.353814%2C33.763456"%20id%3D"Rectangle-1"%20style%3D"stroke%3A%23000%3Bstroke-width%3A3"%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\');\n\
   -webkit-mask-position: left center;\n\
   width: 20px;\n\
   height: 20px;\n\
@@ -289,8 +320,7 @@ button.action {\n\
 nav > button {\n\
   max-width: 100px;\n\
 }\n\
-button.align-flush,\n\
-.toolbar > button.align-flush {\n\
+.align-flush {\n\
   position: absolute;\n\
   right: 15px;\n\
   margin-right: 0 !important;\n\
@@ -326,10 +356,17 @@ html[dir=rtl] button.backTo::before {\n\
   right: -4px;\n\
   left: auto;\n\
 }\n\
+html[dir=rtl] .align-flush {\n\
+  right: auto;\n\
+  left: 15px;\n\
+}\n\
 html[dir=rtl] .toolbar > button.align-flush {\n\
   right: auto;\n\
   left: 15px;\n\
 }\n\
+/* ==============================\n\
+   Nav Bars\n\
+   =========================== */\n\
 #global-nav {\n\
   background-color: '+ $._bkgdColor +';\n\
   border-bottom: solid 1px #a7a7aa;\n\
@@ -411,6 +448,9 @@ nav > button + h1 {\n\
     right: 150px;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Lists (Basic)\n\
+   =========================== */\n\
 .list {\n\
   list-style: none;\n\
   margin: 0 0 10px 0;\n\
@@ -471,7 +511,7 @@ nav > button + h1 {\n\
   padding: 10px 8px;\n\
   position: absolute;\n\
   top: 10px;\n\
-  right: 15px;\n\
+  right: 10px;\n\
 }\n\
 .list + p,\n\
 .list + p + p {\n\
@@ -483,6 +523,9 @@ nav > button + h1 {\n\
 .list ~ p + p {\n\
   margin-top: 5pt;\n\
 }\n\
+/* ==============================\n\
+   List Footer\n\
+  ============================ */\n\
 .list + p,\n\
 .list + p + p {\n\
   color: #7f7f7f;\n\
@@ -493,6 +536,9 @@ nav > button + h1 {\n\
 .list ~ p + p {\n\
   margin-top: 5pt;\n\
 }\n\
+/* ==============================\n\
+   List Hover & Selected States\n\
+  ============================ */\n\
 .isDesktop .list > li[data-goto]:hover,\n\
 .isDesktop .list > li[data-show-article]:hover,\n\
 .isDesktop .list.select > li:hover,\n\
@@ -500,6 +546,9 @@ nav > button + h1 {\n\
   background-color: #d9d9d9;\n\
   cursor: pointer;\n\
 }\n\
+/* ==============================\n\
+  List title & subtitle\n\
+  ============================ */\n\
 .list > li > h3,\n\
 .list > li > h4 {\n\
   width: 80%;\n\
@@ -519,6 +568,9 @@ nav > button + h1 {\n\
   font-weight: normal;\n\
   color: #7f7f7f;\n\
 }\n\
+/* ==============================\n\
+  List detail\n\
+  ============================ */\n\
 .list h3,\n\
 .list h4,\n\
 .list p {\n\
@@ -535,6 +587,9 @@ nav > button + h1 {\n\
   margin: 0;\n\
   color: #7f7f7f;\n\
 }\n\
+/* ==============================\n\
+  List header\n\
+  ============================ */\n\
 section h2 {\n\
   font-weight: normal;\n\
   font-size: 11pt;\n\
@@ -578,6 +633,9 @@ html[dir=rtl] .list li.nav::after {\n\
   left: 15px;\n\
   right: auto;\n\
 }\n\
+/* ==============================\n\
+   Comp List Items\n\
+   =========================== */\n\
 .list > li.comp::before {\n\
   content: none;\n\
 }\n\
@@ -663,7 +721,7 @@ li.comp > aside > .show-detail::after {\n\
   box-sizing: border-box;\n\
   padding: 10px 8px;\n\
   float: right;\n\
-  margin: 0px 10px 0 0 !important;\n\
+  margin: 0 !important;\n\
 }\n\
 li.comp > aside:first-child {\n\
   margin-right: 10px;\n\
@@ -722,6 +780,10 @@ html[dir=rtl] li.comp > aside > h4 {\n\
     text-overflow: ellipsis;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Grids\n\
+   =========================== */\n\
+/* Grid: */\n\
 .grid {\n\
   display: -webkit-box;\n\
   -webkit-box-orient: horizontal;\n\
@@ -736,18 +798,21 @@ html[dir=rtl] li.comp > aside > h4 {\n\
   flex-direction: row;\n\
   align-items: stretch;\n\
 }\n\
+/* Allow columns to wrap */\n\
 .grid.wrap {\n\
   -webkit-box-wrap: wrap;\n\
   -webkit-flex-wrap: wrap;\n\
   -ms-flex-wrap: wrap;\n\
   flex-wrap: wrap;\n\
 }\n\
+/* Column: */\n\
 .col {\n\
   -webkit-box-flex: 1 1 auto;\n\
   -webkit-flex: 1 1 auto;\n\
   -ms-flex: 1 1 auto;\n\
   flex: 1 1 auto;\n\
 }\n\
+/* Centered grids: */\n\
 .grid.center {\n\
   -webkit-box-pack: center;\n\
   -webkit-justify-content: center;\n\
@@ -762,6 +827,7 @@ html[dir=rtl] li.comp > aside > h4 {\n\
   flex-grow: 0;\n\
   flex-shrink: 0;\n\
 }\n\
+/* Columns: */\n\
 .flex-1 {\n\
   -webkit-flex-basis: 10%;\n\
   -ms-flex-basis: 10%;\n\
@@ -854,6 +920,9 @@ html[dir=rtl] .grid {\n\
   -ms-flex-direction: row;\n\
   flex-direction: row;\n\
 }\n\
+/* ==============================\n\
+   Segmented Control\n\
+   =========================== */\n\
 .segmented:not(.paging) {\n\
   -webkit-box-orient: horizontal;\n\
   -webkit-flex-direction: row;\n\
@@ -939,6 +1008,9 @@ html[dir=rtl] .segmented button:last-of-type {\n\
   border-top-left-radius: 4px;\n\
   border-bottom-left-radius: 4px;\n\
 }\n\
+/* ==============================\n\
+   Segmented Paging Control\n\
+   =========================== */\n\
 .segmented.paging,\n\
 .segmented.paging.vertical {\n\
   -webkit-box-orient: horizontal !important;\n\
@@ -981,23 +1053,23 @@ html[dir=rtl] .segmented button:last-of-type {\n\
 }\n\
 .segmented.paging.horizontal > .button:first-of-type::before,\n\
 .segmented.paging.horizontal > button:first-of-type::before {\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M28.038,8.381l2.674,2.599L18.545,23.146l12.086,12.086l-2.593,2.679L17.909,27.782l-4.636-4.636l4.636-4.636%20L28.038,8.381z"/%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M28.038,8.381l2.674,2.599L18.545,23.146l12.086,12.086l-2.593,2.679L17.909,27.782l-4.636-4.636l4.636-4.636%20L28.038,8.381z"/%3E%3C/g%3E%3C/svg%3E");\n\
 }\n\
 .segmented.paging.horizontal > .button:last-of-type::before,\n\
 .segmented.paging.horizontal > button:last-of-type::before {\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M15.946,37.911l-2.674-2.599l12.167-12.167L13.354,11.06l2.593-2.679L26.075,18.51l4.636,4.636l-4.636,4.636L15.946,37.911z"/%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M15.946,37.911l-2.674-2.599l12.167-12.167L13.354,11.06l2.593-2.679L26.075,18.51l4.636,4.636l-4.636,4.636L15.946,37.911z"/%3E%3C/g%3E%3C/svg%3E");\n\
 }\n\
 .segmented.paging.vertical > .button:first-of-type::before,\n\
 html[dir=rtl] .segmented.paging.vertical > .button:last-of-type::before,\n\
 .segmented.paging.vertical > button:first-of-type::before,\n\
 html[dir=rtl] .segmented.paging.vertical > button:last-of-type::before {\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M7.227,17.101l2.599-2.674l12.167,12.167l12.086-12.086l2.679,2.593L26.628,27.229l-4.636,4.636l-4.636-4.636%20L7.227,17.101z"/%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M7.227,17.101l2.599-2.674l12.167,12.167l12.086-12.086l2.679,2.593L26.628,27.229l-4.636,4.636l-4.636-4.636%20L7.227,17.101z"/%3E%3C/g%3E%3C/svg%3E");\n\
 }\n\
 .segmented.paging.vertical > .button:last-of-type::before,\n\
 html[dir=rtl] .segmented.paging.vertical > .button:first-of-type::before,\n\
 .segmented.paging.vertical > button:last-of-type::before,\n\
 html[dir=rtl] .segmented.paging.vertical > button:first-of-type::before {\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M36.757,29.191l-2.599,2.674L21.992,19.698L9.905,31.784l-2.679-2.593l10.129-10.129l4.636-4.636l4.636,4.636%20L36.757,29.191z"/%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"svg2"%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Cg%20id%3D"g4"%3E%3C/g%3E%3Cg%20id%3D"layer2"%3E%3Cpath%20id%3D"path7"%20d%3D"M36.757,29.191l-2.599,2.674L21.992,19.698L9.905,31.784l-2.679-2.593l10.129-10.129l4.636-4.636l4.636,4.636%20L36.757,29.191z"/%3E%3C/g%3E%3C/svg%3E");\n\
 }\n\
 article.paging {\n\
   overflow: hidden !important;\n\
@@ -1021,6 +1093,7 @@ article.paging > section {\n\
   -webkit-transition: all 0.15s ease-out;\n\
   transition: all 0.15s ease-out;\n\
 }\n\
+/* Scaling needed to fix overflow bug in mobile Safari: */\n\
 article.paging.horizontal > section.previous {\n\
   -webkit-transform: translate3d(-100%, 0, 0);\n\
   transform: translate3d(-100%, 0, 0);\n\
@@ -1079,6 +1152,9 @@ html[dir=rtl] article.paging.horizontal > section.next {\n\
 html[dir=rtl] .segmented.paging.horizontal > button::before {\n\
   -webkit-transform: rotate(180deg);\n\
 }\n\
+/* ==============================\n\
+   Toolbar\n\
+   =========================== */\n\
 .toolbar {\n\
   position: fixed;\n\
   bottom: 0;\n\
@@ -1134,17 +1210,36 @@ div.toolbar.previous {\n\
   -webkit-transform: translate3d(-101%, 0, 0) !important;\n\
   transform: translate3d(-101%, 0, 0) !important;\n\
 }\n\
+html[dir=rtl] div.toolbar.current {\n\
+  -webkit-transform: translate3d(-101%, 0, 0) !important;\n\
+  transform: translate3d(-101%, 0, 0) !important;\n\
+}\n\
+html[dir=rtl] div.toolbar.next {\n\
+  -webkit-transform: translate3d(101%, 0, 0) !important;\n\
+  transform: translate3d(101%, 0, 0) !important;\n\
+}\n\
+html[dir=rtl] div.toolbar.previous {\n\
+  -webkit-transform: translate3d(0, 0, 0) !important;\n\
+  transform: translate3d(0, 0, 0) !important;\n\
+}\n\
 html[dir=rtl] .splitlayout > .master + .toolbar {\n\
-  right: 0;\n\
+  right: -324px;\n\
   left: 320px;\n\
   width: 320px;\n\
   border-right: none;\n\
   border-left: solid 1px #c8c8c7 !important;\n\
 }\n\
-html[dir=rtl] .splitlayout > .detail + .toolbar {\n\
+html[dir=rtl] .splitlayout > .detail + .toolbar,\n\
+html[dir=rtl] .splitlayout > .detail + .toolbar.current {\n\
   right: 320px;\n\
   left: 0;\n\
+  /*margin-right: 320px;*/\n\
+  -webkit-transform: translate3d(0, 0, 0) !important;\n\
+  transform: translate3d(0, 0, 0) !important;\n\
 }\n\
+/* ==============================\n\
+   Split Layout\n\
+   =========================== */\n\
 body.splitlayout {\n\
   display: flex;\n\
   display: -webkit-flex;\n\
@@ -1226,6 +1321,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   right: 320px !important;\n\
   left: 0 !important;\n\
 }\n\
+html[dir=rtl] body.splitlayout > article.detail .toolbar {\n\
+  left: 0 !important;\n\
+}\n\
 @media only screen and (max-device-width: 320px) and (orientation: portrait) {\n\
   .splitlayout > article.master {\n\
     right: 260px !important;\n\
@@ -1241,6 +1339,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
     left: 260px !important;\n\
   }\n\
 }\n\
+/* ==============================\n\
+   Mask Control\n\
+   =========================== */\n\
 .mask {\n\
   display: block;\n\
   background-color: #000;\n\
@@ -1254,6 +1355,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   z-index: 9999;\n\
   cursor: pointer;\n\
 }\n\
+/* ==============================\n\
+   Busy Control\n\
+   =========================== */\n\
 @-webkit-keyframes busyAnim {\n\
   0% {\n\
     -webkit-transform: rotate(0deg);\n\
@@ -1283,12 +1387,15 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   -webkit-mask-position: 50% 50%;\n\
   -webkit-mask-size: 90% 90%;\n\
   -webkit-mask-repeat: no-repeat;\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20viewBox%3D"0%200%2042%2042"%3E%3Cg%20transform%3D"translate%2821,21%29"%3E%3Cg%20stroke-width%3D"4"%20stroke-linecap%3D"round"%20stroke%3D"rgb%280,%200,%200%29"%3E%3Cline%20id%3D"tine1"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%280,%200,%200%29"%20opacity%3D"1"%3E%3C/line%3E%3Cline%20id%3D"tine2"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-36,%200,%200%29"%20opacity%3D".9"%3E%3C/line%3E%3Cline%20id%3D"tine3"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-72,%200,%200%29"%20opacity%3D".8"%3E%3C/line%3E%3Cline%20id%3D"tine4"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-108,%200,%200%29"%20opacity%3D".7"%3E%3C/line%3E%3Cline%20id%3D"tine5"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-144,%200,%200%29"%20opacity%3D".6"%3E%3C/line%3E%3Cline%20id%3D"tine6"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-180,%200,%200%29"%20opacity%3D".5"%3E%3C/line%3E%3Cline%20id%3D"tine7"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-216,%200,%200%29"%20opacity%3D".4"%3E%3C/line%3E%3Cline%20id%3D"tine8"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-252,%200,%200%29"%20opacity%3D"1"%3E%3C/line%3E%3Cline%20id%3D"tine9"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-288,%200,%200%29"%20opacity%3D"1"%3E%3C/line%3E%3Cline%20id%3D"tine10"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate%28-324,%200,%200%29"%20opacity%3D"1"%3E%3C/line%3E%3C/g%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%2042%2042"%3E%3Cg%20transform%3D"translate(21%2C21)"%3E%3Cg%20stroke-width%3D"4"%20stroke-linecap%3D"round"%20stroke%3D"rgb(0%2C%200%2C%200)"%3E%3Cline%20id%3D"tine1"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(0%2C%200%2C%200)"%20opacity%3D"1"%3E%3C%2Fline%3E%3Cline%20id%3D"tine2"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-36%2C%200%2C%200)"%20opacity%3D".9"%3E%3C%2Fline%3E%3Cline%20id%3D"tine3"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-72%2C%200%2C%200)"%20opacity%3D".8"%3E%3C%2Fline%3E%3Cline%20id%3D"tine4"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-108%2C%200%2C%200)"%20opacity%3D".7"%3E%3C%2Fline%3E%3Cline%20id%3D"tine5"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-144%2C%200%2C%200)"%20opacity%3D".6"%3E%3C%2Fline%3E%3Cline%20id%3D"tine6"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-180%2C%200%2C%200)"%20opacity%3D".5"%3E%3C%2Fline%3E%3Cline%20id%3D"tine7"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-216%2C%200%2C%200)"%20opacity%3D".4"%3E%3C%2Fline%3E%3Cline%20id%3D"tine8"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-252%2C%200%2C%200)"%20opacity%3D"1"%3E%3C%2Fline%3E%3Cline%20id%3D"tine9"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-288%2C%200%2C%200)"%20opacity%3D"1"%3E%3C%2Fline%3E%3Cline%20id%3D"tine10"%20x1%3D"0"%20y1%3D"11"%20x2%3D"0"%20y2%3D"18"%20transform%3D"rotate(-324%2C%200%2C%200)"%20opacity%3D"1"%3E%3C%2Fline%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");\n\
 }\n\
 .busy.align-flush {\n\
   position: absolute;\n\
   right: 15px;\n\
 }\n\
+/* ==============================\n\
+   Popover Control\n\
+   =========================== */\n\
 .popover {\n\
   width: 280px;\n\
   background-color: #e7e9ee;\n\
@@ -1336,6 +1443,9 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   left: 0;\n\
   right: 0;\n\
 }\n\
+/* ==============================\n\
+   Popup Control\n\
+   =========================== */\n\
 .popup {\n\
   display: block;\n\
   -webkit-box-sizing: border-box;\n\
@@ -1353,6 +1463,7 @@ html[dir=rtl] body.splitlayout > article.detail {\n\
   -webkit-trasform-origin: center center;\n\
   trasform-origin: center center;\n\
   min-height: 100px;\n\
+  left: calc(45%);\n\
 }\n\
 .popup.closed {\n\
   -webkit-transform: scale(0);\n\
@@ -1442,6 +1553,9 @@ html[dir=rtl] .popup > footer > button + button {\n\
   border-right: solid 1px #b5b5b5;\n\
   border-left: none;\n\
 }\n\
+/* ============================== \n\
+   Deletable Lists\n\
+   =========================== */\n\
 .list li > .deletion-indicator {\n\
   display: inline-flex;\n\
   display: -webkit-inline-flex;\n\
@@ -1498,7 +1612,7 @@ html[dir=rtl] .popup > footer > button + button {\n\
   width: 21px;\n\
   height: 21px;\n\
   position: absolute;\n\
-  background-image: url(\'data:image/svg+xml;utf8,%3Csvg%20width%3D%22367px%22%20height%3D%22367px%22%20viewBox%3D%220%200%20367%20367%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22Sortable%22%20transform%3D%22translate%2813.000000,%2013.000000%29%22%20stroke%3D%22%23' + $._secondaryColor.split('#')[1] + '%22%20stroke-width%3D%2225%22%3E%3Ccircle%20id%3D%22Oval-1%22%20cx%3D%22170.5%22%20cy%3D%22170.5%22%20r%3D%22170.5%22%3E%3C/circle%3E%3Cpath%20d%3D%22M55.3736267,209.778395%20L172.745285,100.706186%20L286.306656,209.611568%22%20id%3D%22Path-2%22%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E\');\n\
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D\'367px\'%20height%3D\'367px\'%20viewBox%3D\'0%200%20367%20367\'%20version%3D\'1.1\'%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20xmlns%3Axlink%3D\'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink\'%3E%3Cg%20id%3D\'Page-1\'%20stroke%3D\'none\'%20stroke-width%3D\'1\'%20fill%3D\'none\'%20fill-rule%3D\'evenodd\'%3E%3Cg%20id%3D\'Sortable\'%20transform%3D\'translate(13.000000%2C%2013.000000)\'%20stroke%3D\'#' + $._secondaryColor.split('#')[1] + '\'%20stroke-width%3D\'25\'%3E%3Ccircle%20id%3D\'Oval-1\'%20cx%3D\'170.5\'%20cy%3D\'170.5\'%20r%3D\'170.5\'%3E%3C%2Fcircle%3E%3Cpath%20d%3D\'M55.3736267%2C209.778395%20L172.745285%2C100.706186%20L286.306656%2C209.611568\'%20id%3D\'Path-2\'%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");\n\
   background-repeat: no-repeat;\n\
   background-position: center center;\n\
   background-size: 100% 100%;\n\
@@ -1535,8 +1649,8 @@ html[dir=rtl] .popup > footer > button + button {\n\
   align-items: stretch;\n\
   -webkit-transition: all 0.25s ease-out;\n\
   transition: all 0.25s ease-out;\n\
-  -webkit-transform: translate3d(80px, 0, 0);\n\
-  transform: translate3d(80px, 0, 0);\n\
+  -webkit-transform: translate3d(85px, 0, 0);\n\
+  transform: translate3d(85px, 0, 0);\n\
   cursor: pointer;\n\
   font-family: "HelveticaNeue-Light";\n\
   font-weight: 200;\n\
@@ -1579,8 +1693,8 @@ html[dir=rtl] .popup > footer > button + button {\n\
 }\n\
 .list.editable > li.selected > button.delete,\n\
 .list.deletable > li.selected > button.delete {\n\
-  -webkit-transform: translate3d(80px, 0, 0);\n\
-  transform: translate3d(80px, 0, 0);\n\
+  -webkit-transform: translate3d(85px, 0, 0);\n\
+  transform: translate3d(85px, 0, 0);\n\
 }\n\
 .list.editable > li.selected > .deletion-indicator,\n\
 .list.deletable > li.selected > .deletion-indicator {\n\
@@ -1638,12 +1752,13 @@ html[dir=rtl] .list > li > .move-down {\n\
 html[dir=rtl] .list > li > button.delete {\n\
   -webkit-transform: translate3d(-80px, 0, 0);\n\
   transform: translate3d(-80px, 0, 0);\n\
-  left: 0;\n\
+  left: -10px !important;\n\
   right: auto;\n\
 }\n\
 html[dir=rtl].deletable.showIndicators > li,\n\
 html[dir=rtl].editable.showIndicators > li {\n\
   margin-right: 0px;\n\
+  margin-left: 0px !important;\n\
 }\n\
 html[dir=rtl] .list.deletable > li.selected,\n\
 html[dir=rtl] .list.editable > li.selected {\n\
@@ -1704,8 +1819,11 @@ html[dir=rtl] .list.showIndicators > li > button.delete,\n\
 html[dir=rtl] .list.deletable.showIndicators > li > button.delete,\n\
 html[dir=rtl] .list.editable.showIndicators > li > button.delete {\n\
   right: auto;\n\
-  left: 0 !important;\n\
+  left: -10px !important;\n\
 }\n\
+/* ==============================\n\
+   Form Elements\n\
+   =========================== */\n\
 input[type=text],\n\
 input[type=email],\n\
 input[type=password],\n\
@@ -1780,7 +1898,7 @@ input[type="search"] {\n\
   -webkit-appearance: none;\n\
   padding-left: 20px;\n\
   -webkit-transtion: all 0.5s ease-out;\n\
-  background-image: url(\'%3Csvg%20version=%221.1%22%20id=%22Layer_2%22%20xmlns=%22http://www.w3.org/2000/svg%22%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22%20x=%220px%22%20y=%220px%22%20width=%2248px%22%20height=%2248px%22%20viewBox=%220%200%2048%2048%22%20enable-background=%22new%200%200%2048%2048%22%20xml:space=%22preserve%22%3E%3Cpath%20d=%22M42.71,38.482L32.478,28.208c1.598-2.385,2.532-5.249,2.532-8.329c0-8.273-6.73-15.004-15.004-15.004%20S5.001,11.606,5.001,19.879c0,8.274,6.731,15.004,15.004,15.004c3.055,0,5.896-0.923,8.27-2.497l10.236,10.279%20c0.858,0.861,2.19,0.927,2.977,0.143l1.354-1.349C43.629,40.678,43.569,39.345,42.71,38.482z%20M10.001,19.879%20%20%20%20c0-5.517,4.488-10.004,10.004-10.004S30.01,14.363,30.01,19.879c0,5.516-4.487,10.004-10.004,10.004S10.001,25.396,10.001,19.879z%22%20fill=%22#bbb%22%20/%3E%3C/svg%3E\');\n\
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_2%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2248px%22%20height%3D%2248px%22%20viewBox%3D%220%200%2048%2048%22%20enable-background%3D%22new%200%200%2048%2048%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20d%3D%22M42.71%2C38.482L32.478%2C28.208c1.598-2.385%2C2.532-5.249%2C2.532-8.329c0-8.273-6.73-15.004-15.004-15.004%20S5.001%2C11.606%2C5.001%2C19.879c0%2C8.274%2C6.731%2C15.004%2C15.004%2C15.004c3.055%2C0%2C5.896-0.923%2C8.27-2.497l10.236%2C10.279%20c0.858%2C0.861%2C2.19%2C0.927%2C2.977%2C0.143l1.354-1.349C43.629%2C40.678%2C43.569%2C39.345%2C42.71%2C38.482z%20M10.001%2C19.879%20c0-5.517%2C4.488-10.004%2C10.004-10.004S30.01%2C14.363%2C30.01%2C19.879c0%2C5.516-4.487%2C10.004-10.004%2C10.004S10.001%2C25.396%2C10.001%2C19.879z%22%20fill%3D%22%23bbb%22%20%2F%3E%3C%2Fsvg%3E");\n\
   background-position: 5px center;\n\
   text-align: left;\n\
   background-size: 14px 14px;\n\
@@ -1791,6 +1909,17 @@ input[type="search"] {\n\
 input[type="search"]:focus {\n\
   outline: none;\n\
 }\n\
+/* ==============================\n\
+   Icon\n\
+   =========================== */\n\
+/*\n\
+  Put a class or id on each icon.\n\
+  The use a png or svg image as \n\
+  a background image. Apply a\n\
+  background color too.\n\
+  See page article of demo\n\
+  paging control for example.\n\
+*/\n\
 .icon {\n\
   width: 40px;\n\
   height: 40px;\n\
@@ -1799,6 +1928,9 @@ input[type="search"]:focus {\n\
   background-size: auto 70%;\n\
   border-radius: 10px;\n\
 }\n\
+/* ==============================\n\
+   Range Control\n\
+   =========================== */\n\
 input[type="range"] {\n\
   -webkit-appearance: none !important;\n\
   outline: none;\n\
@@ -1831,6 +1963,9 @@ input[type="range"]::-webkit-slider-thumb {\n\
 html[dir=rtl] input[type="range"] {\n\
   background-position: right center;\n\
 }\n\
+/* ============================== \n\
+   Select List\n\
+   =========================== */\n\
 .list.select li > input {\n\
   display: none;\n\
 }\n\
@@ -1842,7 +1977,7 @@ html[dir=rtl] input[type="range"] {\n\
   -webkit-mask-position: 50% 50%;\n\
   -webkit-mask-size: 90% 90%;\n\
   -webkit-mask-repeat: no-repeat;\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20version%3D"1.1"%20width%3D"32"%20height%3D"26"%20viewBox%3D"0%200%2032%2026"%20id%3D"svg2"%3E%3Cdefs%20id%3D"defs8"%20/%3E%3Cg%20transform%3D"translate%280.13135593,-0.34322034%29"%20id%3D"Page-1"%20style%3D"fill%3Anone%3Bstroke%3Anone"%3E%3Cg%20id%3D"Artboard-1"%20style%3D"stroke%3A%23000000%3Bstroke-width%3A5"%3E%3Cpath%20d%3D"m%2010.500868,22.761362%2011.023688,0%200,-27.9582975"%20transform%3D"matrix%280.70710678,0.70710678,-0.70710678,0.70710678,10.899977,-8.7504466%29"%20id%3D"Rectangle-1"%20/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20version%3D\'1.1\'%20width%3D\'32\'%20height%3D\'26\'%20viewBox%3D\'0%200%2032%2026\'%20id%3D\'svg2\'%3E%3Cdefs%20id%3D\'defs8\'%20%2F%3E%3Cg%20transform%3D\'translate(0.13135593%2C-0.34322034)\'%20id%3D\'Page-1\'%20style%3D\'fill%3Anone%3Bstroke%3Anone\'%3E%3Cg%20id%3D\'Artboard-1\'%20style%3D\'stroke%3A%23000000%3Bstroke-width%3A5\'%3E%3Cpath%20d%3D\'m%2010.500868%2C22.761362%2011.023688%2C0%200%2C-27.9582975\'%20transform%3D\'matrix(0.70710678%2C0.70710678%2C-0.70710678%2C0.70710678%2C10.899977%2C-8.7504466)\'%20id%3D\'Rectangle-1\'%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");\n\
   float: right;\n\
   margin-top: -20px;\n\
   background-color: ' + $._secondaryColor +';\n\
@@ -1853,6 +1988,9 @@ html[dir=rtl] input[type="range"] {\n\
 html[dir=rtl] .list.select li.selected::after {\n\
   float: left;\n\
 }\n\
+/* ==============================\n\
+   Sheet Control\n\
+   =========================== */\n\
 .sheet {\n\
   position: absolute;\n\
   top: 45px;\n\
@@ -1878,7 +2016,6 @@ html[dir=rtl] .list.select li.selected::after {\n\
   -webkit-mask-size: 90% 90%;\n\
   -webkit-mask-repeat: no-repeat;\n\
   -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D\'http%3A//www.w3.org/2000/svg\'%20xmlns%3D\'http%3A//www.w3.org/2000/svg\'%20version%3D\'1.1\'%20width%3D\'76\'%20height%3D\'27\'%20viewBox%3D\'0%200%2076%2027\'%20id%3D\'svg2\'%3E%3Cdefs%20id%3D\'defs8\'%20/%3E%3Cg%20transform%3D\'translate%28-283.79661,-123.77966%29\'%20id%3D\'Page-1\'%20style%3D\'fill%3Anone%3Bstroke%3Anone\'%3E%3Cg%20transform%3D\'translate%28254,108%29\'%20id%3D\'Artboard-1\'%20style%3D\'stroke%3A%23000%3Bstroke-width%3A12%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around\'%3E%3Cpath%20d%3D\'m%2036.25,26.242187%2031.394531,0%2030.53125,0\'%20id%3D\'Path-1\'%20/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");\n\
-  margin: 10px auto 0;\n\
 }\n\
 .sheet.opened {\n\
   visibility: visible;\n\
@@ -1886,11 +2023,11 @@ html[dir=rtl] .list.select li.selected::after {\n\
   transform: translate3d(0, 0, 0);\n\
 }\n\
 .sheet.opened div.handle {\n\
-  background-color: #ffffff;\n\
-  -webkit-mask-position: 50% 50%;\n\
-  -webkit-mask-size: 90% 90%;\n\
-  -webkit-mask-repeat: no-repeat;\n\
-  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D\'http%3A//www.w3.org/2000/svg\'%20xmlns%3D\'http%3A//www.w3.org/2000/svg\'%20version%3D\'1.1\'%20width%3D\'76\'%20height%3D\'27\'%20viewBox%3D\'0%200%2076%2027\'%20id%3D\'svg2\'%3E%3Cdefs%20id%3D\'defs8\'%20/%3E%3Cg%20transform%3D\'translate%28-283.79661,-123.77966%29\'%20id%3D\'Page-1\'%20style%3D\'fill%3Anone%3Bstroke%3Anone\'%3E%3Cg%20transform%3D\'translate%28254,108%29\'%20id%3D\'Artboard-1\'%20style%3D\'stroke%3A%23000%3Bstroke-width%3A12%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around\'%3E%3Cpath%20d%3D\'m%2036.25,26.242187%2031.394531,7.972657%2030.53125,-8.425782\'%20id%3D\'Path-1\'%20/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");\n\
+background-color: #ffffff;\n\
+-webkit-mask-position: 50% 50%;\n\
+-webkit-mask-size: 90% 90%;\n\
+-webkit-mask-repeat: no-repeat;\n\
+-webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3Asvg%3D\'http%3A//www.w3.org/2000/svg\'%20xmlns%3D\'http%3A//www.w3.org/2000/svg\'%20version%3D\'1.1\'%20width%3D\'76\'%20height%3D\'27\'%20viewBox%3D\'0%200%2076%2027\'%20id%3D\'svg2\'%3E%3Cdefs%20id%3D\'defs8\'%20%2F%3E%3Cg%20transform%3D\'translate(-283.79661%2C-123.77966)\'%20id%3D\'Page-1\'%20style%3D\'fill%3Anone%3Bstroke%3Anone\'%3E%3Cg%20transform%3D\'translate(254%2C108)\'%20id%3D\'Artboard-1\'%20style%3D\'stroke%3A%23000%3Bstroke-width%3A12%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around\'%3E%3Cpath%20d%3D\'m%2036.25%2C26.242187%2031.394531%2C7.972657%2030.53125%2C-8.425782\'%20id%3D\'Path-1\'%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");\n\
 }\n\
 .sheet .button {\n\
   color: #585d63;\n\
@@ -1943,17 +2080,20 @@ article.current.blurred.removeBlurSlow {\n\
   filter: blur(0px);\n\
   transition-duration: .35s;\n\
 }\n\
+/* ==============================\n\
+   Slide-Out\n\
+   =========================== */\n\
 .slide-out {\n\
   position: absolute;\n\
   top: 45px;\n\
-  left: 0;\n\
+  right: 0;\n\
   bottom: 0;\n\
   background-color: #ffffff;\n\
   z-index: 111111111;\n\
-  width: 100%;\n\
+  width: 90%;\n\
   visibility: hidden;\n\
-  -webkit-transform: translate3d(-100%, 0, 0);\n\
-  transform: translate3d(-100%, 0, 0);\n\
+  -webkit-transform: translate3d(100%, 0, 0);\n\
+  transform: translate3d(100%, 0, 0);\n\
   -webkit-transition: all 0.25s ease-out;\n\
   transition: all 0.25s ease-out;\n\
   overflow-x: hidden;\n\
@@ -1975,6 +2115,8 @@ article.current.blurred.removeBlurSlow {\n\
   visibility: visible;\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
   transform: translate3d(0, 0, 0);\n\
+  border-left: solid 1px #c8c8c8;\n\
+  box-shadow: -3px 0 6px rgba(0, 0, 0, 0.25);\n\
 }\n\
 .slide-out > section {\n\
   -webkit-box-flex: 1;\n\
@@ -1988,7 +2130,7 @@ button.slide-out-button {\n\
   position: absolute;\n\
   z-index: 1111111;\n\
   top: 5px;\n\
-  left: 15px;\n\
+  right: 15px;\n\
   width: 35px;\n\
   height: 35px;\n\
   -webkit-box-sizing: border-box;\n\
@@ -2006,6 +2148,13 @@ button.slide-out-button::before {\n\
   -webkit-mask-repeat: no-repeat;\n\
   -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%2281px%22%20height%3D%2260px%22%20viewBox%3D%220%200%2081%2060%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22slideout%22%20fill%3D%22%23000000%22%3E%3Crect%20id%3D%22Rectangle%22%20x%3D%228%22%20y%3D%220%22%20width%3D%2264.167%22%20height%3D%227.666%22%3E%3C/rect%3E%3Crect%20id%3D%22Rectangle%22%20x%3D%228%22%20y%3D%2226%22%20width%3D%2264.167%22%20height%3D%227.667%22%3E%3C/rect%3E%3Crect%20id%3D%22Rectangle%22%20x%3D%228%22%20y%3D%2252%22%20width%3D%2264.167%22%20height%3D%227.666%22%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E");\n\
 }\n\
+button.slide-out-button.focused::before {\n\
+  background-color: ' + $._navbarColor + ';\n\
+  -webkit-mask-position: 50% 50%;\n\
+  -webkit-mask-size: 90% 90%;\n\
+  -webkit-mask-repeat: no-repeat;\n\
+    -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%2260px%22%20height%3D%2260px%22%20viewBox%3D%220%200%2060%2060%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22Artboard-1%22%20fill%3D%22%23000000%22%3E%3Crect%20id%3D%22Rectangle-3%22%20transform%3D%22translate%2829.500000,%2029.500000%29%20rotate%28-45.000000%29%20translate%28-29.500000,%20-29.500000%29%20%22%20x%3D%2225.65%22%20y%3D%22-2.31980515%22%20width%3D%227.7%22%20height%3D%2263.6396103%22%3E%3C/rect%3E%3Crect%20id%3D%22Rectangle-4%22%20transform%3D%22translate%2830.000000,%2030.000000%29%20rotate%2845.000000%29%20translate%28-30.000000,%20-30.000000%29%20%22%20x%3D%2226.15%22%20y%3D%22-1.11269837%22%20width%3D%227.7%22%20height%3D%2262.2253967%22%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E");\n\
+}\n\
 body.slide-out-app > article {\n\
   display: none !important;\n\
 }\n\
@@ -2013,25 +2162,42 @@ body.slide-out-app > article.show {\n\
   display: block !important;\n\
   /*margin-top: 20px !important;*/\n\
 }\n\
+body.slide-out-app > article.navigable {\n\
+  display: block !important;\n\
+}\n\
 body.slide-out-app > nav:not(:first-of-type) {\n\
-  display: none !important;\n\
+  display: none;\n\
+}\n\
+body.slide-out-app > nav:not(:first-of-type).current {\n\
+  display: flex !important;\n\
+  display: -webkit-flex !important;\n\
+  display: -webkit-box !important;\n\
 }\n\
 body.slide-out-app > nav:not(:first-of-type).show {\n\
   display: block !important;\n\
   z-index: 10000;\n\
 }\n\
+html[dir=rtl] .slide-out {\n\
+  right: 10%;\n\
+}\n\
 html[dir=rtl] button.slide-out-button {\n\
-  right: 15px;\n\
-  left: auto;\n\
+  left: 15px;\n\
+  right: auto;\n\
 }\n\
 html[dir=rtl] .slide-out {\n\
-  -webkit-transform: translate3d(100%, 0, 0);\n\
-  transform: translate3d(100%, 0, 0);\n\
+  -webkit-transform: translate3d(-100%, 0, 0);\n\
+  transform: translate3d(-100%, 0, 0);\n\
+  border-left: none;\n\
+  border-right: solid 1px #c8c8c8;\n\
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.25);\n\
 }\n\
 html[dir=rtl] .slide-out.open {\n\
-  -webkit-transform: translate3d(0, 0, 0);\n\
-  transform: translate3d(0, 0, 0);\n\
+  -webkit-transform: translate3d(0, 0, 0) !important;\n\
+  transform: translate3d(0, 0, 0) !important;\n\
 }\n\
+/* ==============================\n\
+   Stepper Control\n\
+   =========================== */\n\
 .stepper {\n\
   display: flex;\n\
   display: -webkit-flex;\n\
@@ -2087,11 +2253,13 @@ html[dir=rtl] .slide-out.open {\n\
   border-top-right-radius: 0;\n\
   border-bottom-right-radius: 0;\n\
   border-right: none;\n\
+  margin: 0;\n\
 }\n\
 .stepper > button:last-of-type {\n\
   border-top-left-radius: 0;\n\
   border-bottom-left-radius: 0;\n\
   border-left: none;\n\
+  margin: 0;\n\
 }\n\
 html[dir=rtl] .stepper > button:first-of-type {\n\
   border-radius: 4px;\n\
@@ -2107,6 +2275,9 @@ html[dir=rtl] .stepper > button:last-of-type {\n\
   border-left: solid 1px ' + $._color + ';\n\
   border-right: none;\n\
 }\n\
+/* ==============================\n\
+   Switched List Items\n\
+   =========================== */\n\
 .list > li.switched {\n\
   -webkit-box-direction: reverse;\n\
   display: flex;\n\
@@ -2136,6 +2307,9 @@ html[dir=rtl] .stepper > button:last-of-type {\n\
   max-width: 50%;\n\
   color: #000000 !important;\n\
 }\n\
+/* ==============================\n\
+   Switches\n\
+   =========================== */\n\
 .switch {\n\
   display: inline-block;\n\
   width: 54px;\n\
@@ -2290,6 +2464,16 @@ html[dir=rtl] .switch.on > em {\n\
   -webkit-transform: translate3d(0, 0, 0);\n\
   transform: translate3d(0, 0, 0);\n\
 }\n\
+/* ==============================\n\
+   Tab Bar\n\
+   =========================== */\n\
+body.hasTabBar {\n\
+  /*\n\
+  nav {\n\
+    background-color: @navBkgnd;\n\
+    border-bottom: solid 1px #a7a7aa;\n\
+  }*/\n\
+}\n\
 body.hasTabBar article {\n\
   bottom: 50px;\n\
 }\n\
@@ -2364,8 +2548,11 @@ body.hasTabBar .next:not(.navigable) {\n\
   -webkit-mask-position: 50% 50%;\n\
   -webkit-mask-size: 90% 90%;\n\
   -webkit-mask-repeat: no-repeat;\n\
-  -webkit-mask-image: url(\'data:image/svg+xml;utf8,%3Csvg%20version%3D"1.1"%20id%3D"Layer_2"%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20xmlns%3Axlink%3D"http%3A//www.w3.org/1999/xlink"%20x%3D"0px"%20y%3D"0px"%20width%3D"48px"%20height%3D"48px"%20viewBox%3D"0%200%2048%2048"%20enable-background%3D"new%200%200%2048%2048"%20xml%3Aspace%3D"preserve"%3E%3Ccircle%20cx%3D"10"%20cy%3D"23"%20r%3D"5.172"/%3E%3Ccircle%20cx%3D"24"%20cy%3D"23"%20r%3D"5.172"/%3E%3Ccircle%20cx%3D"38"%20cy%3D"23"%20r%3D"5.172"/%3E%3C/svg%3E\');\n\
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_2%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2248px%22%20height%3D%2248px%22%20viewBox%3D%220%200%2048%2048%22%20enable-background%3D%22new%200%200%2048%2048%22%20xml%3Aspace%3D%22preserve%22%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2223%22%20r%3D%225.172%22%2F%3E%3C%2Fsvg%3E");\n\
 }\n\
+/* ============================== \n\
+   Carousel styles\n\
+   =========================== */\n\
 #carousel {\n\
   width: 100%;\n\
   height: 100%;\n\
