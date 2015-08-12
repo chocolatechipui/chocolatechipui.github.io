@@ -2593,6 +2593,44 @@ fetch('../controllers/php-post.php', {
 });
 </code></pre>
 
+<h2>Handling HTTP Error Status</h2>
+<p>Unlike normal Ajax requests, the Promise returned by <code>fetch</code> will not get rejected, even if the response is 404 or 500. You can get arround this by defining a custom handler:</p>
+
+<pre class="prettyprint"><code>
+  function checkStatus(response) {
+  if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {
+    return response
+  } else {
+    var error = new Error(response.statusText)
+    error.response = response
+    throw error
+  }
+}
+
+fetch('/candies')
+  .then(checkStatus)
+  .then($.json)
+  .then(function(data) {
+    console.dir(data);
+  })
+  .catch(function(error) {
+    console.log('Request failed: ', error);
+  })
+</code></pre>
+
+<h2>Handling Cookies</h2>
+<p>By default, <code>fetch</code> will not send cookies. This can result in session authentication failing. To get <code>fetch</code> to send cookies you need to provide the proper credentials:</p>
+
+<pre class="prettyprint"><code>
+fetch('/candies', {
+  credentials: "same-origin"
+});
+</code></pre>
+
+
+<h2>Receiving Cookies</h2>
+<p>The <code>fetch</code> API is not allowed to read the <code>Set-Cookie</code> header in the response. Instead, it is the browser's responsibility to handle new cookies being set. Any new cookies set in this manner will be available from <code>document.cookie</code>.</p>
+
 <h2>
 <a id="user-content-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSONP</h2>
 
