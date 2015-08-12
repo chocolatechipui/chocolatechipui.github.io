@@ -2586,6 +2586,7 @@ fetch('../controllers/php-post.php', {
       $("#message_ajax").html("<div class='errorMessage'>Sorry " + data.name + ", " + data.email + " is NOT a valid e-mail address. Try again.</div>");
   }
 })
+// Catch the timeout:
 .catch(function(error) {
   console.log(error);
   // returns: Request timed out at: /controllers/php-post.php
