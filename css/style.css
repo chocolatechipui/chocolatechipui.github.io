@@ -441,6 +441,19 @@ body > article > section {
 #landingPage .copyright, #landingPage .copyright a  {
   color: #fafafa;
 }
+.notice {
+  margin: 20px;
+  padding: 20px;
+  border: solid 2px #dc4646;
+  background-color: #ffefda;
+}
+#formUtilities {
+  margin-bottom: 0 !important;
+}
+
+#formUtilities + h3 {
+  margin-top: 0 !important;
+}
 
 /* Media Queries */
 

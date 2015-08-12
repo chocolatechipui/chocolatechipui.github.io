@@ -1361,1108 +1361,17 @@ $('#myList').undelegate('singletap', listSelection, false);
 $('nav.current').find('.back').trigger('singletap');
 </code></pre>
 
-<h2>
-<a name="cc-ajax" class="anchor" href="#ajax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax</h2>
 
-<p>ChocolateChipJS provides a number of methods to enable various Ajax operations.</p>
 
-<ul>
-<li>$.ajax()</li>
-<li>$.get()</li>
-<li>$.getJSON()</li>
-<li>$.post()</li>
-<li>$.JSONP()</li>
-<li>$.form2JSON()</li>
-</ul><h3>
-<a name="cc-ajax-2" class="anchor" href="#ajax-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.ajax</h3>
 
-<p>This method allows you to execute an Ajax operation. You pass in an object literal of the properties you wish to execute. It expects at a minimal a URL to access. It has the following default settings:</p>
 
-<pre class="prettyprint"><code>var settings = {
-  type: 'GET',
-  beforeSend: $.noop,
-  success: $.noop,
-  error: $.noop,
-  context: null,
-  async: true,
-  timeout: 0
-};
-</code></pre>
 
-<p>You can use the $.ajax method to retrieve HTML fragments to insert in your document:</p>
 
-<pre class="prettyprint"><code>$.ajax({
-  url : "announcement.html",
-  success : function(data) {
-    // Insert the fragment into the page:
-    $("#content").html(data);
-  },
-  error: function(data) {
-    $("#content").html("&lt;h4&gt;There was an error while trying to get the file.&lt;/h4&gt;");
-  }
-});
-</code></pre>
 
-<p>You can also request an external JSON file for user in your app:</p>
 
-<pre class="prettyprint"><code>$.ajax({
-  url : "me.json",
-  success : function(data) {
-    // Before using a JSON object, you need to parse it.
-    // Here we parse it and assign it to a variable:
-    var me = JSON.parse(data);
-    // Here we access the properties of the JSON object:
-    $("#content").html(me.firstName + " " + me.lastName);
-  },
-  error: function(data) {
-    $(content).html("&lt;h4&gt;There was an error while trying to get the file.&lt;/h4&gt;");
-  }
-});
-</code></pre>
 
-<p>We can also do a post to a remote server:</p>
 
-<pre class="prettyprint"><code>$.ajax({
-  url : "/path/to/controller",
-  method: 'POST',
-  headers: {
-    "Content-Type" : "application/x-www-form-urlencoded",
-    "async" : true,
-    "Access-Control-Allow-Origin" : "*",
-    "Accept" : "text/plain"
-  },
-  data: myData,
-  success: mySuccessCallback,
-  error: myErrorCallback
-});
-</code></pre>
 
-
-<h3>
-<a name="cc-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.get</h3>
-
-<p>This is a short cut for doing a get request. It can handle the following parameters: url, data, success, dataType. At very least you can pass it the url and a function to execute on success.</p>
-
-<pre class="prettyprint"><code>// Get an html fragment and insert it in the document:
-$.get('/data/suits.html', function(data) {
-  $('#products').html(data);
-});
-</code></pre>
-
-
-<h3>
-<a name="cc-getjson" class="anchor" href="#getjson" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.getJSON</h3>
-
-<p>This is a shortcut for getting a JSON object from a server. It expects three parameters: url, data, and success. If no data is provided, it will execute with just the url and success callback.</p>
-
-<pre class="prettyprint"><code>$.getJSON('/data/deserts.json', function(deserts) {
-  deserts.forEach(desert) {
-    $('#deserts').append('&lt;li&gt;' + desert.name + '&lt;/li&gt;');
-  });
-});
-</code></pre>
-
-<h3>
-<a name="cc-post" class="anchor" href="#post" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.post</h3>
-
-<p>This method is a shortcut for doing a post. It expects these parameters: url, data, success, dataType.</p>
-
-<pre class="prettyprint"><code>$.post("updateUser.php", 
-  { "name": "Joe", "time": "10PM" }, 
-  function() {
-    console.log('The POST was successful.')
-  },
-  "json"
-);
-</code></pre>
-
-
-<h3>
-<a name="cc-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.JSONP</h3>
-
-<p>This method allows you to perform requests from remote sites that support JSONP. It does this by sending a callback along with the request, hence the name JSON with Padding. It expects two arguments: a url and a callback to execute once the data has returned. Normally, the url should end with the phrase: &amp;callback=?. However, there are some services out there that expect a slightly different ending. Please check the documentation for any API before trying to implement a JSONP request.</p>
-
-<p>Because the data lives on a remote server, you'll need to read the documentation for the service to understand its format so that you can output it to your app.</p>
-
-<p>$.JSONP has the following default settings, which you can override:</p>
-
-<pre class="prettyprint"><code>var settings = {
-  url : null,
-  callback: $.noop,
-  callbackType : 'callback=?',
-  timeout: null
-};
-</code></pre>
-
-<p>Be aware that you have no control over when the remote server will respond to your JSONP request. It could take some time. If you would prefer to have more control over what happens, you can provide a timeout value great than 0. If the remote server has not responded by the time the timeout finishes, the request will be canceled.</p>
-
-<p>With timeout:</p>
-
-<pre class="prettyprint"><code>$.JSONP({
-  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;country=US&amp;callback=?', 
-  callback: function(data){
-    $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
-  },
-  // 5 second timeout:
-  timeout: 5000
-});
-</code></pre>
-
-
-
-
-
-
-
-
-
-<h2>
-<a name="cc-animation" class="anchor" href="#ecmascript_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>ECMAScript Promises</h2>
-
-<p>As of 3.8.6, the default build of ChocolateChipJS supports ECMAScript 6 promises. This includes all of its Ajax methods as well. ChocolateChipJS provides a polyfill for older browsers that do not have support for ECMAScript 6 promises, so you can use them in your code immediately.</p>
-
-<p>ECMAScript 6 Promises provide the following interface:</p>
-
-<ol>
-  <li>Promise</li>
-  <li>Promise.then()</li>
-  <li>Promise.resolve()</li>
-  <li>Promise.reject()</li>
-  <li>Promise.catch()</li>
-  <li>Promise.race()</li>
-  <li>Promise.all()</li>
-</ol>
-
-<p>If you are familiar and have been using jQuery or ChocolateChipJS's Deferred object, this will not look too foreign. Except for the last two: race and all. These have no equivalent with typical deferreds. They are features specific to ECMAScript promises.</p>
-
-<h3>The Promise Interface</h3>
-
-<p>An ECMAScript 6 promise is created with the "new" keyword. This returns an instance of the Promise object.</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise();
-</code></pre>
-
-<p>When you create a promise, you can also provide a callback. This will be able to handle two arguments: resolve and reject:</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
-  var value;
-  // Do something to get value;
-  // ...
-  // Then test value to determine how to handle the promise:
-  if (value === 'good') {
-    resolve(value);
-  } else {
-    // When you reject the promise,
-    // you also get the reason it failed,
-    // which you can choose to output if you want:
-    reject(reason);
-  }
-});
-</code></pre>
-
-<h4>Then</h4>
-<p>Promises provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
-
-
-<pre class="prettyprint"><code>// Create an instance of a promise:
-var myPromise = new Promise(function(resolve, reject) {
-  // Resolve the promise:
-  resolve('Success!');
-  // or reject it:
-  // reject('Lost in Space!');
-});
-myPromise.then(function(value) {
-  // Success:
-  console.log(value);
-},
-// Opps! There was a problem:
-function(reason) {
-  console.log(reason);
-});
-</code></pre>
-
-<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second function. Read the next part on Multiple Thens for more information.</p>
-
-<h4>Multiple Thens</h4>
-<p>The <code>then</code> method always returns a promsie. This means that you can chain multiple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
-  resolve(1);
-});
-myPromise.then(function(value) {
-  console.log(value); // 1
-  // Return the value:
-  return value + 1;
-})
-.then(fuction(value) {
-  console.log(value) // 2
-})
-</code></pre>
-
-
-<h4>Resolve</h4>
-
-<p>We can resolve a promise at any time using the <code>resolve</code> method on the static Promise object. Once we execute the resolve method, the promise is disposed of. </p>
-
-<pre class="prettyprint"><code>// Define an alias for the resolve callback:
-var fulfill;
-new Promise(function (resolve, reject) {
-  fulfill = resolve;
-}).then(function(value) {
-  equal(value, 5, 'Promise fulfilled with Promise should resolve to actual value');
-  start();
-});
-fulfill(Promise.resolve(5));
-</code></pre>
-
-<h4>Reject</h4>
-
-<p>Like the resolve example above, we can similarly reject a promise using its method on the static Promise object. In this example we pass a value that gets returned with the rejection:</p>
-
-<pre class="prettyprint"><code>var fulfill;
-new Promise(function (resolve, reject) {
-  fulfill = resolve;
-})['catch'](function(value) {
-  console.log(value);
-});
-fulfill(Promise.reject(5));
-</code></pre>
-
-<h4>Catch</h4>
-
-<p>We can handle errors and exceptions using the <code>catch</code> method. This enables us to have a series of thens that only handle success situations. ECMAScript promise pass any exception along until their is some callback to handle it.</p>
-
-<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
-  resolve("Success!");
-});
-myPromise.then(function(value) {
-  console.log(value); // Success!
-  throw "Oops! Something went wrong.";
-})
-.catch(function(error) {
-  console.log(error); // Oops! Something went wrong.
-})
-</code></pre>
-
-<h4>Race</h4>
-
-<p>Sometimes you may need to execute several operations and any one of them could finish first. You want to take the result of the first to finishing, ignoring the others. ECMAScript promises enable this with the <code>race</code> method. This expects an array of promises as its argument.</p>
-
-<pre class="prettyprint"><code>var f1, f2, f3;
-var p1 = new Promise(function(f, r) { f1 = f; });
-var p2 = new Promise(function(f, r) { f2 = f; });
-var p3 = new Promise(function(f, r) { f3 = f; });
-Promise.race([p1, p2, p3]).then(function(value) {
-  console.log('Promise.race() should resolve to: ' + value);
-});
-// Execute the second:
-f2(2);
-</code></pre>
-
-<h4>All</h4>
-<p>Unlike with race conditions, sometimes you want to execute a number of things and wait until they are all done before doing anything. In those cases you can use the <code>all</code> method. This expects an array of promises as its argument.</p>
-
-<pre class="prettyprint"><code>var f1, f2, f3;
-var p1 = new Promise(function(f, r) { f1 = f; });
-var p2 = new Promise(function(f, r) { f2 = f; });
-var p3 = new Promise(function(f, r) { f3 = f; });
-Promise.all([p1, p2, p3])
-.then(function(value) {
-  console.log(value);
-});
-// Execute theme in opposite order:
-f3(3);
-f2(2);
-f1(1);
-</code></pre>
-
-
-<a name="cc-animation" class="anchor" href="#ajax_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax with ECMAScript Promises</h2>
-
-<p>You can use ECMAScript 6 promises with ChocolateChipJS's Ajax functions as well. These functions have been rewritten to always return promises. Below is a conceptual example showing the handling of a success and error in a GET request:</p>
-
-<pre class="prettyprint"><code>$.get('http://my.com/data/stuff.html')
-.then(function(response) {
-  console.log("Success!", response);
-}, function(error) {
-  console.error("Failed!", error);
-});
-</code></pre>
-
-<p>We could also further separate our error handling in a catch statement:</p>
-
-<pre class="prettyprint"><code>$.get('http://my.com/data/stuff.html')
-.then(function(response) {
-  console.log("Success!", response);
-})
-.then(function(data) {
-  $('#content').append(data);
-})
-.catch(function(error) {
-  console.error("Failed!", error);
-});
-</code></pre>
-
-<p>Here's an example of parsing the JSON text from a request:</p>
-
-<pre class="prettyprint"><code>$.get('story.json')
-.then(JSON.parse)
-.then(function(response) {
-  console.log("Yey JSON!", response);
-});
-</code></pre>
-
-<p>And here's an example of doing multiple Ajax requests but only output the first to come back:</p>
-
-<pre class="prettyprint"><code>var getStuff1 = $.get('data-1.json');
-var getStuff2 = $.get('data-1.json');
-var getStuff3 = $.get('data-1.json');
-Promise.race([getStuff1, getStuff2, getStuff3)])
-.then(function(response) {
-  $('#result').append(response);
-})
-.catch(function(error) {
-  console.log('There was a problem: ', error);
-})
-</code></pre>
-
-<p>Or we might want to wait for all of them to come back before outputting the results:</p>
-
-<pre class="prettyprint"><code>var getStuff1 = $.get('data-1.json');
-var getStuff2 = $.get('data-1.json');
-var getStuff3 = $.get('data-1.json');
-Promise.all([getStuff1, getStuff2, getStuff3)])
-.then(function(response) {
-  $('#result').append(response);
-})
-.catch(function(error) {
-  console.log('There was a problem: ', error);
-})
-</code></pre>
-
-<p>Here's an example of a JSONP request with a promise:</p>
-
-<pre class="prettyprint"><code>$.JSONP({url: 'https://api.github.com/users/yui?callback=?'})
-.then(function(response) {
-  $('.list').append('&lt;li&gt;&lt;h3&gt;The name of the library&lt;/h3&gt;&lt;h4&gt;' + lib.data.name + '&lt;/h4&gt;&lt;/li&gt;');
-})
-.catch(function(err) {
-  console.log('Unable to get data.')
-});
-
-$.JSONP({
-  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;
-})
-.then(function(response) {
-  $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
-})
-.catch(function(err) {
-  console.log('Unable to get data.')
-});
-</code></pre>
-
-<p>You could also use <code>Promise.all</code> or <code>Promise.race</code> to handle both JSONP request at the same time.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>
-<a name="cc-deferred-object" class="anchor" href="#deferred-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deferred Object</h2>
-
-<p><strong>Note:</strong> As of version 3.8.6, ChocolateChipJS uses ECMAScript 6 promises. Previously it used a deferred object compatible with the jQuery implementation. If you prefer that, you can still build ChocolateChipJS with support for it using the flag <code>--deferredSupport</code>:</p>
-<pre class="prettyprint"><code>gulp --deferredSupport</code></pre>
-
-<p>The Deferred object can register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function. This implementation is based on the version in jQuery 1.7. Please examine the unit tests to see how to use it.</p>
-
-<p>The Deferred object is chainable, similar to the way ChocolateChip methods are chainable, but it has its own methods. After creating a Deferred object, you can use any of the methods below by either chaining directly from the object created, or saving the object in a variable and invoking one or more methods on that variable.</p>
-
-<ul>
-<li>$.Deferred</li>
-<li>done</li>
-<li>fail</li>
-<li>always</li>
-<li>pipe</li>
-<li>progress</li>
-<li>notify</li>
-<li>notifyWith</li>
-<li>state</li>
-<li>isResolved</li>
-<li>isRejected</li>
-<li>resolve</li>
-<li>resolveWith</li>
-<li>reject</li>
-<li>rejectWith</li>
-<li>then</li>
-<li>when</li>
-</ul><h3>
-<a name="cc-deferred" class="anchor" href="#deferred" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.Deferred</h3>
-
-<p>A constructor function that returns a chainable utility object with methods to register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function.</p>
-
-<p>The $.Deferred method can be passed an optional function, which is called just before the constructor returns and is passed the constructed deferred object as both the this object and as the first argument to the function. The called function can attach callbacks using <code>deferred.then()</code>, for example.</p>
-
-<p>A Deferred object starts in the pending state. Any callbacks added to the object with <code>deferred.then()</code>, <code>deferred.always()</code>, <code>deferred.done()</code>, or <code>deferred.fail()</code> are queued to be executed later. Calling <code>deferred.resolve()</code> or <code>deferred.resolveWith()</code> transitions the Deferred into the resolved state and immediately executes any doneCallbacks that are set. Calling <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> transitions the Deferred into the rejected state and immediately executes any failCallbacks that are set. Once the object has entered the resolved or rejected state, it stays in that state. Callbacks can still be added to the resolved or rejected Deferred — they will execute immediately.</p>
-
-<p>Enhanced Callbacks with $.Deferred</p>
-
-<p>In JavaScript it is common to invoke functions that optionally accept callbacks that are called within that function.</p>
-
-<p>$.Deferred() introduces several enhancements to the way callbacks are managed and invoked. In particular, $.Deferred() provides flexible ways to provide multiple callbacks, and these callbacks can be invoked regardless of whether the original callback dispatch has already occurred.</p>
-
-<p>One model for understanding Deferred is to think of it as a chain-aware function wrapper. The <code>deferred.then()</code>, <code>deferred.always()</code>, <code>deferred.done()</code>, and <code>deferred.fail()</code> methods specify the functions to be called and the deferred.resolve(args) or deferred.reject(args) methods "call" the functions with the arguments you supply. Once the Deferred has been resolved or rejected it stays in that state; a second call to <code>deferred.resolve()</code>, for example, is ignored. If more functions are added by <code>deferred.then()</code>, for example, after the Deferred is resolved, they are called immediately with the arguments previously provided.</p>
-
-<pre class="prettyprint"><code>var deferred = new $.Deferred();
-
-// or without the new keyword:
-
-var deferred = $.Deferred();
-</code></pre>
-
-<h3>
-<a name="cc-done" class="anchor" href="#done" aria-hidden="true"><span class="octicon octicon-link"></span></a>done</h3>
-
-<p>Add handlers to be called when the Deferred object is resolved. The argument can be a function, or array of functions, that is called when the Deferred is resolved or rejected.</p>
-
-<p>The <code>deferred.done()</code> method accepts one or more arguments, all of which can be either a single function or an array of functions. When the Deferred is resolved, the doneCallbacks are called. Callbacks are executed in the order they were added. Since <code>deferred.done()</code> returns the deferred object, other methods of the deferred object can be chained to this one, including additional <code>.done()</code> methods. When the Deferred is resolved, doneCallbacks are executed using the arguments provided to the resolve or resolveWith method call in the order they were added.</p>
-
-<pre class="prettyprint"><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="utf-8"&gt;
-  &lt;title&gt;deferred.done demo&lt;/title&gt;
-  &lt;script src="chui/chocolatechip.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;button&gt;Go&lt;/button&gt;
-&lt;p&gt;Ready...&lt;/p&gt;
-
-&lt;script&gt;
-// 3 functions to call when the Deferred object is resolved
-function fn1() {
-  $( "p" ).append( " 1 " );
-}
-function fn2() {
-  $( "p" ).append( " 2 " );
-}
-function fn3( n ) {
-  $( "p" ).append( n + " 3 " + n );
-}
-
-// Create a deferred object
-var dfd = $.Deferred();
-
-// Add handlers to be called when dfd is resolved
-dfd
-// .done() can take any number of functions or arrays of functions
-  .done( [ fn1, fn2 ], fn3, [ fn2, fn1 ] )
-// We can chain done methods, too
-  .done(function( n ) {
-    $( "p" ).append( n + " we're done." );
-  });
-
-// Resolve the Deferred object when the button is clicked
-$( "button" ).on( "click", function() {
-  dfd.resolve( "and" );
-});
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<h3>
-<a name="cc-fail" class="anchor" href="#fail" aria-hidden="true"><span class="octicon octicon-link"></span></a>fail</h3>
-
-<p>Add handlers to be called when the Deferred object is rejected. The argument can be a function, or array of functions, that is called when the Deferred is resolved or rejected.</p>
-
-<p>The <code>deferred.fail()</code> method accepts one or more arguments, all of which can be either a single function or an array of functions. When the Deferred is rejected, the failCallbacks are called. Callbacks are executed in the order they were added. Since <code>deferred.fail()</code> returns the deferred object, other methods of the deferred object can be chained to this one, including additional <code>deferred.fail()</code> methods. The failCallbacks are executed using the arguments provided to the <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> method call in the order they were added.</p>
-
-<pre class="prettyprint"><code>// Create a deferred object
-var dfd = $.Deferred();
-
-dfd.done(/* Do stuff when done */).fail(/* Do stuff when fail */);
-</code></pre>
-
-<h3>
-<a name="cc-always" class="anchor" href="#always" aria-hidden="true"><span class="octicon octicon-link"></span></a>always</h3>
-
-<p>Add handlers to be called when the Deferred object is either resolved or rejected. The argument can be a function, or array of functions, that is called when the Deferred is resolved or rejected.</p>
-
-<p>The argument can be either a single function or an array of functions. When the Deferred is resolved or rejected, the callbacks are called. Since <code>deferred.always()</code> returns the Deferred object, other methods of the Deferred object can be chained to this one, including additional <code>.always()</code> methods. When the Deferred is resolved or rejected, callbacks are executed in the order they were added, using the arguments provided to the resolve, reject, resolveWith or rejectWith </p>
-
-<pre class="prettyprint"><code>// Create a deferred object
-var dfd = $.Deferred();
-dfd
-  .done(/* Do stuff when done */)
-  .fail(/* Do stuff when fail */)
-  .always(/* This will always execute for done and fail */);
-</code></pre>
-
-<h3>
-<a name="cc-pipe" class="anchor" href="#pipe" aria-hidden="true"><span class="octicon octicon-link"></span></a>pipe</h3>
-
-<p>Utility method to filter and/or chain Deferreds. It accepts two arguments. The first is <code>doneFilter</code> that is called when the Deferred is resolved. The second is <code>failFilter</code> that is called when the Deferred is rejected.</p>
-
-<p>The <code>deferred.pipe()</code> method returns a new promise that filters the status and values of a deferred through a function. The <code>doneFilter</code> and <code>failFilter</code> functions filter the original Deferred's resolved / rejected status and values. If the filter function used is null, or not specified, the piped promise will be resolved or rejected with the same values as the original.</p>
-
-<h4>
-<a name="cc-filter-resolve-example" class="anchor" href="#filter-resolve-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filter resolve example:</h4>
-
-<pre class="prettyprint"><code>var defer = $.Deferred();
-var filtered = defer.pipe(function( value ) {
-  return value * 2;
-});
-
-defer.resolve( 5 );
-filtered.done(function( value ) {
-  alert( "Value is ( 2*5 = ) 10: " + value );
-});  
-</code></pre>
-
-<h4>
-<a name="cc-filter-reject-example" class="anchor" href="#filter-reject-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filter reject example:</h4>
-
-<pre class="prettyprint"><code>var defer = $.Deferred(),
-filtered = defer.pipe( null, function( value ) {
-  return value * 3;
-});
-
-defer.reject( 6 );
-filtered.fail(function( value ) {
-  alert( "Value is ( 3*6 = ) 18: " + value );
-});
-</code></pre>
-
-<h3>
-<a name="cc-progress" class="anchor" href="#progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>progress</h3>
-
-<p>Add handlers to be called when the Deferred object generates progress notifications. It is executed from the object onto which the promise methods have to be attached.</p>
-
-<p>The <code>deferred.promise()</code> method allows an asynchronous function to prevent other code from interfering with the progress or status of its internal request. The Promise exposes only the Deferred methods needed to attach additional handlers or determine the state (then, done, fail, always, pipe, progress, and state), but not ones that change the state (resolve, reject, notify, resolveWith, rejectWith, and notifyWith).</p>
-
-<p>If target is provided, <code>deferred.promise()</code> will attach the methods onto it and then return this object rather than create a new one. This can be useful to attach the Promise behavior to an object that already exists.</p>
-
-<p>If you are creating a Deferred, keep a reference to the Deferred so that it can be resolved or rejected at some point. Return only the Promise object via <code>deferred.promise()</code> so other code can register callbacks or inspect the current state.</p>
-
-<pre class="prettyprint"><code>var dfd = $.Deferred();
-// Do some stuff with dfd, 
-// then do something as it progresses:
-dfd.progress(function(value1, value2) {
-  equal(value1, param1, 'Should equal param1.');
-  equal(value2, param2, 'Should equal param2.');
-  return equal(this, context, 'Should be the context.');
-});
-</code></pre>
-
-<h3>
-<a name="cc-notify" class="anchor" href="#notify" aria-hidden="true"><span class="octicon octicon-link"></span></a>notify</h3>
-
-<p>Call the <code>progressCallbacks</code> on a Deferred object with the given args. Optional arguments are an object that is passed to the <code>progressCallbacks</code>.</p>
-
-<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state or reporting status by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
-
-<p>When <code>deferred.notify</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code> or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notify()</code>. Any calls to <code>deferred.notify()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
-
-<pre class="prettyprint"><code>var context, def, param1, param2, progressCalled;
-def = new $.Deferred();
-context = new Array();
-param1 = 'foo';
-param2 = 'bar';
-progressCalled = 0; 
-def.progress(function(value1, value2) {
-  progressCalled += 1;
-  equal(value1, param1, 'Should equal param1.');
-  equal(value2, param2, 'Should equal param2.');
-  return equal(this, context, 'Should be the context.');
-});
-def.notifyWith(context, param1, param2);
-equal(progressCalled, 2, 'Should equal 2.');
-def.resolve();
-def.notify();
-</code></pre>
-
-<h3>
-<a name="cc-notifywith" class="anchor" href="#notifywith" aria-hidden="true"><span class="octicon octicon-link"></span></a>notifyWith</h3>
-
-<p>Call the <code>progressCallbacks</code> on a Deferred object with the given context and args.</p>
-
-<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state or reporting status by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
-
-<p>When <code>deferred.notifyWith</code> is called, any <code>progressCallbacks</code> added by <code>deferred.then</code> or <code>deferred.progress</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.notifyWith()</code>. Any calls to <code>deferred.notifyWith()</code> after a Deferred is resolved or rejected (or any <code>progressCallbacks</code> added after that) are ignored. For more information, see the documentation for Deferred object.</p>
-
-<p>See example for <code>notify</code> above.</p>
-
-<h3>
-<a name="cc-state" class="anchor" href="#state" aria-hidden="true"><span class="octicon octicon-link"></span></a>state</h3>
-
-<p>Determine the current state of a Deferred object.</p>
-
-<p>"pending": The Deferred object is not yet in a completed state (neither "rejected" nor "resolved").
-"resolved": The Deferred object is in the resolved state, meaning that either <code>deferred.resolve()</code> or <code>deferred.resolveWith()</code> has been called for the object and the doneCallbacks have been called (or are in the process of being called).
-"rejected": The Deferred object is in the rejected state, meaning that either <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> has been called for the object and the failCallbacks have been called (or are in the process of being called).
-This method is primarily useful for debugging to determine, for example, whether a Deferred has already been resolved even though you are inside code that intended to reject it.</p>
-
-<p>You can use this to check the state of the deferred object and take some action based on it. You might use a switch state to test for the states you are interested in.</p>
-
-<pre class="prettyprint"><code>var dfd = $.Deferred();
-
-// Do some stuff with dfd.
-// Log its state:
-console.log(dfd.state());
-</code></pre>
-
-<h3>
-<a name="cc-isresolved" class="anchor" href="#isresolved" aria-hidden="true"><span class="octicon octicon-link"></span></a>isResolved</h3>
-
-<p><code>deferred.isResolved()</code> is used to determine whether a Deferred object has been resolved. This method does not accept any arguments. This is a convenience method for getting this value from the <code>state</code> method described above. </p>
-
-<p>Returns true if the Deferred object is in the resolved state, meaning that either <code>deferred.resolve()</code> or <code>deferred.resolveWith()</code> has been called for the object and the <code>doneCallbacks</code> have been called (or are in the process of being called).</p>
-
-<p>Note that a Deferred object can be in one of three states: pending, resolved, or rejected; use <code>deferred.isRejected()</code> to determine whether the Deferred object is in the rejected state. These methods are primarily useful for debugging, for example to determine whether a Deferred has already been resolved even though you are inside code that intended to reject it.</p>
-
-<h3>
-<a name="cc-isrejected" class="anchor" href="#isrejected" aria-hidden="true"><span class="octicon octicon-link"></span></a>isRejected</h3>
-
-<p><code>deferred.isRejected()</code> is used to determine whether a Deferred object has been rejected. This method does not accept any arguments. This is a convenience method for getting this value from the <code>state</code> method described above. </p>
-
-<p>Returns true if the Deferred object is in the rejected state, meaning that either <code>deferred.reject()</code> or <code>deferred.rejectWith()</code> has been called for the object and the failCallbacks have been called (or are in the process of being called).</p>
-
-<p>Note that a Deferred object can be in one of three states: pending, resolved, or rejected; use <code>deferred.isResolved()</code> to determine whether the Deferred object is in the resolved state. These methods are primarily useful for debugging, for example to determine whether a Deferred has already been resolved even though you are inside code that intended to reject it.</p>
-
-<h3>
-<a name="cc-resolve" class="anchor" href="#resolve" aria-hidden="true"><span class="octicon octicon-link"></span></a>resolve</h3>
-
-<p>Resolve a Deferred object and call any <code>doneCallbacks</code> with the given args.</p>
-
-<pre class="prettyprint"><code>var dfd = $.Deferred();
-// Do stuff with the deferred.
-dfd.done(function() {/* Do stuff here */});
-// Resolve the deferred, which will 
-// cause dfd.done to execute:
-dfd.resolve();
-</code></pre>
-
-<h3>
-<a name="cc-resolvewith" class="anchor" href="#resolvewith" aria-hidden="true"><span class="octicon octicon-link"></span></a>resolveWith</h3>
-
-<p>Resolve a Deferred object and call any <code>doneCallbacks</code> with the given context and args. It accepts an optional array of arguments that are passed to the <code>doneCallbacks</code>.</p>
-
-<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
-
-<p>When the Deferred is rejected, any <code>doneCallbacks</code> added by <code>deferred.then</code> or <code>deferred.fail</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.reject()</code> call. Any <code>doneCallbacks</code> added after the Deferred enters the rejected state are executed immediately when they are added, using the arguments that were passed to the <code>deferred.reject()</code> call.</p>
-
-<pre class="prettyprint"><code>var context = ["one","two","three"];
-var defer = new $.Deferred(); 
-defer
-  .done(function() {
-    console.log('This has been resolved!');
-    context.forEach(function(ctx) {
-      console.log(ctx);
-    });
-  });
-  .fail(function() {
-    console.log('This has failed!');
-  });
-
-// Resolve the deferred and pass
-// the array as the context:
-defer.resolveWith(context);
-
-// outputs:
-// "This has been resolved!"
-// "one"
-// "two"
-// "three"
-
-</code></pre>
-
-<h3>
-<a name="cc-reject" class="anchor" href="#reject" aria-hidden="true"><span class="octicon octicon-link"></span></a>reject</h3>
-
-<p>Reject a Deferred object and call any <code>failCallbacks</code> with the given args. It accepts optional arguments that are passed to the <code>failCallbacks</code>.</p>
-
-<p>Normally, only the creator of a Deferred should call this method; you can prevent other code from changing the Deferred's state by returning a restricted Promise object through <code>deferred.promise()</code>.</p>
-
-<p>When the Deferred is rejected, any <code>failCallbacks</code> added by <code>deferred.then()</code> or <code>deferred.fail()</code> are called. Callbacks are executed in the order they were added. Each callback is passed the args from the <code>deferred.reject()</code> call. Any <code>failCallbacks</code> added after the Deferred enters the rejected state are executed immediately when they are added, using the arguments that were passed to the <code>deferred.reject()</code> call.</p>
-
-<pre class="prettyprint"><code>var context = ["one","two","three"];
-var defer = new $.Deferred(); 
-defer
-  .done(function() {
-    console.log('This has been resolved!');
-  });
-  .fail(function() {
-    console.log('This was rejected!')
-  });
-
-// Reject the deferred:
-defer.reject();
-
-// outputs:
-// "This was rejected!"
-
-</code></pre>
-
-<h3>
-<a name="cc-rejectwith" class="anchor" href="#rejectwith" aria-hidden="true"><span class="octicon octicon-link"></span></a>rejectWith</h3>
-
-<p>Reject a Deferred object and call any <code>failCallbacks with</code> the given context and args. This works just like <code>deferred.resolveWith</code>, except that <code>failCallbacks</code> are executed instead of <code>doneCallbacks</code>.</p>
-
-<pre class="prettyprint"><code>var context = ["one","two","three"];
-var defer = new $.Deferred(); 
-defer
-  .done(function() {
-    console.log('This has been resolved!');
-    context.forEach(function(ctx) {
-      console.log(ctx);
-    });
-  });
-  .fail(function() {
-    console.log('This was rejected!');
-    console.log('The array has ' + context.length + ' items.')
-  });
-
-// Resolve the deferred and pass
-// the array as the context:
-defer.rejectWith(context);
-
-// outputs:
-// "This was rejected"
-// "The array has 3 items."
-</code></pre>
-
-<h3>
-<a name="cc-then" class="anchor" href="#then" aria-hidden="true"><span class="octicon octicon-link"></span></a>then</h3>
-
-<p>Add handlers to be called when the Deferred object is resolved, rejected, or still in progress. It accepts the following arguments in order:</p>
-
-<ul>
-<li>doneCallbacks: A function, or array of functions, called when the Deferred is resolved.</li>
-<li>failCallbacks: A function, or array of functions, called when the Deferred is rejected.</li>
-<li>progressCallbacks: A function, or array of functions, called when the Deferred notifies progress.</li>
-</ul><p>Callbacks are executed in the order they were added. Since deferred.then returns a Promise, other methods of the Promise object can be chained to this one, including additional <code>deferred.then()</code> methods.</p>
-
-<pre class="prettyprint"><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="utf-8"&gt;
-  &lt;title&gt;deferred.then demo&lt;/title&gt;
-  &lt;script src="chui/chocolatechip.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;button&gt;Filter Resolve&lt;/button&gt;
-&lt;p&gt;&lt;/p&gt;
-
-&lt;script&gt;
-var filterResolve = function() {
-  var defer = $.Deferred(),
-    filtered = defer.then(function( value ) {
-      return value * 2;
-    });
-
-  defer.resolve( 5 );
-  filtered.done(function( value ) {
-    $( "p" ).html( "Value is ( 2*5 = ) 10: " + value );
-  });
-};
-
-$( "button" ).on( "click", filterResolve );
-&lt;/script&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<h3>
-<a name="cc-when" class="anchor" href="#when" aria-hidden="true"><span class="octicon octicon-link"></span></a>when</h3>
-
-<p>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events. It accepts one or more Deferred objects, or plain JavaScript objects.</p>
-
-<p>If a single Deferred is passed to <code>$.when</code>, its Promise object (a subset of the Deferred methods) is returned by the method. Additional methods of the Promise object can be called to attach callbacks, such as <code>deferred.then</code>. When the Deferred is resolved or rejected, usually by the code that created the Deferred originally, the appropriate callbacks will be called.</p>
-
-<p>If a single argument is passed to <code>$.when</code> and it is not a Deferred or a Promise, it will be treated as a resolved Deferred and any <code>doneCallbacks</code> attached will be executed immediately. The <code>doneCallbacks</code> are passed the original argument. In this case any <code>failCallbacks</code> you might set are never called since the Deferred is never rejected. For example:</p>
-
-<pre class="prettyprint"><code>$.when( { testing: 123 } ).done(function( x ) {
-   alert( x.testing ); // Alerts "123"
-});
-</code></pre>
-
-<p>In the case where multiple Deferred objects are passed to $.when, the method returns the Promise from a new "master" Deferred object that tracks the aggregate state of all the Deferreds it has been passed. The method will resolve its master Deferred as soon as all the Deferreds resolve, or reject the master Deferred as soon as one of the Deferreds is rejected. If the master Deferred is resolved, it is passed the resolved values of all the Deferreds that were passed to $.when.</p>
-
-<p>In the multiple Deferreds case where one of the Deferreds is rejected, $.when immediately fires the <code>failCallbacks</code> for its master Deferred. Note that some of the Deferreds may still be unresolved at that point.</p>
-
-<pre class="prettyprint"><code>$.when(asyncEvent()).then(
-  function(status){
-    alert(status + ' Things are going well.');
-    document.getElementById('foo').style.backgroundColor = 'green';
-  },
-  function(status){
-    alert(status + ' You fail this time.');
-    document.getElementById('foo').style.backgroundColor = 'red';
-  }
-);
-
-// another example
-function showDiv(){
-  var dfd = $.Deferred();
-  dfd.done(function(){
-    document.getElementById('foo').style.display = 'block';
-  });
-  setTimeout(function() { dfd2.resolve() }, 2000);
-  return dfd2.promise();
-}
-showDiv();
-</code></pre>
-
-
-
-
-
-
-
-
-<h4>
-  <a name="cc-deferred-ajax" class="anchor" href="#deferred-ajax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax with Deferred Objects</h4>
-
-<p>When doing Ajax requests with support for the deferred object, f the Ajax request was for JSON or was a GET request, the first argument exposed to the successful deferred is the XHR.responseText. Otherwise it is the XHR.status, which lets you know whether the POST, PUT or DELETE was successful or not.</p>
-
-<pre class="prettyprint"><code>$.ajax({ url : "/data/me.json"})
-  .done(function(me) {
-    $("#content").html(me.firstName + " " + me.lastName);
-  })
-  .fail(function(status) {
-    content.html("&lt;h4&gt;There was an error while trying to get the file:" + status + "&lt;/h4&gt;");
-  })
-  // This executes whether a success or failure:
-  .always(function() {
-    console.log('An Ajax request was made to update the page.')
-  })
-});
-</code></pre>
-
-<h3>
-<a name="cc-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.get</h3>
-
-<p>This is a short cut for doing a get request. It can handle the following parameters: url, data, success, dataType. At very least you can pass it the url and a function to execute on success.</p>
-
-<pre class="prettyprint"><code>// Get an html fragment and insert it in the document:
-$.get('/data/suits.html', function(data) {
-  $('#products').html(data);
-});
-</code></pre>
-
-<p>Because $.get is just and alias for $.ajax, it returns a deferred object. This means you can use deferred methods with it:</p>
-
-<pre class="prettyprint"><code>// Get an html fragment and insert it in the document:
-$.get('/data/suits.html')
-.done(function(data) {
-  $('#products').html(data);
-})
-.fail(function(status) {
-  $('#errorMessage').text('There was and error: ' + status)
-});
-</code></pre>
-
-<h3>
-<a name="cc-getjson" class="anchor" href="#getjson" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.getJSON</h3>
-
-<p>This is a shortcut for getting a JSON object from a server. It expects three parameters: url, data, and success. If no data is provided, it will execute with just the url and success callback.</p>
-
-<pre class="prettyprint"><code>$.getJSON('/data/deserts.json', function(desserts) {
-  desserts.forEach(function(dessert) {
-    $('#deserts').append('<li>' + dessert.name + '</li>');
-  });
-});
-</code></pre>
-
-<p>Like the $.ajax method, this also returns a deferred object:</p>
-
-<pre class="prettyprint"><code>$.getJSON('/data/deserts.json')
-.done(function(deserts) {
-  deserts.forEach(desert) {
-    $('#deserts').append('&lt;li&gt;' + desert.name + '&lt;/li&gt;');
-  });
-})
-.fail(function() {
-  alert('There was a problem getting the JSON!');
-});
-</code></pre>
-
-<h3>
-<a name="cc-post" class="anchor" href="#post" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.post</h3>
-
-<p>This method is a shortcut for doing a post. It expects these parameters: url, data, success, dataType.</p>
-
-<pre class="prettyprint"><code>$.post("updateUser.php", 
-  { "name": "Joe", "time": "10PM" }, 
-  function() {
-    console.log('The POST was successful.')
-  },
-  "json"
-);
-</code></pre>
-
-<p>Or, with a deferred object:</p>
-
-<pre class="prettyprint"><code>$.post("updateUser.php", 
-{ 
-  "name": "Joe", 
-  "time": "10PM" 
-})
-.done(function() {
-  function() {
-    console.log('The POST was successful.')
-  }  
-})
-.fail(function() {
-  console.log('There was a problem posting.')
-});
-</code></pre>
-
-<h3>
-<a name="cc-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.JSONP</h3>
-
-<p>This method allows you to perform requests from remote sites that support JSONP. It does this by sending a callback along with the request, hence the name JSON with Padding. It expects two arguments: a url and a callback to execute once the data has returned. Normally, the url should end with the phrase: &amp;callback=?. However, there are some services out there that expect a slightly different ending. Please check the documentation for any API before trying to implement a JSONP request.</p>
-
-<p>Because the data lives on a remote server, you'll need to read the documentation for the service to understand its format so that you can output it to your app.</p>
-
-<p>$.JSONP has the following default settings, which you can override:</p>
-
-<pre class="prettyprint"><code>var settings = {
-  url : null,
-  callback: $.noop,
-  callbackType : 'callback=?',
-  timeout: null
-};
-</code></pre>
-
-<p>Be aware that you have no control over when the remote server will respond to your JSONP request. It could take some time. If you would prefer to have more control over what happens, you can provide a timeout value great than 0. If the remote server has not responded by the time the timeout finishes, the request will be canceled.</p>
-
-<p>Like normal Ajax requests, $.JSONP also returns a deferred object. This allows you to use the usual deferred method chaining with your JSONP request. When the deferred object is resolved, it returns the following values in order: data (the data retrieved, 'resolved' (a string), settings (the settings object used to initialize the request). When the deferred object is rejected, it returns the following values: 'timedout' (a string), settings (the settings object used to initialize the request).</p>
-
-<pre class="prettyprint"><code>$.JSONP({
-  url: 'https://api.github.com/users/yui?callback=?', 
-  callback: function(lib) {
-    $('.list').append('&lt;li&gt;&lt;h3&gt;The name of the library&lt;/h3&gt;&lt;h4&gt;' + lib.data.name + '&lt;/h4&gt;&lt;/li&gt;');
-  }
-});
-
-$.JSONP({
-  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;country=US&amp;callback=?', 
-  callback: function(data){
-    $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
-  }
-});
-</code></pre>
-
-<p>With timeout:</p>
-
-<pre class="prettyprint"><code>$.JSONP({
-  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;country=US&amp;callback=?', 
-  callback: function(data){
-    $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
-  },
-  // 5 second timeout:
-  timeout: 5000
-});
-</code></pre>
-
-<p>Deferred versions:</p>
-
-<pre class="prettyprint"><code>.JSONP({
-  url: 'https://api.github.com/users/yui?callback=?'
-})
-.done(function(lib) {
-  $('.list').append('&lt;li&gt;&lt;h3&gt;The name of the library&lt;/h3&gt;&lt;h4&gt;' + lib.data.name + '&lt;/h4&gt;&lt;/li&gt;');
-});
-
-.JSONP({
-  url: 'https://api.github.com/users/yui?callback=?',
-  timeout: 5000
-})
-.done(function(lib) {
-  $('.list').append('&lt;li&gt;&lt;h3&gt;The name of the library&lt;/h3&gt;&lt;h4&gt;' + lib.data.name + '&lt;/h4&gt;&lt;/li&gt;');
-})
-.fail(function(msg, settings) {
-  console.log(msg);
-  console.log('There was a problem connecting to: ' + settings.url);
-});
-</code></pre>
-
-
-
-
-
-<h3>
-<a name="cc-form2json" class="anchor" href="#form2json" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.form2JSON</h3>
-
-<p>This method converts form values into a JSON object. This can be converted to a string for sending to the server with a GET or POST request, or stored on the client side in localStorage or the client side SQLite database.</p>
-
-<p>It expects two parameters:</p>
-
-<p>selector: a valid selector for the form to be processed.
-delimiter: a character to use as a delimiter for the marking of JSON member relations in the form element’s name values (see example below). This defaults to “.”, but you can use any other character that suits your purposes.
-For this method to work properly you must name all form elements that you want to retrieve so that they match the structure of the resulting JSON object you would like. You use “.” to indicate the sub objects of the JSON object. For example, if your form was for signing up a user, you might have inputs with names such as:</p>
-
-<pre class="prettyprint"><code>&lt;form id="newUser"&gt;
-  &lt;input type="text" name="newUser.name.first"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.name.last"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.address.street"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.address.city"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.address.state"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.address.zip"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.phone"&gt;&lt;/input&gt;
-  &lt;input type="text" name="newUser.email"&gt;&lt;/input&gt;
- &lt;/form&gt;
-
-{"newUser":
-  {"name":
-    {"first": "someValueHere"},
-    {"last": "someValueHere"}
-  },
-  {"address":
-    {"street": "someValueHere"},
-    {"city": "someValueHere"},
-    {"state": "someValueHere"},
-    {"zip": "someValueHere"}
-  },
-  {"phone": "someValueHere" },
-  {"email": "someValueHere"}
-}
-</code></pre>
-
-<p>Disabled form elements or ones which have no value will be ignored.</p>
-
-<p>If you need to create an array from something like a set of choices, you’ll need to mark the name with brackets “[]” to indicate that it’s an array:</p>
-
-<pre class="prettyprint"><code>&lt;div&gt;Favorite food&lt;/div&gt;
-&lt;p&gt;
-  &lt;label&gt;Salad:&lt;/label&gt;
-  &lt;input type="checkbox" name="user.favoriteFood[]" value="salad"&gt;
-&lt;/p&gt;
-&lt;p&gt;
-  &lt;label&gt;Pizza:&lt;/label&gt;
-  &lt;input type="checkbox" name="user.favoriteFood[]" value="pizza"&gt;
-&lt;/p&gt;
-&lt;p&gt;
-  &lt;label&gt;Chicken:&lt;/label&gt;
-  &lt;input type="checkbox" name="user.favoriteFood[]" value="chicken"&gt;
-&lt;/p&gt;
-</code></pre>
 
 <h2>
 <a name="cc-templates" class="anchor" href="#templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templates</h2>
@@ -2710,6 +1619,991 @@ $.unsubscribe(newsSubscription);
 // Due to being unsubscribed above, this does nothing:
 $.publish('news/update', 'We have nothing further to comment at this time.');
 </code></pre>
+
+
+
+
+
+
+<h2>
+<a name="cc-animation" class="anchor" href="#animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Animation</h2>
+
+<h3>
+<a name="cc-animate" class="anchor" href="#animate" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.animate</h3>
+
+<p>This method allows you to create animations using CSS transitions. The method takes three arguments, an object literal of CSS values to animate, followed by a value for the duration in milliseconds, and an easing descriptor. If no easing is provided, it defaults to linear, if no duration is provided it defaults to half a second.</p>
+
+<pre class="prettyprint"><code>$("#animate").on('doubletap', function() {
+  this.anim(
+    {
+      "-webkit-transform": "rotate3d(30, 150, 200, 180deg) scale(3) translate3d(-50%, -30%, 140%)",
+      "opacity": .25,
+      "-webkit-transform-style" : "preserve-3d",
+      "-webkit-perspective": 500
+    },
+    "2s",
+    "ease-in-out"
+  );
+);
+</code></pre>
+
+<p>You can include in the object an optional callback to execute when the animation ends:</p>
+
+<pre class="prettyprint"><code>function saySomething() {
+  alert('The animation just ended.');
+}
+
+$("#animate").on("click", function() {
+  this.anim(
+    {
+      "-webkit-transform": "rotate3d(30, 150, 200, 180deg) scale(3) translate3d(-50%, -30%, 140%)",
+      "opacity": .25,
+      "-webkit-transform-style" : "preserve-3d",
+      "-webkit-perspective": 500,
+      onEnd: saySomething 
+    },
+    "2s",
+    "ease-in-out");
+);
+</code></pre>
+
+<h2>
+<a name="cc-utilities" class="anchor" href="#utilities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Utilities</h2>
+
+<p>ChocolateChipJS has a number of useful utility properties and methods.</p>
+
+<ul>
+<li>$.version</li>
+<li>$.libraryName</li>
+<li>$.slice()</li>
+<li>$.delay()</li>
+<li>$.defer()</li>
+<li>$.noop</li>
+<li>$.concat()</li>
+<li>$.w()</li>
+<li>$.isString()</li>
+<li>$.isArray()</li>
+<li>$.isFunction()</li>
+<li>$.isObject()</li>
+<li>$.isEmptyObject()</li>
+<li>$.isNumber()</li>
+<li>$.isInteger()</li>
+<li>$.isFloat()</li>
+<li>$.each()</li>
+<li>$.uuiNum()</li>
+<li>$.makeUuid()</li>
+<li>$.require()</li>
+<li>"".camelize()</li>
+<li>"".deCamelize()</li>
+<li>"".capitalize()</li>
+<li>"".capitalizeAll()</li>
+</ul><h3>
+<a name="cc-version" class="anchor" href="#version" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.version</h3>
+
+<p>The current version of ChocolateChipJS.</p>
+
+<h3>
+<a name="cc-libraryname" class="anchor" href="#libraryname" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.libraryName</h3>
+
+<p>If you're not sure whether ChocolateChipJS is running, examine this value. If it returns "ChocolateChip", you know what it is.</p>
+
+<h3>
+<a name="cc-slice" class="anchor" href="#slice" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.slice</h3>
+
+<p>This is a shortcut for Array.prototype.slice. You use it to turn any array-like object into an array. This will work for node collections or the arguments object.</p>
+
+<h3>
+<a name="cc-delay" class="anchor" href="#delay" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.delay</h3>
+
+<p>This method is used by $.defer to execute a function after the call stack is clear. See $.defer below.</p>
+
+<h3>
+<a name="cc-defer" class="anchor" href="#defer" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.defer</h3>
+
+<p>This method will defer the execution of a function until the call stack is clear. This means that even though your function is defined before other code, it will not execute until all of the following code has executed.</p>
+
+<pre class="prettyprint"><code>$(document).ready(function() {
+  $.defer(function() {
+    console.log("This comes after Squawk!");
+  });
+  console.log('Squawk!');
+  // Result: Squawk! This comes after Squawk!
+});
+</code></pre>
+
+<h3>
+<a name="cc-noop" class="anchor" href="#noop" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.noop</h3>
+
+<p>This is a 'no operation performed' method the you can use when you need a placeholder for a callback. This gets used internally by ChUI.js for cases where it expects a callback but the user may not provide one.</p>
+
+<pre class="prettyprint"><code>// Attach and event that does nothing:
+$('button').on('click', $.noop);
+</code></pre>
+
+<h3>
+<a name="cc-concat" class="anchor" href="#concat" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.concat</h3>
+
+<p>This method allows you to concatenate string or values using a method interface instead of the '+' operator.</p>
+
+<pre class="prettyprint"><code>$(function() {
+  // Concatenate a series of arguments:
+  var id = ' id="myButton"',
+  class = ' class="button"',
+  style = ' style="color: red;"';
+  var button = $.concat('&lt;button ', id, class, style, '&gt;Button&lt;/button&gt;');
+  // Returns: '&lt;button id="myButton" class="button" style="color: red;"&gt;Button&lt;/button&gt;'
+
+  // Concatenate an array of string values:
+  var listIems = ['&lt;li&gt;One&lt;/li&gt;','&lt;li&gt;Two&lt;/li&gt;','&lt;li&gt;Three&lt;/li&gt;','&lt;li&gt;Four&lt;/li&gt;']
+  var list = $.concat();
+  // Returns: '&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;li&gt;Three&lt;/li&gt;&lt;li&gt;Four&lt;/li&gt;'
+});
+</code></pre>
+
+<h3>
+<a name="cc-w" class="anchor" href="#w" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.w</h3>
+
+<p>This method takes a space-delimited string of words and returns it as an array where the individual words are indices.</p>
+
+<pre class="prettyprint"><code>var str = 'This is an example of a string'
+var strArray = $.w(str) // Returns ['This','is','an','example','of','a','string']
+</code></pre>
+
+<h3>
+<a name="cc-isstring" class="anchor" href="#isstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isString</h3>
+
+<p>This method will return true if the argument is a string.</p>
+
+<pre class="prettyprint"><code>$.isString("This is text"); // Will return 'true'
+$.isString(1); // Will return 'false';
+</code></pre>
+
+<h3>
+<a name="cc-isarray" class="anchor" href="#isarray" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isArray</h3>
+
+<p>This method will return true if the argument is an array.</p>
+
+<pre class="prettyprint"><code>$.isArray([1,2,3]); // Will return 'true'
+</code></pre>
+
+<h3>
+<a name="cc-isfunction" class="anchor" href="#isfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isFunction</h3>
+
+<p>This method will return true if the argument is a function.</p>
+
+<pre class="prettyprint"><code>$.isFunction($.noop); // Will return 'true'
+</code></pre>
+
+<h3>
+<a name="cc-isobject" class="anchor" href="#isobject" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isObject</h3>
+
+<p>This method will return true if the argument is an object.</p>
+
+<pre class="prettyprint"><code>$.isObject({name: 'Joe Bodoni'}); // Will return 'true'
+$.isObject(function() {return}); // Will return 'false'
+</code></pre>
+
+<h3>
+<a name="cc-isemptyobject" class="anchor" href="#isemptyobject" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isEmptyObject</h3>
+
+<p>Returns true is the object is empty {}, otherwise it returns false.</p>
+
+<pre class="prettyprint"><code>var newObj = {};
+$.isEmptyObject(newObj); // Will return 'true'
+$.isEmptyObject(function() {return}); // Will return 'false'
+$.isEmptyObject({name: 'Joe Bodoni'}) // Will return 'false'
+</code></pre>
+
+<h3>
+<a name="cc-isnumber" class="anchor" href="#isnumber" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isNumber</h3>
+
+<p>This method will return true if the argument is a number.</p>
+
+<pre class="prettyprint"><code>$.isNumber(1); // Will return 'true'
+$.isNumber(0.1); // Will return 'true'
+$.isNumber('text'); // Will return 'false'
+</code></pre>
+
+<h3>
+<a name="cc-isinteger" class="anchor" href="#isinteger" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isInteger</h3>
+
+<p>This method will return true if the argument is an integer.</p>
+
+<pre class="prettyprint"><code>$.isInteger(1); // Will return 'true'
+// The following is a float, not an integer:
+$.isInteger(1.1); // Will return 'false'
+</code></pre>
+
+<h3>
+<a name="cc-isfloat" class="anchor" href="#isfloat" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isFloat</h3>
+
+<p>This method will return true if the argument is a float.</p>
+
+<pre class="prettyprint"><code>$.isFloat(0.1); // Will return 'true'
+// This is an integer:
+$.isFloat(1); // Will return 'false'
+</code></pre>
+
+
+
+<h3>
+<a name="cc-each" class="anchor" href="#each" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.each</h3>
+
+<p><code>$.each</code> is a method for looping arrays. The default <code>[].forEach()</code> method can sometimes be slow with large arrays. If you are experiencing performance problems with your arrays of nodes, try using this method instead. It takes two arguments, the array and a callback. The callback works just like the callback in the normal foreach array method:</p>
+
+<pre class="prettyprint"><code>var data = ['one', 'two', 'three', 'four', 'five'];
+$.each(data, function(ctx, icx) {
+  console.log(ctx);
+});
+</code></pre>
+
+<p>The above will output "one, two, three, four, five".</p>
+
+
+<h3>
+<a name="cc-uuinum" class="anchor" href="#uuinum" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.uuiNum</h3>
+
+<p>This method is used internally by ChocolateChip to create uuids for creating identifiers in its cache for events and data.</p>
+
+<h3>
+<a name="cc-makeuuid" class="anchor" href="#makeuuid" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.makeUuid</h3>
+
+<p>Like the $.uuidNum method, this is used internally by ChocolateChip for creating unique identifiers for its caching system.</p>
+
+<h3>
+<a name="cc-require" class="anchor" href="#require" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.require</h3>
+
+<p>This method will import a script into your app. You pass it the source for the script and an optional callback to execute when the script is fully parsed by the browser.</p>
+
+<pre class="prettyprint"><code>$.require('/scripts/libs/sillyputty.js', function() {
+   var sp = new SillyPutty(); // Will not execute until sillyputty.js is fully loaded.
+});
+</code></pre>
+
+<h3>
+<a name="cc-camelize" class="anchor" href="#camelize" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".camelize</h3>
+
+<p>This method turns a hyphenated string into a camel case string.</p>
+
+<pre class="prettyprint"><code>var camelized = $.camelize('background-color'); // Returns 'backgroundColor'
+</code></pre>
+
+<h3>
+<a name="cc-decamelize" class="anchor" href="#decamelize" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".deCamelize</h3>
+
+<p>This method converts a camel case string into a hyphenated string.</p>
+
+<pre class="prettyprint"><code>var hyphenated = $.deCamelize('backgroundColor'); // Returns 'background-color'
+</code></pre>
+
+<h3>
+<a name="cc-capitalize" class="anchor" href="#capitalize" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".capitalize</h3>
+
+<p>This method will capitalize the first letter of a string, as for the first word of a sentence.</p>
+
+<pre class="prettyprint"><code>var word = "chocolate";
+word.capitalize(); // returns 'Chocolate'
+</code></pre>
+
+<h3>
+<a name="cc-capitalizeall" class="anchor" href="#capitalizeall" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".capitalizeAll</h3>
+
+<p>This method will capitalize the first letter of each word in a string.</p>
+
+<pre class="prettyprint"><code>var name = $.capitalize("get out now"); // returns 'Get Out Now'
+</code></pre>
+
+<h2>Performance Testing</h2>
+<p>We've made some claims about the performance of ChocolateChipJS. You can see for yourself by running any of the following tests. These are all on jsperf.com. </p>
+<p>Basic DOM operations:</p>
+<ul>
+  <li><a href='https://jsperf.com/chocolatechip-vs-jquery-vs-zepto/10' target='_blank'>ChocolateChip vs jQuery vs Zepto (DOM actions)</a></li>
+  <li><a href='https://jsperf.com/domsubtreemodified-templates/5' target='_blank'>DOMSubtreeModified &amp; Templates</a></li>
+  <li><a href='https://jsperf.com/domnoderemovedfromdocument-templates/6' target='_blank'>DOMNodeRemovedFromDocument &amp; Templates</a></li>
+  <li><a href='http://jsperf.com/domrecursiveempty/7' target='_blank'>DOMRecursiveEmpty</a></li>
+</ul>
+<p>Smackdown between ChocolateChipJS, jQuery &amp; Zepto using templates:</p>
+<ul>
+  <li><a href='http://jsperf.com/chocolatechipjs-dot/8' target='_blank'>ChocolateChipJS &amp; doT</a></li>
+  <li><a href='http://jsperf.com/chocolatechipjs-handlebars/5' target='_blank'>ChocolateChipJS &amp; Handlebars</a></li>
+  <li><a href='http://jsperf.com/chocolatechipjs-underscore/5' target='_blank'>ChocolateChipJS &amp; Underscore</a></li>
+  <li><a href='http://jsperf.com/jquery-vs-chocolatechip-vs-zepto-dot-vs-handlebars-unde/4' target='_blank'>jQuery vs ChocolateChip vs Zepto &amp; doT vs Handlebars &amp; underscore</a></li>
+  <li><a href='http://jsperf.com/testing-chocolatechip-with-templating/20' target='_blank'>jQuery vs ChocolateChip vs Zepto &amp; doT vs Handlebars &amp; underscore</a></li>
+</ul>
+<p>ChocolateChipJS running various versions of its templating engine:</p>
+<ul>
+  <li><a href='http://jsperf.com/chocolatechipjs-chtemplate/5' target='_blank'>ChocolateChipJS &amp; chTemplate</a></li>
+  <li><a href='http://jsperf.com/choco/4' target='_blank'>ChocolateChip Performance</a></li>
+</ul>
+
+
+<br><br>
+<h2 id='formUtilities'>FORM UTILITIES</h2>
+<h3>
+<a name="cc-form2json" class="anchor" href="#form2json" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.form2JSON</h3>
+
+<p>This method converts form values into a JSON object. This can be converted to a string for sending to the server with a GET or POST request, or stored on the client side in localStorage or the client side SQLite database.</p>
+
+<p>It expects two parameters:</p>
+
+<p>selector: a valid selector for the form to be processed.
+delimiter: a character to use as a delimiter for the marking of JSON member relations in the form element’s name values (see example below). This defaults to “.”, but you can use any other character that suits your purposes.
+For this method to work properly you must name all form elements that you want to retrieve so that they match the structure of the resulting JSON object you would like. You use “.” to indicate the sub objects of the JSON object. For example, if your form was for signing up a user, you might have inputs with names such as:</p>
+
+<pre class="prettyprint"><code>&lt;form id="newUser"&gt;
+  &lt;input type="text" name="newUser.name.first"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.name.last"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.address.street"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.address.city"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.address.state"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.address.zip"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.phone"&gt;&lt;/input&gt;
+  &lt;input type="text" name="newUser.email"&gt;&lt;/input&gt;
+ &lt;/form&gt;
+
+{"newUser":
+  {"name":
+    {"first": "someValueHere"},
+    {"last": "someValueHere"}
+  },
+  {"address":
+    {"street": "someValueHere"},
+    {"city": "someValueHere"},
+    {"state": "someValueHere"},
+    {"zip": "someValueHere"}
+  },
+  {"phone": "someValueHere" },
+  {"email": "someValueHere"}
+}
+</code></pre>
+
+<p>Disabled form elements or ones which have no value will be ignored.</p>
+
+<p>If you need to create an array from something like a set of choices, you’ll need to mark the name with brackets “[]” to indicate that it’s an array:</p>
+
+<pre class="prettyprint"><code>&lt;div&gt;Favorite food&lt;/div&gt;
+&lt;p&gt;
+  &lt;label&gt;Salad:&lt;/label&gt;
+  &lt;input type="checkbox" name="user.favoriteFood[]" value="salad"&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;label&gt;Pizza:&lt;/label&gt;
+  &lt;input type="checkbox" name="user.favoriteFood[]" value="pizza"&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;label&gt;Chicken:&lt;/label&gt;
+  &lt;input type="checkbox" name="user.favoriteFood[]" value="chicken"&gt;
+&lt;/p&gt;
+</code></pre>
+
+<h3>$.serialize</h3>
+
+<p>This method takes the values of a form a returns them encoded. This is necessary for posting or putting data to a server. This method takes a single argument, the form to be serialized. The value can be any valid selector, a simple DOM node or a ChocolateChipJS wrapped element.</p>
+
+```
+var myData = $.serialize('#myForm');
+// or:
+var myForm = document.getElementById('#myForm');
+var myData = $.serialize(myForm);
+// or:
+var myForm = $('#myForm');
+myData = $.serialize(myForm);
+```
+
+
+
+<h2>
+<a name="promises" class="anchor" href="#ecmascript_promises" aria-hidden="true"><span class="octicon octicon-link"></span></a>ECMAScript Promises</h2>
+
+<p>As of 3.8.6, the default build of ChocolateChipJS supports ECMAScript 6 promises. This includes all of its Ajax methods as well. ChocolateChipJS provides a polyfill for older browsers that do not have support for ECMAScript 6 promises, so you can use them in your code immediately.</p>
+
+<p>ECMAScript 6 Promises provide the following interface:</p>
+
+<ol>
+  <li>Promise</li>
+  <li>Promise.then()</li>
+  <li>Promise.resolve()</li>
+  <li>Promise.reject()</li>
+  <li>Promise.catch()</li>
+  <li>Promise.race()</li>
+  <li>Promise.all()</li>
+</ol>
+
+<p>If you are familiar and have been using jQuery or ChocolateChipJS's Deferred object, this will not look too foreign. Except for the last two: race and all. These have no equivalent with typical deferreds. They are features specific to ECMAScript promises.</p>
+
+<h3>The Promise Interface</h3>
+
+<p>An ECMAScript 6 promise is created with the "new" keyword. This returns an instance of the Promise object.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise();
+</code></pre>
+
+<p>When you create a promise, you can also provide a callback. This will be able to handle two arguments: resolve and reject:</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  var value;
+  // Do something to get value;
+  // ...
+  // Then test value to determine how to handle the promise:
+  if (value === 'good') {
+    resolve(value);
+  } else {
+    // When you reject the promise,
+    // you also get the reason it failed,
+    // which you can choose to output if you want:
+    reject(reason);
+  }
+});
+</code></pre>
+
+<h4>Then</h4>
+<p>Promises provide several methods allowing us to do useful things. The way you'll most like use promises is with the <code>then</code> method. This method can take up two two callbacks–one for success and one for failure.</p>
+
+
+<pre class="prettyprint"><code>// Create an instance of a promise:
+var myPromise = new Promise(function(resolve, reject) {
+  // Resolve the promise:
+  resolve('Success!');
+  // or reject it:
+  // reject('Lost in Space!');
+});
+myPromise.then(function(value) {
+  // Success:
+  console.log(value);
+},
+// Opps! There was a problem:
+function(reason) {
+  console.log(reason);
+});
+</code></pre>
+
+<p>As you can see in the above code, <code>then</code> can handle two callbacks, one for success and another optional one for failure. You can just provide a single callback to handle the success. That's up to you. If you want, you could return whatever value you get in your success callback, which allows you to chain a second function. Read the next part on Multiple Thens for more information.</p>
+
+<h4>Multiple Thens</h4>
+<p>The <code>then</code> method always returns a promsie. This means that you can chain multiple thens together. This allows you to break your code up into more logical blocks. This also helps you to avoid one of JavaScript development's worse patterns–the pyramid of doom–deeply nest series of callbacks.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  resolve(1);
+});
+myPromise.then(function(value) {
+  console.log(value); // 1
+  // Return the value:
+  return value + 1;
+})
+.then(fuction(value) {
+  console.log(value) // 2
+})
+</code></pre>
+
+
+<h4>Resolve</h4>
+
+<p>We can resolve a promise at any time using the <code>resolve</code> method on the static Promise object. Once we execute the resolve method, the promise is disposed of. </p>
+
+<pre class="prettyprint"><code>// Define an alias for the resolve callback:
+var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+}).then(function(value) {
+  equal(value, 5, 'Promise fulfilled with Promise should resolve to actual value');
+  start();
+});
+fulfill(Promise.resolve(5));
+</code></pre>
+
+<h4>Reject</h4>
+
+<p>Like the resolve example above, we can similarly reject a promise using its method on the static Promise object. In this example we pass a value that gets returned with the rejection:</p>
+
+<pre class="prettyprint"><code>var fulfill;
+new Promise(function (resolve, reject) {
+  fulfill = resolve;
+})['catch'](function(value) {
+  console.log(value);
+});
+fulfill(Promise.reject(5));
+</code></pre>
+
+<h4>Catch</h4>
+
+<p>We can handle errors and exceptions using the <code>catch</code> method. This enables us to have a series of thens that only handle success situations. ECMAScript promise pass any exception along until their is some callback to handle it.</p>
+
+<pre class="prettyprint"><code>var myPromise = new Promise(function(resolve, reject) {
+  resolve("Success!");
+});
+myPromise.then(function(value) {
+  console.log(value); // Success!
+  throw "Oops! Something went wrong.";
+})
+.catch(function(error) {
+  console.log(error); // Oops! Something went wrong.
+})
+</code></pre>
+
+<h4>Race</h4>
+
+<p>Sometimes you may need to execute several operations and any one of them could finish first. You want to take the result of the first to finishing, ignoring the others. ECMAScript promises enable this with the <code>race</code> method. This expects an array of promises as its argument.</p>
+
+<pre class="prettyprint"><code>var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.race([p1, p2, p3]).then(function(value) {
+  console.log('Promise.race() should resolve to: ' + value);
+});
+// Execute the second:
+f2(2);
+</code></pre>
+
+<h4>All</h4>
+<p>Unlike with race conditions, sometimes you want to execute a number of things and wait until they are all done before doing anything. In those cases you can use the <code>all</code> method. This expects an array of promises as its argument.</p>
+
+<pre class="prettyprint"><code>var f1, f2, f3;
+var p1 = new Promise(function(f, r) { f1 = f; });
+var p2 = new Promise(function(f, r) { f2 = f; });
+var p3 = new Promise(function(f, r) { f3 = f; });
+Promise.all([p1, p2, p3])
+.then(function(value) {
+  console.log(value);
+});
+// Execute theme in opposite order:
+f3(3);
+f2(2);
+f1(1);
+</code></pre>
+
+
+
+
+
+
+
+<h2>
+  <a name="fetch" class="anchor" href="#ecmascript_fetch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetch API - An Alternative to Ajax
+</h2>
+
+<p>Fetch is a <a href="https://fetch.spec.whatwg.org">new API</a> created by the <a href="https://whatwg.org">WHATWG</a> as a simplified and lower level alternative to XHTTP requests. ChocolateChipJS uses this API instead of the older Ajax syntax because we feel it wins out in simplicity and maintainability.</p>
+
+<p>Some peope think the <code>fetch</code> API is too radical and that it will never happen. However, even in its current state it is available in shipping versions of Chrome and Firefox. For Safari and IE, ChocolateChipJS provides a polyfill.</p>
+
+<h3>
+<a id="user-content-so-what-are-we-talking-about-here" class="anchor" href="#so-what-are-we-talking-about-here" aria-hidden="true"><span class="octicon octicon-link"></span></a>So what are we talking about here?</h3>
+
+<p>A plain JavaScript XMLHttpRequest could look like this:</p>
+
+<pre class="prettyprint"><code>var xhr = new XMLHttpRequest();
+xhr.open('GET', url);
+xhr.responseType = 'json';
+
+xhr.onload = function() {
+  console.log(xhr.response);
+};
+
+xhr.onerror = function() {
+  console.log("Booo");
+};
+
+xhr.send();
+</code></pre>
+
+<p>And here's the same thing using the Ajax syntax introduced by jQuery and used in older versions of ChocolateChipJS:</p>
+
+<pre class="prettyprint"><code>$.ajax({
+  url: './some/url',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(err) {
+    console.log(err);
+  }
+});
+</code></pre>
+
+<p>Now here's the same thing using the new  <code>fetch</code> API:</p>
+
+<pre class="prettyprint"><code>fetch('./some/url')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+</code></pre>
+
+<p>As you can see in the above example, <code>fetch</code> uses Promises to its advantage and the result is a much cleaner and easier to follow process.</p>
+
+<p>You can find working examples of the Fetch API in the folder 'fetch'. This requries a PHP server to run. </p>
+
+<h2>
+<a id="user-content-api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
+
+<p>Fetch takes two arguments: input and init. Input is a url. If only a url is provided, <code>fetch</code> assumes a GET request. Init is an optional object of key/value pairs. The possible values for init are:</p>
+
+<pre class="prettyprint"><code>init: {
+  method: {
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'OPTIONS',
+    'HEAD'
+  },
+  headers: {
+    'Accept': 'application/json',
+    'Accept-Encoding', 'deflate',
+    'Accept-Encoding', 'gzip'
+    'Content-Type': 'application/json',
+    "Content-Type": "application/x-www-form-urlencoded",
+    'Content-Type', 'image/jpeg',
+    'Content-Type', 'text/html'
+  },
+  body: {
+    json,
+    text,
+    formData,
+    blob,
+    arrayBuffer
+  },
+  mode:  {
+    "cors",
+    "no-cors",
+    "same-origin",
+  },
+  credentials: {
+    "omit",
+    "same-origin",
+    "include"
+  },
+  cache: {
+    "default",
+    "no-store",
+    "reload",
+    "no-cache",
+    "force-cache",
+    "only-if-cached"
+  }
+}
+</code></pre>
+
+<p>OK, so how do you use this thing? Here are some examples:</p>
+
+<h2>
+<a id="user-content-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get</h2>
+
+<p>In this example we fetch from a url, parse the JSON, pass it to a forEach function and append the data to the document.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  fetch('../data/wines.json')
+  // Parse response to JSON:
+  .then($.json)
+  .then(function(json) {
+    json.forEach(function(wine) {
+      $('#message_ajax').append('&lt;li&gt;' + wine.name + '&lt;/li&gt;');
+    })
+  });
+});
+</code></pre>
+
+<h4>
+<a id="user-content-getting-html" class="anchor" href="#getting-html" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting HTML</h4>
+
+<p>If you want to get some an HTML document or document fragment, do the following:</p>
+
+<pre class="prettyprint"><code>fetch('https://foo.com/fragments/page-1.html')
+  .then(function(response) {
+    return resonse.text();
+  })
+  .then(function(result) {
+    $('body').append(result);
+  });
+</code></pre>
+
+<h4>
+<a id="user-content-json" class="anchor" href="#json" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.json</h4>
+
+<p>This method automatically parses data returned by the response as JSON. To use it, simply put it as the immediate response to a JSON request:</p>
+
+<pre class="prettyprint"><code>.then($.json)
+</code></pre>
+
+<p>See the example above. You can use this whenever you expect JSON will be returned.</p>
+
+<h2>
+<a id="user-content-post" class="anchor" href="#post" aria-hidden="true"><span class="octicon octicon-link"></span></a>Post</h2>
+
+<p>Here we are posting some form data that will get processed by a PHP controller. We provide a url, followed by an init object that contains the 'post' method, headers object and the body, which holds the data from the serialized form:</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  // Serialize form data:
+  var data = $.serialize($('form')[0]);
+  fetch('../controllers/php-post.php', {
+    method: 'post',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+    },
+    body: data
+  })
+  .then($.json) 
+  .then(function(data) {
+    if(data.email_check == "valid"){
+        $("#message_ajax").html("&lt;div class='successMessage'&gt;" + data.email + " is a valid e-mail address. Thank you, " + data.name + ".&lt;/div&gt;");
+        $("#message_ajax").append('&lt;p&gt;' + data.msg + '&lt;/p&gt;');
+    } else {
+        $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry " + data.name + ", " + data.email + " is NOT a valid e-mail address. Try again.&lt;/div&gt;");
+    }
+  });
+});
+</code></pre>
+
+<p>In the above example, our PHP controller processes form data and then returns some information which we can output to the document when it was successful.</p>
+
+<h4>
+<a id="user-content-using-form2json" class="anchor" href="#using-form2json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using $.form2JSON</h4>
+
+<p>If you want to post your form values as JSON, you can use ChocolateChipJS's <code>form2JSON</code> method:</p>
+
+<pre class="prettyprint"><code>var formData = $.form2JSON('#myForm');
+fetch('/submit-form-json', {
+  method: 'post',
+  body: JSON.stringify(formData)
+});
+</code></pre>
+
+<h2>
+<a id="user-content-put" class="anchor" href="#put" aria-hidden="true"><span class="octicon octicon-link"></span></a>Put</h2>
+
+<p>To perform a PUT operation, we provide the url, followed by an init object with the 'put' method, headers and a body holding the form data that we want to put. The PHP controller at the other end of the url will handle this.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  var data = $('#fileText').val();
+  fetch('../controllers/php-put.php', {
+    method: 'put',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+    },
+    body: data
+  })
+  .then($.json) 
+  .then(function(data) {
+      console.dir(data.base);
+      $("#message_ajax").append('&lt;p&gt;' + data.result + '&lt;/p&gt;');
+      $("#message_ajax").append('&lt;p&gt;The file name is: ' + data.fileName + '&lt;/p&gt;');
+  })
+  .catch(function(error) {
+      console.log(error);
+      $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry, put was not successful.&lt;/div&gt;");
+  });
+});
+</code></pre>
+
+<p>If this put request was handled successfully by the server side controller, it will return some data that we will output to the document.</p>
+
+<h2>
+<a id="user-content-delete" class="anchor" href="#delete" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete</h2>
+
+<p>This shows how to implement a delete. In this case we are simply deleting a file on the server. If the file does not exist, our PHP controller will let us know, otherwise it will delete the file. </p>
+
+<p>The delete request needs the url to send to, followed by an init object with the 'delete' method, a headers object and the body to hold the name of the file to delete.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  var file = $('#fileName').val();
+  fetch('../controllers/php-delete.php', {
+    method: 'delete',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+    },
+    body: file
+  })
+  .then($.json) 
+  .then(function(data) {
+      $("#message_ajax").html("&lt;div&gt;DELETE was sent to the server successfully.&lt;/div&gt;");
+      $("#message_ajax").append('&lt;p&gt;' + data.result + '&lt;/p&gt;');
+  },
+  function(data) {
+    console.log('PROBLEM')
+    console.log(data);
+  })
+  .catch(function(error) {
+      $("#message_ajax").html("&lt;div class='errorMessage'&gt;Sorry, 'DELETE' was not successful.&lt;/div&gt;");
+      error.reject();
+  });
+});
+</code></pre>
+
+<p>If the server side controller was successful, it will send back some information that we can output to the document.</p>
+
+<h2>
+<a id="user-content-headers" class="anchor" href="#headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Headers</h2>
+
+<p>In <code>fetch</code> you can create headers using the Headers method:</p>
+
+<pre class="prettyprint"><code>fetch('some/particular/url', {
+  method: 'post',
+  headers: {
+    "Content-Type": "text/plain",
+    "Content-Length": content.length.toString(),
+    "X-Custom-Header": "ProcessThisImmediately"
+  }
+});
+
+// or:
+var headers = new Headers({
+  "Content-Type": "text/plain",
+  "Content-Length": content.length.toString(),
+  "X-Custom-Header": "ProcessThisImmediately",
+});
+fetch('some/particular/url', {
+  method: 'post',
+  headers: headers
+});
+
+// or:
+var reqHeaders = new Headers();
+reqHeaders.append("Content-Type", "text/plain"
+reqHeaders.append("Content-Length", content.length.toString());
+reqHeaders.append("X-Custom-Header", "ProcessThisImmediately");
+fetch('some/particular/url', {
+  method: 'post',
+  headers: headers
+});
+</code></pre>
+
+<p>With the headers object, you can choose the style that works for the situation.</p>
+
+<h2>
+<a id="user-content-request-object" class="anchor" href="#request-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request Object</h2>
+
+<p>You can also create a Request object to use with <code>fetch</code>:</p>
+
+<pre class="prettyprint"><code>// Create Request Object:
+var wineRequest = new Request('../data/wines.json');
+$("#submit").on("click", function(e) {
+  fetch(wineRequest)
+  // Parse response to JSON:
+  .then($.json)
+  .then(function(json) {
+    json.forEach(function(wine) {
+      $('#message_ajax').append('&lt;li&gt;' + wine.name + '&lt;/li&gt;');
+    })
+  });
+});
+</code></pre>
+
+<p>or:</p>
+
+<pre class="prettyprint"><code>var data = $.serialize($('form')[0]);
+// Create Request Object:
+var postRequest = new Request('../controllers/php-post.php', {
+  method: 'post',
+  headers: {  
+    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+  },
+  body: data
+});
+fetch(postRequest);
+</code></pre>
+
+<p>The Request object accepts the same arguments as the fetch method, so you can pass it a url, along with an init object with method, headers, mode and cache, or whatever you need in your case:</p>
+
+<pre class="prettyprint"><code>var myInit = { 
+  method: 'GET',
+  headers: myHeaders,
+  mode: 'cors',
+  cache: 'default' 
+};
+var myRequest = new Request('my/special/url', myInit);
+fetch(myRequest)
+.then(function(response) {
+  console.log('We got something here.')
+})
+</code></pre>
+
+<h2>
+<a id="user-content-serialize" class="anchor" href="#serialize" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.serialize</h2>
+
+<p>This method will serialize the values of a form and return their encoded values as a string. Using this, you can pass the value of a form to a PUT or POST method body along with the header:</p>
+
+<pre class="prettyprint"><code>headers: {  
+  "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+}
+</code></pre>
+
+<p>Look at the previous <code>fetch</code> examples to see how we used this.</p>
+
+<h2>
+<a id="user-content-responseok" class="anchor" href="#responseok" aria-hidden="true"><span class="octicon octicon-link"></span></a>response.ok</h2>
+
+<p>You can check the status of a response by examining its <code>ok</code> property:</p>
+
+<pre class="prettyprint"><code>fetch('some/url')
+.then(function(reponse) {
+  if (response.ok) {
+    console.log('Woohoo! We were successful!');
+  } else {
+    console.log('There seems to have been a network problem.');
+  }
+})
+</code></pre>
+
+<p>You can query any of the following values on the Response object like we did with <code>ok</code>:</p>
+
+<pre class="prettyprint"><code>ok
+status
+statusText
+type
+url
+</code></pre>
+
+<h2>
+<a id="user-content-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSONP</h2>
+
+<p>Although not a part of the <code>fetch</code> API, we created an interface for JSONP that matches that of fetch.</p>
+
+<pre class="prettyprint"><code>$("#submit").on("click", function(e) {
+  $.jsonp('https://something/is/here?name=chipper', { timeout: 10000 })
+  .then($.json)
+  .then(function(obj) {
+    console.log(obj)
+    obj.forEach(function(repo) {
+      $('#message_ajax').append("&lt;li&gt;" + repo.name + "&lt;/li&gt;");
+    });
+  })
+  .catch(function(error) {
+    $('#message_ajax').append("&lt;li&gt;" + error.message + "&lt;/li&gt;")
+  });
+});
+</code></pre>
+
+<p>Jsonp takes the following parameters, though only the url is required:</p>
+
+<pre class="prettyprint"><code>url,
+options: {
+  timeout: 5000,
+  callbackName: 'myCallbackHandler',
+  clear: true/false
+}
+</code></pre>
+
+<p>The url is of course the url you wish to query. You can set a timeout value so if the request is taking too long you can cancel. The default value for callback is good for the majority of sites. However, some sites have a custom handler name they use. You can provide that using the callbackName value. Setting the clear property to false will allow the script and variable for your JSONP request to persist in the browser window. By default the value is set to false so that they are automatically removed.</p>
+
+
+
+
+
+
+
+
+<br><br><br><br>
+<hr>
+<!-- Deprecated content -->
+<div class="notice">
+  <h2>This section holds information about Deferred Objects and Ajax as implemented in Version 3.x. These are replaced by ES6 Promises and the Fetch API presented above.</h2>
+</div>
 
 <h2>
 <a name="cc-deferred-object" class="anchor" href="#deferred-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deferred Object</h2>
@@ -3162,315 +3056,153 @@ showDiv();
 
 
 <h2>
-<a name="cc-animation" class="anchor" href="#animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Animation</h2>
+<a name="cc-ajax" class="anchor" href="#ajax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ajax</h2>
 
-<h3>
-<a name="cc-animate" class="anchor" href="#animate" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.animate</h3>
-
-<p>This method allows you to create animations using CSS transitions. The method takes three arguments, an object literal of CSS values to animate, followed by a value for the duration in milliseconds, and an easing descriptor. If no easing is provided, it defaults to linear, if no duration is provided it defaults to half a second.</p>
-
-<pre class="prettyprint"><code>$("#animate").on('doubletap', function() {
-  this.anim(
-    {
-      "-webkit-transform": "rotate3d(30, 150, 200, 180deg) scale(3) translate3d(-50%, -30%, 140%)",
-      "opacity": .25,
-      "-webkit-transform-style" : "preserve-3d",
-      "-webkit-perspective": 500
-    },
-    "2s",
-    "ease-in-out"
-  );
-);
-</code></pre>
-
-<p>You can include in the object an optional callback to execute when the animation ends:</p>
-
-<pre class="prettyprint"><code>function saySomething() {
-  alert('The animation just ended.');
-}
-
-$("#animate").on("click", function() {
-  this.anim(
-    {
-      "-webkit-transform": "rotate3d(30, 150, 200, 180deg) scale(3) translate3d(-50%, -30%, 140%)",
-      "opacity": .25,
-      "-webkit-transform-style" : "preserve-3d",
-      "-webkit-perspective": 500,
-      onEnd: saySomething 
-    },
-    "2s",
-    "ease-in-out");
-);
-</code></pre>
-
-<h2>
-<a name="cc-utilities" class="anchor" href="#utilities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Utilities</h2>
-
-<p>ChocolateChipJS has a number of useful utility properties and methods.</p>
+<p>ChocolateChipJS provides a number of methods to enable various Ajax operations.</p>
 
 <ul>
-<li>$.version</li>
-<li>$.libraryName</li>
-<li>$.slice()</li>
-<li>$.delay()</li>
-<li>$.defer()</li>
-<li>$.noop</li>
-<li>$.concat()</li>
-<li>$.w()</li>
-<li>$.isString()</li>
-<li>$.isArray()</li>
-<li>$.isFunction()</li>
-<li>$.isObject()</li>
-<li>$.isEmptyObject()</li>
-<li>$.isNumber()</li>
-<li>$.isInteger()</li>
-<li>$.isFloat()</li>
-<li>$.each()</li>
-<li>$.uuiNum()</li>
-<li>$.makeUuid()</li>
-<li>$.require()</li>
-<li>"".camelize()</li>
-<li>"".deCamelize()</li>
-<li>"".capitalize()</li>
-<li>"".capitalizeAll()</li>
+<li>$.ajax()</li>
+<li>$.get()</li>
+<li>$.getJSON()</li>
+<li>$.post()</li>
+<li>$.JSONP()</li>
+<li>$.form2JSON()</li>
 </ul><h3>
-<a name="cc-version" class="anchor" href="#version" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.version</h3>
+<a name="cc-ajax-2" class="anchor" href="#ajax-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.ajax</h3>
 
-<p>The current version of ChocolateChipJS.</p>
+<p>This method allows you to execute an Ajax operation. You pass in an object literal of the properties you wish to execute. It expects at a minimal a URL to access. It has the following default settings:</p>
+
+<pre class="prettyprint"><code>var settings = {
+  type: 'GET',
+  beforeSend: $.noop,
+  success: $.noop,
+  error: $.noop,
+  context: null,
+  async: true,
+  timeout: 0
+};
+</code></pre>
+
+<p>You can use the $.ajax method to retrieve HTML fragments to insert in your document:</p>
+
+<pre class="prettyprint"><code>$.ajax({
+  url : "announcement.html",
+  success : function(data) {
+    // Insert the fragment into the page:
+    $("#content").html(data);
+  },
+  error: function(data) {
+    $("#content").html("&lt;h4&gt;There was an error while trying to get the file.&lt;/h4&gt;");
+  }
+});
+</code></pre>
+
+<p>You can also request an external JSON file for user in your app:</p>
+
+<pre class="prettyprint"><code>$.ajax({
+  url : "me.json",
+  success : function(data) {
+    // Before using a JSON object, you need to parse it.
+    // Here we parse it and assign it to a variable:
+    var me = JSON.parse(data);
+    // Here we access the properties of the JSON object:
+    $("#content").html(me.firstName + " " + me.lastName);
+  },
+  error: function(data) {
+    $(content).html("&lt;h4&gt;There was an error while trying to get the file.&lt;/h4&gt;");
+  }
+});
+</code></pre>
+
+<p>We can also do a post to a remote server:</p>
+
+<pre class="prettyprint"><code>$.ajax({
+  url : "/path/to/controller",
+  method: 'POST',
+  headers: {
+    "Content-Type" : "application/x-www-form-urlencoded",
+    "async" : true,
+    "Access-Control-Allow-Origin" : "*",
+    "Accept" : "text/plain"
+  },
+  data: myData,
+  success: mySuccessCallback,
+  error: myErrorCallback
+});
+</code></pre>
+
 
 <h3>
-<a name="cc-libraryname" class="anchor" href="#libraryname" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.libraryName</h3>
+<a name="cc-get" class="anchor" href="#get" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.get</h3>
 
-<p>If you're not sure whether ChocolateChipJS is running, examine this value. If it returns "ChocolateChip", you know what it is.</p>
+<p>This is a short cut for doing a get request. It can handle the following parameters: url, data, success, dataType. At very least you can pass it the url and a function to execute on success.</p>
 
-<h3>
-<a name="cc-slice" class="anchor" href="#slice" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.slice</h3>
+<pre class="prettyprint"><code>// Get an html fragment and insert it in the document:
+$.get('/data/suits.html', function(data) {
+  $('#products').html(data);
+});
+</code></pre>
 
-<p>This is a shortcut for Array.prototype.slice. You use it to turn any array-like object into an array. This will work for node collections or the arguments object.</p>
-
-<h3>
-<a name="cc-delay" class="anchor" href="#delay" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.delay</h3>
-
-<p>This method is used by $.defer to execute a function after the call stack is clear. See $.defer below.</p>
 
 <h3>
-<a name="cc-defer" class="anchor" href="#defer" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.defer</h3>
+<a name="cc-getjson" class="anchor" href="#getjson" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.getJSON</h3>
 
-<p>This method will defer the execution of a function until the call stack is clear. This means that even though your function is defined before other code, it will not execute until all of the following code has executed.</p>
+<p>This is a shortcut for getting a JSON object from a server. It expects three parameters: url, data, and success. If no data is provided, it will execute with just the url and success callback.</p>
 
-<pre class="prettyprint"><code>$(document).ready(function() {
-  $.defer(function() {
-    console.log("This comes after Squawk!");
+<pre class="prettyprint"><code>$.getJSON('/data/deserts.json', function(deserts) {
+  deserts.forEach(desert) {
+    $('#deserts').append('&lt;li&gt;' + desert.name + '&lt;/li&gt;');
   });
-  console.log('Squawk!');
-  // Result: Squawk! This comes after Squawk!
 });
 </code></pre>
 
 <h3>
-<a name="cc-noop" class="anchor" href="#noop" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.noop</h3>
+<a name="cc-post" class="anchor" href="#post" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.post</h3>
 
-<p>This is a 'no operation performed' method the you can use when you need a placeholder for a callback. This gets used internally by ChUI.js for cases where it expects a callback but the user may not provide one.</p>
+<p>This method is a shortcut for doing a post. It expects these parameters: url, data, success, dataType.</p>
 
-<pre class="prettyprint"><code>// Attach and event that does nothing:
-$('button').on('click', $.noop);
+<pre class="prettyprint"><code>$.post("updateUser.php", 
+  { "name": "Joe", "time": "10PM" }, 
+  function() {
+    console.log('The POST was successful.')
+  },
+  "json"
+);
 </code></pre>
 
+
 <h3>
-<a name="cc-concat" class="anchor" href="#concat" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.concat</h3>
+<a name="cc-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.JSONP</h3>
 
-<p>This method allows you to concatenate string or values using a method interface instead of the '+' operator.</p>
+<p>This method allows you to perform requests from remote sites that support JSONP. It does this by sending a callback along with the request, hence the name JSON with Padding. It expects two arguments: a url and a callback to execute once the data has returned. Normally, the url should end with the phrase: &amp;callback=?. However, there are some services out there that expect a slightly different ending. Please check the documentation for any API before trying to implement a JSONP request.</p>
 
-<pre class="prettyprint"><code>$(function() {
-  // Concatenate a series of arguments:
-  var id = ' id="myButton"',
-  class = ' class="button"',
-  style = ' style="color: red;"';
-  var button = $.concat('&lt;button ', id, class, style, '&gt;Button&lt;/button&gt;');
-  // Returns: '&lt;button id="myButton" class="button" style="color: red;"&gt;Button&lt;/button&gt;'
+<p>Because the data lives on a remote server, you'll need to read the documentation for the service to understand its format so that you can output it to your app.</p>
 
-  // Concatenate an array of string values:
-  var listIems = ['&lt;li&gt;One&lt;/li&gt;','&lt;li&gt;Two&lt;/li&gt;','&lt;li&gt;Three&lt;/li&gt;','&lt;li&gt;Four&lt;/li&gt;']
-  var list = $.concat();
-  // Returns: '&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;li&gt;Three&lt;/li&gt;&lt;li&gt;Four&lt;/li&gt;'
+<p>$.JSONP has the following default settings, which you can override:</p>
+
+<pre class="prettyprint"><code>var settings = {
+  url : null,
+  callback: $.noop,
+  callbackType : 'callback=?',
+  timeout: null
+};
+</code></pre>
+
+<p>Be aware that you have no control over when the remote server will respond to your JSONP request. It could take some time. If you would prefer to have more control over what happens, you can provide a timeout value great than 0. If the remote server has not responded by the time the timeout finishes, the request will be canceled.</p>
+
+<p>With timeout:</p>
+
+<pre class="prettyprint"><code>$.JSONP({
+  url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=94102&amp;country=US&amp;callback=?', 
+  callback: function(data){
+    $('.list').append('&lt;li&gt;&lt;h3&gt;My Location&lt;/h3&gt;&lt;h4&gt;' + data.postalcodes[0].adminName2 + ', ' + data.postalcodes[0].adminName1 + '&lt;/h4&gt;&lt;/li&gt;');
+  },
+  // 5 second timeout:
+  timeout: 5000
 });
 </code></pre>
 
-<h3>
-<a name="cc-w" class="anchor" href="#w" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.w</h3>
 
-<p>This method takes a space-delimited string of words and returns it as an array where the individual words are indices.</p>
-
-<pre class="prettyprint"><code>var str = 'This is an example of a string'
-var strArray = $.w(str) // Returns ['This','is','an','example','of','a','string']
-</code></pre>
-
-<h3>
-<a name="cc-isstring" class="anchor" href="#isstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isString</h3>
-
-<p>This method will return true if the argument is a string.</p>
-
-<pre class="prettyprint"><code>$.isString("This is text"); // Will return 'true'
-$.isString(1); // Will return 'false';
-</code></pre>
-
-<h3>
-<a name="cc-isarray" class="anchor" href="#isarray" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isArray</h3>
-
-<p>This method will return true if the argument is an array.</p>
-
-<pre class="prettyprint"><code>$.isArray([1,2,3]); // Will return 'true'
-</code></pre>
-
-<h3>
-<a name="cc-isfunction" class="anchor" href="#isfunction" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isFunction</h3>
-
-<p>This method will return true if the argument is a function.</p>
-
-<pre class="prettyprint"><code>$.isFunction($.noop); // Will return 'true'
-</code></pre>
-
-<h3>
-<a name="cc-isobject" class="anchor" href="#isobject" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isObject</h3>
-
-<p>This method will return true if the argument is an object.</p>
-
-<pre class="prettyprint"><code>$.isObject({name: 'Joe Bodoni'}); // Will return 'true'
-$.isObject(function() {return}); // Will return 'false'
-</code></pre>
-
-<h3>
-<a name="cc-isemptyobject" class="anchor" href="#isemptyobject" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isEmptyObject</h3>
-
-<p>Returns true is the object is empty {}, otherwise it returns false.</p>
-
-<pre class="prettyprint"><code>var newObj = {};
-$.isEmptyObject(newObj); // Will return 'true'
-$.isEmptyObject(function() {return}); // Will return 'false'
-$.isEmptyObject({name: 'Joe Bodoni'}) // Will return 'false'
-</code></pre>
-
-<h3>
-<a name="cc-isnumber" class="anchor" href="#isnumber" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isNumber</h3>
-
-<p>This method will return true if the argument is a number.</p>
-
-<pre class="prettyprint"><code>$.isNumber(1); // Will return 'true'
-$.isNumber(0.1); // Will return 'true'
-$.isNumber('text'); // Will return 'false'
-</code></pre>
-
-<h3>
-<a name="cc-isinteger" class="anchor" href="#isinteger" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isInteger</h3>
-
-<p>This method will return true if the argument is an integer.</p>
-
-<pre class="prettyprint"><code>$.isInteger(1); // Will return 'true'
-// The following is a float, not an integer:
-$.isInteger(1.1); // Will return 'false'
-</code></pre>
-
-<h3>
-<a name="cc-isfloat" class="anchor" href="#isfloat" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.isFloat</h3>
-
-<p>This method will return true if the argument is a float.</p>
-
-<pre class="prettyprint"><code>$.isFloat(0.1); // Will return 'true'
-// This is an integer:
-$.isFloat(1); // Will return 'false'
-</code></pre>
-
-
-
-<h3>
-<a name="cc-each" class="anchor" href="#each" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.each</h3>
-
-<p><code>$.each</code> is a method for looping arrays. The default <code>[].forEach()</code> method can sometimes be slow with large arrays. If you are experiencing performance problems with your arrays of nodes, try using this method instead. It takes two arguments, the array and a callback. The callback works just like the callback in the normal foreach array method:</p>
-
-<pre class="prettyprint"><code>var data = ['one', 'two', 'three', 'four', 'five'];
-$.each(data, function(ctx, icx) {
-  console.log(ctx);
-});
-</code></pre>
-
-<p>The above will output "one, two, three, four, five".</p>
-
-
-<h3>
-<a name="cc-uuinum" class="anchor" href="#uuinum" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.uuiNum</h3>
-
-<p>This method is used internally by ChocolateChip to create uuids for creating identifiers in its cache for events and data.</p>
-
-<h3>
-<a name="cc-makeuuid" class="anchor" href="#makeuuid" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.makeUuid</h3>
-
-<p>Like the $.uuidNum method, this is used internally by ChocolateChip for creating unique identifiers for its caching system.</p>
-
-<h3>
-<a name="cc-require" class="anchor" href="#require" aria-hidden="true"><span class="octicon octicon-link"></span></a>$.require</h3>
-
-<p>This method will import a script into your app. You pass it the source for the script and an optional callback to execute when the script is fully parsed by the browser.</p>
-
-<pre class="prettyprint"><code>$.require('/scripts/libs/sillyputty.js', function() {
-   var sp = new SillyPutty(); // Will not execute until sillyputty.js is fully loaded.
-});
-</code></pre>
-
-<h3>
-<a name="cc-camelize" class="anchor" href="#camelize" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".camelize</h3>
-
-<p>This method turns a hyphenated string into a camel case string.</p>
-
-<pre class="prettyprint"><code>var camelized = $.camelize('background-color'); // Returns 'backgroundColor'
-</code></pre>
-
-<h3>
-<a name="cc-decamelize" class="anchor" href="#decamelize" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".deCamelize</h3>
-
-<p>This method converts a camel case string into a hyphenated string.</p>
-
-<pre class="prettyprint"><code>var hyphenated = $.deCamelize('backgroundColor'); // Returns 'background-color'
-</code></pre>
-
-<h3>
-<a name="cc-capitalize" class="anchor" href="#capitalize" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".capitalize</h3>
-
-<p>This method will capitalize the first letter of a string, as for the first word of a sentence.</p>
-
-<pre class="prettyprint"><code>var word = "chocolate";
-word.capitalize(); // returns 'Chocolate'
-</code></pre>
-
-<h3>
-<a name="cc-capitalizeall" class="anchor" href="#capitalizeall" aria-hidden="true"><span class="octicon octicon-link"></span></a>"".capitalizeAll</h3>
-
-<p>This method will capitalize the first letter of each word in a string.</p>
-
-<pre class="prettyprint"><code>var name = $.capitalize("get out now"); // returns 'Get Out Now'
-</code></pre>
-
-<h2>Performance Testing</h2>
-<p>We've made some claims about the performance of ChocolateChipJS. You can see for yourself by running any of the following tests. These are all on jsperf.com. </p>
-<p>Basic DOM operations:</p>
-<ul>
-  <li><a href='https://jsperf.com/chocolatechip-vs-jquery-vs-zepto/10' target='_blank'>ChocolateChip vs jQuery vs Zepto (DOM actions)</a></li>
-  <li><a href='https://jsperf.com/domsubtreemodified-templates/5' target='_blank'>DOMSubtreeModified &amp; Templates</a></li>
-  <li><a href='https://jsperf.com/domnoderemovedfromdocument-templates/6' target='_blank'>DOMNodeRemovedFromDocument &amp; Templates</a></li>
-  <li><a href='http://jsperf.com/domrecursiveempty/7' target='_blank'>DOMRecursiveEmpty</a></li>
-</ul>
-<p>Smackdown between ChocolateChipJS, jQuery &amp; Zepto using templates:</p>
-<ul>
-  <li><a href='http://jsperf.com/chocolatechipjs-dot/8' target='_blank'>ChocolateChipJS &amp; doT</a></li>
-  <li><a href='http://jsperf.com/chocolatechipjs-handlebars/5' target='_blank'>ChocolateChipJS &amp; Handlebars</a></li>
-  <li><a href='http://jsperf.com/chocolatechipjs-underscore/5' target='_blank'>ChocolateChipJS &amp; Underscore</a></li>
-  <li><a href='http://jsperf.com/jquery-vs-chocolatechip-vs-zepto-dot-vs-handlebars-unde/4' target='_blank'>jQuery vs ChocolateChip vs Zepto &amp; doT vs Handlebars &amp; underscore</a></li>
-  <li><a href='http://jsperf.com/testing-chocolatechip-with-templating/20' target='_blank'>jQuery vs ChocolateChip vs Zepto &amp; doT vs Handlebars &amp; underscore</a></li>
-</ul>
-<p>ChocolateChipJS running various versions of its templating engine:</p>
-<ul>
-  <li><a href='http://jsperf.com/chocolatechipjs-chtemplate/5' target='_blank'>ChocolateChipJS &amp; chTemplate</a></li>
-  <li><a href='http://jsperf.com/choco/4' target='_blank'>ChocolateChip Performance</a></li>
-</ul>
 
 <script>
    $(function() {
