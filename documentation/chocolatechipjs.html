@@ -2561,9 +2561,9 @@ url
 </code></pre>
 
 <h2>Timeouts</h2>
-<p>If you pass ```fetch``` a timeout value in its init object, you can cancel a request taking too long:</p>
+<p>If you pass <code>fetch</code> a timeout value in its init object, you can cancel a request taking too long:</p>
 
-```
+<pre class="prettyprint"><code>
 var data = $.serialize($('form')[0]);
 
 fetch('../controllers/php-post.php', {
@@ -2590,7 +2590,7 @@ fetch('../controllers/php-post.php', {
   console.log(error);
   // returns: Request timed out at: /controllers/php-post.php
 });
-```
+</code></pre>
 
 <h2>
 <a id="user-content-jsonp" class="anchor" href="#jsonp" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSONP</h2>
