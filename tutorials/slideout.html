@@ -169,6 +169,10 @@ renderChosenFruit(0);
 <h3>Complete Tutorial</h3>
 <p>This was just a quick rundown on making a dynamic slide out. For more detailed and sophisticated solution, take a look at this <a href='http://bit.ly/1pcgVNK' target='_blank'> online tutorial</a>.</p>
 
+<h2>With Navigation Lists</h2>
+<p>You can use the slide out with navigation lists. To do so, the navigation list should be a target for the slide out, which the navigation list's destinations should not. When using a navigation list, if the user drills down, opens the list and closes it, they will be at the same place as when they opened the slide out. And forward or back navigation will work as expected. If while drilling down, the user opens the slide out and choose a different target, the navigation history for that list will be reset. The next time the user opens that navigation list from the slide out it will be at the start again.</p>
+<p>When using a navigation list with a slide out, make sure that you set all navigation bars and articles to <code>next</code>. If you accidentally set the first article to current like you normally would, it will result in some initial odd layering.</p>
+
 
 <script>
    $(function() {
