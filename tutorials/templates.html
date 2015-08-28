@@ -290,6 +290,19 @@ $.template.repeater();
   &lt;li&gt;3: Neil, deGrasse Tyson&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
+<h3>Images</h3>
+<p>If you want to have images in a declarative repeater, you need to use a special attribute for the source. At load time the browser will see the declarative template in the markup and try to parse the image's source. If the path of the image is based on dynamic data, this will result in an error being logged in the browser's console. You can avoid this by using <code>data-src</code> instead of <code>src</code>:</p>
+<pre class="prettyprint"><code>&lt;ul id="repeater" data-repeater="luminaries" class='cloak'&gt;
+  &lt;li&gt;
+     &lt;img data-src="[[= data.image ]]"&gt; 
+     &lt;span&gt;[[= data.firstName ]], [[= data.lastName]]&lt;/span&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>At parse time, ChocolateChip-UI will convert the <code>data-src</code> attribute into a <code>src</code> attribute.</p>
+
+
 <p><strong>Note:</strong> One last thing to bear in mind. Because template variables are actually JavaScript variables, you can perform any appropriate JavaScript operations directly on them. We are already doing that by increase the value of the <code>$.template.index</code> by 1 in each loop in the template above. Or you might want to do something such as capitalizing the last name using <code>String.toUpperCase()</code>:</p>
 
 <pre class="prettyprint"><code>&lt;ul id="repeater" data-repeater="luminaries" class='cloak'&gt;
