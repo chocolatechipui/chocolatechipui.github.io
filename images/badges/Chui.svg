@@ -20,7 +20,7 @@
                     <path d="M0,0 L93,0 L93,20 L0,20 L0,0 Z" id="Shape" fill="url(#linearGradient-3)"></path>
                 </g>
             </g>
-            <g id="Group" transform="translate(11.000000, 4.000000)" font-size="11" font-family="Helvetica" font-weight="normal">
+            <g id="Group" transform="translate(11.000000, 4.000000)" font-size="11" font-family="Helvetica,sans-serif" font-weight="normal">
                 <g id="ChocolateChip-UI-+-ChocolateChip-UI">
                     <text id="Chui" fill-opacity="0.3" fill="#010101">
                         <tspan x="0.5" y="11" fill="#010101">chui</tspan>
